@@ -1,0 +1,14 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    font-weight: 600;
+    font-size: 56px;
+  }
+
+  &__bottom {
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

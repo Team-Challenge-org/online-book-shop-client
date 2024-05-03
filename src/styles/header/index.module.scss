@@ -1,0 +1,56 @@
+.header {
+  height: 128px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 23px 80px 23px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__nav {
+    text-transform: uppercase;
+
+    ul {
+      display: flex;
+      list-style: none;
+    }
+
+    li {
+      padding-right: 32px;
+    }
+  }
+
+  &__right {
+    display: flex;
+
+    form {
+      width: 328px;
+      height: 48px;
+      margin-right: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+
+      input:focus {
+        outline: none;
+      }
+
+      input {
+        color: rgba(0, 0, 0, 0.5);
+        border: none;
+        width: 232px;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      margin-right: 8px;
+
+      span {
+        padding: 16px;
+      }
+    }
+  }
+}
