@@ -1,0 +1,30 @@
+.footer {
+  height: 326px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px 80px 30px 80px;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(202, 196, 208, 1);
+  background-color: rgba(25, 108, 103, 1);
+
+  &__copyright {
+    height: 48px;
+    width: 100%;
+    background-color: rgba(25, 108, 103, 1);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    span {
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16.41px;
+      padding-right: 22px;
+    }
+
+    span:last-child {
+      padding-right: 58px;
+    }
+  }
+}
