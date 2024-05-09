@@ -1,0 +1,23 @@
+.slider {
+  text-align: center;
+  &__title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31.99px;
+    color: rgba(0, 0, 0, 1);
+    margin-top: 24px;
+  }
+
+  &__button {
+    width: 132px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.41px;
+    background: none;
+    cursor: pointer;
+  }
+}
