@@ -9,11 +9,14 @@ const Subscribe = () => {
       </span>
       <form className={styles.footer__subscribe__form}>
         <input
-          type="text"
+          type="email"
           placeholder="Ваша електронна адреса"
           className={styles.footer__subscribe__form__input}
+          required
         />
-        <button className={styles.footer__subscribe__form__button}>Підписатись</button>
+        <button className={styles.footer__subscribe__form__button} type="submit">
+          Підписатись
+        </button>
       </form>
     </div>
   );
