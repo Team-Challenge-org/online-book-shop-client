@@ -11,9 +11,12 @@
   flex-direction: row;
   position: relative;
 
+  &__logo__wrapper {
+    margin-right: 91px;
+  }
+
   &__block {
     display: flex;
-    margin-left: 91px;
     margin-right: 53px;
     flex-direction: column;
 

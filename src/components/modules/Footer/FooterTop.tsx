@@ -6,7 +6,9 @@ import styles from 'styles/footer/index.module.scss';
 const FooterTop = () => {
   return (
     <div className={styles.footer}>
-      <Logo color="white" />
+      <div className={styles.footer__logo__wrapper}>
+        <Logo color="white" />
+      </div>
       <FooterBlock
         title="Контакти"
         text={[
