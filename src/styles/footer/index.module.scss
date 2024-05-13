@@ -72,6 +72,8 @@
       font-weight: 600;
       font-size: 20px;
       line-height: 23.44px;
+      text-align: end;
+      margin-bottom: 32px;
     }
 
     &__text {
@@ -106,7 +108,7 @@
         font-weight: 400;
         font-size: 14px;
         line-height: 16.41px;
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(255, 255, 255, 1);
       }
 
       &__input:focus {
