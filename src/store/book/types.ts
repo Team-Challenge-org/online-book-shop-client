@@ -1,4 +1,4 @@
-export type IBook = {
+export type Book = {
   _id: string;
   index: number;
   picture: string;
@@ -14,7 +14,7 @@ export enum Status {
   ERROR = 'error',
 }
 
-export interface IBookSliceState {
-  items: IBook[];
+export interface BookSliceState {
+  items: Book[];
   status: Status;
 }
