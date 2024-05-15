@@ -31,7 +31,7 @@ const HomePage = () => {
       <SliderPage />
       <div className="main">
         <CategoriesList />
-        <div className="test">{renderedItems}</div>
+        {/*<div className="test">{renderedItems}</div>*/}
       </div>
       <Footer />
     </div>
