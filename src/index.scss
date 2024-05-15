@@ -31,5 +31,10 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
+
+    button {
+      background: none;
+      border: none;
+    }
   }
 }

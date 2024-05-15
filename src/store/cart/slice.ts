@@ -14,7 +14,7 @@ const cartSlice = createSlice({
         ...action.payload,
       });
     },
-    removeItem(state, action) {
+    removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter((obj) => obj.index !== action.payload);
     },
     clearItems(state) {
