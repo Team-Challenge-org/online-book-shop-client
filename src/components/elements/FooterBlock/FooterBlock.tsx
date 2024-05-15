@@ -11,7 +11,9 @@ const Contacts = ({ title, text, social }: IFooterBlock) => {
       <h1 className={styles.footer__block__title}>{title}</h1>
       <div className={styles.footer__block__text}>
         {text.map((item, index) => (
-          <span key={index}>{item}</span>
+          <span className={styles.footer__block__text__item} key={index}>
+            {item}
+          </span>
         ))}
       </div>
       {social ? (

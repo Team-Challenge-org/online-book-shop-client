@@ -12,6 +12,9 @@
 
     &__item:hover {
       background-color: rgba(25, 108, 103, 0.15);
+      animation-timing-function: ease-in-out;
+      animation-duration: 100ms;
+      border: 1px solid transparent;
     }
 
     &__item {

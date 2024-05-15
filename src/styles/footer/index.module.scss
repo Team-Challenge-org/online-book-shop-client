@@ -35,8 +35,26 @@
       flex-direction: column;
       margin-bottom: 32px;
 
-      span {
+      &__item:hover {
+        animation-timing-function: ease-out;
+        animation-duration: 100ms;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      &__item {
         margin-bottom: 8px;
+      }
+
+      &__item::after {
+        content: attr(data-text);
+        content: attr(data-text) / '';
+        height: 0;
+        visibility: hidden;
+        overflow: hidden;
+        user-select: none;
+        pointer-events: none;
+        font-weight: 700;
       }
     }
 
