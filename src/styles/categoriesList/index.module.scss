@@ -10,6 +10,11 @@
     align-items: center;
     justify-content: center;
 
+    &__item:hover {
+      background-color: #196c67;
+      color: #ffffff;
+    }
+
     &__item {
       align-content: center;
       text-align: center;
