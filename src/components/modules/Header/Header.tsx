@@ -24,7 +24,7 @@ const Header = () => {
           <SearchSvg />
         </form>
         <div className={styles.header__right__actions}>
-          <span>UA/EN</span>
+          <span>UA / EN</span>
           <FavSvg />
           <ProfileSvg />
           <CartSvg />
