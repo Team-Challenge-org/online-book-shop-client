@@ -19,8 +19,8 @@
   }
 
   &__button {
-    width: 132px;
-    height: 40px;
+    width: 198px;
+    height: 48px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     color: rgba(0, 0, 0, 1);
     font-weight: 400;
@@ -28,5 +28,9 @@
     line-height: 16.41px;
     background: none;
     cursor: pointer;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21.09px;
   }
 }
