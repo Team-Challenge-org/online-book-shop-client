@@ -1,5 +1,5 @@
-export interface IFooterBlock {
-  title: string;
-  text: string[];
-  social?: boolean;
-}
+export type FooterSocialItemProps = {
+  show: JSX.Element;
+  hover: JSX.Element;
+  link: string;
+};
