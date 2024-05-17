@@ -7,8 +7,9 @@ import { selectCart } from 'store/cart/selectors';
 import { addItem, removeItem } from 'store/cart/slice';
 import { CartItems } from 'store/cart/types';
 import { useAppDispatch } from 'store/store';
+import { CatalogItemType } from 'types/commont';
 
-const CatalogItem = ({ item }: any) => {
+const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { items: cartItems } = useSelector(selectCart);
@@ -25,7 +26,7 @@ const CatalogItem = ({ item }: any) => {
 
   return (
     <li className="test__li" key={item.id}>
-      <img src={item.picture} alt={item.title} width="302px" height="368px" />
+      <img src={item.titleImage!} alt={item.title} width="302px" height="368px" />
       <span>Автор: {item.author}</span>
       <span>Назва: {item.title}</span>
       <span>{item.price} грн.</span>

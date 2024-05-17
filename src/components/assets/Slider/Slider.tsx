@@ -7,6 +7,7 @@ import { useAppDispatch } from 'store/store';
 import { useEffect } from 'react';
 import { fetchSliderBooks } from 'store/slider/asyncAction';
 import SliderItem from './SliderItem';
+import SkeletonSlider from './Skeleton';
 
 function SliderPage() {
   const settings = {
@@ -20,7 +21,7 @@ function SliderPage() {
     cssEase: 'linear',
   };
 
-  const { items } = useSelector(selectSliderBookData);
+  const { items, status } = useSelector(selectSliderBookData);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -33,9 +34,13 @@ function SliderPage() {
 
   const renderedItems = items.slice(0, 5).map((item) => <SliderItem obj={item} key={item.id} />);
 
+  const skeletons = [...new Array(5)].map((_, index) => <SkeletonSlider key={index} />);
+
   return (
     <div className="slider-container">
-      <Slider {...settings}>{renderedItems}</Slider>
+      <Slider {...settings}>
+        {status === 'loading' || status === 'error' ? skeletons : renderedItems}
+      </Slider>
     </div>
   );
 }
