@@ -1,7 +1,12 @@
 import Slider from 'react-slick';
 import 'styles/slider/slick.css';
 import 'styles/slider/slick-theme.css';
-import styles from 'styles/slider/index.module.scss';
+import { selectSliderBookData } from 'store/slider/selectors';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'store/store';
+import { useEffect } from 'react';
+import { fetchSliderBooks } from 'store/slider/asyncAction';
+import SliderItem from './SliderItem';
 
 function SliderPage() {
   const settings = {
@@ -14,35 +19,23 @@ function SliderPage() {
     autoplaySpeed: 3000,
     cssEase: 'linear',
   };
+
+  const { items } = useSelector(selectSliderBookData);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getSliderBooks = async () => {
+      dispatch(fetchSliderBooks());
+    };
+
+    getSliderBooks();
+  }, [dispatch]);
+
+  const renderedItems = items.slice(0, 5).map((item) => <SliderItem obj={item} key={item.id} />);
+
   return (
     <div className="slider-container">
-      <Slider {...settings}>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3001/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 1</h1>
-          <button className={styles.slider__button}>Детальніше</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3000/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 2</h1>
-          <button className={styles.slider__button}>Детальніше</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3002/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 3</h1>
-          <button className={styles.slider__button}>Детальніше</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3003/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 4</h1>
-          <button className={styles.slider__button}>Детальніше</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3004/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 5</h1>
-          <button className={styles.slider__button}>Детальніше</button>
-        </div>
-      </Slider>
+      <Slider {...settings}>{renderedItems}</Slider>
     </div>
   );
 }

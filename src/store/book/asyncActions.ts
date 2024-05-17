@@ -3,6 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Book } from './types';
 
 export const fetchBooks = createAsyncThunk<Book[]>('item/fetchItemsStatus', async () => {
-  const { data } = await axios.get<Book[]>('https://6427149c46fd35eb7c397933.mockapi.io/books');
+  const { data } = await axios.get<Book[]>(
+    'https://quiet-ocean-77925-b4d85148e93b.herokuapp.com/api/v1/book/all',
+  );
   return data;
 });

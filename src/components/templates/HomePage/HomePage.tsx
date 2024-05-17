@@ -21,9 +21,7 @@ const HomePage = () => {
     getBooks();
   }, [dispatch]);
 
-  const renderedItems = items
-    .slice(0, 10)
-    .map((item) => <CatalogItem item={item} key={item.index} />);
+  const renderedItems = items.slice(0, 10).map((item) => <CatalogItem item={item} key={item.id} />);
 
   return (
     <div className="container">
