@@ -1,7 +1,8 @@
-import SliderPage from 'components/assets/Slider/Slider';
-import CategoriesList from 'components/modules/CategoriesList/CategoriesList';
-import Footer from 'components/modules/Footer/Footer';
-import Header from 'components/modules/Header/Header';
+import SliderPage from "components/assets/Slider/Slider";
+import CategoriesList from "components/modules/CategoriesList/CategoriesList";
+import BooksList from "components/modules/BooksList/BooksList";
+import Footer from "components/modules/Footer/Footer";
+import Header from "components/modules/Header/Header";
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
       <Header />
       <SliderPage />
       <CategoriesList />
+      <BooksList />
       <div className="main"></div>
       <Footer />
     </div>
