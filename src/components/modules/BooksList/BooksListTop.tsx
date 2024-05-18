@@ -1,6 +1,6 @@
 import styles from "styles/booksList/index.module.scss";
 
-const BooksList = () => {
+const BooksListTop = () => {
   const books = [
     {
       author: "Автор",
@@ -12,25 +12,25 @@ const BooksList = () => {
       author: "Автор",
       title: "Книга 1",
       price: "350 грн",
-      cover: require("./image-104.png"),
+      cover: require("./image-105.png"),
     },
     {
       author: "Автор",
       title: "Книга 2",
       price: "300 грн",
-      cover: require("./image-104.png"),
+      cover: require("./image-106.png"),
     },
     {
       author: "Автор",
       title: "Книга 3",
       price: "400 грн",
-      cover: require("./image-104.png"),
+      cover: require("./image-107.png"),
     },
     {
       author: "Автор",
       title: "Книга 4",
       price: "450 грн",
-      cover: require("./image-104.png"),
+      cover: require("./image-108.png"),
     },
   ];
 
@@ -51,9 +51,9 @@ const BooksList = () => {
             className={styles.books__cover}
           />
           <div className={styles.books__info}>
-            <h4 className={styles.book__author}>{book.author}</h4>
-            <h3 className={styles.books__title}>{book.title}</h3>
-            <p className={styles.books__price}>{book.price}</p>
+            <h4 className={styles.books__info__author}>{book.author}</h4>
+            <h3 className={styles.books__info__title}>{book.title}</h3>
+            <p className={styles.books__info__price}>{book.price}</p>
           </div>
         </div>
       ))}
@@ -61,4 +61,4 @@ const BooksList = () => {
   );
 };
 
-export default BooksList;
+export default BooksListTop;

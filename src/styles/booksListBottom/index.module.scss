@@ -1,6 +1,6 @@
-.books {
+.list {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr) 2fr;
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 10px;
   max-width: 1440px;
@@ -11,15 +11,16 @@
     flex-direction: column;
     align-items: start;
 
-    &--large {
-      grid-row: 1 / 3;
-      width: 628px;
+    &--small {
+      grid-column: span 1 / span 1;
+      grid-row: span 1 / span 1;
+      width: 302px;
     }
 
-    &--small {
-      grid-column: auto / span 1;
-      grid-row: auto / span 1;
-      width: 302px;
+    &--large {
+      grid-column: 3 / 5;
+      grid-row: 1 / 3;
+      width: 628px;
     }
   }
   &__cover {
@@ -36,14 +37,12 @@
     &__price {
       font-weight: 400;
       color: #000000;
+      font-size: 20px;
     }
+
     &__author {
       color: #959595;
       font-size: 16px;
-    }
-
-    &__title {
-      font-size: 24px;
     }
 
     &__price {
