@@ -4,7 +4,6 @@ import FavSvg from 'components/elements/FavSvg/FavSvg';
 import Logo from 'components/elements/Logo/Logo';
 import ProfileSvg from 'components/elements/ProfileSvg/ProfileSvg';
 import SearchSvg from 'components/elements/SearchSvg/SearchSvg';
-import VoiceSvg from 'components/elements/VoiceSvg/VoiceSvg';
 
 const Header = () => {
   return (
@@ -18,9 +17,8 @@ const Header = () => {
         </ul>
       </nav>
       <div className={styles.header__right}>
-        <form>
-          <VoiceSvg />
-          <input type="text" />
+        <form className={styles.header__right__form}>
+          <input type="text" placeholder="Пошук" className={styles.header__right__form__input} />
           <SearchSvg />
         </form>
         <div className={styles.header__right__actions}>

@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchSliderBooks } from './asyncAction';
-import { Book, BookSliceState, Status } from 'store/book/types';
+import { Status } from 'store/book/types';
+import { SliderBook, SliderBookSliceState } from './types';
 
-const initialState: BookSliceState = {
+const initialState: SliderBookSliceState = {
   items: [],
   status: Status.LOADING,
 };
@@ -11,7 +12,7 @@ const sliderSlice = createSlice({
   name: 'slider',
   initialState,
   reducers: {
-    setSliderBooks(state, action: PayloadAction<Book[]>) {
+    setSliderBooks(state, action: PayloadAction<SliderBook[]>) {
       state.items = action.payload;
     },
   },

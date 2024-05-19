@@ -6,10 +6,6 @@ export type FooterSocialItemProps = {
   link: string;
 };
 
-export type SliderItemType = {
-  obj: Book;
-};
-
 export type CatalogItemType = {
   item: Book;
 };

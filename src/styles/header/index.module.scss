@@ -24,7 +24,7 @@
   &__right {
     display: flex;
 
-    form {
+    &__form {
       width: 328px;
       height: 48px;
       margin-right: 8px;
@@ -32,14 +32,15 @@
       display: flex;
       align-items: center;
 
-      input:focus {
+      &__input:focus {
         outline: none;
       }
 
-      input {
+      &__input {
         color: rgba(0, 0, 0, 0.5);
         border: none;
-        width: 232px;
+        width: 280px;
+        padding-left: 10px;
       }
     }
 
