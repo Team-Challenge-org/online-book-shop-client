@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import item from './book/slice';
 import cart from './cart/slice';
 import slider from './slider/slice';
+import favorite from './favorite/slice';
 
 export const store = configureStore({
   reducer: {
     item,
     cart,
     slider,
+    favorite,
   },
 });
 

@@ -1,27 +1,48 @@
 import CartActiveSvg from 'components/elements/CartActiveSvg/CartActiveSvg';
 import CartInactiveSvg from 'components/elements/CartInactiveSvg/CartInactiveSvg';
 import FavoriteActiveSvg from 'components/elements/FavoriteActiveSvg/FavoriteActiveSvg';
-import { useState } from 'react';
+import FavoriteInactiveSvg from 'components/elements/FavoriteInactiveSvg/FavoriteInactiveSvg';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCart } from 'store/cart/selectors';
-import { addItem, removeItem } from 'store/cart/slice';
+import { addOrRemoveCartItem } from 'store/cart/slice';
 import { CartItems } from 'store/cart/types';
+import { selectFavorite } from 'store/favorite/selectors';
+import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { useAppDispatch } from 'store/store';
 import { CatalogItemType } from 'types/commont';
 
 const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
   const { items: cartItems } = useSelector(selectCart);
+  const { items: favoriteItems } = useSelector(selectFavorite);
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      let checkCart = cartItems.find((obj) => obj.id === item.id);
+      if (checkCart) {
+        setIsAddedToCart(true);
+      }
+    }
+
+    if (favoriteItems.length > 0) {
+      let checkFavorite = favoriteItems.find((obj) => obj.id === item.id);
+      if (checkFavorite) {
+        setIsAddedToFavorite(true);
+      }
+    }
+  }, [cartItems, favoriteItems, item]);
 
   const cartItemsHandler = (obj: CartItems) => {
-    if (cartItems.find((object) => object.id === obj.id)) {
-      dispatch(removeItem(obj.id));
-      setIsAddedToCart(false);
-    } else {
-      dispatch(addItem(obj));
-      setIsAddedToCart(true);
-    }
+    dispatch(addOrRemoveCartItem(obj));
+    setIsAddedToCart(!isAddedToCart);
+  };
+
+  const favoriteItemsHandler = (obj: CartItems) => {
+    dispatch(addOrRemoveFavoriteItem(obj));
+    setIsAddedToFavorite(!isAddedToFavorite);
   };
 
   return (
@@ -33,8 +54,8 @@ const CatalogItem = ({ item }: CatalogItemType) => {
       <button onClick={() => cartItemsHandler(item)}>
         {isAddedToCart ? <CartInactiveSvg /> : <CartActiveSvg />}
       </button>
-      <button>
-        <FavoriteActiveSvg />
+      <button onClick={() => favoriteItemsHandler(item)}>
+        {isAddedToFavorite ? <FavoriteInactiveSvg /> : <FavoriteActiveSvg />}
       </button>
     </li>
   );

@@ -49,7 +49,8 @@
       align-items: center;
       margin-right: 8px;
 
-      span {
+      &__switch {
+        text-wrap: nowrap;
         padding: 16px;
       }
     }

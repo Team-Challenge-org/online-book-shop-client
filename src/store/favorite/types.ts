@@ -1,4 +1,4 @@
-export type CartItems = {
+export type FavoriteItems = {
   id: number;
   title: string;
   full_description: string;
@@ -12,6 +12,6 @@ export type CartItems = {
   images: string[];
 };
 
-export type CartSliceState = {
-  items: CartItems[];
+export type FavoriteSliceState = {
+  items: FavoriteItems[];
 };

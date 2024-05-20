@@ -22,7 +22,7 @@ const Header = () => {
           <SearchSvg />
         </form>
         <div className={styles.header__right__actions}>
-          <span>UA / EN</span>
+          <span className={styles.header__right__actions__switch}>UA / EN</span>
           <FavSvg />
           <ProfileSvg />
           <CartSvg />

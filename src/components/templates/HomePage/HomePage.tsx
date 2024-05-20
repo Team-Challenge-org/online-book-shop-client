@@ -14,6 +14,11 @@ const HomePage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const json = JSON.stringify(items);
+    localStorage.setItem('cart', json);
+  }, [items]);
+
+  useEffect(() => {
     const getBooks = async () => {
       dispatch(fetchBooks());
     };
