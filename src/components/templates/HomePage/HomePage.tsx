@@ -3,20 +3,30 @@ import CategoriesList from 'components/modules/CategoriesList/CategoriesList';
 import Footer from 'components/modules/Footer/Footer';
 import Header from 'components/modules/Header/Header';
 import CatalogItem from 'components/modules/ItemPage/CatalogItem';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchBooks } from 'store/book/asyncActions';
 import { selectBookData } from 'store/book/selectors';
+import { selectCart } from 'store/cart/selectors';
+import { selectFavorite } from 'store/favorite/selectors';
 import { useAppDispatch } from 'store/store';
 
 const HomePage = () => {
   const { items } = useSelector(selectBookData);
+  const { items: cartItems } = useSelector(selectCart);
+  const { items: favoriteItems } = useSelector(selectFavorite);
   const dispatch = useAppDispatch();
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    const json = JSON.stringify(items);
-    localStorage.setItem('cart', json);
-  }, [items]);
+    if (isMounted.current) {
+      const jsonCart = JSON.stringify(cartItems);
+      localStorage.setItem('cart', jsonCart);
+      const jsonFavorite = JSON.stringify(favoriteItems);
+      localStorage.setItem('favorite', jsonFavorite);
+    }
+    isMounted.current = true;
+  }, [cartItems, favoriteItems]);
 
   useEffect(() => {
     const getBooks = async () => {
@@ -34,7 +44,7 @@ const HomePage = () => {
       <SliderPage />
       <div className="main">
         <CategoriesList />
-        {/*<div className="test">{renderedItems}</div>*/}
+        <div className="test">{renderedItems}</div>
       </div>
       <Footer />
     </div>

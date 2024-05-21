@@ -1,6 +1,6 @@
 import { FavoriteItems } from 'store/favorite/types';
 
-export const getCartFromLS = () => {
+export const getFavoriteFromLS = () => {
   const data = localStorage.getItem('favorite');
   const items = data ? JSON.parse(data) : [];
 
