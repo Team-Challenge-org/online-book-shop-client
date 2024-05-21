@@ -1,35 +1,35 @@
-import styles from "styles/booksList/index.module.scss";
+import styles from "styles/booksListTop/index.module.scss";
 
 const BooksListTop = () => {
   const books = [
     {
-      author: "Автор",
-      title: "Велика Книга",
-      price: "500 грн",
+      author: "Джессіка Ру",
+      title: "Флорографія",
+      price: "770 грн",
       cover: require("./image-104.png"),
     },
     {
-      author: "Автор",
-      title: "Книга 1",
-      price: "350 грн",
+      author: "Гілтон Картер",
+      title: "Дикі інтер’єри",
+      price: "750 грн",
       cover: require("./image-105.png"),
     },
     {
-      author: "Автор",
-      title: "Книга 2",
-      price: "300 грн",
+      author: "Сет Годін",
+      title: "Це маркетинг",
+      price: "470 грн",
       cover: require("./image-106.png"),
     },
     {
-      author: "Автор",
-      title: "Книга 3",
-      price: "400 грн",
+      author: "Ліна Костенко",
+      title: "Триста поезій",
+      price: "350 грн",
       cover: require("./image-107.png"),
     },
     {
-      author: "Автор",
-      title: "Книга 4",
-      price: "450 грн",
+      author: "Люсія Бондар",
+      title: "Interior Design in Ukraine",
+      price: "990 грн",
       cover: require("./image-108.png"),
     },
   ];
