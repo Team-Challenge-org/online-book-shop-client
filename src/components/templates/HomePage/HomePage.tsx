@@ -1,3 +1,6 @@
+
+import BooksListTop from "components/modules/BooksList/BooksListTop";
+import BooksListBottom from "components/modules/BooksList/BooksListBottom";
 import SliderPage from 'components/assets/Slider/Slider';
 import CategoriesList from 'components/modules/CategoriesList/CategoriesList';
 import Footer from 'components/modules/Footer/Footer';
@@ -42,7 +45,10 @@ const HomePage = () => {
     <div className="container">
       <Header />
       <SliderPage />
-      <div className="main">
+      <CategoriesList />
+      <BooksListTop />
+      <BooksListBottom />
+      <div className="main"></div><div className="main">
         <CategoriesList />
         {/*<div className="test">{renderedItems}</div>*/}
       </div>

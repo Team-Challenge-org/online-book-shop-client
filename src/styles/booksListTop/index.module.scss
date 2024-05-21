@@ -1,0 +1,63 @@
+.books {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: flex-end;
+  column-gap: 15px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-bottom: 24px;
+
+    &--large {
+      grid-row: 1 / 3;
+      width: 628px;
+    }
+
+    &--small {
+      grid-column: auto / span 1;
+      grid-row: auto / span 1;
+      width: 302px;
+    }
+  }
+
+  &__cover {
+    max-width: 100%;
+    height: auto;
+    padding-bottom: 16px;
+  }
+
+  &__info {
+    text-align: start;
+    font-family: Inter, sans-serif;
+
+    &__author,
+    &__title,
+    &__price {
+      font-weight: 400;
+      color: #000000;
+      margin: 0;
+      line-height: 1.21;
+      font-size: 20px;
+    }
+    &__author {
+      color: #959595;
+      font-size: 16px;
+      padding-bottom: 8px;
+    }
+
+    &__title {
+      padding-bottom: 8px;
+      white-space: nowrap;
+    }
+
+    &__price {
+      font-weight: 600;
+    }
+  }
+}
