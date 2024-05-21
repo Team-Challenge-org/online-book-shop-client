@@ -5,8 +5,8 @@ import { SliderItemType } from 'store/slider/types';
 const SliderItem = ({ obj }: SliderItemType) => {
   return (
     <div className={styles.slider}>
-      <SliderImage image={obj.image} title={obj.bookName} />
-      <h1 className={styles.slider__title}>{obj.bookName}</h1>
+      <SliderImage image={obj.titleImage} title={obj.title} />
+      <h1 className={styles.slider__title}>{obj.title}</h1>
       <button className={styles.slider__button}>Детальніше</button>
     </div>
   );
