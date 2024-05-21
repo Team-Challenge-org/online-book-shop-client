@@ -35,8 +35,24 @@
       flex-direction: column;
       margin-bottom: 32px;
 
-      span {
+      &__item {
         margin-bottom: 8px;
+
+        &__link {
+          margin-bottom: 8px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16.41px;
+          color: #ffffff;
+          text-decoration: none;
+        }
+
+        &__link:hover {
+          animation-timing-function: ease-out;
+          animation-duration: 100ms;
+          font-weight: 700;
+          cursor: pointer;
+        }
       }
     }
 
@@ -44,7 +60,7 @@
       display: flex;
       flex-direction: column;
 
-      h1 {
+      &__title {
         font-weight: 600;
         font-size: 20px;
         line-height: 23.44px;
@@ -54,11 +70,7 @@
         display: flex;
         flex-direction: row;
 
-        h1 {
-          padding-bottom: 16px;
-        }
-
-        svg {
+        &__item {
           margin-right: 8px;
         }
       }
@@ -100,7 +112,6 @@
         box-sizing: border-box;
         padding: 16px;
         background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 12px 0 0 12px;
         font-weight: 400;
         font-size: 14px;
         line-height: 16.41px;
@@ -127,7 +138,11 @@
         font-size: 14px;
         line-height: 16.41px;
         width: 115px;
-        border-radius: 0 12px 12px 0;
+        cursor: pointer;
+      }
+
+      &__button:hover {
+        font-weight: 700;
       }
     }
   }

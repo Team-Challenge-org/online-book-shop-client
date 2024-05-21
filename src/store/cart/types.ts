@@ -1,4 +1,4 @@
-export type Book = {
+export type CartItem = {
   id: number;
   title: string;
   full_description: string;
@@ -12,13 +12,6 @@ export type Book = {
   images: string[];
 };
 
-export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-export interface BookSliceState {
-  items: Book[];
-  status: Status;
-}
+export type CartSliceState = {
+  items: CartItem[];
+};

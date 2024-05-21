@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IBook } from './types';
+import { Book } from './types';
 
-export const fetchBooks = createAsyncThunk<IBook[]>('item/fetchItemsStatus', async () => {
-  const { data } = await axios.get<IBook[]>('https://6427149c46fd35eb7c397933.mockapi.io/books');
+export const fetchBooks = createAsyncThunk<Book[]>('item/fetchItemsStatus', async () => {
+  const { data } = await axios.get<Book[]>(
+    'https://quiet-ocean-77925-b4d85148e93b.herokuapp.com/api/v1/book/all',
+  );
   return data;
 });

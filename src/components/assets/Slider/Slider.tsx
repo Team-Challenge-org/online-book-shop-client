@@ -1,7 +1,13 @@
 import Slider from 'react-slick';
 import 'styles/slider/slick.css';
 import 'styles/slider/slick-theme.css';
-import styles from 'styles/slider/index.module.scss';
+import { selectSliderBookData } from 'store/slider/selectors';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'store/store';
+import { useEffect } from 'react';
+import { fetchSliderBooks } from 'store/slider/asyncAction';
+import SliderItem from './SliderItem';
+import SkeletonSlider from './Skeleton';
 
 function SliderPage() {
   const settings = {
@@ -14,34 +20,27 @@ function SliderPage() {
     autoplaySpeed: 3000,
     cssEase: 'linear',
   };
+
+  const { items, status } = useSelector(selectSliderBookData);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getSliderBooks = async () => {
+      dispatch(fetchSliderBooks());
+    };
+
+    getSliderBooks();
+  }, [dispatch]);
+
+  const renderedItems = items.map((item) => <SliderItem obj={item} key={item.id} />);
+  console.log(renderedItems);
+
+  const skeletons = [...new Array(5)].map((_, index) => <SkeletonSlider key={index} />);
+
   return (
     <div className="slider-container">
       <Slider {...settings}>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3001/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 1</h1>
-          <button className={styles.slider__button}>Переглянути</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3000/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 2</h1>
-          <button className={styles.slider__button}>Переглянути</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3002/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 3</h1>
-          <button className={styles.slider__button}>Переглянути</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3003/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 4</h1>
-          <button className={styles.slider__button}>Переглянути</button>
-        </div>
-        <div className={styles.slider}>
-          <img src="https://picsum.photos/3004/568" className={styles.slider__image} />
-          <h1 className={styles.slider__title}>Назва книги 5</h1>
-          <button className={styles.slider__button}>Переглянути</button>
-        </div>
+        {status === 'loading' || status === 'error' ? skeletons : renderedItems}
       </Slider>
     </div>
   );
