@@ -9,3 +9,8 @@ export type FooterSocialItemProps = {
 export type CatalogItemType = {
   item: Book;
 };
+
+export type ButtonHoverType = {
+  hover: JSX.Element;
+  isAdded: boolean;
+};

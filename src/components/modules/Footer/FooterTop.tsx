@@ -1,6 +1,5 @@
 import FacebookHoverSvg from 'components/elements/FacebookHoverSvg/FacebookHoverSvg';
 import FacebookSvg from 'components/elements/FacebookSvg/FacebookSvg';
-import FooterSocialItem from 'components/elements/FooterSocialItem/FooterSocialItem';
 import InstagramHoverSvg from 'components/elements/InstagramHoverSvg/InstagramHoverSvg';
 import InstagramSvg from 'components/elements/InstagramSvg/InstagramSvg';
 import Logo from 'components/elements/Logo/Logo';
@@ -11,6 +10,7 @@ import YoutubeHoverSvg from 'components/elements/YoutubeHoverSvg/YoutubeHoverSvg
 import YoutubeSvg from 'components/elements/YoutubeSvg/YoutubeSvg';
 import { Link } from 'react-router-dom';
 import styles from 'styles/footer/index.module.scss';
+import FooterSocialItem from './FooterSocialItem';
 
 const FooterTop = () => {
   return (

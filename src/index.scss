@@ -24,6 +24,26 @@ body {
   list-style: none;
   flex-wrap: wrap;
 
+  .test__wrapper {
+    position: relative;
+
+    &__hover {
+      position: absolute;
+      width: 302px;
+      height: 368px;
+      top: 161px;
+      left: 91px;
+
+      button {
+        background: none;
+        border: none;
+        width: 48px;
+        height: 48px;
+        margin-right: 24px;
+      }
+    }
+  }
+
   &__li {
     border: 1px solid black;
     margin-right: 10px;
@@ -31,10 +51,6 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-
-    button {
-      background: none;
-      border: none;
-    }
+    align-items: center;
   }
 }

@@ -12,6 +12,10 @@ import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { FavoriteItems } from 'store/favorite/types';
 import { useAppDispatch } from 'store/store';
 import { CatalogItemType } from 'types/commont';
+import ButtonHoverCart from './ButtonHoverCart';
+import CartHoverSvg from 'components/elements/CartHoverSvg/CartHoverSvg';
+import ButtonHoverFavorite from './ButtonHoverFavorite';
+import FavoriteHoverSvg from 'components/elements/FavoriteHoverSvg/FavoriteHoverSvg';
 
 const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -48,16 +52,21 @@ const CatalogItem = ({ item }: CatalogItemType) => {
 
   return (
     <li className="test__li" key={item.id}>
-      <img src={item.titleImage!} alt={item.title} width="302px" height="368px" />
+      <div className="test__wrapper">
+        <img src={item.titleImage!} alt={item.title} width="302px" height="368px" />
+        <div className="test__wrapper__hover">
+          <button onClick={() => CartItemHandler(item)}>
+            <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
+          </button>
+          <button onClick={() => favoriteItemsHandler(item)}>
+            <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
+          </button>
+        </div>
+      </div>
+
       <span>Автор: {item.author}</span>
       <span>Назва: {item.title}</span>
       <span>{item.price} грн.</span>
-      <button onClick={() => CartItemHandler(item)}>
-        {isAddedToCart ? <CartActiveSvg /> : <CartInactiveSvg />}
-      </button>
-      <button onClick={() => favoriteItemsHandler(item)}>
-        {isAddedToFavorite ? <FavoriteActiveSvg /> : <FavoriteInactiveSvg />}
-      </button>
     </li>
   );
 };
