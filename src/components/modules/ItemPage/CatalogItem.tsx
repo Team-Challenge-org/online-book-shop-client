@@ -1,7 +1,3 @@
-import CartActiveSvg from 'components/elements/CartActiveSvg/CartActiveSvg';
-import CartInactiveSvg from 'components/elements/CartInactiveSvg/CartInactiveSvg';
-import FavoriteActiveSvg from 'components/elements/FavoriteActiveSvg/FavoriteActiveSvg';
-import FavoriteInactiveSvg from 'components/elements/FavoriteInactiveSvg/FavoriteInactiveSvg';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCart } from 'store/cart/selectors';
@@ -16,11 +12,13 @@ import ButtonHoverCart from './ButtonHoverCart';
 import CartHoverSvg from 'components/elements/CartHoverSvg/CartHoverSvg';
 import ButtonHoverFavorite from './ButtonHoverFavorite';
 import FavoriteHoverSvg from 'components/elements/FavoriteHoverSvg/FavoriteHoverSvg';
+import styles from 'styles/catalogItem/index.module.scss';
 
 const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
   const { items: CartItem } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
 
@@ -51,22 +49,39 @@ const CatalogItem = ({ item }: CatalogItemType) => {
   };
 
   return (
-    <li className="test__li" key={item.id}>
-      <div className="test__wrapper">
-        <img src={item.titleImage!} alt={item.title} width="302px" height="368px" />
-        <div className="test__wrapper__hover">
-          <button onClick={() => CartItemHandler(item)}>
-            <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
-          </button>
-          <button onClick={() => favoriteItemsHandler(item)}>
-            <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
-          </button>
-        </div>
+    <li className={styles.catalog__list} key={item.id}>
+      <div
+        className={styles.catalog__list__item}
+        onMouseEnter={() => setShowButtons(true)}
+        onMouseLeave={() => setShowButtons(false)}>
+        <img
+          src={item.titleImage!}
+          alt={item.title}
+          className={styles.catalog__list__item__image}
+        />
+        {showButtons ? (
+          <div className={styles.catalog__list__item__active}>
+            <button
+              onClick={() => CartItemHandler(item)}
+              className={styles.catalog__list__item__active__button}>
+              <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
+            </button>
+            <button
+              onClick={() => favoriteItemsHandler(item)}
+              className={styles.catalog__list__item__active__button}>
+              <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
 
-      <span>Автор: {item.author}</span>
-      <span>Назва: {item.title}</span>
-      <span>{item.price} грн.</span>
+      <div className={styles.catalog__list__item__text}>
+        <span className={styles.catalog__list__item__text__author}>Автор: {item.author}</span>
+        <span className={styles.catalog__list__item__text__title}>Назва: {item.title}</span>
+        <span className={styles.catalog__list__item__text__price}>{item.price} грн.</span>
+      </div>
     </li>
   );
 };
