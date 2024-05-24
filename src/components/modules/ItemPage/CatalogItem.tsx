@@ -18,6 +18,7 @@ const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
   const { items: CartItem } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
 
@@ -49,22 +50,31 @@ const CatalogItem = ({ item }: CatalogItemType) => {
 
   return (
     <li className={styles.catalog__list} key={item.id}>
-      <div className={styles.catalog__list__item}>
+      <div
+        className={styles.catalog__list__item}
+        onMouseEnter={() => setShowButtons(true)}
+        onMouseLeave={() => setShowButtons(false)}>
         <img
           src={item.titleImage!}
           alt={item.title}
-          width="302px"
-          height="368px"
           className={styles.catalog__list__item__image}
         />
-        <div className={styles.catalog__list__wrapper__hover}>
-          <button onClick={() => CartItemHandler(item)}>
-            <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
-          </button>
-          <button onClick={() => favoriteItemsHandler(item)}>
-            <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
-          </button>
-        </div>
+        {showButtons ? (
+          <div className={styles.catalog__list__item__active}>
+            <button
+              onClick={() => CartItemHandler(item)}
+              className={styles.catalog__list__item__active__button}>
+              <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
+            </button>
+            <button
+              onClick={() => favoriteItemsHandler(item)}
+              className={styles.catalog__list__item__active__button}>
+              <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
 
       <div className={styles.catalog__list__item__text}>
