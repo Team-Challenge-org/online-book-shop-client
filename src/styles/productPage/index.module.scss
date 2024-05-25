@@ -1,0 +1,75 @@
+.product {
+  margin: 40px 80px 40px 80px;
+  font-family: 'Inter';
+
+  &__bread {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.36px;
+  }
+
+  &__main {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: row;
+
+    &__slider {
+      width: 654px;
+      height: 640px;
+      margin-right: 72px;
+    }
+
+    &__item {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      &__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        &__author {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19.36px;
+          color: rgba(149, 149, 149, 1);
+        }
+
+        &__quantity {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16.94px;
+          color: rgba(30, 113, 52, 1);
+          padding: 4px 12px 4px 12px;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      &__title {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 26.63px;
+        color: rgba(0, 0, 0, 1);
+        margin-bottom: 16px;
+      }
+
+      &__price {
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 26.63px;
+        color: rgba(0, 0, 0, 1);
+        margin-bottom: 56px;
+      }
+
+      &__text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16.94px;
+        color: rgba(28, 27, 31, 1);
+        margin-right: 79px;
+      }
+    }
+  }
+}

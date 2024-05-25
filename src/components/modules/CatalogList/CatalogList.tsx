@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from 'styles/catalogItem/index.module.scss';
-import CatalogItem from 'components/modules/ItemPage/CatalogItem';
+import CatalogItem from 'components/modules/CatalogList/CatalogItem';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchBooks } from 'store/book/asyncActions';
