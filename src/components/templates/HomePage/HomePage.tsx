@@ -2,8 +2,6 @@ import SliderPage from 'components/assets/Slider/Slider';
 import CategoriesList from 'components/modules/CategoriesList/CategoriesList';
 import Footer from 'components/modules/Footer/Footer';
 import Header from 'components/modules/Header/Header';
-import BooksListTop from 'components/modules/BooksList/BooksListTop';
-import BooksListBottom from 'components/modules/BooksList/BooksListBottom';
 import CatalogList from 'components/modules/ItemPage/CatalogList';
 
 const HomePage = () => {
@@ -12,8 +10,6 @@ const HomePage = () => {
       <Header />
       <SliderPage />
       <CategoriesList />
-      {/*<BooksListTop />
-      <BooksListBottom />*/}
       <div className="main">
         <CatalogList />
       </div>

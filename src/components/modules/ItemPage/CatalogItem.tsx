@@ -61,16 +61,18 @@ const CatalogItem = ({ item }: CatalogItemType) => {
         />
         {showButtons ? (
           <div className={styles.catalog__list__item__active}>
-            <button
-              onClick={() => CartItemHandler(item)}
-              className={styles.catalog__list__item__active__button}>
-              <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
-            </button>
-            <button
-              onClick={() => favoriteItemsHandler(item)}
-              className={styles.catalog__list__item__active__button}>
-              <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
-            </button>
+            <div className={styles.catalog__list__item__active__wrapper}>
+              <button
+                onClick={() => CartItemHandler(item)}
+                className={styles.catalog__list__item__active__button}>
+                <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
+              </button>
+              <button
+                onClick={() => favoriteItemsHandler(item)}
+                className={styles.catalog__list__item__active__button}>
+                <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
+              </button>
+            </div>
           </div>
         ) : (
           ''

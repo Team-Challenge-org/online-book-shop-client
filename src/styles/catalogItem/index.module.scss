@@ -37,9 +37,16 @@
       position: relative;
 
       &__active {
+        background: rgba(255, 255, 255, 0.6);
         position: absolute;
-        left: calc(50% - 60px);
-        top: calc(50% - 48px);
+        width: 100%;
+        height: 100%;
+
+        &__wrapper {
+          left: calc(50% - 60px);
+          top: calc(50% - 48px);
+          position: absolute;
+        }
 
         &__button:first-child {
           margin-right: 24px;
