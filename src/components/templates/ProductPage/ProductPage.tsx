@@ -92,27 +92,25 @@ const ProductPage = () => {
 
   return (
     <div className={styles.product}>
-      <span className={styles.product__bread}>
-        Головна / Дизайн / ILLUSTRATION in Ukraine. Ілюстрація в Україні
-      </span>
+      <span className={styles.product__bread}>Головна / Дизайн / {book.title}</span>
       <div className={styles.product__main}>
         <div className={styles.product__main__slider}>
           <img
-            src={book?.titleImage!}
-            alt={book?.title}
+            src={book.titleImage!}
+            alt={book.title}
             className={styles.product__main__slider__image}
           />
         </div>
         <div className={styles.product__main__item}>
           <div className={styles.product__main__item__header}>
-            <span className={styles.product__main__item__header__author}>{book?.authors}</span>
+            <span className={styles.product__main__item__header__author}>{book.authors}</span>
             <span className={styles.product__main__item__header__quantity}>
-              {book?.available ? 'В наявності' : 'Немає в наявності'}
+              {book.available ? 'В наявності' : 'Немає в наявності'}
             </span>
           </div>
-          <span className={styles.product__main__item__title}>{book?.title}</span>
-          <span className={styles.product__main__item__price}>{book?.price} грн</span>
-          <span className={styles.product__main__item__text}>{book?.short_description}</span>
+          <span className={styles.product__main__item__title}>{book.title}</span>
+          <span className={styles.product__main__item__price}>{book.price} грн</span>
+          <span className={styles.product__main__item__text}>{book.short_description}</span>
           <div className={styles.product__main__item__active}>
             <button
               className={

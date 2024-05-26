@@ -1,5 +1,9 @@
 .slider {
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
   &__image {
     height: 560px;
   }
@@ -22,6 +26,7 @@
   }
 
   &__button {
+    display: flex;
     width: 198px;
     height: 48px;
     border: 1px solid rgba(0, 0, 0, 0.5);
@@ -35,5 +40,8 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 21.09px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
   }
 }
