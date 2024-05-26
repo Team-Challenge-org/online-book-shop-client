@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from 'styles/productPage/index.module.scss';
 import { DropdownItemType } from 'types/commont';
 
-const DropdownItem = ({ title, element, text }: DropdownItemType) => {
+const DropdownItem = ({ title, characteristics, description, order }: DropdownItemType) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleShowMenu = () => {
@@ -21,70 +21,70 @@ const DropdownItem = ({ title, element, text }: DropdownItemType) => {
       </div>
       {showMenu ? (
         <div className={styles.product__main__item__dropdown__hiden}>
-          {element ? (
+          {characteristics ? (
             <table className={styles.product__main__item__dropdown__hiden__characteristics}>
               <tbody>
                 <tr>
                   <td>Видавництво</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.publishing}
+                    {characteristics?.publishing}
                   </td>
                 </tr>
                 <tr>
                   <td>Мова</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.language}
+                    {characteristics?.language}
                   </td>
                 </tr>
                 <tr>
                   <td>Тип обкладинки</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.cover}
+                    {characteristics?.cover}
                   </td>
                 </tr>
                 <tr>
                   <td>Кількість сторінок</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.pages}
+                    {characteristics?.pages}
                   </td>
                 </tr>
                 <tr>
                   <td>Формат</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.format}
+                    {characteristics?.format}
                   </td>
                 </tr>
                 <tr>
                   <td>ISBN</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.isbn}
+                    {characteristics?.isbn}
                   </td>
                 </tr>
                 <tr>
                   <td>Папір</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.paper}
+                    {characteristics?.paper}
                   </td>
                 </tr>
                 <tr>
                   <td>Ілюстрації</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.illustrations}
+                    {characteristics?.illustrations}
                   </td>
                 </tr>
                 <tr>
                   <td>Тип книги</td>
                   <td
                     className={styles.product__main__item__dropdown__hiden__characteristics__right}>
-                    {element?.type}
+                    {characteristics?.type}
                   </td>
                 </tr>
               </tbody>
@@ -92,7 +92,24 @@ const DropdownItem = ({ title, element, text }: DropdownItemType) => {
           ) : (
             ''
           )}
-          <span className={styles.product__main__item__dropdown__hiden__text}>{text}</span>
+          {description ? (
+            <span className={styles.product__main__item__dropdown__hiden__text}>{description}</span>
+          ) : (
+            ''
+          )}
+          {order ? (
+            <div className={styles.product__main__item__dropdown__hiden__order}>
+              {order.map((item, index) => (
+                <span
+                  key={index}
+                  className={styles.product__main__item__dropdown__hiden__order__item}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         ''

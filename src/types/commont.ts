@@ -17,15 +17,16 @@ export type ButtonHoverType = {
 
 export type DropdownItemType = {
   title: string;
-  element?: DropdownCharacteristicsType;
-  text?: string;
+  description?: string;
+  characteristics?: DropdownCharacteristicsType;
+  order?: string[];
 };
 
 export type DropdownCharacteristicsType = {
   publishing: string;
   language: string;
   cover: string;
-  pages: string;
+  pages: number;
   format: string;
   isbn: string;
   paper: string;

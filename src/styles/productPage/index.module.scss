@@ -145,6 +145,17 @@
               text-align: right;
             }
           }
+          &__order {
+            display: flex;
+            flex-direction: column;
+            &__item {
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 14.52px;
+              color: rgba(0, 0, 0, 1);
+              margin-bottom: 16px;
+            }
+          }
         }
       }
     }
