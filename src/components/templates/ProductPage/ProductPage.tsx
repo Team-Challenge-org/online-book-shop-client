@@ -1,7 +1,27 @@
+import FavoriteInProductInactiveSvg from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
 import React from 'react';
 import styles from 'styles/productPage/index.module.scss';
+import DropdownItem from './DropdownItem';
+import { DropdownCharacteristicsType } from 'types/commont';
 
 const ProductPage = () => {
+  const characteristics: DropdownCharacteristicsType = {
+    publishing: 'CP Publishing',
+    language: 'Українська, Англійська',
+    cover: 'Тверда',
+    pages: '208',
+    format: '230х310 мм',
+    isbn: '978-617-95044-3-3',
+    paper: 'Крейдований',
+    illustrations: 'Кольорові',
+    type: 'Паперова',
+  };
+
+  const text = `Термін обробки та відправки замовлень складає 1-5 робочих днів.
+Способи оплати: банківською карткою або готівкою (під час отримання).
+Способи доставки: «Нова пошта»(відділення/кур'єрська доставка), «Укрпошта» (на відділення по Україні/ за кордон).
+Правила повернення: повернення товару здійснюється протягом 14 днів з дня отримання згідно Закону України "Про захист прав споживачів".`;
+
   return (
     <div className={styles.product}>
       <span className={styles.product__bread}>
@@ -27,6 +47,29 @@ const ProductPage = () => {
             виготовлені із екологічного паперу Arctic Paper, висвітлено яскраві, оригінальні
             ілюстрації від 30 найталановитіших українських митців.
           </span>
+          <div className={styles.product__main__item__active}>
+            <button className={`${styles.product__main__item__active__cart} + button`}>
+              Додати у кошик{' '}
+            </button>
+            <button className={styles.product__main__item__active__favorite}>
+              <FavoriteInProductInactiveSvg />
+            </button>
+          </div>
+          <DropdownItem
+            title="Опис"
+            text="
+            Книга «ILLUSTRATION in Ukraine. Ілюстрація в Україні» – унікальна, абсолютно перша
+            книга, в якій представлені художні досягнення українських митців – ілюстраторів. Її
+            упорядкування здійснено разом із Клубом ілюстраторів Pictoric. Ілюстрація – це не тільки
+            і не стільки, в загальноприйнятому розумінні, частина книжки чи проєкту, це художній
+            витвір, технічно складний та емоційно забарвлений артоб’єкт. Добірка робіт
+            художників-ілюстраторів, що представлена в книжці, – це зріз творчого надбання молодих
+            українських талантів. Кожен художник – яскрава особистість зі своїм внутрішнім світом,
+            історією, кругозором, джерелами натхнення, техніками та стилями, творчими пошуками.
+            Поряд з ілюстраціями в книзі ви знайдете цікаві факти про авторів."
+          />
+          <DropdownItem title="Характеристики" element={characteristics} />
+          <DropdownItem title="Оплата, доставка та повернення" text={text} />
         </div>
       </div>
     </div>

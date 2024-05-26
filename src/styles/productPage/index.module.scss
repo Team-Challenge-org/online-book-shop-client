@@ -1,6 +1,8 @@
 .product {
   margin: 40px 80px 40px 80px;
   font-family: 'Inter';
+  border-bottom: 1px solid rgba(149, 149, 149, 0.5);
+  margin-bottom: 80px;
 
   &__bread {
     font-weight: 400;
@@ -12,6 +14,7 @@
     margin-top: 64px;
     display: flex;
     flex-direction: row;
+    margin-bottom: 64px;
 
     &__slider {
       width: 654px;
@@ -64,11 +67,85 @@
       }
 
       &__text {
+        margin-right: 79px;
         font-weight: 400;
         font-size: 14px;
         line-height: 16.94px;
         color: rgba(28, 27, 31, 1);
+        margin-bottom: 56px;
+      }
+      &__active {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 69px;
+        &__cart {
+          height: 56px;
+          width: 100%;
+          margin-right: 23px;
+          cursor: pointer;
+        }
+        &__favorite {
+          background: none;
+          border: none;
+          padding: 0;
+          margin: 0;
+          cursor: pointer;
+        }
+      }
+
+      &__dropdown {
+        display: flex;
+        flex-direction: column;
         margin-right: 79px;
+        font-family: 'Inter';
+
+        &__header {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          height: 48px;
+          margin-bottom: 16px;
+          cursor: pointer;
+          align-items: center;
+
+          &__title {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 21.78px;
+            color: rgba(0, 0, 0, 1);
+          }
+
+          &__button {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24.2px;
+            color: rgba(28, 27, 31, 1);
+          }
+        }
+
+        &__hiden {
+          &__text {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14.52px;
+            color: rgba(28, 27, 31, 1);
+          }
+          &__characteristics {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14.52px;
+            color: rgba(28, 27, 31, 1);
+            width: 100%;
+
+            tr {
+              height: 31px;
+            }
+
+            &__right {
+              text-align: right;
+            }
+          }
+        }
       }
     }
   }
