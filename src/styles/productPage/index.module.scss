@@ -3,6 +3,7 @@
   font-family: 'Inter';
   border-bottom: 1px solid rgba(149, 149, 149, 0.5);
   margin-bottom: 80px;
+  min-height: 740px;
 
   &__bread {
     font-weight: 400;
@@ -20,6 +21,11 @@
       width: 654px;
       height: 640px;
       margin-right: 72px;
+
+      &__image {
+        width: 510px;
+        height: 640px;
+      }
     }
 
     &__item {

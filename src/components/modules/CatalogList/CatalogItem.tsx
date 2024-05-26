@@ -13,6 +13,7 @@ import CartHoverSvg from 'components/elements/CartHoverSvg/CartHoverSvg';
 import ButtonHoverFavorite from './ButtonHoverFavorite';
 import FavoriteHoverSvg from 'components/elements/FavoriteHoverSvg/FavoriteHoverSvg';
 import styles from 'styles/catalogItem/index.module.scss';
+import { Link } from 'react-router-dom';
 
 const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -80,8 +81,10 @@ const CatalogItem = ({ item }: CatalogItemType) => {
       </div>
 
       <div className={styles.catalog__list__item__text}>
-        <span className={styles.catalog__list__item__text__author}>Автор: {item.author}</span>
-        <span className={styles.catalog__list__item__text__title}>Назва: {item.title}</span>
+        <span className={styles.catalog__list__item__text__author}>{item.authors}</span>
+        <Link to={`/book/${item.id}`} className={styles.catalog__list__item__text__title}>
+          {item.title}
+        </Link>
         <span className={styles.catalog__list__item__text__price}>{item.price} грн.</span>
       </div>
     </li>
