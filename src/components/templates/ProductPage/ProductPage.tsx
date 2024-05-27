@@ -1,4 +1,3 @@
-import FavoriteInProductInactiveSvg from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
 import React, { useEffect, useState } from 'react';
 import styles from 'styles/productPage/index.module.scss';
 import DropdownItem from './DropdownItem';
@@ -10,11 +9,12 @@ import { useAppDispatch } from 'store/store';
 import { useSelector } from 'react-redux';
 import { selectCart } from 'store/cart/selectors';
 import { selectFavorite } from 'store/favorite/selectors';
-import FavoriteInProductActiveSvg from 'components/elements/FavoriteInProductActiveSvg/FavoriteInProductActiveSvg';
 import { addOrRemoveCartItem } from 'store/cart/slice';
 import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { FavoriteItems } from 'store/favorite/types';
 import { CartItem } from 'store/cart/types';
+import FavoriteInProductHoverSvg from 'components/elements/FavoriteInProductHoverSvg/FavoriteInProductHoverSvg';
+import ButtonHoverFavorite from './ButtonHoverFavorite';
 
 const ProductPage = () => {
   const [book, setBook] = useState<Book>();
@@ -124,11 +124,10 @@ const ProductPage = () => {
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}>
-              {isAddedToFavorite ? (
-                <FavoriteInProductActiveSvg />
-              ) : (
-                <FavoriteInProductInactiveSvg />
-              )}
+              <ButtonHoverFavorite
+                hover={<FavoriteInProductHoverSvg />}
+                isAdded={isAddedToFavorite}
+              />
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />
