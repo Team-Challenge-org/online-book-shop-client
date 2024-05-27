@@ -18,13 +18,13 @@
     margin-bottom: 64px;
 
     &__slider {
-      width: 654px;
-      height: 640px;
+      width: 100vw;
+      height: 100vh;
       margin-right: 72px;
 
       &__image {
-        width: 510px;
-        height: 640px;
+        width: 100%;
+        height: 100%;
       }
     }
 
