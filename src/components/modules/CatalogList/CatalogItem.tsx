@@ -14,6 +14,7 @@ import ButtonHoverFavorite from './ButtonHoverFavorite';
 import FavoriteHoverSvg from 'components/elements/FavoriteHoverSvg/FavoriteHoverSvg';
 import styles from 'styles/catalogItem/index.module.scss';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const CatalogItem = ({ item }: CatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -62,18 +63,23 @@ const CatalogItem = ({ item }: CatalogItemType) => {
         />
         {showButtons ? (
           <div className={styles.catalog__list__item__active}>
-            <div className={styles.catalog__list__item__active__wrapper}>
-              <button
-                onClick={() => favoriteItemsHandler(item)}
-                className={styles.catalog__list__item__active__button}>
-                <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
-              </button>
-              <button
-                onClick={() => CartItemHandler(item)}
-                className={styles.catalog__list__item__active__button}>
-                <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
-              </button>
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: 'easeOut', duration: 1 }}>
+              <div className={styles.catalog__list__item__active__wrapper}>
+                <button
+                  onClick={() => favoriteItemsHandler(item)}
+                  className={styles.catalog__list__item__active__button}>
+                  <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
+                </button>
+                <button
+                  onClick={() => CartItemHandler(item)}
+                  className={styles.catalog__list__item__active__button}>
+                  <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
+                </button>
+              </div>
+            </motion.div>
           </div>
         ) : (
           ''

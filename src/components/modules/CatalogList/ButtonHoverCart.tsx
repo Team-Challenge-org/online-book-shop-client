@@ -8,7 +8,7 @@ const ButtonHoverCart = ({ hover, isAdded: isAddedToCart }: ButtonHoverType) => 
 
   return (
     <div onMouseEnter={() => setHiddenCart(false)} onMouseLeave={() => setHiddenCart(true)}>
-      {hiddenCart ? isAddedToCart ? <CartActiveSvg /> : <CartInactiveSvg /> : hover}
+      {isAddedToCart ? <CartActiveSvg /> : hiddenCart ? <CartInactiveSvg /> : hover}
     </div>
   );
 };
