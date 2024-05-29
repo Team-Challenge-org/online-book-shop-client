@@ -1,21 +1,29 @@
 import FavoriteInProductActiveSvg from 'components/elements/FavoriteInProductActiveSvg/FavoriteInProductActiveSvg';
+import FavoriteInProductHoverSvg from 'components/elements/FavoriteInProductHoverSvg/FavoriteInProductHoverSvg';
 import FavoriteInProductInactiveSvg from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ButtonHoverType } from 'types/commont';
+import { ButtonFavoriteOrCartType } from 'types/commont';
 
-const ButtonHoverFavorite = ({ hover, isAdded: isAddedToFavorite }: ButtonHoverType) => {
+const ButtonHoverFavorite = ({ isAdded: isAddedToFavorite }: ButtonFavoriteOrCartType) => {
   const [hiddenFavorite, setHiddenFavorite] = useState(true);
 
   return (
     <div onMouseEnter={() => setHiddenFavorite(false)} onMouseLeave={() => setHiddenFavorite(true)}>
       {hiddenFavorite ? (
         isAddedToFavorite ? (
-          <FavoriteInProductActiveSvg />
+          <motion.div transition={{ ease: 'easyOut', duration: 1 }}>
+            <FavoriteInProductActiveSvg />
+          </motion.div>
         ) : (
-          <FavoriteInProductInactiveSvg />
+          <motion.div transition={{ ease: 'easyOut', duration: 1 }}>
+            <FavoriteInProductInactiveSvg />
+          </motion.div>
         )
       ) : (
-        hover
+        <motion.div transition={{ ease: 'easyOut', duration: 1 }}>
+          <FavoriteInProductHoverSvg />
+        </motion.div>
       )}
     </div>
   );

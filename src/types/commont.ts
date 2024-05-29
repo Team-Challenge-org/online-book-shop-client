@@ -10,8 +10,7 @@ export type CatalogItemType = {
   item: Book;
 };
 
-export type ButtonHoverType = {
-  hover: JSX.Element;
+export type ButtonFavoriteOrCartType = {
   isAdded: boolean;
 };
 
