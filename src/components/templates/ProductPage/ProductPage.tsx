@@ -13,7 +13,6 @@ import { addOrRemoveCartItem } from 'store/cart/slice';
 import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { FavoriteItems } from 'store/favorite/types';
 import { CartItem } from 'store/cart/types';
-import FavoriteInProductHoverSvg from 'components/elements/FavoriteInProductHoverSvg/FavoriteInProductHoverSvg';
 import ButtonHoverFavorite from './ButtonHoverFavorite';
 
 const ProductPage = () => {
@@ -124,10 +123,7 @@ const ProductPage = () => {
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}>
-              <ButtonHoverFavorite
-                hover={<FavoriteInProductHoverSvg />}
-                isAdded={isAddedToFavorite}
-              />
+              <ButtonHoverFavorite isAdded={isAddedToFavorite} />
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />

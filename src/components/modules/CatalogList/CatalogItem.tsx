@@ -8,10 +8,8 @@ import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { FavoriteItems } from 'store/favorite/types';
 import { useAppDispatch } from 'store/store';
 import { CatalogItemType } from 'types/commont';
-import ButtonHoverCart from './ButtonHoverCart';
-import CartHoverSvg from 'components/elements/CartHoverSvg/CartHoverSvg';
-import ButtonHoverFavorite from './ButtonHoverFavorite';
-import FavoriteHoverSvg from 'components/elements/FavoriteHoverSvg/FavoriteHoverSvg';
+import ButtonCart from './ButtonCart';
+import ButtonFavorite from './ButtonFavorite';
 import styles from 'styles/catalogItem/index.module.scss';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -71,12 +69,12 @@ const CatalogItem = ({ item }: CatalogItemType) => {
                 <button
                   onClick={() => favoriteItemsHandler(item)}
                   className={styles.catalog__list__item__active__button}>
-                  <ButtonHoverFavorite hover={<FavoriteHoverSvg />} isAdded={isAddedToFavorite} />
+                  <ButtonFavorite isAdded={isAddedToFavorite} />
                 </button>
                 <button
                   onClick={() => CartItemHandler(item)}
                   className={styles.catalog__list__item__active__button}>
-                  <ButtonHoverCart hover={<CartHoverSvg />} isAdded={isAddedToCart} />
+                  <ButtonCart isAdded={isAddedToCart} />
                 </button>
               </div>
             </motion.div>
