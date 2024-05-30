@@ -4,6 +4,7 @@ import item from './book/slice';
 import cart from './cart/slice';
 import slider from './slider/slice';
 import favorite from './favorite/slice';
+import categories from './categories/slice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     cart,
     slider,
     favorite,
+    categories,
   },
 });
 

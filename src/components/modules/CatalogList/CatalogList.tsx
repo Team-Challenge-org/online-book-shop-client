@@ -8,6 +8,7 @@ import { selectBookData } from 'store/book/selectors';
 import { selectCart } from 'store/cart/selectors';
 import { selectFavorite } from 'store/favorite/selectors';
 import { useAppDispatch } from 'store/store';
+import { selectCategory } from 'store/categories/selectors';
 
 const CatalogList = () => {
   const { items } = useSelector(selectBookData);
@@ -15,6 +16,7 @@ const CatalogList = () => {
   const { items: favoriteItems } = useSelector(selectFavorite);
   const dispatch = useAppDispatch();
   const isMounted = useRef(false);
+  const category = useSelector(selectCategory);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -34,8 +36,16 @@ const CatalogList = () => {
     getBooks();
   }, [dispatch]);
 
-  const renderedItems = items.slice(0, 10).map((item) => <CatalogItem item={item} key={item.id} />);
-  return <div className={styles.catalog}>{renderedItems}</div>;
+  const renderedItems = items.map((item) => <CatalogItem item={item} key={item.id} />).slice(0, 10);
+
+  const filteredItems = items
+    .filter((item) => item.category === category.name)
+    .map((item) => <CatalogItem item={item} key={item.id} />)
+    .slice(0, 10);
+
+  return (
+    <div className={styles.catalog}>{filteredItems.length > 0 ? filteredItems : renderedItems}</div>
+  );
 };
 
 export default CatalogList;

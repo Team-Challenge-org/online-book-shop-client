@@ -13,7 +13,7 @@ import { addOrRemoveCartItem } from 'store/cart/slice';
 import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { FavoriteItems } from 'store/favorite/types';
 import { CartItem } from 'store/cart/types';
-import ButtonHoverFavorite from './ButtonHoverFavorite';
+import ButtonFavorite from './ButtonFavorite';
 
 const ProductPage = () => {
   const [book, setBook] = useState<Book>();
@@ -112,18 +112,14 @@ const ProductPage = () => {
           <span className={styles.product__main__item__text}>{book.short_description}</span>
           <div className={styles.product__main__item__active}>
             <button
-              className={
-                isAddedToCart
-                  ? `${styles.product__main__item__active__cart} + button + button--active`
-                  : `${styles.product__main__item__active__cart} + button`
-              }
+              className={`${styles.product__main__item__active__cart} + button`}
               onClick={() => cartItemHandler(book)}>
               Додати у кошик
             </button>
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}>
-              <ButtonHoverFavorite isAdded={isAddedToFavorite} />
+              <ButtonFavorite isAdded={isAddedToFavorite} />
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />

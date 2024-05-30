@@ -33,7 +33,6 @@ function SliderPage() {
   }, [dispatch]);
 
   const renderedItems = items.map((item) => <SliderItem obj={item} key={item.id} />);
-  console.log(renderedItems);
 
   const skeletons = [...new Array(5)].map((_, index) => <SkeletonSlider key={index} />);
 
