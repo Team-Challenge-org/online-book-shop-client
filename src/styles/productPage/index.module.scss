@@ -1,9 +1,14 @@
 .product {
   margin: 40px 80px 40px 80px;
   font-family: 'Inter';
-  border-bottom: 1px solid rgba(149, 149, 149, 0.5);
   margin-bottom: 80px;
   min-height: 740px;
+
+  &__dashed {
+    border-bottom: 1px solid rgba(149, 149, 149, 0.5);
+    margin-left: -80px;
+    margin-right: -80px;
+  }
 
   &__bread {
     font-weight: 400;

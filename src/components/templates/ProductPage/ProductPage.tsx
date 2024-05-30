@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from 'styles/productPage/index.module.scss';
-import DropdownItem from './DropdownItem';
 import { DropdownCharacteristicsType } from 'types/commont';
 import { Book } from 'store/book/types';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,7 +12,8 @@ import { addOrRemoveCartItem } from 'store/cart/slice';
 import { addOrRemoveFavoriteItem } from 'store/favorite/slice';
 import { FavoriteItems } from 'store/favorite/types';
 import { CartItem } from 'store/cart/types';
-import ButtonFavorite from './ButtonFavorite';
+import DropdownItem from 'components/modules/ProductPage/DropdownItem';
+import FavoriteInProductInactiveSvg from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
 
 const ProductPage = () => {
   const [book, setBook] = useState<Book>();
@@ -119,7 +119,7 @@ const ProductPage = () => {
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}>
-              <ButtonFavorite isAdded={isAddedToFavorite} />
+              <FavoriteInProductInactiveSvg isAdded={isAddedToFavorite} />
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />
@@ -127,6 +127,7 @@ const ProductPage = () => {
           <DropdownItem title="Оплата, доставка та повернення" order={order} />
         </div>
       </div>
+      <div className={styles.product__dashed}></div>
     </div>
   );
 };
