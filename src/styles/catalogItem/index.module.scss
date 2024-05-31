@@ -1,5 +1,6 @@
 .catalog {
   display: grid;
+
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
@@ -78,6 +79,8 @@
           line-height: 19.36px;
           color: rgba(149, 149, 149, 1);
           margin-bottom: 8px;
+          max-height: 18px;
+          overflow: hidden;
         }
 
         &__title {
@@ -87,6 +90,8 @@
           color: rgba(0, 0, 0, 1);
           margin-bottom: 8px;
           text-decoration: none;
+          max-height: 23px;
+          overflow: hidden;
         }
 
         &__price {
