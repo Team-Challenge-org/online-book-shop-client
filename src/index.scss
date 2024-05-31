@@ -17,6 +17,8 @@ body {
 
 .main {
   flex: 1;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .button:hover {

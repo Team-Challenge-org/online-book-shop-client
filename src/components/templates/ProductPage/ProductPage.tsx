@@ -90,44 +90,48 @@ const ProductPage = () => {
   }
 
   return (
-    <div className={styles.product}>
-      <span className={styles.product__bread}>Головна / Дизайн / {book.title}</span>
-      <div className={styles.product__main}>
-        <div className={styles.product__main__slider}>
-          <img
-            src={book.titleImage!}
-            alt={book.title}
-            className={styles.product__main__slider__image}
-          />
-        </div>
-        <div className={styles.product__main__item}>
-          <div className={styles.product__main__item__header}>
-            <span className={styles.product__main__item__header__author}>{book.authors}</span>
-            <span className={styles.product__main__item__header__quantity}>
-              {book.available ? 'В наявності' : 'Немає в наявності'}
-            </span>
+    <div className="container">
+      <div className="main">
+        <div className={styles.product}>
+          <span className={styles.product__bread}>Головна / Дизайн / {book.title}</span>
+          <div className={styles.product__main}>
+            <div className={styles.product__main__slider}>
+              <img
+                src={book.titleImage!}
+                alt={book.title}
+                className={styles.product__main__slider__image}
+              />
+            </div>
+            <div className={styles.product__main__item}>
+              <div className={styles.product__main__item__header}>
+                <span className={styles.product__main__item__header__author}>{book.authors}</span>
+                <span className={styles.product__main__item__header__quantity}>
+                  {book.available ? 'В наявності' : 'Немає в наявності'}
+                </span>
+              </div>
+              <span className={styles.product__main__item__title}>{book.title}</span>
+              <span className={styles.product__main__item__price}>{book.price} грн</span>
+              <span className={styles.product__main__item__text}>{book.short_description}</span>
+              <div className={styles.product__main__item__active}>
+                <button
+                  className={`${styles.product__main__item__active__cart} + button`}
+                  onClick={() => cartItemHandler(book)}>
+                  Додати у кошик
+                </button>
+                <button
+                  className={styles.product__main__item__active__favorite}
+                  onClick={() => favoriteItemsHandler(book)}>
+                  <FavoriteInProductInactiveSvg isAdded={isAddedToFavorite} />
+                </button>
+              </div>
+              <DropdownItem title="Опис" description={book.full_description} />
+              <DropdownItem title="Характеристики" characteristics={characteristics} />
+              <DropdownItem title="Оплата, доставка та повернення" order={order} />
+            </div>
           </div>
-          <span className={styles.product__main__item__title}>{book.title}</span>
-          <span className={styles.product__main__item__price}>{book.price} грн</span>
-          <span className={styles.product__main__item__text}>{book.short_description}</span>
-          <div className={styles.product__main__item__active}>
-            <button
-              className={`${styles.product__main__item__active__cart} + button`}
-              onClick={() => cartItemHandler(book)}>
-              Додати у кошик
-            </button>
-            <button
-              className={styles.product__main__item__active__favorite}
-              onClick={() => favoriteItemsHandler(book)}>
-              <FavoriteInProductInactiveSvg isAdded={isAddedToFavorite} />
-            </button>
-          </div>
-          <DropdownItem title="Опис" description={book.full_description} />
-          <DropdownItem title="Характеристики" characteristics={characteristics} />
-          <DropdownItem title="Оплата, доставка та повернення" order={order} />
+          <div className={styles.product__dashed}></div>
         </div>
       </div>
-      <div className={styles.product__dashed}></div>
     </div>
   );
 };

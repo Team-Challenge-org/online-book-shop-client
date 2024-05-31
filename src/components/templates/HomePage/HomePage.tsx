@@ -4,10 +4,12 @@ import CatalogList from 'components/modules/CatalogList/CatalogList';
 
 const HomePage = () => {
   return (
-    <div className="main">
+    <div className="container">
       <Slider />
       <CategoriesList />
-      <CatalogList />
+      <div className="main">
+        <CatalogList />
+      </div>
     </div>
   );
 };
