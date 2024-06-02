@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import { ButtonFavoriteOrCartType } from 'types/commont';
+import { useState } from "react";
+import { ButtonFavoriteOrCartType } from "types/common";
 
-const FavoriteInProductInactiveSvg = ({ isAdded }: ButtonFavoriteOrCartType) => {
+const FavoriteInProductInactiveSvg = ({
+  isAdded,
+}: ButtonFavoriteOrCartType) => {
   const [hiddenFavorite, setHiddenFavorite] = useState(true);
 
   return (
@@ -12,9 +14,17 @@ const FavoriteInProductInactiveSvg = ({ isAdded }: ButtonFavoriteOrCartType) => 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={() => setHiddenFavorite(false)}
-      onMouseLeave={() => setHiddenFavorite(true)}>
+      onMouseLeave={() => setHiddenFavorite(true)}
+    >
       <path d="M0.5 0.5H55.5V55.5H0.5V0.5Z" stroke="#196C67" />
-      <mask id="mask0_1074_984" maskUnits="userSpaceOnUse" x="14" y="14" width="28" height="28">
+      <mask
+        id="mask0_1074_984"
+        maskUnits="userSpaceOnUse"
+        x="14"
+        y="14"
+        width="28"
+        height="28"
+      >
         <path d="M14 14H42V42H14V14Z" fill="#D9D9D9" />
       </mask>
       {isAdded ? (

@@ -1,14 +1,23 @@
-import styles from 'styles/header/index.module.scss';
-import CartSvg from 'components/elements/CartSvg/CartSvg';
-import FavSvg from 'components/elements/FavSvg/FavSvg';
-import Logo from 'components/elements/Logo/Logo';
-import ProfileSvg from 'components/elements/ProfileSvg/ProfileSvg';
-import SearchSvg from 'components/elements/SearchSvg/SearchSvg';
+import styles from "styles/header/index.module.scss";
+
+import Logo from "components/elements/Logo/Logo";
+import { MdFavoriteBorder } from "react-icons/md";
+import SearchSvg from "components/elements/SearchSvg/SearchSvg";
+
+import CartSvg from "components/elements/CartSvg/CartSvg";
+import FavSvg from "components/elements/FavSvg/FavSvg";
+import ProfileSvg from "components/elements/ProfileSvg/ProfileSvg";
+
+import { MdOutlinePersonOutline } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 
 const Header = () => {
+  const { onOpenCartModal } = useModalCart();
+
   return (
     <header className={styles.header}>
-      <Logo color={'#000000'} />
+      <Logo color={"#000000"} />
       <nav className={styles.header__nav}>
         <ul>
           <li>Каталог</li>
@@ -18,14 +27,28 @@ const Header = () => {
       </nav>
       <div className={styles.header__right}>
         <form className={styles.header__right__form}>
-          <input type="text" placeholder="Пошук" className={styles.header__right__form__input} />
+          <input
+            type="text"
+            placeholder="Пошук"
+            className={styles.header__right__form__input}
+          />
           <SearchSvg />
         </form>
         <div className={styles.header__right__actions}>
-          <span className={styles.header__right__actions__switch}>UA / EN</span>
-          <FavSvg />
+          <span className={styles.header__right__actions__switch}>
+            <span>UA </span>/ EN
+          </span>
+
+          {/* <FavSvg />
           <ProfileSvg />
-          <CartSvg />
+          <CartSvg /> */}
+
+          <MdFavoriteBorder className={styles.nav_icon} />
+          <MdOutlinePersonOutline className={styles.nav_icon} />
+          <MdOutlineShoppingCart
+            className={styles.nav_icon}
+            onClick={onOpenCartModal}
+          />
         </div>
       </div>
     </header>

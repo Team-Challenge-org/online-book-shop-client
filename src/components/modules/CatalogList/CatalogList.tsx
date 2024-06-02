@@ -1,14 +1,14 @@
-import React from 'react';
-import styles from 'styles/catalogItem/index.module.scss';
-import CatalogItem from 'components/modules/CatalogList/CatalogItem';
-import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { fetchBooks } from 'store/book/asyncActions';
-import { selectBookData } from 'store/book/selectors';
-import { selectCart } from 'store/cart/selectors';
-import { selectFavorite } from 'store/favorite/selectors';
-import { useAppDispatch } from 'store/store';
-import { selectCategory } from 'store/categories/selectors';
+import React from "react";
+import styles from "styles/catalogItem/index.module.scss";
+import CatalogItem from "components/modules/CatalogList/CatalogItem";
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { fetchBooks } from "store/book/asyncActions";
+import { selectBookData } from "store/book/selectors";
+import { selectCart } from "store/cart/selectors";
+import { selectFavorite } from "store/favorite/selectors";
+import { useAppDispatch } from "store/store";
+import { selectCategory } from "store/categories/selectors";
 
 const CatalogList = () => {
   const { items } = useSelector(selectBookData);
@@ -21,9 +21,9 @@ const CatalogList = () => {
   useEffect(() => {
     if (isMounted.current) {
       const jsonCart = JSON.stringify(cartItems);
-      localStorage.setItem('cart', jsonCart);
+      localStorage.setItem("cart", jsonCart);
       const jsonFavorite = JSON.stringify(favoriteItems);
-      localStorage.setItem('favorite', jsonFavorite);
+      localStorage.setItem("favorite", jsonFavorite);
     }
     isMounted.current = true;
   }, [cartItems, favoriteItems]);
@@ -36,7 +36,9 @@ const CatalogList = () => {
     getBooks();
   }, [dispatch]);
 
-  const renderedItems = items.map((item) => <CatalogItem item={item} key={item.id} />).slice(0, 10);
+  const renderedItems = items
+    .map((item) => <CatalogItem item={item} key={item.id} />)
+    .slice(0, 10);
 
   const filteredItems = items
     .filter((item) => item.category === category.name)
@@ -44,7 +46,9 @@ const CatalogList = () => {
     .slice(0, 10);
 
   return (
-    <div className={styles.catalog}>{filteredItems.length > 0 ? filteredItems : renderedItems}</div>
+    <div className={styles.catalog}>
+      {filteredItems.length > 0 ? filteredItems : renderedItems}
+    </div>
   );
 };
 
