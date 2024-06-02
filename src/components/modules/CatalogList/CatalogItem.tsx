@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCart } from "store/cart/selectors";
-import { addOrRemoveCartItem } from "store/cart/slice";
+import { addOrRemoveCartItem } from "store/cart/cartSlice";
 import { CartItem } from "store/cart/types";
 import { selectFavorite } from "store/favorite/selectors";
-import { addOrRemoveFavoriteItem } from "store/favorite/slice";
+import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { FavoriteItems } from "store/favorite/types";
 import { useAppDispatch } from "store/store";
 import { CatalogItemType } from "types/common";

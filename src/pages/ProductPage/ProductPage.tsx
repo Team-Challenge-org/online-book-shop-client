@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "styles/productPage/index.module.scss";
 import { DropdownCharacteristicsType } from "types/common";
-import { Book } from "store/book/types";
+import { Book } from "store/books/types";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAppDispatch } from "store/store";
 import { useSelector } from "react-redux";
 import { selectCart } from "store/cart/selectors";
 import { selectFavorite } from "store/favorite/selectors";
-import { addOrRemoveCartItem } from "store/cart/slice";
-import { addOrRemoveFavoriteItem } from "store/favorite/slice";
+import { addOrRemoveCartItem } from "store/cart/cartSlice";
+import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { FavoriteItems } from "store/favorite/types";
 import { CartItem } from "store/cart/types";
 import DropdownItem from "components/modules/ProductPage/DropdownItem";
 import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
+import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 
 const ProductPage = () => {
   const [book, setBook] = useState<Book>();
@@ -24,6 +25,7 @@ const ProductPage = () => {
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
   const { items: CartItem } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
+  const { onOpenCartModal } = useModalCart();
 
   useEffect(() => {
     async function fetchBook() {
@@ -59,6 +61,7 @@ const ProductPage = () => {
   const cartItemHandler = (obj: CartItem) => {
     dispatch(addOrRemoveCartItem(obj));
     setIsAddedToCart(!isAddedToCart);
+    onOpenCartModal();
   };
 
   const favoriteItemsHandler = (obj: FavoriteItems) => {

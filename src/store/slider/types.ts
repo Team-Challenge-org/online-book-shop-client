@@ -1,4 +1,4 @@
-import { Status } from 'store/book/types';
+import { Status } from "store/books/types";
 
 export type SliderBook = {
   id: number;

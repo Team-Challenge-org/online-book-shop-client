@@ -1,32 +1,32 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Book, BookSliceState, Status } from './types';
-import { fetchBooks } from './asyncActions';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Book, BookSliceState, Status } from "./types";
+import { fetchBooks } from "./asyncActions";
 
 const initialState: BookSliceState = {
-  items: [],
+  books: [],
   status: Status.LOADING,
 };
 
 const bookSlice = createSlice({
-  name: 'book',
+  name: "book",
   initialState,
   reducers: {
     setBooks(state, action: PayloadAction<Book[]>) {
-      state.items = action.payload;
+      state.books = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.pending, (state) => {
       state.status = Status.LOADING;
-      state.items = [];
+      state.books = [];
     });
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.books = action.payload;
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchBooks.rejected, (state) => {
       state.status = Status.ERROR;
-      state.items = [];
+      state.books = [];
     });
   },
 });

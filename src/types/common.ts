@@ -1,4 +1,4 @@
-import { Book } from 'store/book/types';
+import type { Book } from "store/books/types";
 
 export type FooterSocialItemProps = {
   show: JSX.Element;

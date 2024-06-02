@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCart } from "store/cart/selectors";
 import {
   decreaseItemQantity,
   increaseItemQuantity,
   removeItem,
-} from "store/cart/slice";
+} from "store/cart/cartSlice";
+import { selectCart } from "store/cart/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import React, { createContext, useContext, useState } from "react";
 
 export type TModalCartContext = {
   showModal: boolean;
@@ -24,9 +24,9 @@ const ModalCartContext = createContext<TModalCartContext>({
   cartItemsCount: 0,
   onOpenCartModal: () => {},
   onCloseCartModal: () => {},
-  onIncreaseBookCount: (bookId) => {},
-  onDecreaseBookCount: (bookId) => {},
-  onRemoveBookFromCart: (bookId) => {},
+  onIncreaseBookCount: () => {},
+  onDecreaseBookCount: () => {},
+  onRemoveBookFromCart: () => {},
 });
 
 type TModalCartProviderProps = {
@@ -34,8 +34,7 @@ type TModalCartProviderProps = {
 };
 
 function ModalCartProvider({ children }: TModalCartProviderProps) {
-  //FIXME: temporary i use true/ but i need false
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const { items: shoppingCart } = useSelector(selectCart);
 
   const totalCartPrice = shoppingCart?.reduce(

@@ -1,35 +1,9 @@
-// @import "./styles/utils/variables";
-
-@import "./styles/base/typography";
-
-// test
-// COLORS
-$color-main: rgba(25, 108, 103, 1);
-$color-accent: rgba(234, 67, 53, 0.7);
-
-$color-black: rgba(28, 27, 31, 1);
-$color-gray: rgba(149, 149, 149, 1);
-$color-white: rgba(255, 255, 255, 1);
-
-$color-red: rgba(234, 67, 53, 1);
-$color-green: rgba(52, 168, 83, 1);
-$color-yellow: rgba(251, 188, 5, 1);
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import "./styles/utils/variables";
+@import "./styles/utils/typography";
+@import "./styles/utils/reset-styles";
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: "Roboto", sans-serif;
-}
-
-ul,
-li {
-  list-style-type: none;
 }
 
 .container {
