@@ -11,9 +11,10 @@ import ProfileSvg from "components/elements/ProfileSvg/ProfileSvg";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
+import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 
 const Header = () => {
-  const { onOpenCartModal } = useModalCart();
+  const { showModal, onOpenCartModal } = useModalCart();
 
   return (
     <header className={styles.header}>
@@ -51,6 +52,9 @@ const Header = () => {
           />
         </div>
       </div>
+
+      {/* Modal Window For Shopping Cart */}
+      {showModal && <ModalCart />}
     </header>
   );
 };

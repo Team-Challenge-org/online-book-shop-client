@@ -21,6 +21,6 @@ export enum Status {
 }
 
 export interface BookSliceState {
-  items: Book[];
+  books: Book[];
   status: Status;
 }

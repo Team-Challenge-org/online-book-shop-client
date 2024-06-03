@@ -1,19 +1,20 @@
-import React from "react";
 import styles from "styles/catalogItem/index.module.scss";
-import CatalogItem from "components/modules/CatalogList/CatalogItem";
+
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { fetchBooks } from "store/book/asyncActions";
-import { selectBookData } from "store/book/selectors";
-import { selectCart } from "store/cart/selectors";
-import { selectFavorite } from "store/favorite/selectors";
 import { useAppDispatch } from "store/store";
+import { selectCart } from "store/cart/selectors";
+import { fetchBooks } from "store/books/asyncActions";
+import { selectBookData } from "store/books/selectors";
+import { selectFavorite } from "store/favorite/selectors";
 import { selectCategory } from "store/categories/selectors";
+import CatalogItem from "components/modules/CatalogList/CatalogItem";
 
 const CatalogList = () => {
-  const { items } = useSelector(selectBookData);
+  const { books } = useSelector(selectBookData);
   const { items: cartItems } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
+
   const dispatch = useAppDispatch();
   const isMounted = useRef(false);
   const category = useSelector(selectCategory);
@@ -36,11 +37,11 @@ const CatalogList = () => {
     getBooks();
   }, [dispatch]);
 
-  const renderedItems = items
+  const renderedItems = books
     .map((item) => <CatalogItem item={item} key={item.id} />)
     .slice(0, 10);
 
-  const filteredItems = items
+  const filteredItems = books
     .filter((item) => item.category === category.name)
     .map((item) => <CatalogItem item={item} key={item.id} />)
     .slice(0, 10);

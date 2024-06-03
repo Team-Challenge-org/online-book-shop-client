@@ -1,10 +1,11 @@
 import styles from "./cartItem.module.scss";
+import type { Book } from "store/books/types";
 
 import { MdAdd } from "react-icons/md";
 import { MdRemove } from "react-icons/md";
 
-import type { Book } from "store/book/types";
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
+import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
 
 export function CartItem({ book }: { book: Book }) {
   const { onDecreaseBookCount, onIncreaseBookCount, onRemoveBookFromCart } =
@@ -14,12 +15,16 @@ export function CartItem({ book }: { book: Book }) {
 
   return (
     <li className={styles.book_container}>
-      <div>
-        <img
-          src={book?.titleImage as string}
-          alt={book.title}
-          className={styles.image}
-        />
+      <div className={styles.img_box}>
+        {book?.titleImage ? (
+          <img
+            src={book?.titleImage as string}
+            alt={book.title}
+            className={styles.image}
+          />
+        ) : (
+          <ModalCartBookImageLoader />
+        )}
       </div>
 
       <div className={styles.book_info_box}>
@@ -46,6 +51,7 @@ export function CartItem({ book }: { book: Book }) {
               <MdAdd />
             </div>
           </div>
+
           <div className={styles.price}>{totalBookPrice} грн</div>
         </div>
 

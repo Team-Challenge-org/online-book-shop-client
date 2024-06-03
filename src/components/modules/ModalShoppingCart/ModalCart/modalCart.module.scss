@@ -1,3 +1,5 @@
+@import "../../../../styles/utils/variables";
+
 .overlay {
   position: fixed;
   top: 0;
@@ -20,8 +22,8 @@
     display: flex;
     flex-direction: column;
 
-    color: black;
-    background-color: white;
+    color: $color-black;
+    background-color: $color-white;
 
     .header_box {
       display: flex;
@@ -29,10 +31,10 @@
       align-items: center;
 
       padding: 35px 20px;
-      border-bottom: 1px solid #95959580;
+      border-bottom: 1px solid $color-gray;
 
       .title {
-        color: #1c1b1f;
+        color: $color-black;
         font-size: 20px;
         font-weight: 400;
         margin: 0;
@@ -40,7 +42,7 @@
 
       .close_icon {
         font-size: 20px;
-        color: #959595;
+        color: $color-gray;
         cursor: pointer;
       }
     }
@@ -53,7 +55,7 @@
   .footer_box {
     margin-top: auto;
     padding: 24px 40px 35px;
-    border-top: 1px solid #95959580;
+    border-top: 1px solid $color-gray;
 
     .price_box {
       margin-bottom: 24px;
@@ -72,8 +74,8 @@
     }
     .submit_btn {
       width: 100%;
-      color: white;
-      background: #196c67;
+      color: $color-white;
+      background: $color-main;
       border: none;
       padding: 18.5px 0;
     }
