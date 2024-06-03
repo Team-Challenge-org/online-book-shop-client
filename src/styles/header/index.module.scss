@@ -49,11 +49,15 @@
     &__actions {
       display: flex;
       align-items: center;
-      margin-right: 8px;
+      gap: 30px;
 
       &__switch {
         text-wrap: nowrap;
-        padding: 16px;
+        margin-left: 40px;
+
+        span {
+          color: #196c67;
+        }
       }
     }
   }
@@ -61,5 +65,13 @@
   &__slider {
     width: 100%;
     margin: 0 auto;
+  }
+
+  .nav_icon {
+    height: 24px;
+    width: 24px;
+
+    color: #1c1b1f;
+    cursor: pointer;
   }
 }

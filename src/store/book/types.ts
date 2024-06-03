@@ -11,12 +11,13 @@ export type Book = {
   titleImage: string | null;
   timeAdded: string;
   images: string[];
+  quantity: number;
 };
 
 export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
 }
 
 export interface BookSliceState {

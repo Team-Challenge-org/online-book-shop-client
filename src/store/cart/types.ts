@@ -11,6 +11,7 @@ export type CartItem = {
   titleImage: string | null;
   timeAdded: string;
   images: string[];
+  quantity: number;
 };
 
 export type CartSliceState = {
