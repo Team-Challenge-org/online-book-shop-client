@@ -1,7 +1,7 @@
 import {
+  removeItem,
   decreaseItemQantity,
   increaseItemQuantity,
-  removeItem,
 } from "store/cart/cartSlice";
 import { selectCart } from "store/cart/selectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,10 +68,10 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
 
   const contextValue: TModalCartContext = {
     showModal,
-    totalCartPrice,
     cartItemsCount,
-    onCloseCartModal: handleCloseModal,
+    totalCartPrice,
     onOpenCartModal: handleOpenModal,
+    onCloseCartModal: handleCloseModal,
     onIncreaseBookCount: hadnleIncreaseBookCount,
     onDecreaseBookCount: handleDecreaseBookCount,
     onRemoveBookFromCart: handleRemoveBookFromCart,
@@ -87,6 +87,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
 // Custom hook
 function useModalCart() {
   const context = useContext(ModalCartContext);
+
   if (context === undefined)
     throw new Error("ModalCartContext  was used outside of ModalCartProvider");
 
