@@ -1,18 +1,16 @@
-import type { CartItem, CartSliceState } from "./types";
+import type { CartItem, CartSliceState } from './types';
 
-import { getCartFromLS } from "utils/getCartFromLS";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getCartFromLS } from 'utils/getCartFromLS';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: CartSliceState = getCartFromLS();
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addOrRemoveCartItem(state, action: PayloadAction<CartItem>) {
-      const findCartItem = state.items.find(
-        (item) => item.id === action.payload.id
-      );
+      const findCartItem = state.items.find((item) => item.id === action.payload.id);
 
       if (findCartItem) {
         state.items = state.items.filter((obj) => obj.id !== action.payload.id);
