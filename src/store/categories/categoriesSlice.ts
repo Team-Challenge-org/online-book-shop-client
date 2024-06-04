@@ -1,24 +1,23 @@
-import { fetchCategories } from "./asyncAction";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CategoriesSliceState, Category, Status } from "./types";
+import { fetchCategories } from './asyncAction';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { CategoriesSliceState, Category, Status } from './types';
+import { getCategoryFromLS } from 'utils/getCategoryFromLS';
 
 const initialState: CategoriesSliceState = {
   items: [],
   status: Status.LOADING,
-  selected: {},
+  selected: getCategoryFromLS(),
 };
 
 const categoriesSlice = createSlice({
-  name: "categories",
+  name: 'categories',
   initialState,
   reducers: {
     setCategories(state, action: PayloadAction<Category[]>) {
       state.items = action.payload;
     },
     setCategory(state, action: PayloadAction<Category>) {
-      const findCategory = state.items.find(
-        (category) => category.id === action.payload.id
-      );
+      const findCategory = state.items.find((category) => category.id === action.payload.id);
 
       if (findCategory) {
         state.selected = action.payload;
