@@ -1,9 +1,10 @@
+import type { TFooterSocialItemProps } from "types/common";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "styles/footer/index.module.scss";
-import { FooterSocialItemProps } from "types/common";
 
-const FooterSocialItem = ({ link, show, hover }: FooterSocialItemProps) => {
+const FooterSocialItem = ({ link, show, hover }: TFooterSocialItemProps) => {
   const [hidden, setHidden] = useState(true);
 
   return (

@@ -6,6 +6,7 @@ import booksReducer from "./books/booksSlice";
 import sliderReducer from "./slider/sliderSlice";
 import favoriteReducer from "./favorite/favoriteSlice";
 import categoriesReducer from "./categories/categoriesSlice";
+import recentlyViewedBooksReducer from "./recentlyViewedBooks/recentlyViewedBooksSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     slider: sliderReducer,
     favorite: favoriteReducer,
     categories: categoriesReducer,
+    recentlyViewedBooks: recentlyViewedBooksReducer,
   },
 });
 

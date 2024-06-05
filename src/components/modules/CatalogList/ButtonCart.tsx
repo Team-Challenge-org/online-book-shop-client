@@ -1,10 +1,10 @@
+import { TButtonFavoriteOrCartType } from "types/common";
+
+import { motion } from "framer-motion";
 import CartActiveSvg from "components/elements/CartActiveSvg/CartActiveSvg";
 import CartInactiveSvg from "components/elements/CartInactiveSvg/CartInactiveSvg";
-import { motion } from "framer-motion";
-import React from "react";
-import { ButtonFavoriteOrCartType } from "types/common";
 
-const ButtonCart = ({ isAdded: isAddedToCart }: ButtonFavoriteOrCartType) => {
+const ButtonCart = ({ isAdded: isAddedToCart }: TButtonFavoriteOrCartType) => {
   return (
     <div>
       {isAddedToCart ? (

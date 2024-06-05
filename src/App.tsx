@@ -1,7 +1,7 @@
-import MainLayout from 'components/layouts/MainLayout';
-import HomePage from 'pages/HomePage/HomePage';
-import ProductPage from 'pages/ProductPage/ProductPage';
-import { Route, Routes } from 'react-router-dom';
+import MainLayout from "components/layouts/MainLayout";
+import HomePage from "pages/HomePage/HomePage";
+import ProductPage from "pages/ProductPage/ProductPage";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
