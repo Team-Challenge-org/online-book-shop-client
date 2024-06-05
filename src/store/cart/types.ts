@@ -1,4 +1,4 @@
-export type CartItem = {
+export type TCartItem = {
   id: number;
   title: string;
   full_description: string;
@@ -14,6 +14,6 @@ export type CartItem = {
   quantity: number;
 };
 
-export type CartSliceState = {
-  items: CartItem[];
+export type TCartSliceState = {
+  items: TCartItem[];
 };

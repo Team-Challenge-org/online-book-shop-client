@@ -1,5 +1,5 @@
 import styles from "./cartItem.module.scss";
-import type { Book } from "store/books/types";
+import type { TBook } from "store/books/types";
 
 import { MdAdd } from "react-icons/md";
 import { MdRemove } from "react-icons/md";
@@ -7,7 +7,7 @@ import { MdRemove } from "react-icons/md";
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
 
-export function CartItem({ book }: { book: Book }) {
+export function CartItem({ book }: { book: TBook }) {
   const { onDecreaseBookCount, onIncreaseBookCount, onRemoveBookFromCart } =
     useModalCart();
 

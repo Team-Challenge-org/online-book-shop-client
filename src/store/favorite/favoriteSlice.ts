@@ -1,16 +1,17 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { FavoriteItems, FavoriteSliceState } from './types';
-import { getFavoriteFromLS } from 'utils/getFavoriteFromLS';
+import type { TFavoriteItems, TFavoriteSliceState } from "./types";
 
-const initialState: FavoriteSliceState = getFavoriteFromLS();
+import { getFavoriteFromLS } from "utils/getFavoriteFromLS";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+const initialState: TFavoriteSliceState = getFavoriteFromLS();
 
 const favoriteSlice = createSlice({
-  name: 'favorite',
+  name: "favorite",
   initialState,
   reducers: {
-    addOrRemoveFavoriteItem(state, action: PayloadAction<FavoriteItems>) {
+    addOrRemoveFavoriteItem(state, action: PayloadAction<TFavoriteItems>) {
       const checkItemInFavorite = state.items.find(
-        (item: FavoriteItems) => item.id === action.payload.id,
+        (item: TFavoriteItems) => item.id === action.payload.id
       );
       if (checkItemInFavorite) {
         state.items = state.items.filter((obj) => obj.id !== action.payload.id);

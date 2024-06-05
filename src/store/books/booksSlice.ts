@@ -1,8 +1,9 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Book, BookSliceState, Status } from "./types";
-import { fetchBooks } from "./asyncActions";
+import { type TBook, type IBookSliceState, Status } from "./types";
 
-const initialState: BookSliceState = {
+import { fetchBooks } from "./asyncActions";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+const initialState: IBookSliceState = {
   books: [],
   status: Status.LOADING,
 };
@@ -11,7 +12,7 @@ const bookSlice = createSlice({
   name: "book",
   initialState,
   reducers: {
-    setBooks(state, action: PayloadAction<Book[]>) {
+    setBooks(state, action: PayloadAction<TBook[]>) {
       state.books = action.payload;
     },
   },

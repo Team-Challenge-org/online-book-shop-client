@@ -4,10 +4,10 @@ import CategoriesList from "components/modules/CategoriesList/CategoriesList";
 
 const HomePage = () => {
   return (
-    <main className="container">
+    <main className="main">
       <Slider />
       <CategoriesList />
-      <div className="main">
+      <div className="container">
         <CatalogList />
       </div>
     </main>

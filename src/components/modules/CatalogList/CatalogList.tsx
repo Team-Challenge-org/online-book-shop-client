@@ -47,9 +47,9 @@ const CatalogList = () => {
     .slice(0, 10);
 
   return (
-    <div className={styles.catalog}>
+    <section className={styles.catalog}>
       {filteredItems.length > 0 ? filteredItems : renderedItems}
-    </div>
+    </section>
   );
 };
 
