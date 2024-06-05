@@ -6,8 +6,6 @@
 
   &__dashed {
     border-bottom: 1px solid rgba(149, 149, 149, 0.5);
-    margin-left: -80px;
-    margin-right: -80px;
   }
 
   &__bread {
@@ -26,9 +24,37 @@
       margin-right: 72px;
       width: 35.417vw;
       height: 68.449vh;
-      border: 10px solid red;
+      position: relative;
+
+      &__arrow_next__wrapper {
+        height: 100%;
+        width: 72px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 11;
+      }
+
+      &__arrow_prev__wrapper {
+        height: 100%;
+        width: 72px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 11;
+      }
+
+      &__arrow_prev {
+        content: url(../../../public/img/arrowLeft.svg);
+      }
+
+      &__arrow_next {
+        content: url(../../../public/img/arrowRight.svg);
+      }
 
       &__image {
+        padding-left: 72px;
+        padding-right: 72px;
         width: 35.417vw;
         height: 68.449vh;
       }
