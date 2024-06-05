@@ -23,13 +23,14 @@
     margin-bottom: 64px;
 
     &__slider {
-      width: 100vw;
-      height: 100vh;
       margin-right: 72px;
+      width: 35.417vw;
+      height: 68.449vh;
+      border: 10px solid red;
 
       &__image {
-        width: 100%;
-        height: 100%;
+        width: 35.417vw;
+        height: 68.449vh;
       }
     }
 

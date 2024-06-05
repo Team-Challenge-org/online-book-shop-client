@@ -16,6 +16,7 @@ import DropdownItem from 'components/modules/ProductPage/DropdownItem';
 import FavoriteInProductInactiveSvg from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
 import { useModalCart } from 'contexts/modalCartWindow/ModalCartContext';
 import Breadcrumbs from 'components/elements/Breadcrumbs/Breadcrumbs';
+import ProductPageSlider from 'components/modules/ProductPage/ProductPageSlider/ProductPageSlider';
 
 const ProductPage = () => {
   const [book, setBook] = useState<Book>();
@@ -100,11 +101,15 @@ const ProductPage = () => {
           <Breadcrumbs book={book} />
           <div className={styles.product__main}>
             <div className={styles.product__main__slider}>
-              <img
-                src={book.titleImage!}
-                alt={book.title}
-                className={styles.product__main__slider__image}
-              />
+              {book.images.length > 1 ? (
+                <ProductPageSlider images={book.images} />
+              ) : (
+                <img
+                  src={book.titleImage!}
+                  alt={book.title}
+                  className={styles.product__main__slider__image}
+                />
+              )}
             </div>
             <div className={styles.product__main__item}>
               <div className={styles.product__main__item__header}>
