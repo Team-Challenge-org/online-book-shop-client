@@ -1,4 +1,4 @@
-@import "styles/utils/variables";
+@import 'styles/utils/variables';
 
 section {
   margin: 0 auto;
@@ -11,14 +11,14 @@ section {
   }
 
   ul {
-    width: 68.6vw;
-    width: 1400px;
+    width: 88.88vw;
     height: 467px;
   }
 
   .book_box {
-    max-width: 302px;
-    margin: 0 24px;
+    // max-width: 302px;
+    width: 302px;
+    height: 467px;
 
     .text_info {
       margin-top: 16px;
