@@ -10,8 +10,15 @@ section {
     margin-bottom: 40px;
   }
 
+  ul {
+    width: 68.6vw;
+    width: 1400px;
+    height: 467px;
+  }
+
   .book_box {
-    // max-width: 302px;
+    max-width: 302px;
+    margin: 0 24px;
 
     .text_info {
       margin-top: 16px;

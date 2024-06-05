@@ -4,27 +4,27 @@ import {
 } from "utils/truncateString";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { MdArrowForwardIos } from "react-icons/md";
+import { MdArrowBackIosNew } from "react-icons/md";
 import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
 
 import styles from "./recentlyViewedBooks.module.scss";
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export function RecentlyViewedBooks() {
   const navigate = useNavigate();
   const { books: recentlyViewedBooks } = useSelector(selectRecentlyViewedBooks);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
+    nextArrow: <MdArrowForwardIos />,
+    prevArrow: <MdArrowBackIosNew />,
   };
-
-  console.log(recentlyViewedBooks)
 
   return recentlyViewedBooks.length === 0 ? null : (
     <section>
