@@ -7,6 +7,7 @@ export default function ProductPage() {
       <div className="container">
         <ProductInfo />
         {/* <RecentlyViewedBooks /> */}
+
       </div>
     </main>
   );

@@ -1,12 +1,13 @@
+
 import type { TCartItem, TCartSliceState } from "./types";
 
-import { getCartFromLS } from "utils/getCartFromLS";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getCartFromLS } from 'utils/getCartFromLS';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: TCartSliceState = getCartFromLS();
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addOrRemoveCartItem(state, action: PayloadAction<TCartItem>) {

@@ -33,6 +33,11 @@
       line-height: 16.36px;
       white-space: no-wrap;
       cursor: pointer;
+
+      &__active {
+        background-color: rgba(25, 108, 103, 0.15);
+        border: 1px solid transparent;
+      }
     }
   }
 }

@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ModalCartProvider } from 'contexts/modalCartWindow/ModalCartContext';
 
 import './index.scss';
-//import "normalize.css";
+//import 'normalize.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
