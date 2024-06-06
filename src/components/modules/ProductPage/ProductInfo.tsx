@@ -18,6 +18,7 @@ import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 
 import styles from "styles/productPage/index.module.scss";
 import ProductPageSlider from "./ProductPageSlider/ProductPageSlider";
+import Breadcrumbs from "components/elements/Breadcrumbs/Breadcrumbs";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -97,16 +98,14 @@ export const ProductInfo = () => {
 
   return (
     <section className={styles.product}>
-      <span className={styles.product__bread}>
-        Головна / Дизайн / {book.title}
-      </span>
+      <Breadcrumbs book={book} />
       <div className={styles.product__main}>
         <div className={styles.product__main__slider}>
           {book.images.length > 1 ? (
             <ProductPageSlider images={book.images} />
           ) : (
             <img
-              src={book.titleImage!}
+              src={book.images[0]}
               alt={book.title}
               className={styles.product__main__slider__image}
             />
@@ -151,7 +150,6 @@ export const ProductInfo = () => {
           <DropdownItem title="Оплата, доставка та повернення" order={order} />
         </div>
       </div>
-      <div className={styles.product__dashed}></div>
     </section>
   );
 };

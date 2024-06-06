@@ -7,7 +7,8 @@ export default function ProductPage() {
     <main className="main">
       <div className="container">
         <ProductInfo />
-        {/* <RecentlyViewedBooks /> */}
+      <span className='line'></span>
+        <RecentlyViewedBooks />
       </div>
     </main>
   );

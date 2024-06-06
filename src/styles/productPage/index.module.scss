@@ -1,12 +1,8 @@
 .product {
   margin: 40px 80px 40px 80px;
   font-family: "Inter";
-  margin-bottom: 80px;
-  min-height: 740px;
-
-  &__dashed {
-    border-bottom: 1px solid rgba(149, 149, 149, 0.5);
-  }
+  position: relative;
+  overflow: hidden;
 
   &__bread {
     font-weight: 400;
@@ -18,12 +14,9 @@
     margin-top: 64px;
     display: flex;
     flex-direction: row;
-    margin-bottom: 64px;
 
     &__slider {
-
       text-align: center;
-      height: 640px;
       min-width: calc(510px + (72px + 72px)); // 72px arrow slider
 
       margin-right: 72px;
@@ -39,6 +32,9 @@
         right: 0px;
         top: 0px;
         z-index: 11;
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
       }
 
       &__arrow_prev__wrapper {
@@ -48,6 +44,9 @@
         left: 0px;
         top: 0px;
         z-index: 11;
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
       }
 
       &__arrow_prev {
@@ -62,7 +61,9 @@
         padding-left: 72px;
         padding-right: 72px;
         width: 35.417vw;
-        height: 68.449vh;
+        height: 44.444vw;
+        padding-bottom: 64px;
+        max-height: 640px;
       }
     }
 
@@ -91,6 +92,10 @@
           color: rgba(30, 113, 52, 1);
           padding: 4px 12px 4px 12px;
           border: 1px solid rgba(0, 0, 0, 0.2);
+          text-wrap: nowrap;
+          justify-content: center;
+          display: flex;
+          align-items: center;
         }
       }
 
