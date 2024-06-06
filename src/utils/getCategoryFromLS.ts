@@ -1,8 +1,8 @@
-import { Category } from 'store/categories/types';
+import { TCategory } from 'store/categories/types';
 
 export const getCategoryFromLS = () => {
   const data = localStorage.getItem('category');
-  const category: Category = data ? JSON.parse(data) : '';
+  const category: TCategory = data ? JSON.parse(data) : '';
 
   return category;
 };

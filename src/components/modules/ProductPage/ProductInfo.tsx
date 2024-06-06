@@ -17,6 +17,7 @@ import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductI
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 
 import styles from "styles/productPage/index.module.scss";
+import ProductPageSlider from "./ProductPageSlider/ProductPageSlider";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -101,11 +102,15 @@ export const ProductInfo = () => {
       </span>
       <div className={styles.product__main}>
         <div className={styles.product__main__slider}>
-          <img
-            src={book.titleImage!}
-            alt={book.title}
-            className={styles.product__main__slider__image}
-          />
+          {book.images.length > 1 ? (
+            <ProductPageSlider images={book.images} />
+          ) : (
+            <img
+              src={book.titleImage!}
+              alt={book.title}
+              className={styles.product__main__slider__image}
+            />
+          )}
         </div>
 
         <div className={styles.product__main__item}>
@@ -117,9 +122,7 @@ export const ProductInfo = () => {
               {book.available ? "В наявності" : "Немає в наявності"}
             </span>
           </div>
-          <h1 className={styles.product__main__item__title}>
-            {book.title}
-          </h1>
+          <h1 className={styles.product__main__item__title}>{book.title}</h1>
           <span className={styles.product__main__item__price}>
             {book.price} грн
           </span>
