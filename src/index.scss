@@ -1,9 +1,21 @@
-@import "./styles/utils/variables";
-@import "./styles/utils/typography";
-@import "./styles/utils/reset-styles";
+@import './styles/utils/variables';
+@import './styles/utils/typography';
+@import './styles/utils/reset-styles';
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+button,
+input[type='submit'],
+input[type='reset'] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 .container {
@@ -17,6 +29,7 @@ body {
   flex: 1;
   max-width: 1440px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .button:hover {
@@ -25,7 +38,7 @@ body {
 
 .button {
   background-color: $color-main;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-weight: 400;
   font-size: 18px;
   line-height: 21.78px;
