@@ -1,4 +1,4 @@
-export type Category = {
+export type TCategory = {
   id?: number;
   name?: string;
 };
@@ -9,8 +9,8 @@ export enum Status {
   ERROR = 'error',
 }
 
-export interface CategoriesSliceState {
-  items: Category[];
+export interface ICategoriesSliceState {
+  items: TCategory[];
   status: Status;
-  selected: Category;
+  selected: TCategory;
 }

@@ -48,8 +48,10 @@ const CatalogList = () => {
     .map((item) => <CatalogItem item={item} key={item.id} />)
     .slice(0, 10);
 
-  return (
-    <div className={styles.catalog}>{filteredItems.length > 0 ? filteredItems : renderedItems}</div>
+    <section className={styles.catalog}>
+      {filteredItems.length > 0 ? filteredItems : renderedItems}
+    </section>
+
   );
 };
 

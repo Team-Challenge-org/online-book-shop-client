@@ -1,27 +1,27 @@
-import type { Book } from 'store/books/types';
+import type { TBook } from "store/books/types";
 
-export type FooterSocialItemProps = {
+export type TFooterSocialItemProps = {
   show: JSX.Element;
   hover: JSX.Element;
   link: string;
 };
 
-export type CatalogItemType = {
-  item: Book;
+export type TCatalogItemType = {
+  item: TBook;
 };
 
-export type ButtonFavoriteOrCartType = {
+export type TButtonFavoriteOrCartType = {
   isAdded: boolean;
 };
 
-export type DropdownItemType = {
+export type TDropdownItemType = {
   title: string;
   description?: string;
-  characteristics?: DropdownCharacteristicsType;
+  characteristics?: TDropdownCharacteristicsType;
   order?: string[];
 };
 
-export type DropdownCharacteristicsType = {
+export type TDropdownCharacteristicsType = {
   publishing: string;
   language: string;
   cover: string;

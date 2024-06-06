@@ -1,13 +1,14 @@
+import type { TDropdownItemType } from "types/common";
+
 import { useState } from "react";
 import styles from "styles/productPage/index.module.scss";
-import { DropdownItemType } from "types/common";
 
 const DropdownItem = ({
   title,
   characteristics,
   description,
   order,
-}: DropdownItemType) => {
+}: TDropdownItemType) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleShowMenu = () => {

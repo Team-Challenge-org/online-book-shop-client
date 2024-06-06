@@ -1,11 +1,12 @@
+import type { TButtonFavoriteOrCartType } from "types/common";
+
+import { motion } from "framer-motion";
 import FavoriteActiveSvg from "components/elements/FavoriteActiveSvg/FavoriteActiveSvg";
 import FavoriteInactiveSvg from "components/elements/FavoriteInactiveSvg/FavoriteInactiveSvg";
-import { motion } from "framer-motion";
-import { ButtonFavoriteOrCartType } from "types/common";
 
 const ButtonFavorite = ({
   isAdded: isAddedToFavorite,
-}: ButtonFavoriteOrCartType) => {
+}: TButtonFavoriteOrCartType) => {
   return (
     <div>
       {isAddedToFavorite ? (

@@ -1,9 +1,9 @@
-import { fetchCategories } from './asyncAction';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { CategoriesSliceState, Category, Status } from './types';
+import { fetchCategories } from "./asyncAction";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ICategoriesSliceState, type TCategory, Status } from "./types";
 import { getCategoryFromLS } from 'utils/getCategoryFromLS';
 
-const initialState: CategoriesSliceState = {
+const initialState: ICategoriesSliceState = {
   items: [],
   status: Status.LOADING,
   selected: getCategoryFromLS(),
@@ -13,9 +13,13 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    setCategories(state, action: PayloadAction<Category[]>) {
+    setCategories(state, action: PayloadAction<TCategory[]>) {
       state.items = action.payload;
     },
+    setCategory(state, action: PayloadAction<TCategory>) {
+      const findCategory = state.items.find(
+        (category) => category.id === action.payload.id
+      );
     setCategory(state, action: PayloadAction<Category>) {
       const findCategory = state.items.find((category) => category.id === action.payload.id);
 

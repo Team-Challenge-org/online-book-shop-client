@@ -1,6 +1,6 @@
 .product {
   margin: 40px 80px 40px 80px;
-  font-family: 'Inter';
+  font-family: "Inter";
   margin-bottom: 80px;
   min-height: 740px;
 
@@ -21,10 +21,16 @@
     margin-bottom: 64px;
 
     &__slider {
+
+      text-align: center;
+      height: 640px;
+      min-width: calc(510px + (72px + 72px)); // 72px arrow slider
+
       margin-right: 72px;
       width: 35.417vw;
       height: 68.449vh;
       position: relative;
+
 
       &__arrow_next__wrapper {
         height: 100%;
@@ -93,6 +99,7 @@
         font-size: 22px;
         line-height: 26.63px;
         color: rgba(0, 0, 0, 1);
+        margin-top: 0;
         margin-bottom: 16px;
       }
 
@@ -135,7 +142,7 @@
         display: flex;
         flex-direction: column;
         margin-right: 79px;
-        font-family: 'Inter';
+        font-family: "Inter";
 
         &__header {
           display: flex;

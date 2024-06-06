@@ -1,9 +1,10 @@
+import type { TButtonFavoriteOrCartType } from "types/common";
+
 import { useState } from "react";
-import { ButtonFavoriteOrCartType } from "types/common";
 
 const FavoriteInProductInactiveSvg = ({
   isAdded,
-}: ButtonFavoriteOrCartType) => {
+}: TButtonFavoriteOrCartType) => {
   const [hiddenFavorite, setHiddenFavorite] = useState(true);
 
   return (

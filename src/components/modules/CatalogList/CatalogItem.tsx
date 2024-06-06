@@ -1,20 +1,22 @@
+import type { TCartItem } from "store/cart/types";
+import type { TCatalogItemType } from "types/common";
+import type { TFavoriteItems } from "store/favorite/types";
+
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCart } from "store/cart/selectors";
 import { addOrRemoveCartItem } from "store/cart/cartSlice";
-import { CartItem } from "store/cart/types";
 import { selectFavorite } from "store/favorite/selectors";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import { FavoriteItems } from "store/favorite/types";
 import { useAppDispatch } from "store/store";
-import { CatalogItemType } from "types/common";
 import ButtonCart from "./ButtonCart";
 import ButtonFavorite from "./ButtonFavorite";
 import styles from "styles/catalogItem/index.module.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
-const CatalogItem = ({ item }: CatalogItemType) => {
+const CatalogItem = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
@@ -38,12 +40,12 @@ const CatalogItem = ({ item }: CatalogItemType) => {
     }
   }, [CartItem, favoriteItems, item, dispatch]);
 
-  const CartItemHandler = (obj: CartItem) => {
+  const CartItemHandler = (obj: TCartItem) => {
     dispatch(addOrRemoveCartItem(obj));
     setIsAddedToCart(!isAddedToCart);
   };
 
-  const favoriteItemsHandler = (obj: FavoriteItems) => {
+  const favoriteItemsHandler = (obj: TFavoriteItems) => {
     dispatch(addOrRemoveFavoriteItem(obj));
     setIsAddedToFavorite(!isAddedToFavorite);
   };
@@ -95,6 +97,7 @@ const CatalogItem = ({ item }: CatalogItemType) => {
         <Link
           to={`/book/${item.id}`}
           className={styles.catalog__list__item__text__title}
+          onClick={() => dispatch(addRecentlyViewedBook(item))}
         >
           {item.title}
         </Link>

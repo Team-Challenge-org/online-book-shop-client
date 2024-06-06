@@ -1,4 +1,4 @@
-export type FavoriteItems = {
+export type TFavoriteItems = {
   id: number;
   title: string;
   full_description: string;
@@ -13,6 +13,6 @@ export type FavoriteItems = {
   images: string[];
 };
 
-export type FavoriteSliceState = {
-  items: FavoriteItems[];
+export type TFavoriteSliceState = {
+  items: TFavoriteItems[];
 };

@@ -1,6 +1,6 @@
 import { Status } from "store/books/types";
 
-export type SliderBook = {
+export type TSliderBook = {
   id: number;
   titleImage: string;
   title: string;
@@ -10,11 +10,11 @@ export type SliderBook = {
   authors: string | null;
 };
 
-export interface SliderBookSliceState {
-  items: SliderBook[];
+export interface ISliderBookSliceState {
+  items: TSliderBook[];
   status: Status;
 }
 
 export type SliderItemType = {
-  obj: SliderBook;
+  obj: TSliderBook;
 };
