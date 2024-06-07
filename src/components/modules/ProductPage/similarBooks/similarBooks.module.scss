@@ -1,0 +1,94 @@
+@import "styles/utils/variables";
+
+.recently {
+  margin: 0 auto;
+  margin-bottom: 80px;
+  max-width: 1440px;
+  position: relative;
+
+  &__arrow_next__wrapper {
+    height: 100%;
+    width: 80px;
+    position: absolute;
+    right: -60px;
+    top: 0px;
+    z-index: 11;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__arrow_prev__wrapper {
+    height: 100%;
+    width: 80px;
+    position: absolute;
+    left: -60px;
+    top: 0px;
+    z-index: 11;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__arrow_prev {
+    content: url(../../../../../public/img/arrowLeft.svg);
+  }
+
+  &__arrow_next {
+    content: url(../../../../../public/img/arrowRight.svg);
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+
+  &__list {
+    width: 88.88vw;
+    height: 32.43vw;
+    display: flex;
+    gap: 24px;
+  }
+
+  .book_box {
+    width: 20.97vw;
+    height: 32.43vw;
+    max-width: 302px;
+    max-height: 467px;
+
+    &__slider {
+      max-width: 1440px;
+    }
+
+    &__image {
+      width: 20.97vw;
+      height: 25.55vw;
+      max-width: 302px;
+      max-height: 368px;
+    }
+
+    .text_info {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      p {
+        font-size: 16px;
+        color: $color-gray;
+      }
+
+      h3 {
+        font-weight: 400;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      span {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -22,5 +22,6 @@ export enum Status {
 
 export interface IBookSliceState {
   books: TBook[];
+  similarBooks: TBook[];
   status: Status;
 }

@@ -8,7 +8,6 @@ import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
 import styles from "./recentlyViewedBooks.module.scss";
 import Slider from "react-slick";
 
-
 function SampleNextArrow(props: any) {
   return (
     <div {...props} className={styles.recently__arrow_next__wrapper}>
@@ -24,7 +23,6 @@ function SamplePrevArrow(props: any) {
     </div>
   );
 }
-
 
 export function RecentlyViewedBooks() {
   const navigate = useNavigate();
@@ -50,7 +48,8 @@ export function RecentlyViewedBooks() {
             <li key={book.id} className={styles.book_box}>
               <img
                 src={book?.titleImage as string}
-                alt={"image of: " + book.title} className={styles.book_box__image}
+                alt={"image of: " + book.title}
+                className={styles.book_box__image}
               />
 
               <div className={styles.text_info}>
