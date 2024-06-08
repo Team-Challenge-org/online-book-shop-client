@@ -7,33 +7,14 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
+import { selectSimilarBooks } from "store/books/selectors";
 
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
-import styles from "./recentlyViewedBooks.module.scss";
-import Slider from "react-slick";
+import styles from "./similarBooks.module.scss";
 
-
-function SampleNextArrow(props: any) {
-  return (
-    <div {...props} className={styles.recently__arrow_next__wrapper}>
-      <div {...props} className={styles.recently__arrow_next} />
-    </div>
-  );
-}
-
-function SamplePrevArrow(props: any) {
-  return (
-    <div {...props} className={styles.recently__arrow_prev__wrapper}>
-      <div {...props} className={styles.recently__arrow_prev} />
-    </div>
-  );
-}
-
-
-export function RecentlyViewedBooks() {
-  const { books: recentlyViewedBooks } = useSelector(selectRecentlyViewedBooks);
+export function SimilarBooks() {
+  const similarBooks = useSelector(selectSimilarBooks);
   const navigate = useNavigate();
 
   const options: EmblaOptionsType = {
@@ -53,7 +34,7 @@ export function RecentlyViewedBooks() {
 
   return (
     <section>
-      <h2>Нещодавно переглянуті книги</h2>
+      <h2>Вас може зацікавити</h2>
 
       <div className={styles.slider_embla}>
         <MdArrowBackIosNew
@@ -64,7 +45,7 @@ export function RecentlyViewedBooks() {
         <div className={styles.embla}>
           <div className={styles.sembla__viewport} ref={emblaRef}>
             <ul className={styles.embla__container}>
-              {recentlyViewedBooks.map((book) => (
+              {similarBooks.map((book) => (
                 <li key={book.id} className={styles.embla__slide}>
                   <img
                     src={book?.titleImage as string}

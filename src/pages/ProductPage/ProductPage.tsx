@@ -1,4 +1,5 @@
 import { ProductInfo } from "../../components/modules/ProductPage/ProductInfo";
+import { SimilarBooks } from "components/modules/ProductPage/similarBooks/SimilarBooks";
 import { RecentlyViewedBooks } from "components/modules/ProductPage/recentlyViewedBooks/RecentlyViewedBooks";
 
 export default function ProductPage() {
@@ -8,8 +9,7 @@ export default function ProductPage() {
         <ProductInfo />
         <span className="line"></span>
         <RecentlyViewedBooks />
-
-        {/* <TestSlider /> */}
+        <SimilarBooks />
       </div>
     </main>
   );

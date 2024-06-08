@@ -1,3 +1,4 @@
+import type { TBook } from "store/books/types";
 import type { TCartItem } from "store/cart/types";
 import type { TCatalogItemType } from "types/common";
 import type { TFavoriteItems } from "store/favorite/types";
@@ -15,6 +16,7 @@ import styles from "styles/catalogList/index.module.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
+import { setSimilarBooks } from "store/books/booksSlice";
 
 const CatalogItem = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -50,6 +52,10 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
     setIsAddedToFavorite(!isAddedToFavorite);
   };
 
+  function updateBookSelection(book: TBook) {
+    dispatch(addRecentlyViewedBook(book));
+    dispatch(setSimilarBooks(book));
+  }
   return (
     <li className={styles.catalog__list} key={item.id}>
       <div
@@ -97,7 +103,7 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
         <Link
           to={`/book/${item.id}`}
           className={styles.catalog__list__item__text__title}
-          onClick={() => dispatch(addRecentlyViewedBook(item))}
+          onClick={() => updateBookSelection(item)}
         >
           {item.title}
         </Link>

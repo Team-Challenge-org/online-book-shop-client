@@ -2,9 +2,11 @@ import { type TBook, type IBookSliceState, Status } from "./types";
 
 import { fetchBooks } from "./asyncActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getSimilarBooksFromLS } from "utils/getSimilarBooksFromLS";
 
 const initialState: IBookSliceState = {
   books: [],
+  similarBooks: getSimilarBooksFromLS(),
   status: Status.LOADING,
 };
 
@@ -14,6 +16,21 @@ const bookSlice = createSlice({
   reducers: {
     setBooks(state, action: PayloadAction<TBook[]>) {
       state.books = action.payload;
+    },
+    setSimilarBooks(state, { payload }) {
+      const receivedBook = payload;
+      const similarBooks = state.books.filter(
+        (book) =>
+          book.category === receivedBook.category && book.id !== receivedBook.id
+      );
+      // Shuffle the filtered books to randomize selection
+      const shuffledSimilarBooks = [...similarBooks].sort(
+        () => Math.random() - 0.5
+      );
+      const sixSimilarBooks = shuffledSimilarBooks.slice(0, 6);
+
+      state.similarBooks = sixSimilarBooks;
+      localStorage.setItem("similarBooks", JSON.stringify(state.similarBooks));
     },
   },
   extraReducers: (builder) => {
@@ -32,6 +49,6 @@ const bookSlice = createSlice({
   },
 });
 
-export const { setBooks } = bookSlice.actions;
+export const { setBooks, setSimilarBooks } = bookSlice.actions;
 
 export default bookSlice.reducer;
