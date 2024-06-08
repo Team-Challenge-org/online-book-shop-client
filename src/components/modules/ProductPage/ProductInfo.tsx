@@ -16,7 +16,7 @@ import DropdownItem from "components/modules/ProductPage/DropdownItem";
 import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 
-import styles from "styles/productPage/index.module.scss";
+import styles from "styles/productInfo/index.module.scss";
 import ProductPageSlider from "./ProductPageSlider/ProductPageSlider";
 import Breadcrumbs from "components/elements/Breadcrumbs/Breadcrumbs";
 

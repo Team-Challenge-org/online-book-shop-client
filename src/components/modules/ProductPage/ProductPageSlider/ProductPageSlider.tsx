@@ -1,10 +1,12 @@
-import React from 'react';
-import Slider from 'react-slick';
-import styles from 'styles/productPage/index.module.scss';
+import Slider from "react-slick";
+import styles from "styles/productInfo/index.module.scss";
 
 function SampleNextArrow(props: any) {
   return (
-    <div {...props} className={styles.product__main__slider__arrow_next__wrapper}>
+    <div
+      {...props}
+      className={styles.product__main__slider__arrow_next__wrapper}
+    >
       <div {...props} className={styles.product__main__slider__arrow_next} />
     </div>
   );
@@ -12,7 +14,10 @@ function SampleNextArrow(props: any) {
 
 function SamplePrevArrow(props: any) {
   return (
-    <div {...props} className={styles.product__main__slider__arrow_prev__wrapper}>
+    <div
+      {...props}
+      className={styles.product__main__slider__arrow_prev__wrapper}
+    >
       <div {...props} className={styles.product__main__slider__arrow_prev} />
     </div>
   );
@@ -26,7 +31,7 @@ const ProductPageSlider = ({ images }: any) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    cssEase: 'linear',
+    cssEase: "linear",
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
@@ -35,7 +40,12 @@ const ProductPageSlider = ({ images }: any) => {
     <div>
       <Slider {...settings}>
         {images.map((image: any) => (
-          <img src={image} alt={image} className={styles.product__main__slider__image} />
+          <img
+            key={image}
+            src={image}
+            alt={image}
+            className={styles.product__main__slider__image}
+          />
         ))}
       </Slider>
     </div>
