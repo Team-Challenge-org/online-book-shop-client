@@ -11,7 +11,7 @@ import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { useAppDispatch } from "store/store";
 import ButtonCart from "./ButtonCart";
 import ButtonFavorite from "./ButtonFavorite";
-import styles from "styles/catalogItem/index.module.scss";
+import styles from "styles/catalogList/index.module.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
