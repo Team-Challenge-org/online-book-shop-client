@@ -11,6 +11,11 @@
     grid-column-start: 1;
     grid-row-end: 3;
     grid-column-end: 3;
+
+    img {
+      max-width: 628px;
+      max-height: 859px;
+    }
   }
 
   &__list:last-child {
@@ -18,6 +23,11 @@
     grid-column-start: 3;
     grid-row-end: 5;
     grid-column-end: 5;
+
+    img {
+      max-width: 628px;
+      max-height: 859px;
+    }
   }
 
   &__list {
@@ -64,6 +74,8 @@
       &__image {
         width: 100%;
         height: 100%;
+        max-width: 302px;
+        max-height: 368px;
       }
 
       &__text {

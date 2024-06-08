@@ -1,4 +1,4 @@
-import styles from "styles/catalogItem/index.module.scss";
+import styles from "styles/catalogList/index.module.scss";
 
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
