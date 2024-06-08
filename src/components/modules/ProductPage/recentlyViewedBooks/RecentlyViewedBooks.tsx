@@ -12,25 +12,6 @@ import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
 import styles from "./recentlyViewedBooks.module.scss";
-import Slider from "react-slick";
-
-
-function SampleNextArrow(props: any) {
-  return (
-    <div {...props} className={styles.recently__arrow_next__wrapper}>
-      <div {...props} className={styles.recently__arrow_next} />
-    </div>
-  );
-}
-
-function SamplePrevArrow(props: any) {
-  return (
-    <div {...props} className={styles.recently__arrow_prev__wrapper}>
-      <div {...props} className={styles.recently__arrow_prev} />
-    </div>
-  );
-}
-
 
 export function RecentlyViewedBooks() {
   const { books: recentlyViewedBooks } = useSelector(selectRecentlyViewedBooks);
