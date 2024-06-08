@@ -1,106 +1,86 @@
-@import 'styles/utils/variables';
+@import "styles/utils/variables";
 
-.slick-slide {
-  display: none;
-  float: left;
-
-  height: 100%;
-  min-height: 1px;
-
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  margin-left: 80px;
 }
 
-.recently {
-  margin: 0 auto;
+// Slider
+.slider_embla {
+  display: flex;
+  justify-content: center;
+}
+
+.embla {
+  overflow: hidden;
   margin-bottom: 80px;
-  max-width: 1280px;
-  position: relative;
 
-  &__arrow_next__wrapper {
-    height: 100%;
-    width: 80px;
-    position: absolute;
-    right: -80px;
-    top: 0px;
-    z-index: 11;
-    display: flex!important;
-    justify-content: center;
+  &__container {
+    width: 1280px;
+    display: flex;
+  }
+
+  &__slide {
+    flex: 0 0 302px;
+    min-width: 0;
+
+    width: 302px;
+    height: 467px;
+    color: $color-black;
+
+    display: flex;
     align-items: center;
-  }
-
-  &__arrow_prev__wrapper {
-    height: 100%;
-    width: 80px;
-    position: absolute;
-    left: -80px;
-    top: 0px;
-    z-index: 11;
-    display: flex!important;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    margin-right: 24px;
   }
 
-  &__arrow_prev {
-    content: url(../../../../../public/img/arrowLeft.svg);
+  // Arrows
+  &__prev {
+    height: 30px;
+    width: 80px;
+    color: black;
+    cursor: pointer;
+    margin-top: 169px;
   }
 
-  &__arrow_next {
-    content: url(../../../../../public/img/arrowRight.svg);
+  &__next {
+    height: 30px;
+    width: 80px;
+    color: black;
+    cursor: pointer;
+    margin-top: 169px;
+  }
+}
+
+// inside BOOK
+.book_image {
+  width: 302px;
+  height: 368px;
+  margin-bottom: 16px;
+}
+
+.text_info_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  p {
+    font-size: 16px;
+    color: $color-gray;
   }
 
-
-  h2 {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 40px;
+  h3 {
+    font-weight: 400;
+    font-size: 20px;
+    cursor: pointer;
   }
 
-  &__list {
-    width: 88.88vw;
-    height: 32.43vw;
-  }
-
-  .book_box {
-    width: 20.97vw;
-    height: 32.43vw;
-    max-width: 302px;
-    max-height: 467px;
-    position: relative;
-    left: 1px;
-
-    &__slider {
-      max-width: 1440px;
-
-    }
-
-    &__image {
-      width: 20.97vw;
-      height: 25.55vw;
-      max-width: 302px;
-      max-height: 368px;
-
-    }
-
-    .text_info {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      p {
-        font-size: 16px;
-        color: $color-gray;
-      }
-
-      h3 {
-        font-weight: 400;
-        font-size: 20px;
-        cursor: pointer;
-      }
-
-      span {
-        font-size: 20px;
-        font-weight: 600;
-      }
-    }
+  span {
+    font-size: 20px;
+    font-weight: 600;
   }
 }

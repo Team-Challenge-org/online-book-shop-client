@@ -1,7 +1,7 @@
 import type { TDropdownItemType } from "types/common";
 
 import { useState } from "react";
-import styles from "styles/productPage/index.module.scss";
+import styles from "styles/productInfo/index.module.scss";
 
 const DropdownItem = ({
   title,

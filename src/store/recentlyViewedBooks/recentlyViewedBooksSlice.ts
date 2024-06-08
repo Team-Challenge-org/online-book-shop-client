@@ -1,4 +1,3 @@
-// import type { TBook } from "store/books/types";
 import type { TRecentlyViewedBooksSlice } from "./types";
 
 import { createSlice } from "@reduxjs/toolkit";
@@ -16,7 +15,7 @@ const recentlyViewedBooksSlice = createSlice({
 
       if (!bookExists) {
         state.books.unshift(currentBook);
-        if (state.books.length > 5) {
+        if (state.books.length > 6) {
           state.books.pop();
         }
       }
