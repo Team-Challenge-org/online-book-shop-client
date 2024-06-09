@@ -11,6 +11,7 @@
   z-index: 1000;
 
   overflow: scroll;
+  overflow-x: hidden;
 
   .modal {
     position: fixed;
@@ -65,8 +66,9 @@
       justify-content: space-between;
 
       h2 {
+        font-size: 14px;
+        font-weight: 500;
         text-transform: uppercase;
-        font-weight: 400;
       }
 
       .total_price {

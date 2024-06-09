@@ -1,3 +1,5 @@
+import styles from "./recentlyViewedBooks.module.scss";
+
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { EmblaOptionsType } from "embla-carousel";
@@ -6,7 +8,6 @@ import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
 
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
-import styles from "./recentlyViewedBooks.module.scss";
 import RecentlyViewedBooksItem from "./RecentlyViewedBooksItem";
 
 export function RecentlyViewedBooks() {
@@ -27,15 +28,19 @@ export function RecentlyViewedBooks() {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  return (
+  const booksQuantity: number = recentlyViewedBooks?.length;
+
+  return booksQuantity === 0 ? null : (
     <section>
       <h2>Нещодавно переглянуті книги</h2>
 
       <div className={styles.slider_embla}>
-        <MdArrowBackIosNew
-          className={styles.embla__prev}
-          onClick={scrollPrev}
-        />
+        {booksQuantity > 4 ? (
+          <MdArrowBackIosNew
+            className={styles.embla__prev}
+            onClick={scrollPrev}
+          />
+        ) : null}
 
         <div className={styles.embla}>
           <div className={styles.sembla__viewport} ref={emblaRef}>
@@ -47,10 +52,12 @@ export function RecentlyViewedBooks() {
           </div>
         </div>
 
-        <MdArrowForwardIos
-          className={styles.embla__next}
-          onClick={scrollNext}
-        />
+        {booksQuantity > 4 ? (
+          <MdArrowForwardIos
+            className={styles.embla__next}
+            onClick={scrollNext}
+          />
+        ) : null}
       </div>
     </section>
   );

@@ -6,6 +6,7 @@ import { MdRemove } from "react-icons/md";
 
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
+import { handleTruncateAuthors } from "utils/truncateString";
 
 export function CartItem({ book }: { book: TBook }) {
   const { onDecreaseBookCount, onIncreaseBookCount, onRemoveBookFromCart } =
@@ -29,7 +30,12 @@ export function CartItem({ book }: { book: TBook }) {
 
       <div className={styles.book_info_box}>
         <div className={styles.text}>
-          <p className={styles.book_authors}>{book?.authors}</p>
+          <p
+            className={styles.book_authors}
+            data-title={book.authors as string}
+          >
+            {handleTruncateAuthors(book?.authors as string)}
+          </p>
           <p className={styles.book_title}>{book?.title}</p>
         </div>
 

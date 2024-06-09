@@ -1,21 +1,26 @@
+import type { TBook } from "store/books/types";
+import styles from "./similarBooks.module.scss";
+
 import {
   handleTruncateAuthors,
   handleTruncateBookTitle,
 } from "utils/truncateString";
 import { useCallback } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
+import { useDispatch, useSelector } from "react-redux";
 import { selectSimilarBooks } from "store/books/selectors";
 
-import { MdArrowBackIosNew } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
-import styles from "./similarBooks.module.scss";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { setSimilarBooks } from "store/books/booksSlice";
+import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
 export function SimilarBooks() {
-  const similarBooks = useSelector(selectSimilarBooks);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const similarBooks = useSelector(selectSimilarBooks);
 
   const options: EmblaOptionsType = {
     loop: true,
@@ -31,6 +36,12 @@ export function SimilarBooks() {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
+
+  function updateBookViewAndData(book: TBook) {
+    navigate(`/book/${book.id}`);
+    dispatch(setSimilarBooks(book));
+    dispatch(addRecentlyViewedBook(book));
+  }
 
   return (
     <section>
@@ -60,7 +71,7 @@ export function SimilarBooks() {
 
                     <h3
                       data-title={book.title}
-                      onClick={() => navigate(`/book/${book.id}`)}
+                      onClick={() => updateBookViewAndData(book)}
                     >
                       {handleTruncateBookTitle(book?.title)}
                     </h3>
