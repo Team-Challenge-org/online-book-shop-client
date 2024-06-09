@@ -1,20 +1,20 @@
-import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { EmblaOptionsType } from 'embla-carousel';
-import useEmblaCarousel from 'embla-carousel-react';
-import { selectRecentlyViewedBooks } from 'store/recentlyViewedBooks/selectors';
+import { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { EmblaOptionsType } from "embla-carousel";
+import useEmblaCarousel from "embla-carousel-react";
+import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
 
-import { MdArrowBackIosNew } from 'react-icons/md';
-import { MdArrowForwardIos } from 'react-icons/md';
-import styles from './recentlyViewedBooks.module.scss';
-import RecentlyViewedBooksItem from './RecentlyViewedBooksItem';
+import { MdArrowBackIosNew } from "react-icons/md";
+import { MdArrowForwardIos } from "react-icons/md";
+import styles from "./recentlyViewedBooks.module.scss";
+import RecentlyViewedBooksItem from "./RecentlyViewedBooksItem";
 
 export function RecentlyViewedBooks() {
   const { books: recentlyViewedBooks } = useSelector(selectRecentlyViewedBooks);
 
   const options: EmblaOptionsType = {
     loop: true,
-    align: 'start',
+    align: "start",
   };
 
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
@@ -32,7 +32,10 @@ export function RecentlyViewedBooks() {
       <h2>Нещодавно переглянуті книги</h2>
 
       <div className={styles.slider_embla}>
-        <MdArrowBackIosNew className={styles.embla__prev} onClick={scrollPrev} />
+        <MdArrowBackIosNew
+          className={styles.embla__prev}
+          onClick={scrollPrev}
+        />
 
         <div className={styles.embla}>
           <div className={styles.sembla__viewport} ref={emblaRef}>
@@ -44,7 +47,10 @@ export function RecentlyViewedBooks() {
           </div>
         </div>
 
-        <MdArrowForwardIos className={styles.embla__next} onClick={scrollNext} />
+        <MdArrowForwardIos
+          className={styles.embla__next}
+          onClick={scrollNext}
+        />
       </div>
     </section>
   );
