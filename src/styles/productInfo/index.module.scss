@@ -1,8 +1,8 @@
-@import "styles/utils/variables";
+@import 'styles/utils/variables';
 
 .product {
-  margin: 40px 80px 64px 80px;
-  font-family: "Inter";
+  margin: 40px 80px 0px 80px;
+  font-family: 'Inter';
   position: relative;
   overflow: hidden;
 
@@ -23,7 +23,6 @@
 
       margin-right: 72px;
       width: 35.417vw;
-      height: 68.449vh;
       position: relative;
 
       &__arrow_next__wrapper {
@@ -148,7 +147,7 @@
         display: flex;
         flex-direction: column;
         margin-right: 79px;
-        font-family: "Inter";
+        font-family: 'Inter';
 
         &__header {
           display: flex;

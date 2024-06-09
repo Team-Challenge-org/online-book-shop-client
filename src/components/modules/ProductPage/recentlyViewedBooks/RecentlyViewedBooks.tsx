@@ -38,7 +38,7 @@ export function RecentlyViewedBooks() {
           <div className={styles.sembla__viewport} ref={emblaRef}>
             <ul className={styles.embla__container}>
               {recentlyViewedBooks.map((book) => (
-                <RecentlyViewedBooksItem book={book} />
+                <RecentlyViewedBooksItem book={book} key={book.id} />
               ))}
             </ul>
           </div>
