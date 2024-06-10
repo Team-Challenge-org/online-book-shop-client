@@ -1,24 +1,24 @@
+import styles from "styles/productInfo/index.module.scss";
+
 import type { TBook } from "store/books/types";
 import type { TCartItem } from "store/cart/types";
 import type { TFavoriteItems } from "store/favorite/types";
 import type { TDropdownCharacteristicsType } from "types/common";
 
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "store/store";
+import { selectCart } from "store/cart/selectors";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { useAppDispatch } from "store/store";
-import { useSelector } from "react-redux";
-import { selectCart } from "store/cart/selectors";
 import { selectFavorite } from "store/favorite/selectors";
 import { addItemToCart, addOrRemoveCartItem } from "store/cart/cartSlice";
-import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import DropdownItem from "components/modules/ProductPage/DropdownItem";
-import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
-import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
-
-import styles from "styles/productInfo/index.module.scss";
-import ProductPageSlider from "./ProductPageSlider/ProductPageSlider";
 import Breadcrumbs from "components/elements/Breadcrumbs/Breadcrumbs";
+import ProductPageSlider from "./ProductPageSlider/ProductPageSlider";
+import DropdownItem from "components/modules/ProductPage/DropdownItem";
+import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
+import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
+import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -63,8 +63,8 @@ export const ProductInfo = () => {
   }, [CartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
+    dispatch(addItemToCart(obj))
     // dispatch(addOrRemoveCartItem(obj));
-    dispatch(addItemToCart(obj));
     setIsAddedToCart(!isAddedToCart);
     onOpenCartModal();
   };

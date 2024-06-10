@@ -1,4 +1,4 @@
-import { type TBook, type IBookSliceState, Status} from "./types";
+import { type TBook, type IBookSliceState, Status } from "./types";
 
 import { fetchBooks } from "./asyncActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
@@ -9,8 +9,6 @@ const initialState: IBookSliceState = {
   similarBooks: getSimilarBooksFromLS(),
   status: Status.LOADING,
 };
-
-
 
 const bookSlice = createSlice({
   name: "book",
@@ -40,13 +38,13 @@ const bookSlice = createSlice({
       state.status = Status.LOADING;
       state.books = [];
     });
+
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
-      const booksData = action.payload
-      state.books = booksData.content
+      const booksData = action.payload;
+      state.books = booksData.content;
       state.status = Status.SUCCESS;
-      // console.log(action.payload);
-      
     });
+
     builder.addCase(fetchBooks.rejected, (state) => {
       state.status = Status.ERROR;
       state.books = [];
