@@ -1,3 +1,17 @@
+export type TBooksData = {
+  content: TBook[];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  pageable: TBooksPageable;
+  size: number;
+  sort: TBooksSort;
+  totalElements: number;
+  totalPages: number;
+};
+
 export type TBook = {
   id: number;
   title: string;
@@ -12,6 +26,21 @@ export type TBook = {
   timeAdded: string;
   images: string[];
   quantity: number;
+};
+
+export type TBooksPageable = {
+  offset: number;
+  pageNumber: number;
+  pageSize: number;
+  paged: boolean;
+  sort: TBooksSort;
+  unpaged: boolean;
+};
+
+export type TBooksSort = {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
 };
 
 export enum Status {

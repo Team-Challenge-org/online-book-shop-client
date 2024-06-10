@@ -10,7 +10,7 @@ import { useAppDispatch } from "store/store";
 import { useSelector } from "react-redux";
 import { selectCart } from "store/cart/selectors";
 import { selectFavorite } from "store/favorite/selectors";
-import { addOrRemoveCartItem } from "store/cart/cartSlice";
+import { addItemToCart, addOrRemoveCartItem } from "store/cart/cartSlice";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import DropdownItem from "components/modules/ProductPage/DropdownItem";
 import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
@@ -63,7 +63,8 @@ export const ProductInfo = () => {
   }, [CartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
-    dispatch(addOrRemoveCartItem(obj));
+    // dispatch(addOrRemoveCartItem(obj));
+    dispatch(addItemToCart(obj));
     setIsAddedToCart(!isAddedToCart);
     onOpenCartModal();
   };

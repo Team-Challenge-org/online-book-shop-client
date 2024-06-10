@@ -50,10 +50,11 @@ const CatalogList = () => {
     .map((item) => <CatalogItem item={item} key={item.id} />)
     .slice(0, 10);
 
-    return (
-  <section className={styles.catalog}>
-    {filteredItems.length > 0 ? filteredItems : renderedItems}
-  </section>)
+  return (
+    <section className={styles.catalog}>
+      {filteredItems.length > 0 ? filteredItems : renderedItems}
+    </section>
+  );
 };
 
 export default CatalogList;

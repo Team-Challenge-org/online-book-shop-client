@@ -1,13 +1,12 @@
-
 import type { TCartItem, TCartSliceState } from "./types";
 
-import { getCartFromLS } from 'utils/getCartFromLS';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { getCartFromLS } from "utils/getCartFromLS";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TCartSliceState = getCartFromLS();
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     addOrRemoveCartItem(state, action: PayloadAction<TCartItem>) {
@@ -43,12 +42,17 @@ const cartSlice = createSlice({
     removeItem(state, { payload }) {
       state.items = state.items.filter((item) => item.id !== payload);
     },
+    addItemToCart(state, { payload }) {
+      // state.items = state.items.push(payload);
+      console.log(payload);
+    },
   },
 });
 
 export const {
   clearItems,
   removeItem,
+  addItemToCart, // FIXME: test func
   addOrRemoveCartItem,
   increaseItemQuantity,
   decreaseItemQantity,
