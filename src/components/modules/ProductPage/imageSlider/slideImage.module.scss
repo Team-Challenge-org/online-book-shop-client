@@ -1,0 +1,32 @@
+.slider_embla {
+  display: flex;
+  align-items: center;
+}
+
+.embla {
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+  }
+
+  &__slide {
+    flex: 0 0 100%;
+
+    img {
+      width: 510px;
+      height: 640px;
+    }
+  }
+}
+
+//Arrows
+.embla__prev,
+.embla__next {
+  height: 30px;
+  width: 72px;
+  color: black;
+  cursor: pointer;
+}
+
+//654 px 510img 72arrow + 72arrow

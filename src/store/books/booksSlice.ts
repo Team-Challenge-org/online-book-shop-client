@@ -43,6 +43,8 @@ const bookSlice = createSlice({
       const booksData = action.payload;
       state.books = booksData.content;
       state.status = Status.SUCCESS;
+      console.log(booksData);
+      
     });
 
     builder.addCase(fetchBooks.rejected, (state) => {

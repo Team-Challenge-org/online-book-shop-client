@@ -58,7 +58,7 @@ export function CartItem({ book }: { book: TBook }) {
             </div>
           </div>
 
-          <div className={styles.price}>{totalBookPrice} грн</div>
+          <div className={styles.price}>{totalBookPrice.toFixed(2)} грн</div>
         </div>
 
         <span

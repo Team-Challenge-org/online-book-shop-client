@@ -19,7 +19,9 @@ const RecentlyViewedBooksItem = ({ book }: { book: TBook }) => {
 
   function updateBookViewAndData(book: TBook) {
     navigate(`/book/${book.id}`);
-    dispatch(setSimilarBooks(book));
+    if (book) {
+      dispatch(setSimilarBooks(book));
+    }
     dispatch(addRecentlyViewedBook(book));
   }
 

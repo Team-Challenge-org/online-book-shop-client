@@ -43,6 +43,8 @@ export function SimilarBooks() {
     dispatch(addRecentlyViewedBook(book));
   }
 
+  if (similarBooks?.length === 0) return null;
+  
   return (
     <section>
       <h2>Вас може зацікавити</h2>

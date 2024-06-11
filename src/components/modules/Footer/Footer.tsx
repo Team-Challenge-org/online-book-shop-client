@@ -1,16 +1,17 @@
 import styles from 'styles/footer/index.module.scss';
-import FacebookHoverSvg from 'components/elements/FacebookHoverSvg/FacebookHoverSvg';
-import FacebookSvg from 'components/elements/FacebookSvg/FacebookSvg';
-import InstagramHoverSvg from 'components/elements/InstagramHoverSvg/InstagramHoverSvg';
-import InstagramSvg from 'components/elements/InstagramSvg/InstagramSvg';
-import Logo from 'components/elements/Logo/Logo';
-import Subscribe from 'components/elements/Subscribe/Subscribe';
-import TelegramHoverSvg from 'components/elements/TelegramHoverSvg/TelegramHoverSvg';
-import TelegramSvg from 'components/elements/TelegramSvg/TelegramSvg';
-import YoutubeHoverSvg from 'components/elements/YoutubeHoverSvg/YoutubeHoverSvg';
-import YoutubeSvg from 'components/elements/YoutubeSvg/YoutubeSvg';
+
 import { Link } from 'react-router-dom';
+import Logo from 'components/elements/Logo/Logo';
 import FooterSocialItem from './FooterSocialItem';
+import Subscribe from 'components/elements/Subscribe/Subscribe';
+import YoutubeSvg from 'components/elements/YoutubeSvg/YoutubeSvg';
+import TelegramSvg from 'components/elements/TelegramSvg/TelegramSvg';
+import FacebookSvg from 'components/elements/FacebookSvg/FacebookSvg';
+import InstagramSvg from 'components/elements/InstagramSvg/InstagramSvg';
+import YoutubeHoverSvg from 'components/elements/YoutubeHoverSvg/YoutubeHoverSvg';
+import FacebookHoverSvg from 'components/elements/FacebookHoverSvg/FacebookHoverSvg';
+import TelegramHoverSvg from 'components/elements/TelegramHoverSvg/TelegramHoverSvg';
+import InstagramHoverSvg from 'components/elements/InstagramHoverSvg/InstagramHoverSvg';
 
 const Footer = () => {
   return (

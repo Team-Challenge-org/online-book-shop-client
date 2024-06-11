@@ -46,6 +46,7 @@ const cartSlice = createSlice({
     },
     removeItem(state, { payload }) {
       state.items = state.items.filter((item) => item.id !== payload);
+      localStorage.setItem("cart", JSON.stringify(state.items));
     },
     addItemToCart(state, { payload }) {
       const findCartItem = state.items.find((item) => item.id === payload.id);
@@ -64,7 +65,7 @@ const cartSlice = createSlice({
 export const {
   clearItems,
   removeItem,
-  addItemToCart, // FIXME: test func
+  addItemToCart, 
   addOrRemoveCartItem,
   increaseItemQuantity,
   decreaseItemQantity,

@@ -52,7 +52,7 @@ export function ModalCart() {
           <div className={styles.footer_box}>
             <div className={styles.price_box}>
               <h2>Разом</h2>
-              <p className={styles.total_price}>{totalCartPrice} грн</p>
+              <p className={styles.total_price}>{totalCartPrice.toFixed(2)} грн</p>
             </div>
 
             <button className={styles.submit_btn}>Оформити замовлення</button>

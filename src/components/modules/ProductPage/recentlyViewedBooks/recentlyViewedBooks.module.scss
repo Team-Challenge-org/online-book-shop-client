@@ -1,4 +1,4 @@
-@import 'styles/utils/variables';
+@import "styles/utils/variables";
 
 section h2 {
   font-size: 24px;
@@ -38,14 +38,7 @@ section h2 {
   }
 
   // Arrows
-  &__prev {
-    height: 30px;
-    width: 80px;
-    color: black;
-    cursor: pointer;
-    margin-top: 169px;
-  }
-
+  &__prev,
   &__next {
     height: 30px;
     width: 80px;

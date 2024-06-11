@@ -10,11 +10,11 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
 import { selectCart } from "store/cart/selectors";
 import React, { useEffect, useState } from "react";
+import { addItemToCart } from "store/cart/cartSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectFavorite } from "store/favorite/selectors";
-import { addItemToCart, addOrRemoveCartItem } from "store/cart/cartSlice";
+import { SliderImage } from "./imageSlider/SliderImage";
 import Breadcrumbs from "components/elements/Breadcrumbs/Breadcrumbs";
-import ProductPageSlider from "./ProductPageSlider/ProductPageSlider";
 import DropdownItem from "components/modules/ProductPage/DropdownItem";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
@@ -60,11 +60,12 @@ export const ProductInfo = () => {
         setIsAddedToFavorite(true);
       }
     }
+
+    window.scroll(0, 0); //show upper part of page
   }, [CartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
-    dispatch(addItemToCart(obj))
-    // dispatch(addOrRemoveCartItem(obj));
+    dispatch(addItemToCart(obj));
     setIsAddedToCart(!isAddedToCart);
     onOpenCartModal();
   };
@@ -94,7 +95,7 @@ export const ProductInfo = () => {
   ];
 
   if (!book) {
-    return <>'Загрузка...'</>;
+    return <p>Загрузка...</p>;
   }
 
   return (
@@ -103,7 +104,7 @@ export const ProductInfo = () => {
       <div className={styles.product__main}>
         <div className={styles.product__main__slider}>
           {book.images.length > 1 ? (
-            <ProductPageSlider images={book.images} />
+            <SliderImage images={book.images} />
           ) : (
             <img
               src={book.images[0]}
