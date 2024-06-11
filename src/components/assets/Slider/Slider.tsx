@@ -25,8 +25,6 @@ function SliderPage() {
   const { items, status } = useSelector(selectSliderBookData);
   const dispatch = useAppDispatch();
 
-  console.log(items)
-
   useEffect(() => {
     const getSliderBooks = async () => {
       dispatch(fetchSliderBooks());

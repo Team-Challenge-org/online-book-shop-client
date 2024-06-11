@@ -10,8 +10,6 @@ export const fetchBooks = createAsyncThunk<TBooksData>(
       "https://quiet-ocean-77925-b4d85148e93b.herokuapp.com/api/v1/book/all?size=200"
     );
 
-    console.log(data);
-    
     return data;
   }
 );
