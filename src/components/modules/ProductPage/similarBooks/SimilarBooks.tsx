@@ -16,6 +16,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { setSimilarBooks } from "store/books/booksSlice";
 import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
+import { NAV_URL } from "constants/global";
 
 export function SimilarBooks() {
   const navigate = useNavigate();
@@ -38,13 +39,13 @@ export function SimilarBooks() {
   }, [emblaApi]);
 
   function updateBookViewAndData(book: TBook) {
-    navigate(`/book/${book.id}`);
+    navigate(NAV_URL.PRODUCT_PAGE + book.id);
     dispatch(setSimilarBooks(book));
     dispatch(addRecentlyViewedBook(book));
   }
 
   if (similarBooks?.length === 0) return null;
-  
+
   return (
     <section>
       <h2>Вас може зацікавити</h2>

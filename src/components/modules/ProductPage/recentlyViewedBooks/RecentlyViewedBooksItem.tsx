@@ -7,6 +7,7 @@ import {
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TBook } from "store/books/types";
+import { NAV_URL } from "constants/global";
 import { useNavigate } from "react-router-dom";
 import { setSimilarBooks } from "store/books/booksSlice";
 import ImageHover from "components/elements/ImageHover/ImageHover";
@@ -18,7 +19,7 @@ const RecentlyViewedBooksItem = ({ book }: { book: TBook }) => {
   const dispatch = useDispatch();
 
   function updateBookViewAndData(book: TBook) {
-    navigate(`/book/${book.id}`);
+    navigate(NAV_URL.PRODUCT_PAGE + book.id);
     if (book) {
       dispatch(setSimilarBooks(book));
     }

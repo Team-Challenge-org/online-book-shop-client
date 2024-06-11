@@ -1,7 +1,9 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
 import styles from "./breadcrumbs.module.scss";
-import { TBook } from "store/books/types";
+
+import type { TBook } from "store/books/types";
+
+import { NAV_URL } from "constants/global";
+import { Link, useLocation } from "react-router-dom";
 
 const Breadcrumbs = ({ book }: { book?: TBook }) => {
   const location = useLocation();
@@ -10,7 +12,7 @@ const Breadcrumbs = ({ book }: { book?: TBook }) => {
     <div className={styles.breadcrumbs}>
       <ul>
         <li>
-          <Link to={"/"}>Головна</Link>
+          <Link to={NAV_URL.HOME_PAGE}>Головна</Link>
           <span className={styles.separator}>/</span>
         </li>
         {location.pathname.includes("/book") && (
