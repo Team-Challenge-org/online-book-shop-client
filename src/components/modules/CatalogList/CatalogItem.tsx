@@ -11,8 +11,8 @@ import ImageHover from "components/elements/ImageHover/ImageHover";
 import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
 const CatalogItem = ({ item }: TCatalogItemType) => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [showButtons, setShowButtons] = useState(false);
 
   return (
@@ -21,7 +21,9 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
         className={styles.catalog__list__item}
         onMouseEnter={() => setShowButtons(true)}
         onMouseLeave={() => setShowButtons(false)}
-        onClick={() => navigate(NAV_URL.PRODUCT_PAGE + item.id)}
+        onClick={(e) => {
+          navigate(NAV_URL.PRODUCT_PAGE + item.id);
+        }}
       >
         <img
           src={item.titleImage!}
