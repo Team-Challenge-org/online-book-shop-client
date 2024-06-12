@@ -1,16 +1,20 @@
 import styles from "./cartItem.module.scss";
+
 import type { TBook } from "store/books/types";
 
 import { MdAdd } from "react-icons/md";
 import { MdRemove } from "react-icons/md";
-
+import { handleTruncateAuthors } from "utils/truncateString";
 import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
-import { handleTruncateAuthors } from "utils/truncateString";
 
 export function CartItem({ book }: { book: TBook }) {
-  const { onDecreaseBookCount, onIncreaseBookCount, onRemoveBookFromCart } =
-    useModalCart();
+  const {
+    onDecreaseBookCount,
+    onIncreaseBookCount,
+    onRemoveBookFromCart,
+    onUpdateItemQuantity,
+  } = useModalCart();
 
   const totalBookPrice = book?.price * book?.quantity;
 
@@ -48,7 +52,16 @@ export function CartItem({ book }: { book: TBook }) {
               <MdRemove />
             </div>
 
-            <span className={styles.quantity}>{book?.quantity}</span>
+            <input
+              type="number"
+              className={styles.field_quantity}
+              maxLength={3}
+              min='1'
+              value={book?.quantity}
+              onChange={(e) =>
+                onUpdateItemQuantity(book.id, Number(e.target.value))
+              }
+            />
 
             <div
               className={styles.change_count_btn}

@@ -1,4 +1,4 @@
-import styles from "./recentlyViewedBooks.module.scss";
+import styles from "./recentlyViewedBooksItem.module.scss";
 
 import {
   handleTruncateAuthors,
@@ -13,10 +13,10 @@ import { setSimilarBooks } from "store/books/booksSlice";
 import ImageHover from "components/elements/ImageHover/ImageHover";
 import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
-const RecentlyViewedBooksItem = ({ book }: { book: TBook }) => {
-  const [showButtons, setShowButtons] = useState(false);
+export function RecentlyViewedBooksItem({ book }: { book: TBook }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showButtons, setShowButtons] = useState(false);
 
   function updateBookViewAndData(book: TBook) {
     navigate(NAV_URL.PRODUCT_PAGE + book.id);
@@ -27,7 +27,7 @@ const RecentlyViewedBooksItem = ({ book }: { book: TBook }) => {
   }
 
   return (
-    <li key={book.id} className={styles.embla__slide}>
+    <li className={styles.embla__slide}>
       <div
         className={styles.book_item}
         onMouseEnter={() => setShowButtons(true)}
@@ -53,6 +53,4 @@ const RecentlyViewedBooksItem = ({ book }: { book: TBook }) => {
       </div>
     </li>
   );
-};
-
-export default RecentlyViewedBooksItem;
+}

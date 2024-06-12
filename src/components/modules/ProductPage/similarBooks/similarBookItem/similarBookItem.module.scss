@@ -1,27 +1,6 @@
 @import "styles/utils/variables";
 
-h2 {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 40px;
-  margin-left: 80px;
-}
-
-// Slider
-.slider_embla {
-  display: flex;
-  justify-content: center;
-}
-
 .embla {
-  overflow: hidden;
-  margin-bottom: 80px;
-
-  &__container {
-    width: 1280px;
-    display: flex;
-  }
-
   &__slide {
     flex: 0 0 302px;
     min-width: 0;
@@ -36,26 +15,8 @@ h2 {
     flex-direction: column;
     margin-right: 24px;
   }
-
-  // Arrows
-  &__prev {
-    height: 30px;
-    width: 80px;
-    color: black;
-    cursor: pointer;
-    margin-top: 169px;
-  }
-
-  &__next {
-    height: 30px;
-    width: 80px;
-    color: black;
-    cursor: pointer;
-    margin-top: 169px;
-  }
 }
 
-// inside BOOK
 .book_image {
   width: 302px;
   height: 368px;

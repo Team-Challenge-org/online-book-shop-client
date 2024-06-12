@@ -1,32 +1,15 @@
-import styles from "./recentlyViewedBooks.module.scss";
+import styles from "./recentlyViewedBooksList.module.scss";
 
-import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { EmblaOptionsType } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
-import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
-
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
-import RecentlyViewedBooksItem from "./RecentlyViewedBooksItem";
+import { useProductPageSlider } from "hooks/useProductPageSlider";
+import { selectRecentlyViewedBooks } from "store/recentlyViewedBooks/selectors";
+import { RecentlyViewedBooksItem } from "../recentlyViewedBookItem/RecentlyViewedBooksItem";
 
-export function RecentlyViewedBooks() {
+export function RecentlyViewedBooksList() {
+  const { emblaRef, scrollNext, scrollPrev } = useProductPageSlider();
   const { books: recentlyViewedBooks } = useSelector(selectRecentlyViewedBooks);
-
-  const options: EmblaOptionsType = {
-    loop: true,
-    align: "start",
-  };
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
 
   const booksQuantity: number = recentlyViewedBooks?.length;
 

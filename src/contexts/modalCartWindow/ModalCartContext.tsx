@@ -2,6 +2,7 @@ import {
   removeItem,
   decreaseItemQantity,
   increaseItemQuantity,
+  updateItemQuantity,
 } from "store/cart/cartSlice";
 import { selectCart } from "store/cart/selectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,7 @@ export type TModalCartContext = {
   onIncreaseBookCount: (bookId: number) => void;
   onDecreaseBookCount: (bookId: number) => void;
   onRemoveBookFromCart: (bookId: number) => void;
+  onUpdateItemQuantity: (id: number, quantity: number) => void;
 };
 
 const ModalCartContext = createContext<TModalCartContext>({
@@ -27,6 +29,7 @@ const ModalCartContext = createContext<TModalCartContext>({
   onIncreaseBookCount: () => {},
   onDecreaseBookCount: () => {},
   onRemoveBookFromCart: () => {},
+  onUpdateItemQuantity: () => {},
 });
 
 type TModalCartProviderProps = {
@@ -34,6 +37,7 @@ type TModalCartProviderProps = {
 };
 
 function ModalCartProvider({ children }: TModalCartProviderProps) {
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const { items: shoppingCart } = useSelector(selectCart);
 
@@ -52,8 +56,6 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     setShowModal(false);
   }
 
-  const dispatch = useDispatch();
-
   function hadnleIncreaseBookCount(bookId: number) {
     dispatch(increaseItemQuantity(bookId));
   }
@@ -66,6 +68,15 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     dispatch(removeItem(bookId));
   }
 
+  function handleUpdateItemQuantity(id: number, quantity: number) {
+    dispatch(
+      updateItemQuantity({
+        itemId: id,
+        newQuantity: quantity,
+      })
+    );
+  }
+
   const contextValue: TModalCartContext = {
     showModal,
     cartItemsCount,
@@ -75,6 +86,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     onIncreaseBookCount: hadnleIncreaseBookCount,
     onDecreaseBookCount: handleDecreaseBookCount,
     onRemoveBookFromCart: handleRemoveBookFromCart,
+    onUpdateItemQuantity: handleUpdateItemQuantity,
   };
 
   return (
