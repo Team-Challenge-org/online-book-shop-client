@@ -4,8 +4,8 @@ import type { TBook } from "store/books/types";
 
 import { MdAdd } from "react-icons/md";
 import { MdRemove } from "react-icons/md";
-import { handleTruncateAuthors } from "utils/truncateString";
-import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
+import { truncateAuthors } from "utils/truncateString";
+import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
 
 export function CartItem({ book }: { book: TBook }) {
@@ -38,7 +38,7 @@ export function CartItem({ book }: { book: TBook }) {
             className={styles.book_authors}
             data-title={book.authors as string}
           >
-            {handleTruncateAuthors(book?.authors as string)}
+            {truncateAuthors(book?.authors as string)}
           </p>
           <p className={styles.book_title}>{book?.title}</p>
         </div>
@@ -56,7 +56,7 @@ export function CartItem({ book }: { book: TBook }) {
               type="number"
               className={styles.field_quantity}
               maxLength={3}
-              min='1'
+              min="1"
               value={book?.quantity}
               onChange={(e) =>
                 onUpdateItemQuantity(book.id, Number(e.target.value))

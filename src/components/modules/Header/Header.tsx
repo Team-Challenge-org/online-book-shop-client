@@ -2,12 +2,11 @@ import styles from "styles/header/index.module.scss";
 
 import Logo from "components/elements/Logo/Logo";
 import { MdFavoriteBorder } from "react-icons/md";
-import SearchSvg from "components/elements/SearchSvg/SearchSvg";
-
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlinePersonOutline } from "react-icons/md";
+import { useModalCart } from "contexts/ModalCartContext";
+import { SearchSvg } from "components/elements/SearchSvg/SearchSvg";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
-import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();

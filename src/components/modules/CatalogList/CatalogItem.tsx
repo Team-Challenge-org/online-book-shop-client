@@ -8,6 +8,7 @@ import { useAppDispatch } from "store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { setSimilarBooks } from "store/books/booksSlice";
 import ImageHover from "components/elements/ImageHover/ImageHover";
+import { truncateAuthors, truncateBookTitle } from "utils/truncateString";
 import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
 const CatalogItem = ({ item }: TCatalogItemType) => {
@@ -35,7 +36,7 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
 
       <div className={styles.catalog__list__item__text}>
         <span className={styles.catalog__list__item__text__author}>
-          {item.authors}
+          {truncateAuthors(item.authors as string)}
         </span>
         <Link
           to={`/book/${item.id}`}
@@ -45,7 +46,7 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
             dispatch(setSimilarBooks(item));
           }}
         >
-          {item.title}
+          {truncateBookTitle(item.title)}
         </Link>
         <span className={styles.catalog__list__item__text__price}>
           {item.price} грн.

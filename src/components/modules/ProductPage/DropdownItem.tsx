@@ -3,7 +3,7 @@ import type { TDropdownItemType } from "types/common";
 import { useState } from "react";
 import styles from "styles/productInfo/index.module.scss";
 
-const DropdownItem = ({
+export const DropdownItem = ({
   title,
   characteristics,
   description,
@@ -162,5 +162,3 @@ const DropdownItem = ({
     </div>
   );
 };
-
-export default DropdownItem;

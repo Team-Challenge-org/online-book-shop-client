@@ -1,4 +1,4 @@
-export function handleTruncateAuthors(string: string) {
+export function truncateAuthors(string: string) {
   if (string) {
     const truncatedString =
       string.length > 35 ? string.substring(0, 35) + "..." : string;
@@ -7,7 +7,7 @@ export function handleTruncateAuthors(string: string) {
   }
 }
 
-export function handleTruncateBookTitle(string: string) {
+export function truncateBookTitle(string: string) {
   if (string) {
     const truncatedString =
       string.length > 25 ? string.substring(0, 25) + "..." : string;

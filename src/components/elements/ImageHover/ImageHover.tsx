@@ -6,26 +6,23 @@ import type { TFavoriteItems } from "store/favorite/types";
 
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { NAV_URL } from "constants/global";
 import { useAppDispatch } from "store/store";
-import { useNavigate } from "react-router-dom";
 import { selectCart } from "store/cart/selectors";
 import React, { useEffect, useState } from "react";
+import { useBooksLogic } from "contexts/BooksContext";
 import { selectFavorite } from "store/favorite/selectors";
 import { addOrRemoveCartItem } from "store/cart/cartSlice";
 import { ButtonCart } from "components/modules/CatalogList/ButtonCart";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { ButtonFavorite } from "components/modules/CatalogList/ButtonFavorite";
-import { setSimilarBooks } from "store/books/booksSlice";
-import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
   const { items: CartItem } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
+  const { updateBookViewAndData } = useBooksLogic();
 
   useEffect(() => {
     if (CartItem.length > 0) {
@@ -52,12 +49,6 @@ const ImageHover = ({ item }: TCatalogItemType) => {
     dispatch(addOrRemoveFavoriteItem(obj));
     setIsAddedToFavorite(!isAddedToFavorite);
   };
-
-  function updateBookViewAndData(book: TBook) {
-    dispatch(setSimilarBooks(book));
-    dispatch(addRecentlyViewedBook(book));
-    navigate(NAV_URL.PRODUCT_PAGE + book.id);
-  }
 
   return (
     <div className={styles.hover} onClick={() => updateBookViewAndData(item)}>

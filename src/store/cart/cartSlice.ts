@@ -1,6 +1,6 @@
+import { getCartFromLS } from "utils/getDataFromLS";
 import type { TCartItem, TCartSliceState } from "./types";
 
-import { getCartFromLS } from "utils/getCartFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TCartSliceState = getCartFromLS();
@@ -52,10 +52,6 @@ const cartSlice = createSlice({
         currentItem.quantity = newQuantity;
       }
 
-      if (currentItem?.quantity === 0) {
-        currentItem.quantity = 1;
-      }
-
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
     removeItem(state, { payload }) {
@@ -67,6 +63,10 @@ const cartSlice = createSlice({
 
       if (!findCartItem) {
         state.items.push(payload);
+      }
+
+      if (findCartItem?.quantity === 0) {
+        findCartItem.quantity = 1;
       }
 
       localStorage.setItem("cart", JSON.stringify(state.items));

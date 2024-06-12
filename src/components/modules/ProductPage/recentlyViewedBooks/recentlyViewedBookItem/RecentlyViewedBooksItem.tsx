@@ -1,28 +1,14 @@
 import styles from "./recentlyViewedBooksItem.module.scss";
 
-import {
-  handleTruncateAuthors,
-  handleTruncateBookTitle,
-} from "utils/truncateString";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { TBook } from "store/books/types";
-import { NAV_URL } from "constants/global";
-import { useNavigate } from "react-router-dom";
-import { setSimilarBooks } from "store/books/booksSlice";
+import { useBooksLogic } from "contexts/BooksContext";
 import ImageHover from "components/elements/ImageHover/ImageHover";
-import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
+import { truncateAuthors, truncateBookTitle } from "utils/truncateString";
 
 export function RecentlyViewedBooksItem({ book }: { book: TBook }) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { updateBookViewAndData } = useBooksLogic();
   const [showButtons, setShowButtons] = useState(false);
-
-  function updateBookViewAndData(book: TBook) {
-    dispatch(setSimilarBooks(book));
-    dispatch(addRecentlyViewedBook(book));
-    navigate(NAV_URL.PRODUCT_PAGE + book.id);
-  }
 
   return (
     <li className={styles.embla__slide}>
@@ -40,11 +26,11 @@ export function RecentlyViewedBooksItem({ book }: { book: TBook }) {
       </div>
       <div className={styles.text_info_box}>
         <p data-title={book.authors as string}>
-          {handleTruncateAuthors(book?.authors as string)}
+          {truncateAuthors(book?.authors as string)}
         </p>
 
         <h3 data-title={book.title} onClick={() => updateBookViewAndData(book)}>
-          {handleTruncateBookTitle(book?.title)}
+          {truncateBookTitle(book?.title)}
         </h3>
 
         <span>{book.price} грн</span>
