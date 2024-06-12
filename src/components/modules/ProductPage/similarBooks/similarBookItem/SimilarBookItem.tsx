@@ -11,24 +11,34 @@ import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedB
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NAV_URL } from "constants/global";
+import { useState } from "react";
+import ImageHover from "components/elements/ImageHover/ImageHover";
 
 export function SimilarBookItem({ book }: { book: TBook }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showButtons, setShowButtons] = useState(false);
 
   function updateBookViewAndData(book: TBook) {
-    navigate(NAV_URL.PRODUCT_PAGE + book.id);
     dispatch(setSimilarBooks(book));
     dispatch(addRecentlyViewedBook(book));
+    navigate(NAV_URL.PRODUCT_PAGE + book.id);
   }
 
   return (
     <li key={book.id} className={styles.embla__slide}>
-      <img
-        src={book?.titleImage as string}
-        alt={"image of: " + book.title}
-        className={styles.book_image}
-      />
+      <div
+        className={styles.book_item}
+        onMouseEnter={() => setShowButtons(true)}
+        onMouseLeave={() => setShowButtons(false)}
+      >
+        <img
+          src={book?.titleImage as string}
+          alt={"image of: " + book.title}
+          className={styles.book_image}
+        />
+        {showButtons ? <ImageHover item={book} /> : ""}
+      </div>
 
       <div className={styles.text_info_box}>
         <p data-title={book.authors as string}>

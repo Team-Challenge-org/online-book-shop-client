@@ -1,6 +1,6 @@
 import { ProductInfo } from "../../components/modules/ProductPage/ProductInfo";
 import { SimilarBooksList } from "components/modules/ProductPage/similarBooks/similarBooksList/SimilarBooksList";
-import { RecentlyViewedBooksList } from "components/modules/ProductPage/recentlyViewedBooks/recentlyViewedBooksList/RecentlyViewedBooks";
+import { RecentlyViewedBooksList } from "components/modules/ProductPage/recentlyViewedBooks/recentlyViewedBooksList/RecentlyViewedBooksList";
 
 export default function ProductPage() {
   return (

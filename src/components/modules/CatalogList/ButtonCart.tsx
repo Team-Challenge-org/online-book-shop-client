@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import CartActiveSvg from "components/elements/CartActiveSvg/CartActiveSvg";
 import CartInactiveSvg from "components/elements/CartInactiveSvg/CartInactiveSvg";
 
-const ButtonCart = ({ isAdded: isAddedToCart }: TButtonFavoriteOrCartType) => {
+export const ButtonCart = ({
+  isAdded: isAddedToCart,
+}: TButtonFavoriteOrCartType) => {
   return (
     <div>
       {isAddedToCart ? (
@@ -27,5 +29,3 @@ const ButtonCart = ({ isAdded: isAddedToCart }: TButtonFavoriteOrCartType) => {
     </div>
   );
 };
-
-export default ButtonCart;

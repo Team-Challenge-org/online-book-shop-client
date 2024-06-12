@@ -1,22 +1,27 @@
 import styles from "./imagehover.module.scss";
 
-import type { TCartItem } from "store/cart/types";
+import type { TBook } from "store/books/types";
 import type { TCatalogItemType } from "types/common";
 import type { TFavoriteItems } from "store/favorite/types";
 
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { NAV_URL } from "constants/global";
 import { useAppDispatch } from "store/store";
+import { useNavigate } from "react-router-dom";
 import { selectCart } from "store/cart/selectors";
 import React, { useEffect, useState } from "react";
 import { selectFavorite } from "store/favorite/selectors";
 import { addOrRemoveCartItem } from "store/cart/cartSlice";
-import ButtonCart from "components/modules/CatalogList/ButtonCart";
+import { ButtonCart } from "components/modules/CatalogList/ButtonCart";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import ButtonFavorite from "components/modules/CatalogList/ButtonFavorite";
+import { ButtonFavorite } from "components/modules/CatalogList/ButtonFavorite";
+import { setSimilarBooks } from "store/books/booksSlice";
+import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
   const { items: CartItem } = useSelector(selectCart);
@@ -38,7 +43,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
     }
   }, [CartItem, favoriteItems, item, dispatch]);
 
-  const CartItemHandler = (obj: TCartItem) => {
+  const CartItemHandler = (obj: TBook) => {
     dispatch(addOrRemoveCartItem(obj));
     setIsAddedToCart(!isAddedToCart);
   };
@@ -48,8 +53,14 @@ const ImageHover = ({ item }: TCatalogItemType) => {
     setIsAddedToFavorite(!isAddedToFavorite);
   };
 
+  function updateBookViewAndData(book: TBook) {
+    dispatch(setSimilarBooks(book));
+    dispatch(addRecentlyViewedBook(book));
+    navigate(NAV_URL.PRODUCT_PAGE + book.id);
+  }
+
   return (
-    <div className={styles.hover}>
+    <div className={styles.hover} onClick={() => updateBookViewAndData(item)}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

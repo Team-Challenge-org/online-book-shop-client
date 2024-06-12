@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import FavoriteActiveSvg from "components/elements/FavoriteActiveSvg/FavoriteActiveSvg";
 import FavoriteInactiveSvg from "components/elements/FavoriteInactiveSvg/FavoriteInactiveSvg";
 
-const ButtonFavorite = ({
+export const ButtonFavorite = ({
   isAdded: isAddedToFavorite,
 }: TButtonFavoriteOrCartType) => {
   return (
@@ -29,5 +29,3 @@ const ButtonFavorite = ({
     </div>
   );
 };
-
-export default ButtonFavorite;

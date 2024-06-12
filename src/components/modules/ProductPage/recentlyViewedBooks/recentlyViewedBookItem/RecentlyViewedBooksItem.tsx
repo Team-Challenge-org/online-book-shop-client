@@ -19,11 +19,9 @@ export function RecentlyViewedBooksItem({ book }: { book: TBook }) {
   const [showButtons, setShowButtons] = useState(false);
 
   function updateBookViewAndData(book: TBook) {
-    navigate(NAV_URL.PRODUCT_PAGE + book.id);
-    if (book) {
-      dispatch(setSimilarBooks(book));
-    }
+    dispatch(setSimilarBooks(book));
     dispatch(addRecentlyViewedBook(book));
+    navigate(NAV_URL.PRODUCT_PAGE + book.id);
   }
 
   return (
