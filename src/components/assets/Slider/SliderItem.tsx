@@ -19,8 +19,6 @@ const SliderItem = ({ obj }: SliderItemType) => {
       >
         Детальніше
       </Link>
-      {/* FIXME: */}
-      {obj?.quantity as number}
     </div>
   );
 };
