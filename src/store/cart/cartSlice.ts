@@ -24,9 +24,11 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
+
     clearItems(state) {
       state.items = [];
     },
+
     increaseItemQuantity(state, { payload }) {
       const currentItem = state.items.find((item) => item.id === payload);
 
@@ -34,6 +36,7 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
+
     decreaseItemQantity(state, { payload }) {
       const currentItem = state.items.find((item) => item.id === payload);
 
@@ -44,6 +47,7 @@ const cartSlice = createSlice({
       }
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
+
     updateItemQuantity(state, action) {
       const { itemId, newQuantity } = action.payload;
       const currentItem = state.items.find((item) => item.id === itemId);
@@ -52,21 +56,23 @@ const cartSlice = createSlice({
         currentItem.quantity = newQuantity;
       }
 
+      if (currentItem?.quantity === 0) {
+        currentItem.quantity = 1;
+      }
+
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
+
     removeItem(state, { payload }) {
       state.items = state.items.filter((item) => item.id !== payload);
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
+
     addItemToCart(state, { payload }) {
       const findCartItem = state.items.find((item) => item.id === payload.id);
 
       if (!findCartItem) {
         state.items.push(payload);
-      }
-
-      if (findCartItem?.quantity === 0) {
-        findCartItem.quantity = 1;
       }
 
       localStorage.setItem("cart", JSON.stringify(state.items));

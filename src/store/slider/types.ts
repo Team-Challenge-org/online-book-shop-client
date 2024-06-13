@@ -7,6 +7,7 @@ export type TSliderBook = {
   price: number;
   category: string;
   available: string;
+  quantity: number;
   authors: string | null;
 };
 

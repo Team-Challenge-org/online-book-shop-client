@@ -19,6 +19,7 @@ import { Breadcrumbs } from "components/elements/Breadcrumbs/Breadcrumbs";
 import { DropdownItem } from "components/modules/ProductPage/DropdownItem";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { FavoriteInProductInactiveSvg } from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
+import booksSlice from "store/books/booksSlice";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -101,6 +102,7 @@ export const ProductInfo = () => {
   return (
     <section className={styles.product}>
       <Breadcrumbs book={book} />
+
       <div className={styles.product__main}>
         <div className={styles.product__main__slider}>
           {book.images.length > 1 ? (

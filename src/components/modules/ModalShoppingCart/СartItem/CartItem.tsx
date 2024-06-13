@@ -56,7 +56,6 @@ export function CartItem({ book }: { book: TBook }) {
               type="number"
               className={styles.field_quantity}
               maxLength={3}
-              min="1"
               value={book?.quantity}
               onChange={(e) =>
                 onUpdateItemQuantity(book.id, Number(e.target.value))
