@@ -1,6 +1,6 @@
+import { getFavoriteFromLS } from "utils/getDataFromLS";
 import type { TFavoriteItems, TFavoriteSliceState } from "./types";
 
-import { getFavoriteFromLS } from "utils/getFavoriteFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TFavoriteSliceState = getFavoriteFromLS();

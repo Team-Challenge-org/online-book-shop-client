@@ -1,8 +1,8 @@
 import { type TBook, type IBookSliceState, Status } from "./types";
 
 import { fetchBooks } from "./asyncActions";
+import { getSimilarBooksFromLS } from "utils/getDataFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getSimilarBooksFromLS } from "utils/getSimilarBooksFromLS";
 
 const initialState: IBookSliceState = {
   books: [],

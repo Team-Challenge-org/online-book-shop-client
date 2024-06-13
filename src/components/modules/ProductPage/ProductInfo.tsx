@@ -11,14 +11,14 @@ import { useAppDispatch } from "store/store";
 import { selectCart } from "store/cart/selectors";
 import React, { useEffect, useState } from "react";
 import { addItemToCart } from "store/cart/cartSlice";
+import { SliderImage } from "./imageSlider/SliderImage";
+import { useModalCart } from "contexts/ModalCartContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectFavorite } from "store/favorite/selectors";
-import { SliderImage } from "./imageSlider/SliderImage";
-import Breadcrumbs from "components/elements/Breadcrumbs/Breadcrumbs";
-import DropdownItem from "components/modules/ProductPage/DropdownItem";
+import { Breadcrumbs } from "components/elements/Breadcrumbs/Breadcrumbs";
+import { DropdownItem } from "components/modules/ProductPage/DropdownItem";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import { useModalCart } from "contexts/modalCartWindow/ModalCartContext";
-import FavoriteInProductInactiveSvg from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
+import { FavoriteInProductInactiveSvg } from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -27,7 +27,7 @@ export const ProductInfo = () => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
-  const { items: CartItem } = useSelector(selectCart);
+  const { items: cartItem } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
   const { onOpenCartModal } = useModalCart();
 
@@ -47,8 +47,8 @@ export const ProductInfo = () => {
   }, [id, navigate]);
 
   useEffect(() => {
-    if (CartItem.length > 0) {
-      let checkCart = CartItem.find((obj) => obj.id === book?.id);
+    if (cartItem.length > 0) {
+      let checkCart = cartItem.find((obj) => obj.id === book?.id);
       if (checkCart) {
         setIsAddedToCart(true);
       }
@@ -62,7 +62,7 @@ export const ProductInfo = () => {
     }
 
     window.scroll(0, 0); //show upper part of page
-  }, [CartItem, favoriteItems, book, dispatch]);
+  }, [cartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
     dispatch(addItemToCart(obj));

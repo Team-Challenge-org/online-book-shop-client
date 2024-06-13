@@ -1,7 +1,7 @@
 import { fetchCategories } from "./asyncAction";
+import { getCategoryFromLS } from "utils/getDataFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ICategoriesSliceState, type TCategory, Status } from "./types";
-import { getCategoryFromLS } from "utils/getCategoryFromLS";
 
 const initialState: ICategoriesSliceState = {
   items: [],

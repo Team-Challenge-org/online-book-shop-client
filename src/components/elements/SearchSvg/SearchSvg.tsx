@@ -1,6 +1,19 @@
-const SearchSvg = () => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <mask id="mask0_223_189" maskUnits="userSpaceOnUse" x="12" y="12" width="24" height="24">
+export const SearchSvg = () => (
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <mask
+      id="mask0_223_189"
+      maskUnits="userSpaceOnUse"
+      x="12"
+      y="12"
+      width="24"
+      height="24"
+    >
       <rect x="12" y="12" width="24" height="24" fill="#D9D9D9" />
     </mask>
     <g mask="url(#mask0_223_189)">
@@ -12,5 +25,3 @@ const SearchSvg = () => (
     </g>
   </svg>
 );
-
-export default SearchSvg;

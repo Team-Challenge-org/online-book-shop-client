@@ -5,7 +5,7 @@ import type { TBook } from "store/books/types";
 import { NAV_URL } from "constants/global";
 import { Link, useLocation } from "react-router-dom";
 
-const Breadcrumbs = ({ book }: { book?: TBook }) => {
+export const Breadcrumbs = ({ book }: { book?: TBook }) => {
   const location = useLocation();
 
   return (
@@ -30,5 +30,3 @@ const Breadcrumbs = ({ book }: { book?: TBook }) => {
     </div>
   );
 };
-
-export default Breadcrumbs;

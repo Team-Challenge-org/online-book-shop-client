@@ -2,7 +2,7 @@ import type { TButtonFavoriteOrCartType } from "types/common";
 
 import { useState } from "react";
 
-const FavoriteInProductInactiveSvg = ({
+export const FavoriteInProductInactiveSvg = ({
   isAdded,
 }: TButtonFavoriteOrCartType) => {
   const [hiddenFavorite, setHiddenFavorite] = useState(true);
@@ -50,5 +50,3 @@ const FavoriteInProductInactiveSvg = ({
     </svg>
   );
 };
-
-export default FavoriteInProductInactiveSvg;

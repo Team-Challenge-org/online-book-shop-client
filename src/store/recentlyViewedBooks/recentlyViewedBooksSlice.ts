@@ -1,7 +1,8 @@
 import type { TRecentlyViewedBooksSlice } from "./types";
 
 import { createSlice } from "@reduxjs/toolkit";
-import { getRecentlyViewedBooksFromLS } from "utils/getRecentlyViewedBooksFromLS";
+import { getRecentlyViewedBooksFromLS } from "utils/getDataFromLS";
+
 
 const initialState: TRecentlyViewedBooksSlice = getRecentlyViewedBooksFromLS();
 
