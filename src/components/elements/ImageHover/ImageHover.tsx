@@ -55,7 +55,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ ease: "easeOut", duration: 1 }}
+        transition={{ ease: "easeOut", duration: 0.4 }}
       >
         <div className={styles.hover__wrapper}>
           <button
