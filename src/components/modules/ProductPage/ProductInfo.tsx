@@ -19,7 +19,7 @@ import { Breadcrumbs } from "components/elements/Breadcrumbs/Breadcrumbs";
 import { DropdownItem } from "components/modules/ProductPage/DropdownItem";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { FavoriteInProductInactiveSvg } from "components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg";
-import booksSlice from "store/books/booksSlice";
+import { Endpoints } from "constants/api";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -35,9 +35,7 @@ export const ProductInfo = () => {
   useEffect(() => {
     async function fetchBook() {
       try {
-        const { data } = await axios.get(
-          `https://quiet-ocean-77925-b4d85148e93b.herokuapp.com/api/v1/book/findById/${id}`
-        );
+        const { data } = await axios.get(Endpoints.GET_BOOK_BY_ID + id);
         setBook(data);
       } catch (error) {
         alert("Помилка при загрузці книги");
@@ -62,7 +60,7 @@ export const ProductInfo = () => {
       }
     }
 
-    window.scroll(0, 0); //show upper part of page
+    // window.scroll(0, 0); //show upper part of page
   }, [cartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
