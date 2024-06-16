@@ -33,7 +33,6 @@ const cartSlice = createSlice({
       const currentItem = state.items.find((item) => item.id === payload);
 
       if (currentItem) currentItem.quantity += 1;
-
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
 
@@ -43,7 +42,7 @@ const cartSlice = createSlice({
       if (currentItem) currentItem.quantity -= 1;
 
       if (currentItem?.quantity === 0) currentItem.quantity = 1;
-      
+
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
 
@@ -51,13 +50,9 @@ const cartSlice = createSlice({
       const { itemId, newQuantity } = action.payload;
       const currentItem = state.items.find((item) => item.id === itemId);
 
-      if (currentItem) {
-        currentItem.quantity = newQuantity;
-      }
+      if (currentItem) currentItem.quantity = newQuantity;
 
-      if (currentItem?.quantity === 0) {
-        currentItem.quantity = 1;
-      }
+      if (currentItem?.quantity === 0) currentItem.quantity = 1;
 
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
@@ -70,9 +65,9 @@ const cartSlice = createSlice({
     addItemToCart(state, { payload }) {
       const findCartItem = state.items.find((item) => item.id === payload.id);
 
-      if (!findCartItem) {
-        state.items.push(payload);
-      }
+      if (findCartItem) findCartItem.quantity += 1;
+
+      if (!findCartItem) state.items.push(payload);
 
       localStorage.setItem("cart", JSON.stringify(state.items));
 
