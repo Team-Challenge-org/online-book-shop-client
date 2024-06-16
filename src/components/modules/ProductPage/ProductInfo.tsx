@@ -43,6 +43,7 @@ export const ProductInfo = () => {
       }
     }
     fetchBook();
+    window.scrollTo(0, 0); //show upper part of page
   }, [id, navigate]);
 
   useEffect(() => {
@@ -59,8 +60,6 @@ export const ProductInfo = () => {
         setIsAddedToFavorite(true);
       }
     }
-
-    // window.scroll(0, 0); //show upper part of page
   }, [cartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
