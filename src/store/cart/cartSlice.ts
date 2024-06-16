@@ -42,9 +42,8 @@ const cartSlice = createSlice({
 
       if (currentItem) currentItem.quantity -= 1;
 
-      if (currentItem?.quantity === 0) {
-        state.items = state.items.filter((item) => item.id !== payload);
-      }
+      if (currentItem?.quantity === 0) currentItem.quantity = 1;
+      
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
 
