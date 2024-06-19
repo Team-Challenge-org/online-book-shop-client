@@ -1,0 +1,58 @@
+@import "styles/utils/variables";
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  li {
+    a {
+      border: 1px solid $color-gray;
+      padding: 12px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-decoration: none;
+      color: $color-black;
+
+      span {
+        margin-left: 16px;
+      }
+
+      &:hover {
+        border: 1px solid rgba(25, 108, 103, 0);
+        background-color: $color-main-hover;
+      }
+    }
+  }
+}
+
+.line {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid $color-gray;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+  margin-top: 32px;
+
+  span {
+    background: #fff;
+    padding: 0 28px;
+  }
+}

@@ -7,6 +7,9 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { SearchSvg } from "components/elements/SearchSvg/SearchSvg";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
+import { AuthModal } from "../auth/authModal/AuthModal";
+import { SocialRegister } from "../auth/socialRegister/SocialRegister";
+import { RegisterForm } from "../auth/registerForm/RegisterForm";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
@@ -46,6 +49,11 @@ const Header = () => {
 
       {/* Modal Window For Shopping Cart */}
       {showModal && <ModalCart />}
+
+      <AuthModal>
+        <SocialRegister />
+        <RegisterForm />
+      </AuthModal>
     </header>
   );
 };
