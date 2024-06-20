@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store/store';
 import { selectCart } from 'store/cart/selectors';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { addItemToCart } from 'store/cart/cartSlice';
 import { SliderImage } from './imageSlider/SliderImage';
 import { useModalCart } from 'contexts/ModalCartContext';
@@ -18,8 +18,8 @@ import { selectFavorite } from 'store/favorite/selectors';
 import { Breadcrumbs } from 'components/elements/Breadcrumbs/Breadcrumbs';
 import { DropdownItem } from 'components/modules/ProductPage/DropdownItem';
 import { addOrRemoveFavoriteItem } from 'store/favorite/favoriteSlice';
-import { FavoriteInProductInactiveSvg } from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
 import { Endpoints } from 'constants/api';
+import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>();
@@ -28,7 +28,7 @@ export const ProductInfo = () => {
   const dispatch = useAppDispatch();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
-  const { items: cartItem } = useSelector(selectCart);
+  const { items: cartItems } = useSelector(selectCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
   const { onOpenCartModal } = useModalCart();
 
@@ -47,8 +47,8 @@ export const ProductInfo = () => {
   }, [id, navigate]);
 
   useEffect(() => {
-    if (cartItem.length > 0) {
-      let checkCart = cartItem.find((obj) => obj.id === book?.id);
+    if (cartItems.length > 0) {
+      let checkCart = cartItems.find((obj) => obj.id === book?.id);
       if (checkCart) {
         setIsAddedToCart(true);
       }
@@ -60,7 +60,7 @@ export const ProductInfo = () => {
         setIsAddedToFavorite(true);
       }
     }
-  }, [cartItem, favoriteItems, book, dispatch]);
+  }, [cartItems, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
     dispatch(addItemToCart(obj));
@@ -72,6 +72,8 @@ export const ProductInfo = () => {
     dispatch(addOrRemoveFavoriteItem(obj));
     setIsAddedToFavorite(!isAddedToFavorite);
   };
+
+  console.log(localStorage.getItem('favorite'));
 
   const characteristics: TDropdownCharacteristicsType = {
     publishing: 'CP Publishing',
@@ -95,6 +97,8 @@ export const ProductInfo = () => {
   if (!book) {
     return <p>Загрузка...</p>;
   }
+
+  console.log(isAddedToFavorite);
 
   return (
     <section className={styles.product}>
@@ -132,7 +136,11 @@ export const ProductInfo = () => {
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}>
-              <FavoriteInProductInactiveSvg isAdded={isAddedToFavorite} />
+              {isAddedToFavorite ? (
+                <MdOutlineFavorite color="#196C67" size="28px" />
+              ) : (
+                <MdFavoriteBorder color="#196C67" size="28px" />
+              )}
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />

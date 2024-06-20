@@ -26,7 +26,7 @@ const LoginPageLogic = () => {
       if (result.payload) {
         setEmail('');
         setPassword('');
-        navigate('/');
+        //navigate('/');
       }
     });
   };
