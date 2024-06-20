@@ -2,7 +2,6 @@ import type { TBook } from 'store/books/types';
 import type { TCartItem } from 'store/cart/types';
 import type { TCategory } from 'store/categories/types';
 import type { TFavoriteItems } from 'store/favorite/types';
-import { TUser } from 'store/user/types';
 
 export const getCartFromLS = () => {
   const data = localStorage.getItem('cart');

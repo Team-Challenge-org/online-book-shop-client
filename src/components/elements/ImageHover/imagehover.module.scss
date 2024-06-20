@@ -21,5 +21,23 @@
     width: 48px;
     height: 48px;
     cursor: pointer;
+
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+    }
+
+    &__black {
+      background-color: #000000;
+    }
+
+    &__green {
+      background-color: #196C67;
+    }
+
   }
 }
