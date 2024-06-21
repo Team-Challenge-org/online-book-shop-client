@@ -8,28 +8,38 @@ import type { TDropdownCharacteristicsType } from 'types/common';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store/store';
-import { selectCart } from 'store/cart/selectors';
 import React, { useEffect, useState } from 'react';
 import { addItemToCart } from 'store/cart/cartSlice';
 import { SliderImage } from './imageSlider/SliderImage';
 import { useModalCart } from 'contexts/ModalCartContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { selectFavorite } from 'store/favorite/selectors';
+import { selectOneFavorite } from 'store/favorite/selectors';
 import { Breadcrumbs } from 'components/elements/Breadcrumbs/Breadcrumbs';
 import { DropdownItem } from 'components/modules/ProductPage/DropdownItem';
 import { addOrRemoveFavoriteItem } from 'store/favorite/favoriteSlice';
-import { FavoriteInProductInactiveSvg } from 'components/elements/FavoriteInProductInactiveSvg/FavoriteInProductInactiveSvg';
 import { Endpoints } from 'constants/api';
+import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
 
 export const ProductInfo = () => {
-  const [book, setBook] = useState<TBook>();
+  const [book, setBook] = useState<TBook>({
+    id: 0,
+  title: '',
+  full_description: '',
+  short_description: '',
+  price: 0,
+  category: '',
+  isThisNotSlider: true,
+  available: '',
+  authors: null,
+  titleImage: null,
+  timeAdded: '',
+  images: [''],
+  quantity: 0
+  });
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
-  const { items: cartItem } = useSelector(selectCart);
-  const { items: favoriteItems } = useSelector(selectFavorite);
+  const favorite = useSelector(selectOneFavorite(book!))
   const { onOpenCartModal } = useModalCart();
 
   useEffect(() => {
@@ -46,31 +56,14 @@ export const ProductInfo = () => {
     window.scrollTo(0, 0); //show upper part of page
   }, [id, navigate]);
 
-  useEffect(() => {
-    if (cartItem.length > 0) {
-      let checkCart = cartItem.find((obj) => obj.id === book?.id);
-      if (checkCart) {
-        setIsAddedToCart(true);
-      }
-    }
-
-    if (favoriteItems.length > 0) {
-      let checkFavorite = favoriteItems.find((obj) => obj.id === book?.id);
-      if (checkFavorite) {
-        setIsAddedToFavorite(true);
-      }
-    }
-  }, [cartItem, favoriteItems, book, dispatch]);
 
   const cartItemHandler = (obj: TCartItem) => {
     dispatch(addItemToCart(obj));
-    setIsAddedToCart(!isAddedToCart);
     onOpenCartModal();
   };
 
   const favoriteItemsHandler = (obj: TFavoriteItems) => {
     dispatch(addOrRemoveFavoriteItem(obj));
-    setIsAddedToFavorite(!isAddedToFavorite);
   };
 
   const characteristics: TDropdownCharacteristicsType = {
@@ -92,9 +85,6 @@ export const ProductInfo = () => {
     'Правила повернення: повернення товару здійснюється протягом 14 днів з дня отримання згідно Закону України "Про захист прав споживачів".',
   ];
 
-  if (!book) {
-    return <p>Загрузка...</p>;
-  }
 
   return (
     <section className={styles.product}>
@@ -132,7 +122,11 @@ export const ProductInfo = () => {
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}>
-              <FavoriteInProductInactiveSvg isAdded={isAddedToFavorite} />
+              {favorite ? (
+                <MdOutlineFavorite color="#196C67" size="28px" />
+              ) : (
+                <MdFavoriteBorder color="#196C67" size="28px" />
+              )}
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />
