@@ -3,13 +3,13 @@ import styles from "styles/header/index.module.scss";
 import Logo from "components/elements/Logo/Logo";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { AuthModal } from "../auth/authModal/AuthModal";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
+import { RegisterForm } from "../auth/registerForm/RegisterForm";
 import { SearchSvg } from "components/elements/SearchSvg/SearchSvg";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
-import { AuthModal } from "../auth/authModal/AuthModal";
 import { SocialRegister } from "../auth/socialRegister/SocialRegister";
-import { RegisterForm } from "../auth/registerForm/RegisterForm";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
@@ -50,8 +50,10 @@ const Header = () => {
       {/* Modal Window For Shopping Cart */}
       {showModal && <ModalCart />}
 
+      {/* Register Modal Window  */}
       <AuthModal>
         <SocialRegister />
+        
         <RegisterForm />
       </AuthModal>
     </header>
