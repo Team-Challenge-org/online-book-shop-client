@@ -50,3 +50,10 @@ export function getUserFromLS() {
 
   return user;
 }
+
+export function getAuthFromLS() {
+  const data = localStorage.getItem('auth')
+  const auth: boolean = data ? JSON.parse(data) : false;
+
+  return auth
+}

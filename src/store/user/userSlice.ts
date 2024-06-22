@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser } from './asyncActions';
 import { TUserState } from './types';
-import { getUserFromLS } from 'utils/getDataFromLS';
+import { getAuthFromLS, getUserFromLS } from 'utils/getDataFromLS';
 
 const initialState: TUserState = {
   loading: false,
   user: getUserFromLS(),
   error: null,
+  isAuth: getAuthFromLS()
 };
 
 const userSlice = createSlice({
@@ -15,7 +16,9 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
+      state.isAuth = false;
       localStorage.removeItem('user');
+      localStorage.removeItem('auth')
     },
   },
   extraReducers(builder) {
