@@ -1,0 +1,68 @@
+@import "/src/styles/utils/variables";
+
+.error {
+    display: flex;
+    font-weight: 400;
+    align-items: center;
+    justify-content: center;
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        width: 593px;
+        margin-left: 84px;
+        
+    &__title {
+        color: $color-main;
+        font-size: 28px;
+        line-height: 32.81px;
+    }
+
+    &__text {
+        margin-top: 49px;
+        color: $color-black;
+        opacity: 0.8;
+        font-size: 14px;
+        line-height: 16.41px;
+        width: 462px;
+    }
+
+    &__list {
+        margin-left: 20px;
+        list-style:disc;
+        color: $color-black;
+        opacity: 0.8;
+        font-size: 14px;
+        line-height: 16.94px;
+        width: 410px;
+    }
+    }
+
+    &__footer {
+        margin-top: 37px;
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &__text {
+            font-size: 14px;
+            line-height: 16.94px;
+            color: $color-black;
+            opacity: 0.8;
+            width: 893px;
+            text-align: center;
+
+            &__green {
+                color: $color-main;
+            }
+
+        }
+        
+    &__button {
+        margin-top: 24px;
+        width: 475px;
+        height: 48px;
+    }
+    }
+}
