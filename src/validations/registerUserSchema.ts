@@ -12,9 +12,9 @@ export const registerUserSchema = z
       .string()
       .min(6, "Password must be at least 6 characters")
       .trim(),
-    confirmPassword: z.string(),
+    confirm_password: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirm_password, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
