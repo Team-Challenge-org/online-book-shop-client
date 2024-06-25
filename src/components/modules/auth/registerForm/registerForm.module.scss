@@ -6,43 +6,6 @@ form {
   flex-direction: column;
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 8px;
-
-  .text {
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 400;
-  }
-
-  .input_box {
-    width: 100%;
-    border: 1px solid $color-gray;
-    position: relative;
-
-    input {
-      width: 90%;
-      border: none;
-      padding: 16px;
-      outline: none;
-    }
-
-    .eye_icon {
-      color: $color-gray;
-      width: 15px;
-      height: 15px;
-
-      position: absolute;
-      top: 16px;
-      right: 16px;
-
-      cursor: pointer;
-    }
-  }
-}
-
 .checkbox_container {
   width: 100%;
   display: flex;

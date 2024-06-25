@@ -1,27 +1,59 @@
+import { errorMessage } from "constants/auth";
 import { z } from "zod";
 
 export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
 
+const excludedDomains = ["mail.ru", "yandex.ru"];
+
 export const registerUserSchema = z
   .object({
-    first_name: z.string().min(1, { message: "Name is required" }),
-    last_name: z.string().min(1, { message: "Last name is required" }),
-    phone_number: z.number(),
-    email: z.string().email("Invalid email address"),
+    first_name: z
+      .string()
+      .min(2, errorMessage.FIRST_NAME)
+      .max(30, errorMessage.FIRST_NAME),
+
+    last_name: z
+      .string()
+      .min(2, errorMessage.LAST_NAME)
+      .max(50, errorMessage.LAST_NAME),
+
+    phone_number: z
+      .string()
+      .refine(
+        (value) => value.replace(/\D+/g, "").length === 12,
+        errorMessage.PHONE_NUMBER
+      )
+      .transform((value) => value.replace(/\D+/g, "")),
+
+    email: z
+      .string()
+      .email(errorMessage.EMAIL)
+      .refine(
+        (value) =>
+          !excludedDomains.some((domain) => value.endsWith(`@${domain}`)),
+        {
+          message: errorMessage.EMAIL,
+        }
+      ),
+
     password: z
       .string()
-      .min(6, "Password must be at least 6 characters")
-      .trim(),
+      .trim()
+      .min(8, errorMessage.PASSWORD)
+      .max(30, errorMessage.PASSWORD)
+      .refine((value) => /[a-zA-Z0-9~!$%^&*_\-=+}{'\?.-]/.test(value), {
+        message: errorMessage.PASSWORD,
+      }),
+
     confirm_password: z.string(),
   })
-  .refine((data) => data.password === data.confirm_password, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
 
-// for validation confirm password
-// const schema = z.object({
-//     // ... other fields in your array
-//     password: z.string().min(6, "Password must be at least 6 characters").trim(),
-//     confirmPassword: z.string().equalTo(z.ref('password'), { message: "Passwords must match" }),
-//   });
+  .superRefine(({ password, confirm_password }, ctx) => {
+    if (password !== confirm_password) {
+      ctx.addIssue({
+        code: "custom",
+        message: errorMessage.CONFIRM_PASSWORD,
+        path: ["confirm_password"],
+      });
+    }
+  });

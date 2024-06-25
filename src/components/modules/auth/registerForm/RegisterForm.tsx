@@ -1,15 +1,18 @@
-import { FormProvider, useForm } from "react-hook-form";
 import styles from "./registerForm.module.scss";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { MdOutlineVisibility } from "react-icons/md";
-import { MdOutlineVisibilityOff } from "react-icons/md";
 import {
   registerUserSchema,
   TRegisterUserSchema,
 } from "validations/registerUserSchema";
 
-type TRegisterFields = {
+import { useState } from "react";
+import { MdOutlineVisibility } from "react-icons/md";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MdOutlineVisibilityOff } from "react-icons/md";
+import { FormProvider, useForm } from "react-hook-form";
+import { RegisterField } from "../shared/registerField/RegisterField";
+
+export type TRegisterField = {
   id: number;
   type: string;
   label: string;
@@ -25,7 +28,7 @@ type TRegisterFields = {
   iconCloseEye?: JSX.Element;
 };
 
-const registerFields: TRegisterFields[] = [
+const registerFields: TRegisterField[] = [
   {
     id: 1,
     type: "text",
@@ -79,51 +82,30 @@ export function RegisterForm() {
     resolver: zodResolver(registerUserSchema),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
+  const [isPublicOfferAccepted, setIsPublicOfferAccepted] = useState(false);
+  const { handleSubmit } = methods;
 
   function onSubmitData(data: TRegisterUserSchema) {
-    console.log(data);
-    methods.reset();
+    if (isPublicOfferAccepted) {
+      console.log(data);
+      methods.reset();
+    }
   }
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmitData)}>
-        {registerFields.map((field) => {
-          // console.log(typeof field.valueName);
-
-          return (
-            <label key={field.id}>
-              <span className={styles.text}>{field.label}</span>
-
-              <div className={styles.input_box}>
-                <input
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  {...register(field.valueName)}
-                />
-
-                {field.iconOpenEye && (
-                  <span className={styles.eye_icon}>{field.iconCloseEye}</span>
-                )}
-
-                {/* Display error message if any */}
-                {/* {errors?.field.value?.message && (
-                <span className={styles.error_message}>
-                  {errors[field.value].message}
-                </span>
-              )} */}
-              </div>
-            </label>
-          );
-        })}
+        {registerFields.map((field) => (
+          <RegisterField key={field.id} field={field} />
+        ))}
 
         <label className={styles.checkbox_container}>
-          <input type="checkbox" className={styles.checkbox} />
+          <input
+            type="checkbox"
+            checked={isPublicOfferAccepted}
+            onChange={() => setIsPublicOfferAccepted((prev) => !prev)}
+            className={styles.checkbox}
+          />
           <span>Я ознайомлений(-а) з публічною офертою та приймаю її</span>
         </label>
 

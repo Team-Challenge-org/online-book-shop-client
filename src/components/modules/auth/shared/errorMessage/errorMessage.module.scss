@@ -1,0 +1,18 @@
+@import "/src/styles/utils/variables";
+
+.error_message_container {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .error_message {
+    font-size: 10px;
+    color: $color-red;
+  }
+
+  .error_info {
+    color: $color-red;
+    cursor: pointer;
+  }
+}
