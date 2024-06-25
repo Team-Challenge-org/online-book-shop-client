@@ -118,6 +118,7 @@
 
     &__form {
       white-space: nowrap;
+      display: flex;
       &__input {
         width: 292px;
         height: 48px;
