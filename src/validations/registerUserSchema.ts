@@ -1,9 +1,7 @@
-import { errorMessage } from "constants/auth";
 import { z } from "zod";
+import { errorMessage, EXCLUDED_DOMAINS } from "constants/auth";
 
 export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
-
-const excludedDomains = ["mail.ru", "yandex.ru"];
 
 export const registerUserSchema = z
   .object({
@@ -30,7 +28,7 @@ export const registerUserSchema = z
       .email(errorMessage.EMAIL)
       .refine(
         (value) =>
-          !excludedDomains.some((domain) => value.endsWith(`@${domain}`)),
+          !EXCLUDED_DOMAINS.some((domain) => value.endsWith(`@${domain}`)),
         {
           message: errorMessage.EMAIL,
         }

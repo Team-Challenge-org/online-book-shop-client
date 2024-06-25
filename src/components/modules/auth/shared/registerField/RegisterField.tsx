@@ -1,9 +1,10 @@
 import styles from "./registerField.module.scss";
 
+import type { TRegisterField } from "types/auth";
+
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "../errorMessage/ErrorMessage";
-import { TRegisterField } from "../../registerForm/RegisterForm";
 
 export function RegisterField({ field }: { field: TRegisterField }) {
   const {
@@ -33,14 +34,17 @@ export function RegisterField({ field }: { field: TRegisterField }) {
             className={styles.eye_icon}
             onClick={() => setPasswordHidden((prev) => !prev)}
           >
-            {passwordHidden ? field.iconOpenEye : field.iconCloseEye}
+            {passwordHidden ? field.iconCloseEye : field.iconOpenEye}
           </span>
         )}
       </div>
 
       {/* Display error message if any */}
       {errors?.[field.valueName] && (
-        <ErrorMessage message={errors[field.valueName]?.message as string} />
+        <ErrorMessage
+          message={errors[field.valueName]?.message as string}
+          errorTips={field.errorTips}
+        />
       )}
     </label>
   );

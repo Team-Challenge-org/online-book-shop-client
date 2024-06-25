@@ -6,6 +6,8 @@
   gap: 8px;
   align-items: center;
 
+  position: relative;
+
   .error_message {
     font-size: 10px;
     color: $color-red;
@@ -16,3 +18,10 @@
     cursor: pointer;
   }
 }
+
+// #my-tooltip {
+//   background-color: red;
+//   width: 300px;
+//   border: 2px solid blue;
+//   border-radius: 20px;
+// }

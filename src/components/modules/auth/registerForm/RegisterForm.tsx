@@ -1,5 +1,7 @@
 import styles from "./registerForm.module.scss";
 
+import type { TRegisterField } from "types/auth";
+
 import {
   registerUserSchema,
   TRegisterUserSchema,
@@ -12,22 +14,6 @@ import { MdOutlineVisibilityOff } from "react-icons/md";
 import { FormProvider, useForm } from "react-hook-form";
 import { RegisterField } from "../shared/registerField/RegisterField";
 
-export type TRegisterField = {
-  id: number;
-  type: string;
-  label: string;
-  placeholder: string;
-  valueName:
-    | "first_name"
-    | "last_name"
-    | "phone_number"
-    | "email"
-    | "password"
-    | "confirm_password";
-  iconOpenEye?: JSX.Element;
-  iconCloseEye?: JSX.Element;
-};
-
 const registerFields: TRegisterField[] = [
   {
     id: 1,
@@ -35,6 +21,11 @@ const registerFields: TRegisterField[] = [
     label: "Ваше ім’я *",
     placeholder: "Введіть ваше ім’я",
     valueName: "first_name",
+    errorTips: [
+      "Ви можете використовувати лише кирилицю, латиницю та арабські цифри.",
+      "Ви можете використовувати великі та малі літери.",
+      "Довжина імені має бути від 2 до 30 символів.",
+    ],
   },
   {
     id: 2,
@@ -42,6 +33,11 @@ const registerFields: TRegisterField[] = [
     label: "Ваше прізвище *",
     placeholder: "Введіть ваше прізвище",
     valueName: "last_name",
+    errorTips: [
+      "Ви можете використовувати лише кирилицю, латиницю та арабські цифри.",
+      "Ви можете використовувати великі та малі літери.",
+      "Довжина імені має бути від 2 до 50 символів.",
+    ],
   },
   {
     id: 3,
@@ -49,6 +45,10 @@ const registerFields: TRegisterField[] = [
     label: "Номер телефону *",
     placeholder: "+38",
     valueName: "phone_number",
+    errorTips: [
+      "Ви можете використовувати лише арабські цифри та «+».",
+      "Довжина мобільного номера має бути 13 символів, включаючи «+».",
+    ],
   },
   {
     id: 4,
@@ -56,6 +56,12 @@ const registerFields: TRegisterField[] = [
     label: "Електронна пошта *",
     placeholder: "Введіть електронну пошту",
     valueName: "email",
+    errorTips: [
+      "Ви можете використовувати лише арабські цифри, латиницю та наступні символи ~ ! $ % ^ & * _ = + } { ' ? - @.",
+      "Ви можете використовувати великі та малі літери.",
+      "Пошта має містити “@”.",
+      "Пошта повинна мати будь-який діючий домейн окрім “mail.ru”, “yandex.ru” та інших доменів, пов'язаних з росією.",
+    ],
   },
   {
     id: 5,
@@ -65,6 +71,13 @@ const registerFields: TRegisterField[] = [
     valueName: "password",
     iconOpenEye: <MdOutlineVisibility />,
     iconCloseEye: <MdOutlineVisibilityOff />,
+    errorTips: [
+      "Ви можете використовувати лише арабські цифри, латиницю та наступні символи ~ ! $ % ^ & * _ = + } { ' ? -",
+      "Ви можете використовувати великі та малі літери.",
+      "Довжина пароля має бути від 8 до 30 символів.",
+      "Використовуйте комбінацію великих та малих літер, арабських цифр та спеціальних символів для створення більш надійного пароля.",
+      "Перевірте чи ввімкнено CapsLock.",
+    ],
   },
   {
     id: 6,

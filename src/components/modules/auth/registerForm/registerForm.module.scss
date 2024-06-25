@@ -11,7 +11,7 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   span {
     font-size: 14px;
@@ -22,6 +22,7 @@ form {
     accent-color: $color-main;
     width: 16px;
     height: 16px;
+    margin: 0;
   }
 }
 

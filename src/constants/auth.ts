@@ -1,3 +1,5 @@
+export const EXCLUDED_DOMAINS = ["mail.ru", "yandex.ru"];
+
 export const errorMessage = {
   FIRST_NAME: "Будь ласка, перевірте правильність введення ім’я",
   LAST_NAME: "Будь ласка, перевірте правильність введення прізвища",
