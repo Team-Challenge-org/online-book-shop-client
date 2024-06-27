@@ -1,3 +1,5 @@
+@import '/src/styles/utils/_variables';
+
 .header {
   height: 128px;
   max-width: 1440px;
@@ -56,7 +58,28 @@
         margin-left: 40px;
 
         span {
-          color: #196c67;
+          color: $color-main;
+        }
+      }
+
+      &__cart {
+        display: flex;
+        position: relative;
+
+        &__quantity {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $color-main;
+          color: $color-white;
+          font-size: 8px;
+          line-height: 9.38px;
+          width: 12px;
+          height: 12px;
+          border-radius: 12px;
+          position: absolute;
+          top: 0;
+          right: 0;
         }
       }
     }
@@ -71,7 +94,11 @@
     height: 24px;
     width: 24px;
 
-    color: #1c1b1f;
+    color: $color-black;
     cursor: pointer;
+  }
+
+  .nav_icon:hover {
+    color: $color-main;
   }
 }
