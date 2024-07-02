@@ -1,7 +1,7 @@
-import { AuthModal } from "./authModal/AuthModal";
-import { RegisterForm } from "./registerForm/RegisterForm";
-import { SocialRegister } from "./socialRegister/SocialRegister";
-import EnterOrRegisterAccount from "./shared/enterOrRegisterAccount/EnterOrRegisterAccount";
+import { AuthModal } from './authModal/AuthModal';
+import { RegisterForm } from './registerForm/RegisterForm';
+import { SocialRegister } from './socialRegister/SocialRegister';
+import EnterOrRegisterAccount from './shared/enterOrRegisterAccount/EnterOrRegisterAccount';
 
 export default function ModalRegisterForm() {
   return (
@@ -10,11 +10,7 @@ export default function ModalRegisterForm() {
 
       <RegisterForm />
 
-      <EnterOrRegisterAccount
-        link="/"
-        linkText="Увійти"
-        text="Вже маєте акаунт?"
-      />
+      <EnterOrRegisterAccount link="/login" linkText="Увійти" text="Вже маєте акаунт?" />
     </AuthModal>
   );
 }

@@ -17,9 +17,9 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route path="" element={<HomePage />} />
-        <Route path="book/:id" element={<ProductPage />} />
-        <Route path="login" element={auth ? <Navigate to="/logout" /> : <LoginPageLogic />} />
-        <Route path="logout" element={auth ? <LogoutPageLogic /> : <Navigate to="/login" />} />
+        <Route path="/book/:id" element={<ProductPage />} />
+        <Route path="/login" element={auth ? <Navigate to="/logout" /> : <LoginPageLogic />} />
+        <Route path="/logout" element={auth ? <LogoutPageLogic /> : <Navigate to="/login" />} />
 
         {/* Errors: */}
         <Route path="/404" element={<NotFoundPage />} />
