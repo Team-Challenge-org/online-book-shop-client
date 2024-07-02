@@ -28,6 +28,7 @@ export function ModalCart() {
       <div className={styles.modal}>
         <div className={styles.header_box}>
           <h1 className={styles.title}>кошик</h1>
+
           <span className={styles.close_icon} onClick={onCloseCartModal}>
             &times;
           </span>
