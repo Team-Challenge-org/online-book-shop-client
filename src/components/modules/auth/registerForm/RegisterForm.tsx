@@ -95,8 +95,12 @@ export function RegisterForm() {
     resolver: zodResolver(registerUserSchema),
   });
 
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
+
   const [isPublicOfferAccepted, setIsPublicOfferAccepted] = useState(false);
-  const { handleSubmit } = methods;
 
   function onSubmitData(data: TRegisterUserSchema) {
     if (isPublicOfferAccepted) {
@@ -104,6 +108,9 @@ export function RegisterForm() {
       methods.reset();
     }
   }
+
+  const activeBtnSubmit =
+    isValid && isPublicOfferAccepted ? styles.btn_active : styles.btn_unactive;
 
   return (
     <FormProvider {...methods}>
@@ -119,10 +126,11 @@ export function RegisterForm() {
             onChange={() => setIsPublicOfferAccepted((prev) => !prev)}
             className={styles.checkbox}
           />
+
           <span>Я ознайомлений(-а) з публічною офертою та приймаю її</span>
         </label>
 
-        <button className={styles.btn_submit} type="submit">
+        <button className={activeBtnSubmit} type="submit">
           Зареєструватись
         </button>
       </form>

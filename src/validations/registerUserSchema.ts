@@ -37,12 +37,14 @@ export const registerUserSchema = z
     password: z
       .string()
       .trim()
-      .min(8, errorMessage.PASSWORD)
-      .max(30, errorMessage.PASSWORD)
+      .min(8, errorMessage.PASSWORD.COMMON)
+      .max(30, errorMessage.PASSWORD.COMMON)
       .refine((value) => /[a-zA-Z0-9~!$%^&*_\-=+}{'\?.-]/.test(value), {
-        message: errorMessage.PASSWORD,
+        message: errorMessage.PASSWORD.COMMON,
       }),
-
+    // .refine((passwordValue: string) => {
+    //   return getPasswordStrength(passwordValue);
+    // }),
     confirm_password: z.string(),
   })
 

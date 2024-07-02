@@ -2,17 +2,27 @@ import styles from "./registerField.module.scss";
 
 import type { TRegisterField } from "types/auth";
 
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "../errorMessage/ErrorMessage";
+import { usePasswordComplexity } from "hooks/usePasswordComplexity";
+import { PasswordComplexity } from "../passwordComplexity/PasswordComplexity";
 
 export function RegisterField({ field }: { field: TRegisterField }) {
   const {
+    watch,
     register,
     formState: { errors },
   } = useFormContext();
 
-  const [passwordHidden, setPasswordHidden] = useState(true);
+  const passwordValue = watch("password");
+
+  const {
+    passwordHidden,
+    isPasswordField,
+    setPasswordHidden,
+    passwordComplexity,
+    passwordComplexityMessage,
+  } = usePasswordComplexity(passwordValue, field);
 
   return (
     <label key={field.id}>
@@ -44,6 +54,13 @@ export function RegisterField({ field }: { field: TRegisterField }) {
         <ErrorMessage
           message={errors[field.valueName]?.message as string}
           errorTips={field.errorTips}
+        />
+      )}
+
+      {isPasswordField && (
+        <PasswordComplexity
+          passwordComplexity={passwordComplexity}
+          passwordComplexityMessage={passwordComplexityMessage}
         />
       )}
     </label>

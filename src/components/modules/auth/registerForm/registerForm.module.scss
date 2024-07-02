@@ -26,7 +26,7 @@ form {
   }
 }
 
-.btn_submit {
+.btn_active {
   margin-top: 24px;
   width: 100%;
   padding: 16px;
@@ -40,4 +40,15 @@ form {
   &:hover {
     opacity: 0.7;
   }
+}
+
+.btn_unactive {
+  margin-top: 24px;
+  width: 100%;
+  padding: 16px;
+  background-color: rgba(25, 108, 103, 0.4);
+
+  color: $color-white;
+  font-size: 14px;
+  font-weight: 300;
 }

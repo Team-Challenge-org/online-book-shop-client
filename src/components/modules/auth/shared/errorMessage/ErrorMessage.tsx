@@ -6,7 +6,7 @@ import { ErrorTooltip } from "../errorTooltip/ErrorTooltip";
 
 type TErrorMessageProps = {
   message: string | undefined;
-  errorTips: string[] | undefined;
+  errorTips?: string[] | undefined;
 };
 
 export function ErrorMessage({ message, errorTips }: TErrorMessageProps) {
@@ -16,13 +16,23 @@ export function ErrorMessage({ message, errorTips }: TErrorMessageProps) {
     <div className={styles.error_message_container}>
       <span className={styles.error_message}>{message}</span>
 
-      <MdInfoOutline
-        className={styles.error_info}
-        onMouseEnter={() => setIsShownTooltip(true)}
-        onMouseLeave={() => setIsShownTooltip(false)}
-      />
+      {errorTips && (
+        <MdInfoOutline
+          className={styles.error_info}
+          onMouseEnter={() => setIsShownTooltip(true)}
+          onMouseLeave={() => setIsShownTooltip(false)}
+        />
+      )}
 
-      {isShownTooltip ? <ErrorTooltip errorTips={errorTips} /> : ""}
+      {isShownTooltip ? (
+        <ErrorTooltip
+          addListStyle={true}
+          errorTips={errorTips}
+          tooltipType="commonTooltip"
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
