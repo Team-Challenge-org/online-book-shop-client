@@ -1,90 +1,89 @@
-import styles from "./registerForm.module.scss";
+import styles from './registerForm.module.scss';
 
-import type { TRegisterField } from "types/auth";
+import type { TRegisterField } from 'types/auth';
 
-import {
-  registerUserSchema,
-  TRegisterUserSchema,
-} from "validations/registerUserSchema";
+import { registerUserSchema, TRegisterUserSchema } from 'validations/registerUserSchema';
 
-import { useState } from "react";
-import { MdOutlineVisibility } from "react-icons/md";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { MdOutlineVisibilityOff } from "react-icons/md";
-import { FormProvider, useForm } from "react-hook-form";
-import { RegisterField } from "../shared/registerField/RegisterField";
+import { useState } from 'react';
+import { MdOutlineVisibility } from 'react-icons/md';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { MdOutlineVisibilityOff } from 'react-icons/md';
+import { FormProvider, useForm } from 'react-hook-form';
+import { RegisterField } from '../shared/registerField/RegisterField';
+import axios from 'axios';
+import { Endpoints } from 'constants/api';
 
 const registerFields: TRegisterField[] = [
   {
     id: 1,
-    type: "text",
-    label: "Ваше ім’я *",
-    placeholder: "Введіть ваше ім’я",
-    valueName: "first_name",
+    type: 'text',
+    label: 'Ваше ім’я *',
+    placeholder: 'Введіть ваше ім’я',
+    valueName: 'first_name',
     errorTips: [
-      "Ви можете використовувати лише кирилицю, латиницю та арабські цифри.",
-      "Ви можете використовувати великі та малі літери.",
-      "Довжина імені має бути від 2 до 30 символів.",
+      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
+      'Ви можете використовувати великі та малі літери.',
+      'Довжина імені має бути від 2 до 30 символів.',
     ],
   },
   {
     id: 2,
-    type: "text",
-    label: "Ваше прізвище *",
-    placeholder: "Введіть ваше прізвище",
-    valueName: "last_name",
+    type: 'text',
+    label: 'Ваше прізвище *',
+    placeholder: 'Введіть ваше прізвище',
+    valueName: 'last_name',
     errorTips: [
-      "Ви можете використовувати лише кирилицю, латиницю та арабські цифри.",
-      "Ви можете використовувати великі та малі літери.",
-      "Довжина імені має бути від 2 до 50 символів.",
+      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
+      'Ви можете використовувати великі та малі літери.',
+      'Довжина імені має бути від 2 до 50 символів.',
     ],
   },
   {
     id: 3,
-    type: "number",
-    label: "Номер телефону *",
-    placeholder: "+38",
-    valueName: "phone_number",
+    type: 'number',
+    label: 'Номер телефону *',
+    placeholder: '+38',
+    valueName: 'phone_number',
     errorTips: [
-      "Ви можете використовувати лише арабські цифри та «+».",
-      "Довжина мобільного номера має бути 13 символів, включаючи «+».",
+      'Ви можете використовувати лише арабські цифри та «+».',
+      'Довжина мобільного номера має бути 13 символів, включаючи «+».',
     ],
   },
   {
     id: 4,
-    type: "email",
-    label: "Електронна пошта *",
-    placeholder: "Введіть електронну пошту",
-    valueName: "email",
+    type: 'email',
+    label: 'Електронна пошта *',
+    placeholder: 'Введіть електронну пошту',
+    valueName: 'email',
     errorTips: [
       "Ви можете використовувати лише арабські цифри, латиницю та наступні символи ~ ! $ % ^ & * _ = + } { ' ? - @.",
-      "Ви можете використовувати великі та малі літери.",
-      "Пошта має містити “@”.",
+      'Ви можете використовувати великі та малі літери.',
+      'Пошта має містити “@”.',
       "Пошта повинна мати будь-який діючий домейн окрім “mail.ru”, “yandex.ru” та інших доменів, пов'язаних з росією.",
     ],
   },
   {
     id: 5,
-    type: "password",
-    label: "Пароль *",
-    placeholder: "Введіть пароль",
-    valueName: "password",
+    type: 'password',
+    label: 'Пароль *',
+    placeholder: 'Введіть пароль',
+    valueName: 'password',
     iconOpenEye: <MdOutlineVisibility />,
     iconCloseEye: <MdOutlineVisibilityOff />,
     errorTips: [
       "Ви можете використовувати лише арабські цифри, латиницю та наступні символи ~ ! $ % ^ & * _ = + } { ' ? -",
-      "Ви можете використовувати великі та малі літери.",
-      "Довжина пароля має бути від 8 до 30 символів.",
-      "Використовуйте комбінацію великих та малих літер, арабських цифр та спеціальних символів для створення більш надійного пароля.",
-      "Перевірте чи ввімкнено CapsLock.",
+      'Ви можете використовувати великі та малі літери.',
+      'Довжина пароля має бути від 8 до 30 символів.',
+      'Використовуйте комбінацію великих та малих літер, арабських цифр та спеціальних символів для створення більш надійного пароля.',
+      'Перевірте чи ввімкнено CapsLock.',
     ],
   },
   {
     id: 6,
-    type: "password",
-    label: "Підтвердіть пароль *",
-    placeholder: "Введіть пароль",
-    valueName: "confirm_password",
+    type: 'password',
+    label: 'Підтвердіть пароль *',
+    placeholder: 'Введіть пароль',
+    valueName: 'confirm_password',
     iconOpenEye: <MdOutlineVisibility />,
     iconCloseEye: <MdOutlineVisibilityOff />,
   },
@@ -104,7 +103,17 @@ export function RegisterForm() {
 
   function onSubmitData(data: TRegisterUserSchema) {
     if (isPublicOfferAccepted) {
-      console.log(data);
+      try {
+        axios.post(`${Endpoints.REGISTER}`, {
+          firstName: data.first_name,
+          surname: data.last_name,
+          email: data.email,
+          password: data.password,
+          //phone: data.phone_number -- Нужно будет добавить, когда добавят на беке
+        });
+      } catch (error) {
+        console.log(error);
+      }
       methods.reset();
     }
   }
