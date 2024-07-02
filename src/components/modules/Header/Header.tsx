@@ -1,4 +1,4 @@
-import styles from "styles/header/index.module.scss";
+import styles from './header.module.scss';
 
 import { useAuth } from "contexts/AuthContext";
 import Logo from "components/elements/Logo/Logo";
@@ -17,7 +17,6 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Logo color={"#000000"} />
-
       <nav className={styles.header__nav}>
         <ul>
           <li>Каталог</li>
@@ -28,11 +27,7 @@ const Header = () => {
 
       <div className={styles.header__right}>
         <form className={styles.header__right__form}>
-          <input
-            type="text"
-            placeholder="Пошук"
-            className={styles.header__right__form__input}
-          />
+          <input type="text" placeholder="Пошук" className={styles.header__right__form__input} />
           <SearchSvg />
         </form>
 
@@ -43,14 +38,17 @@ const Header = () => {
 
           <MdFavoriteBorder className={styles.nav_icon} />
 
-          <MdOutlinePersonOutline
-            className={styles.nav_icon}
-            onClick={onShowRegisterForm}
-          />
-          <MdOutlineShoppingCart
-            className={styles.nav_icon}
-            onClick={onOpenCartModal}
-          />
+          <MdOutlinePersonOutline className={styles.nav_icon} onClick={onShowRegisterForm} />
+          <div className={styles.header__right__actions__cart}>
+            <MdOutlineShoppingCart className={styles.nav_icon} onClick={onOpenCartModal} />
+            {shoppingCart.length > 0 ? (
+              <span className={styles.header__right__actions__cart__quantity}>
+                {shoppingCart.length}
+              </span>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
 

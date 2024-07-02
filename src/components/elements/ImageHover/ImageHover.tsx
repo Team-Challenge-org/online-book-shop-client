@@ -7,48 +7,33 @@ import type { TFavoriteItems } from "store/favorite/types";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
-import { selectCart } from "store/cart/selectors";
-import React, { useEffect, useState } from "react";
+import { selectOneCart } from "store/cart/selectors";
+import React, { useState } from "react";
 import { useBooksLogic } from "contexts/BooksContext";
-import { selectFavorite } from "store/favorite/selectors";
+import { selectOneFavorite } from "store/favorite/selectors";
 import { addOrRemoveCartItem } from "store/cart/cartSlice";
-import { ButtonCart } from "components/modules/CatalogList/ButtonCart";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import { ButtonFavorite } from "components/modules/CatalogList/ButtonFavorite";
+import { MdFavorite } from "react-icons/md";
+import { MdFavoriteBorder } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdShoppingCart } from "react-icons/md";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [isAddedToFavorite, setIsAddedToFavorite] = useState(false);
-  const { items: CartItem } = useSelector(selectCart);
-  const { items: favoriteItems } = useSelector(selectFavorite);
   const { updateBookViewAndData } = useBooksLogic();
-
-  useEffect(() => {
-    if (CartItem.length > 0) {
-      let checkCart = CartItem.find((obj) => obj.id === item.id);
-      if (checkCart) {
-        setIsAddedToCart(true);
-      }
-    }
-
-    if (favoriteItems.length > 0) {
-      let checkFavorite = favoriteItems.find((obj) => obj.id === item.id);
-      if (checkFavorite) {
-        setIsAddedToFavorite(true);
-      }
-    }
-  }, [CartItem, favoriteItems, item, dispatch]);
+  const favorite = useSelector(selectOneFavorite(item))
+  const cart = useSelector(selectOneCart(item))
+  const [hoverFavorite, setHoverFavorite] = useState(false)
+  const [hoverCart, setHoverCart] = useState(false)
 
   const CartItemHandler = (obj: TBook) => {
     dispatch(addOrRemoveCartItem(obj));
-    setIsAddedToCart(!isAddedToCart);
   };
 
   const favoriteItemsHandler = (obj: TFavoriteItems) => {
     dispatch(addOrRemoveFavoriteItem(obj));
-    setIsAddedToFavorite(!isAddedToFavorite);
   };
+
 
   return (
     <div className={styles.hover} onClick={() => updateBookViewAndData(item)}>
@@ -63,9 +48,10 @@ const ImageHover = ({ item }: TCatalogItemType) => {
               e.stopPropagation();
               favoriteItemsHandler(item);
             }}
-            className={styles.hover__button}
-          >
-            <ButtonFavorite isAdded={isAddedToFavorite} />
+            className={styles.hover__button}>
+            {favorite ? (<div className={`${styles.hover__button__icon} ${styles.hover__button__black}`}><MdFavorite color="#FFFFFF" size="28px" /></div>) : (<div
+      onMouseEnter={() => setHoverFavorite(true)}
+      onMouseLeave={() => setHoverFavorite(false)} className={`${styles.hover__button__icon} ${hoverFavorite ? (styles.hover__button__black) : (styles.hover__button__green)}`}><MdFavoriteBorder color="#FFFFFF" size="28px" /></div>)}
           </button>
           <button
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -74,7 +60,9 @@ const ImageHover = ({ item }: TCatalogItemType) => {
             }}
             className={styles.hover__button}
           >
-            <ButtonCart isAdded={isAddedToCart} />
+              {cart ? (<div className={`${styles.hover__button__icon} ${styles.hover__button__black}`}><MdShoppingCart color="#FFFFFF" size="28px" /></div>) : (<div
+      onMouseEnter={() => setHoverCart(true)}
+      onMouseLeave={() => setHoverCart(false)} className={`${styles.hover__button__icon} ${hoverCart ? (styles.hover__button__black) : (styles.hover__button__green)}`}><MdOutlineShoppingCart color="#FFFFFF" size="28px" /></div>)}
           </button>
         </div>
       </motion.div>

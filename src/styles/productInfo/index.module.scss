@@ -132,18 +132,21 @@
         margin-bottom: 69px;
         &__cart {
           height: 56px;
-          width: 100%;
+          width: calc(100% - 56px); // favorite button = 56px
           margin-right: 23px;
           cursor: pointer;
         }
         &__favorite {
           background: none;
-          border: none;
-          padding: 0;
-          margin: 0;
+          border: 1px solid #196C67;
+          width: 56px;
+          height: 56px;
           cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
-      }
+      } 
 
       &__dropdown {
         display: flex;

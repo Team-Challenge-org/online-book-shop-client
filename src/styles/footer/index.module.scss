@@ -118,6 +118,7 @@
 
     &__form {
       white-space: nowrap;
+      display: flex;
       &__input {
         width: 292px;
         height: 48px;
@@ -126,18 +127,18 @@
         background: none;
         box-sizing: border-box;
         padding: 16px;
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: #FFFFFF;
         font-weight: 400;
         font-size: 14px;
         line-height: 16.41px;
-        color: rgba(0, 0, 0, 0.5);
+        color: #959595;
       }
 
       &__input::placeholder {
         font-weight: 400;
         font-size: 14px;
         line-height: 16.41px;
-        color: rgba(255, 255, 255, 1);
+        color: #959595;
       }
 
       &__input:focus {
@@ -145,7 +146,7 @@
       }
 
       &__button {
-        background-color: rgba(234, 67, 53, 0.71);
+        background-color: #1C1B1F;
         border: 1px solid rgba(255, 255, 255, 0.5);
         height: 48px;
         color: #ffffff;
