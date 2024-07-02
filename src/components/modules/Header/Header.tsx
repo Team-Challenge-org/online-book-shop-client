@@ -9,10 +9,13 @@ import { useModalCart } from "contexts/ModalCartContext";
 import ModalRegisterForm from "../auth/ModalRegisterForm";
 import { SearchSvg } from "components/elements/SearchSvg/SearchSvg";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
+import { useSelector } from 'react-redux';
+import { selectCart } from 'store/cart/selectors';
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm } = useAuth();
+  const { items: shoppingCart } = useSelector(selectCart);
 
   return (
     <header className={styles.header}>
