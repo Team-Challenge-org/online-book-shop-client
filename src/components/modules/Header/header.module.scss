@@ -14,14 +14,15 @@
   &__nav {
     text-transform: uppercase;
 
-    ul {
+    &__list {
       display: flex;
       list-style: none;
-    }
+      flex-direction: row;
 
-    li {
-      padding-right: 32px;
-      text-wrap: nowrap;
+      &__item {
+        padding-right: 32px;
+        text-wrap: nowrap;
+      }
     }
   }
 
@@ -32,9 +33,11 @@
       width: 328px;
       height: 48px;
       margin-right: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(28, 27, 31, 0.5);
       display: flex;
       align-items: center;
+      justify-content: center;
+      position: relative;
 
       &__input:focus {
         outline: none;
@@ -45,6 +48,15 @@
         border: none;
         width: 280px;
         padding-left: 10px;
+      }
+
+      &__icon {
+        width: 24px;
+        height: 24px;
+        color: rgba(217, 217, 217, 1);
+        position: absolute;
+        top: 12px;
+        right: 12px;
       }
     }
 

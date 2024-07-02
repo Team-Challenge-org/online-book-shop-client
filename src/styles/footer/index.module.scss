@@ -119,6 +119,7 @@
     &__form {
       white-space: nowrap;
       display: flex;
+      flex-direction: row;
       &__input {
         width: 292px;
         height: 48px;
@@ -127,7 +128,7 @@
         background: none;
         box-sizing: border-box;
         padding: 16px;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         font-weight: 400;
         font-size: 14px;
         line-height: 16.41px;
@@ -146,7 +147,7 @@
       }
 
       &__button {
-        background-color: #1C1B1F;
+        background-color: #1c1b1f;
         border: 1px solid rgba(255, 255, 255, 0.5);
         height: 48px;
         color: #ffffff;

@@ -1,4 +1,4 @@
-@import "styles/utils/variables";
+@import 'styles/utils/variables';
 
 .container {
   width: 100%;
@@ -14,13 +14,13 @@
   margin-bottom: 40px;
 }
 
-ul {
+.list {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
 
-  li {
+  &__item {
     a {
       border: 1px solid $color-gray;
       padding: 12px 0;

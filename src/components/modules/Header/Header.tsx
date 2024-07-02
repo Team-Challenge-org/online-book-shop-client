@@ -1,16 +1,17 @@
 import styles from './header.module.scss';
 
-import { useAuth } from "contexts/AuthContext";
-import Logo from "components/elements/Logo/Logo";
-import { MdFavoriteBorder } from "react-icons/md";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { MdOutlinePersonOutline } from "react-icons/md";
-import { useModalCart } from "contexts/ModalCartContext";
-import ModalRegisterForm from "../auth/ModalRegisterForm";
-import { SearchSvg } from "components/elements/SearchSvg/SearchSvg";
-import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
+import { useAuth } from 'contexts/AuthContext';
+import Logo from 'components/elements/Logo/Logo';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import { MdOutlinePersonOutline } from 'react-icons/md';
+import { useModalCart } from 'contexts/ModalCartContext';
+import ModalRegisterForm from '../auth/ModalRegisterForm';
+import { SearchSvg } from 'components/elements/SearchSvg/SearchSvg';
+import { ModalCart } from '../ModalShoppingCart/ModalCart/ModalCart';
 import { useSelector } from 'react-redux';
 import { selectCart } from 'store/cart/selectors';
+import { MdOutlineSearch } from 'react-icons/md';
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
@@ -19,19 +20,19 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Logo color={"#000000"} />
+      <Logo color={'#000000'} />
       <nav className={styles.header__nav}>
-        <ul>
-          <li>Каталог</li>
-          <li>Оплата та доставка</li>
-          <li>Про нас</li>
+        <ul className={styles.header__nav__list}>
+          <li className={styles.header__nav__list__item}>Каталог</li>
+          <li className={styles.header__nav__list__item}>Оплата та доставка</li>
+          <li className={styles.header__nav__list__item}>Про нас</li>
         </ul>
       </nav>
 
       <div className={styles.header__right}>
         <form className={styles.header__right__form}>
           <input type="text" placeholder="Пошук" className={styles.header__right__form__input} />
-          <SearchSvg />
+          <MdOutlineSearch className={styles.header__right__form__icon} />
         </form>
 
         <div className={styles.header__right__actions}>
