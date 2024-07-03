@@ -1,5 +1,4 @@
 import Spinner from 'components/elements/Spinner/Spinner';
-import LoginForm from 'components/modules/auth/loginForm/LoginForm';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +20,7 @@ const LoginPageLogic = () => {
     let userCredential: TUser = {
       email,
       password,
+      isRememberMe: false,
     };
     dispatch(loginUser(userCredential)).then((result: { payload: any }) => {
       if (result.payload) {
@@ -32,24 +32,21 @@ const LoginPageLogic = () => {
   };
 
   return (
-    //<form onSubmit={handleLoginEvent}>
-    //  <label htmlFor="">Email</label>
-    //  <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-    //  <br />
-    //  <label htmlFor="">Password</label>
-    //  <input
-    //    type="password"
-    //    required
-    //    value={password}
-    //    onChange={(e) => setPassword(e.target.value)}
-    //  />
-    //  <br />
-    //  <button type="submit">{loading ? <Spinner /> : 'Login'}</button>
-    //  {error && <div>{error}</div>}
-    //</form>
-    <>
-      <LoginForm />
-    </>
+    <form onSubmit={handleLoginEvent}>
+      <label htmlFor="">Email</label>
+      <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+      <br />
+      <label htmlFor="">Password</label>
+      <input
+        type="password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <br />
+      <button type="submit">{loading ? <Spinner /> : 'Login'}</button>
+      {error && <div>{error}</div>}
+    </form>
   );
 };
 

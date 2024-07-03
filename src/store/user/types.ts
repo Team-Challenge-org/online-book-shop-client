@@ -8,7 +8,11 @@ export type TUserState = {
   loading: boolean;
   user: string | null;
   error: null | string;
-  isAuth: boolean;
+  isAuth: boolean | null;
 };
 
-export type TUser = { email: string | null; password: string | null };
+export type TUser = {
+  email: string | null;
+  password: string | null;
+  isRememberMe: boolean | null;
+};
