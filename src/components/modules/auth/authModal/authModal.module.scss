@@ -37,3 +37,15 @@
     color: $color-gray;
   }
 }
+
+@media(max-width: 1400px) {
+  .overlay {
+    overflow-y: scroll;
+
+    .modal {
+      transform: none;
+      top: 0;
+      left: calc(50% - 280px)
+    }
+  }
+}

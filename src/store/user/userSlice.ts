@@ -7,7 +7,7 @@ const initialState: TUserState = {
   loading: false,
   user: getUserFromLS(),
   error: null,
-  isAuth: getAuthFromLS()
+  isAuth: getAuthFromLS(),
 };
 
 const userSlice = createSlice({
@@ -18,7 +18,9 @@ const userSlice = createSlice({
       state.user = null;
       state.isAuth = false;
       localStorage.removeItem('user');
-      localStorage.removeItem('auth')
+      localStorage.removeItem('auth');
+      sessionStorage.removeItem('user');
+      sessionStorage.removeItem('auth');
     },
   },
   extraReducers(builder) {
@@ -32,6 +34,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.error = null;
+        state.isAuth = true
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

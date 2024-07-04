@@ -45,15 +45,19 @@ export function getSimilarBooksFromLS() {
 }
 
 export function getUserFromLS() {
-  const data = localStorage.getItem('user');
-  const user: string = data ? JSON.parse(data) : null;
+  let data = localStorage.getItem('user');
+  let data2 = sessionStorage.getItem('user');
+
+  const user: string = data ? JSON.parse(data) : (data2 ? JSON.parse(data2) : null);
 
   return user;
 }
 
 export function getAuthFromLS() {
-  const data = localStorage.getItem('auth')
-  const auth: boolean = data ? JSON.parse(data) : false;
+  let data = localStorage.getItem('auth');
+  let data2 = sessionStorage.getItem('auth');
+ 
+  const auth: boolean = data ? JSON.parse(data) : (data2 ? JSON.parse(data2) : false);
 
-  return auth
+  return auth;
 }
