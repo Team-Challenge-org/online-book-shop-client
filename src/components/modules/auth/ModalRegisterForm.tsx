@@ -2,22 +2,33 @@ import { AuthModal } from './authModal/AuthModal';
 import { RegisterForm } from './registerForm/RegisterForm';
 import { SocialRegister } from './socialRegister/SocialRegister';
 import LoginForm from './loginForm/LoginForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './shared/enterOrRegisterAccount/enterOrRegisterAccount.module.scss';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { selectAuthData } from 'store/user/selectors';
-import LogoutPageLogic from 'pages/LoginPage/LogoutPageLogic';
+import { AppDispatch } from 'store/store';
+import { logout } from 'store/user/userSlice';
 
 export default function ModalRegisterForm() {
   const [showLogin, setShowLogin] = useState(false);
-  const auth = useSelector(selectAuthData);
+  const auth = useSelector(selectAuthData, shallowEqual);
+  const [isAuth, setIsAuth] = useState(false)
+  const dispatch = useDispatch<AppDispatch>();
+  
+  useEffect(() => {
+    if (auth) {
+      setIsAuth(true)
+    } else {
+      setIsAuth(false)
+    }
+  }, [auth])
 
   return (
     <AuthModal>
       <SocialRegister />
 
-      {auth ? (
-        <LogoutPageLogic />
+      {isAuth ? (
+        <button onClick={() => dispatch(logout())}>Logout</button>
       ) : (
         <>
           {showLogin ? <LoginForm /> : <RegisterForm />}

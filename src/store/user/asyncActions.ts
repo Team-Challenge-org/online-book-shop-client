@@ -3,11 +3,9 @@ import axios from 'axios';
 import { TUser } from './types';
 import { Endpoints } from 'constants/api';
 
-export const loginUser = createAsyncThunk('auth/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(Endpoints.LOGIN, {
-    email: userCrentials.email,
-    password: userCrentials.password,
-  });
+export const loginUser = createAsyncThunk('user/login', async (userCrentials: TUser) => {
+  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
+
   if (userCrentials.isRememberMe) {
     localStorage.setItem('user', JSON.stringify(data));
     localStorage.setItem('auth', 'true');

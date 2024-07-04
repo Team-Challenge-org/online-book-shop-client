@@ -7,7 +7,6 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import { useModalCart } from 'contexts/ModalCartContext';
 import ModalRegisterForm from '../auth/ModalRegisterForm';
-import { SearchSvg } from 'components/elements/SearchSvg/SearchSvg';
 import { ModalCart } from '../ModalShoppingCart/ModalCart/ModalCart';
 import { useSelector } from 'react-redux';
 import { selectCart } from 'store/cart/selectors';

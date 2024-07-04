@@ -1,7 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
-import { Endpoints } from 'constants/api';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { TLoginUserSchema, loginUserSchema } from 'validations/loginUserSchema';
 import styles from './loginForm.module.scss';
@@ -9,9 +7,25 @@ import { RegisterField } from '../shared/registerField/RegisterField';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import { TUser } from 'store/user/types';
 import { loginUser } from 'store/user/asyncActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from 'store/store';
+import Spinner from 'components/elements/Spinner/Spinner';
+import { selectUserData } from 'store/user/selectors';
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const {loading} = useSelector(selectUserData);
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (loading) {
+      setIsLoading(true)
+    } else {
+      setIsLoading(false)
+    }
+  }, [loading])
+
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),
   });
@@ -22,8 +36,7 @@ const LoginForm = () => {
       password: data.login_password,
       isRememberMe,
     };
-    dispatch(loginUser(userCredential));
-    console.log(data);
+    dispatch(loginUser(userCredential))
     methods.reset();
   }
 
@@ -36,7 +49,8 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmitData)} className={styles.login}>
+      {isLoading ? <Spinner /> : (
+        <form onSubmit={handleSubmit(onSubmitData)} className={styles.login}>
         <RegisterField
           field={{
             id: 400,
@@ -72,11 +86,9 @@ const LoginForm = () => {
           Увійти
         </button>
       </form>
+      )}
     </FormProvider>
   );
 };
 
 export default LoginForm;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
