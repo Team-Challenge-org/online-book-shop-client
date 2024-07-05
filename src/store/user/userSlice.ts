@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser } from './asyncActions';
+import { loginUser, registerUser } from './asyncActions';
 import { TUserState } from './types';
 import { getAuthFromLS, getUserFromLS } from 'utils/getDataFromLS';
 
@@ -45,7 +45,23 @@ const userSlice = createSlice({
         } else {
           state.error = action.error.message!;
         }
-      });
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.user = null;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+        state.isAuth = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        console.log(action.error.message);
+      })
   },
 });
 

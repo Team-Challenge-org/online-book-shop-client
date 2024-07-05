@@ -4,14 +4,19 @@ import type { TRegisterField } from 'types/auth';
 
 import { registerUserSchema, TRegisterUserSchema } from 'validations/registerUserSchema';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdOutlineVisibility } from 'react-icons/md';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MdOutlineVisibilityOff } from 'react-icons/md';
 import { FormProvider, useForm } from 'react-hook-form';
 import { RegisterField } from '../shared/registerField/RegisterField';
-import axios from 'axios';
-import { Endpoints } from 'constants/api';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from 'components/elements/Spinner/Spinner';
+import { selectUserData } from 'store/user/selectors';
+import { registerUser } from 'store/user/asyncActions';
+import { AppDispatch } from 'store/store';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from 'contexts/AuthContext';
 
 const registerFields: TRegisterField[] = [
   {
@@ -90,6 +95,20 @@ const registerFields: TRegisterField[] = [
 ];
 
 export function RegisterForm() {
+  const {loading} = useSelector(selectUserData);
+  const [isLoading, setIsLoading] = useState(false)
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate()
+  const { onCloseRegisterForm } = useAuth();
+
+  useEffect(() => {
+    if (loading) {
+      setIsLoading(true)
+    } else {
+      setIsLoading(false)
+    }
+  }, [loading])
+
   const methods = useForm<TRegisterUserSchema>({
     resolver: zodResolver(registerUserSchema),
   });
@@ -103,18 +122,10 @@ export function RegisterForm() {
 
   function onSubmitData(data: TRegisterUserSchema) {
     if (isPublicOfferAccepted) {
-      try {
-        axios.post(`${Endpoints.REGISTER}`, {
-          firstName: data.first_name,
-          surname: data.last_name,
-          email: data.email,
-          password: data.password,
-          //phone: data.phone_number -- Нужно будет добавить, когда добавят на беке
-        });
-      } catch (error) {
-        console.log(error);
-      }
-      methods.reset();
+    dispatch(registerUser(data))
+    navigate('/')
+    methods.reset();
+    onCloseRegisterForm()
     }
   }
 
@@ -123,7 +134,7 @@ export function RegisterForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmitData)}>
+      {isLoading ? <Spinner /> : (<form onSubmit={handleSubmit(onSubmitData)}>
         {registerFields.map((field) => (
           <RegisterField key={field.id} field={field} />
         ))}
@@ -142,7 +153,7 @@ export function RegisterForm() {
         <button className={activeBtnSubmit} type="submit">
           Зареєструватись
         </button>
-      </form>
+      </form>)}
     </FormProvider>
   );
 }
