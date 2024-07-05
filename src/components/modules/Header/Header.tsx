@@ -6,7 +6,7 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import { useModalCart } from 'contexts/ModalCartContext';
-import ModalRegisterForm from '../auth/ModalRegisterForm';
+import ModalUserForm from '../auth/ModalUserForm';
 import { ModalCart } from '../ModalShoppingCart/ModalCart/ModalCart';
 import { useSelector } from 'react-redux';
 import { selectCart } from 'store/cart/selectors';
@@ -59,7 +59,7 @@ const Header = () => {
       {showModal && <ModalCart />}
 
       {/* Register Modal Window  */}
-      {showRegisterForm && <ModalRegisterForm />}
+      {showRegisterForm && <ModalUserForm />}
     </header>
   );
 };

@@ -1,25 +1,22 @@
+import { useState } from "react";
+import LoginForm from "../../loginForm/LoginForm";
+import { RegisterForm } from "../../registerForm/RegisterForm";
 import styles from "./enterOrRegisterAccount.module.scss";
 
-import { Link } from "react-router-dom";
+export default function EnterOrRegisterAccount() {
+  const [showLogin, setShowLogin] = useState(false);
 
-type TEnterOrRegisterAccountProps = {
-  text: string;
-  link: string;
-  linkText: string;
-};
-
-export default function EnterOrRegisterAccount({
-  text,
-  link,
-  linkText,
-}: TEnterOrRegisterAccountProps) {
   return (
-    <div className={styles.block}>
-      <p>{text}</p>
+    <>
+          {showLogin ? <LoginForm /> : <RegisterForm />}
 
-      <Link to={link} className={styles.link}>
-        {linkText}
-      </Link>
-    </div>
+          <div className={styles.block}>
+            <p>{showLogin ? 'Немає акаунту?' : 'Вже маєте акаунт?'}</p>
+
+            <span className={styles.link} onClick={() => setShowLogin(!showLogin)}>
+              {showLogin ? 'Зареєструватись' : 'Увійти'}
+            </span>
+          </div>
+        </>
   );
 }
