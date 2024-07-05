@@ -1,22 +1,23 @@
+import styles from "./enterOrRegisterAccount.module.scss";
+
 import { useState } from "react";
 import LoginForm from "../../loginForm/LoginForm";
 import { RegisterForm } from "../../registerForm/RegisterForm";
-import styles from "./enterOrRegisterAccount.module.scss";
 
 export default function EnterOrRegisterAccount() {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
-          {showLogin ? <LoginForm /> : <RegisterForm />}
+      {showLogin ? <LoginForm /> : <RegisterForm />}
 
-          <div className={styles.block}>
-            <p>{showLogin ? 'Немає акаунту?' : 'Вже маєте акаунт?'}</p>
+      <div className={styles.block}>
+        <p>{showLogin ? "Немає акаунту?" : "Вже маєте акаунт?"}</p>
 
-            <span className={styles.link} onClick={() => setShowLogin(!showLogin)}>
-              {showLogin ? 'Зареєструватись' : 'Увійти'}
-            </span>
-          </div>
-        </>
+        <span className={styles.link} onClick={() => setShowLogin(!showLogin)}>
+          {showLogin ? "Зареєструватись" : "Увійти"}
+        </span>
+      </div>
+    </>
   );
 }

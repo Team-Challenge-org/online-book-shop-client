@@ -41,6 +41,8 @@ export function CartItem({ book }: { book: TBook }) {
             {truncateAuthors(book?.authors as string)}
           </p>
           <p className={styles.book_title}>{book?.title}</p>
+
+          <span className={styles.book_price}>{book.price} грн</span>
         </div>
 
         <div className={styles.count_price_box}>

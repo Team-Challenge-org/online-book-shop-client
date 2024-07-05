@@ -1,6 +1,7 @@
+import type { TUserState } from './types';
+
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser, registerUser } from './asyncActions';
-import { TUserState } from './types';
 import { getAuthFromLS, getUserFromLS } from 'utils/getDataFromLS';
 
 const initialState: TUserState = {
