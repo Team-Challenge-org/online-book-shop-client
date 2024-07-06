@@ -1,4 +1,4 @@
-@import '/src/styles/utils/_variables';
+@import "/src/styles/utils/_variables";
 
 .header {
   height: 128px;
@@ -84,14 +84,14 @@
           align-items: center;
           background-color: $color-main;
           color: $color-white;
-          font-size: 8px;
+          font-size: 12px;
           line-height: 9.38px;
-          width: 12px;
-          height: 12px;
+          width: 20px;
+          height: 20px;
           border-radius: 12px;
           position: absolute;
-          top: 0;
-          right: 0;
+          top: -8px;
+          right: -6px;
         }
       }
     }

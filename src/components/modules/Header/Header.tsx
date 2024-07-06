@@ -1,16 +1,16 @@
-import styles from './header.module.scss';
+import styles from "./header.module.scss";
 
-import { useAuth } from 'contexts/AuthContext';
-import Logo from 'components/elements/Logo/Logo';
-import { MdFavoriteBorder } from 'react-icons/md';
-import { MdOutlineShoppingCart } from 'react-icons/md';
-import { MdOutlinePersonOutline } from 'react-icons/md';
-import { useModalCart } from 'contexts/ModalCartContext';
-import ModalUserForm from '../auth/ModalUserForm';
-import { ModalCart } from '../ModalShoppingCart/ModalCart/ModalCart';
-import { useSelector } from 'react-redux';
-import { selectCart } from 'store/cart/selectors';
-import { MdOutlineSearch } from 'react-icons/md';
+import { useSelector } from "react-redux";
+import { useAuth } from "contexts/AuthContext";
+import { MdOutlineSearch } from "react-icons/md";
+import Logo from "components/elements/Logo/Logo";
+import { selectCart } from "store/cart/selectors";
+import ModalUserForm from "../auth/ModalUserForm";
+import { MdFavoriteBorder } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlinePersonOutline } from "react-icons/md";
+import { useModalCart } from "contexts/ModalCartContext";
+import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
@@ -19,7 +19,8 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Logo color={'#000000'} />
+      <Logo color={"#000000"} />
+
       <nav className={styles.header__nav}>
         <ul className={styles.header__nav__list}>
           <li className={styles.header__nav__list__item}>Каталог</li>
@@ -30,7 +31,11 @@ const Header = () => {
 
       <div className={styles.header__right}>
         <form className={styles.header__right__form}>
-          <input type="text" placeholder="Пошук" className={styles.header__right__form__input} />
+          <input
+            type="text"
+            placeholder="Пошук"
+            className={styles.header__right__form__input}
+          />
           <MdOutlineSearch className={styles.header__right__form__icon} />
         </form>
 
@@ -41,15 +46,21 @@ const Header = () => {
 
           <MdFavoriteBorder className={styles.nav_icon} />
 
-          <MdOutlinePersonOutline className={styles.nav_icon} onClick={onShowRegisterForm} />
+          <MdOutlinePersonOutline
+            className={styles.nav_icon}
+            onClick={onShowRegisterForm}
+          />
           <div className={styles.header__right__actions__cart}>
-            <MdOutlineShoppingCart className={styles.nav_icon} onClick={onOpenCartModal} />
+            <MdOutlineShoppingCart
+              className={styles.nav_icon}
+              onClick={onOpenCartModal}
+            />
             {shoppingCart.length > 0 ? (
               <span className={styles.header__right__actions__cart__quantity}>
                 {shoppingCart.length}
               </span>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
