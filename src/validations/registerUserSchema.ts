@@ -12,6 +12,7 @@ export const registerUserSchema = z
 
     last_name: z
       .string()
+      .regex(/^[А-Яа-яA-Za-z0-9\s]+$/, errorMessage.LAST_NAME)
       .min(2, errorMessage.LAST_NAME)
       .max(50, errorMessage.LAST_NAME),
 
