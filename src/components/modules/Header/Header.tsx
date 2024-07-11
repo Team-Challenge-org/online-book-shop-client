@@ -11,10 +11,12 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
+import { ResetPasswordModalForm } from "../auth/resetPasswordForm/ResetPasswordModalForm";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
-  const { showRegisterForm, onShowRegisterForm } = useAuth();
+  const { showRegisterForm, onShowRegisterForm, showResetPasswordForm } =
+    useAuth();
   const { items: shoppingCart } = useSelector(selectCart);
 
   return (
@@ -70,7 +72,9 @@ const Header = () => {
       {showModal && <ModalCart />}
 
       {/* Register Modal Window  */}
-      {showRegisterForm && <ModalUserForm />}
+      {showRegisterForm && !showResetPasswordForm && <ModalUserForm />}
+
+      {showResetPasswordForm && <ResetPasswordModalForm />}
     </header>
   );
 };

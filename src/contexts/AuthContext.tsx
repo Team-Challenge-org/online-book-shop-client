@@ -2,14 +2,20 @@ import React, { createContext, useContext, useState } from "react";
 
 type TAuthContext = {
   showRegisterForm: boolean;
+  showResetPasswordForm: boolean;
   onShowRegisterForm: () => void;
   onCloseRegisterForm: () => void;
+  onShowResetPasswordForm: () => void;
+  onCloseResetPasswordForm: () => void;
 };
 
 const AuthContext = createContext<TAuthContext>({
   showRegisterForm: false,
+  showResetPasswordForm: false,
   onShowRegisterForm: () => {},
   onCloseRegisterForm: () => {},
+  onShowResetPasswordForm: () => {},
+  onCloseResetPasswordForm: () => {},
 });
 
 type TAuthContextProps = {
@@ -18,6 +24,16 @@ type TAuthContextProps = {
 
 function AuthProvider({ children }: TAuthContextProps) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [showResetPasswordForm, setShowResetPasswordForm] = useState(false);
+
+  function handleShowResetPasswordForm() {
+    setShowResetPasswordForm(true);
+    setShowRegisterForm(false);
+  }
+
+  function handleCloseResetPasswordForm() {
+    setShowResetPasswordForm(false);
+  }
 
   function handleShowRegisterForm() {
     setShowRegisterForm(true);
@@ -29,8 +45,11 @@ function AuthProvider({ children }: TAuthContextProps) {
 
   const contextValue: TAuthContext = {
     showRegisterForm,
+    showResetPasswordForm,
     onShowRegisterForm: handleShowRegisterForm,
     onCloseRegisterForm: handleCloseRegisterForm,
+    onShowResetPasswordForm: handleShowResetPasswordForm,
+    onCloseResetPasswordForm: handleCloseResetPasswordForm,
   };
 
   return (
