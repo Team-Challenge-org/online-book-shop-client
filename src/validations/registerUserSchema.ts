@@ -3,16 +3,20 @@ import { errorMessage, EXCLUDED_DOMAINS } from "constants/auth";
 
 export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
 
+const emailRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export const registerUserSchema = z
   .object({
     first_name: z
       .string()
+      .regex(/^[А-Яа-яA-Za-z0-9\s-]+$/, errorMessage.FIRST_NAME)
       .min(2, errorMessage.FIRST_NAME)
       .max(30, errorMessage.FIRST_NAME),
 
     last_name: z
       .string()
-      .regex(/^[А-Яа-яA-Za-z0-9\s]+$/, errorMessage.LAST_NAME)
+      .regex(/^[А-Яа-яA-Za-z0-9\s-]+$/, errorMessage.LAST_NAME)
       .min(2, errorMessage.LAST_NAME)
       .max(50, errorMessage.LAST_NAME),
 
@@ -26,7 +30,7 @@ export const registerUserSchema = z
 
     email: z
       .string()
-      .email(errorMessage.EMAIL)
+      .refine((value) => emailRegex.test(value), errorMessage.EMAIL)
       .refine(
         (value) =>
           !EXCLUDED_DOMAINS.some((domain) => value.endsWith(`@${domain}`)),
@@ -43,9 +47,7 @@ export const registerUserSchema = z
       .refine((value) => /[a-zA-Z0-9~!$%^&*_\-=+}{'\?.-]/.test(value), {
         message: errorMessage.PASSWORD.COMMON,
       }),
-    // .refine((passwordValue: string) => {
-    //   return getPasswordStrength(passwordValue);
-    // }),
+
     confirm_password: z.string(),
   })
 
