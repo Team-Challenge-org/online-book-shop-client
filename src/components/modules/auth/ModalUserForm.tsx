@@ -20,10 +20,11 @@ export default function ModalUserForm() {
     }
   }, [auth]);
 
+
   return (
     <AuthModal>
       <SocialRegister />
-
+      
       {isAuth ? (
         <button onClick={() => dispatch(logout())}>Logout</button>
       ) : (

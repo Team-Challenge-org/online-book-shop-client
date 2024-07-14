@@ -8,3 +8,5 @@ export const Endpoints = {
   LOGIN: `${API_BASE_URL}/api/v1/auth/login`,
   REGISTER: `${API_BASE_URL}/api/v1/auth/register`,
 };
+
+export const NP_API_BASE_URL = 'https://api.novaposhta.ua/v2.0/json/'

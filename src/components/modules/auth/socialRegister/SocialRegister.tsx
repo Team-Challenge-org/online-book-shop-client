@@ -1,18 +1,27 @@
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import styles from './socialRegister.module.scss';
 
 import { Link } from 'react-router-dom';
 
 export function SocialRegister() {
+  
+  const responseMessage = (response: CredentialResponse) => {
+    console.log(response);
+};
+
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Реєстрація</h1>
 
       <ul className={styles.list}>
         <li className={styles.list__item}>
-          <Link to="/">
+          {/* <Link to="/">
             <img src="/img/google_icon.png" alt="google logo" />
             <span>Продовжити через Google</span>
-          </Link>
+          </Link> */}
+      <GoogleLogin onSuccess={responseMessage} />
+
         </li>
 
         <li className={styles.list__item}>

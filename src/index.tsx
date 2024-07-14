@@ -8,12 +8,14 @@ import { ModalCartProvider } from "contexts/ModalCartContext";
 
 import "./index.scss";
 import { BooksLogicProvider } from "contexts/BooksContext";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 //import 'normalize.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
+  <GoogleOAuthProvider clientId="336704376321-ffc2vo7ostsru4udrskftmkt853imcc4.apps.googleusercontent.com">
   <BrowserRouter>
     <Provider store={store}>
       <BooksLogicProvider>
@@ -23,4 +25,5 @@ root.render(
       </BooksLogicProvider>
     </Provider>
   </BrowserRouter>
+  </GoogleOAuthProvider>
 );
