@@ -4,7 +4,7 @@ import { errorMessage, EXCLUDED_DOMAINS } from "constants/auth";
 export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
 
 const nameRegex = /^[А-Яа-яA-Za-z0-9iIіІєЄ'\s-]+$/;
-const emailRegex =
+export const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const registerUserSchema = z
