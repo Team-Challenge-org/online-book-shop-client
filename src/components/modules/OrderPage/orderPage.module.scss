@@ -100,5 +100,22 @@
     input::-webkit-calendar-picker-indicator {
       display: none;
     }
+
+    &__block {
+      &__label {
+        &__block {
+          width: 100%;
+          border: 1px solid $color-gray;
+          position: relative;
+
+          &__input {
+            width: 90%;
+            border: none;
+            padding: 16px;
+            outline: none;
+          }
+        }
+      }
+    }
   }
 }

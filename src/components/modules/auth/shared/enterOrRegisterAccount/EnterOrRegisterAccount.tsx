@@ -5,7 +5,7 @@ import LoginForm from "../../loginForm/LoginForm";
 import { RegisterForm } from "../../registerForm/RegisterForm";
 
 export default function EnterOrRegisterAccount() {
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <>

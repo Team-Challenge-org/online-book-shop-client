@@ -41,7 +41,7 @@ export default function CitySelect() {
       <label className={styles.order__delivery__block__label}>
         <span className={styles.order__delivery__block__label__title}>Місто *</span>
 
-        <div className={errors?.city ? styles.input_box_error : styles.order__delivery}>
+        <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
           <input
             type="text"
             list="places"
