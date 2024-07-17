@@ -36,6 +36,8 @@ export const registerUser = createAsyncThunk(
     sessionStorage.setItem("user", JSON.stringify(data));
     sessionStorage.setItem("auth", "true");
 
+    await axios.post(`https://online-book-shop-1.onrender.com/api/v1/mail/send?mail=${user.email}`)
+
     return data;
   }
 );
