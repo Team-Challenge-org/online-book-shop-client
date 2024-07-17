@@ -9,6 +9,7 @@ export type TUserState = {
   user: string | null;
   error: null | string;
   isAuth: boolean | null;
+  showMessage: boolean;
 };
 
 export type TUser = {

@@ -64,6 +64,38 @@
       display: flex;
       align-items: center;
       gap: 30px;
+      position: relative;
+      font-weight: 400;
+
+      &__message {
+        position: absolute;
+        top: 45px;
+        right: -20px;
+        color: $color-main;
+        background-color: rgba(25, 108, 103, 0.05);
+        width: 184px;
+        height: 40px;
+        border-radius: 12px;
+        border: 1px solid rgba(25, 108, 103, 1);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding-left: 20px;
+
+        &__title {
+          font-size: 12px;
+          line-height: 14.52px;
+
+          &_italic {
+            font-style: italic;
+          }
+        }
+
+        &__text {
+          font-size: 10px;
+          line-height: 12.1px;
+        }
+      }
 
       &__switch {
         text-wrap: nowrap;

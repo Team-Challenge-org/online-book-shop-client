@@ -9,12 +9,16 @@ const initialState: TUserState = {
   user: getUserFromLS(),
   error: null,
   isAuth: getAuthFromLS(),
+  showMessage: false
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    hideMessage(state) {
+      state.showMessage = false
+    },
   },
   extraReducers(builder) {
     builder
@@ -48,7 +52,8 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.error = null;
-        state.isAuth = false;
+        state.isAuth = true;
+        state.showMessage = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -79,5 +84,7 @@ const userSlice = createSlice({
       })
   },
 });
+
+export const { hideMessage } = userSlice.actions;
 
 export default userSlice.reducer;
