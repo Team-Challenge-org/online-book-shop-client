@@ -1,7 +1,7 @@
 import styles from "./newPasswordFields.module.scss";
 
 import { useFormContext } from "react-hook-form";
-import { TResetPasswordField } from "../ResetPasswordModalForm";
+import { TResetPasswordField } from "../EmailCheckerForPasswordResetForm";
 import { usePasswordComplexity } from "hooks/usePasswordComplexity";
 import { ErrorMessage } from "../../shared/errorMessage/ErrorMessage";
 import { PasswordComplexity } from "../../shared/passwordComplexity/PasswordComplexity";

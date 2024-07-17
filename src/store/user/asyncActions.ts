@@ -39,3 +39,16 @@ export const registerUser = createAsyncThunk(
     return data;
   }
 );
+
+export const checkEmailForResetPassword = createAsyncThunk(
+  "user/email_checker",
+  async (email: string) => {
+    const data  = await axios.post(
+      `${Endpoints.CHECK_EMAIL}?userEmail=${email}`
+    );
+
+    console.log(data);
+
+    return data;
+  }
+);
