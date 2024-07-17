@@ -9,7 +9,7 @@ export const orderContactsSchema = z
       .string()
       .min(2, errorDeliveryMessage.CITY)
       .max(30, errorDeliveryMessage.CITY)
-      .refine((value) => /[А-ЯЄI][а-яєi]+/g.test(value ?? ""), {message: 'Name should contain only alphabets'}),
+      .refine((value) => value.replace(/[А-ЯЄI][а-яєi]+/g, ""), errorDeliveryMessage.CITY),
 
       delivery_type: z
       .string()

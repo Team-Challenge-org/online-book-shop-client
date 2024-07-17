@@ -97,15 +97,21 @@
   }
 
   &__delivery {
-    input::-webkit-calendar-picker-indicator {
-      display: none;
-    }
 
     &__block {
       &__label {
+        display: flex;
+        flex-direction: column;
+
+        &__title {
+          margin-bottom: 8px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 16.41px;
+          color: $color-black;
+        }
         &__block {
           width: 100%;
-          border: 1px solid $color-gray;
           position: relative;
 
           &__input {
@@ -113,6 +119,38 @@
             border: none;
             padding: 16px;
             outline: none;
+            border: 1px solid $color-gray;
+            position: relative;
+
+            &_arrow {
+              width: 24px;
+              height: 24px;
+              position: absolute;
+              top: 12px;
+              right: calc(10% + 12px);
+            }
+          }
+          
+          &__list {
+            border: none;
+            max-height: 480px;
+            overflow-y: auto;
+            width: 90%;
+
+            &__item {
+              height: 48px;
+              width: 90%;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 16.41px;
+              color: $color-black;
+              padding-left: 16px;
+              border-left: 1px solid $color-gray;
+              border-right: 1px solid $color-gray;
+              border-bottom: 1px solid $color-gray;
+              display: flex;
+              align-items: center;
+            }
           }
         }
       }

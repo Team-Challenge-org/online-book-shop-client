@@ -6,13 +6,16 @@ import { TNPCity } from 'types/np';
 import { useFormContext } from 'react-hook-form';
 import styles from '../orderPage.module.scss';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowUp } from "react-icons/md";
 
 export default function CitySelect() {
   const [cityArray, setCityArray] = useState([]);
+  const [focusInput, setFocusInput] = useState(false)
 
   const {
     watch,
     register,
+    setValue,
     formState: { errors },
   } = useFormContext();
 
@@ -36,6 +39,7 @@ export default function CitySelect() {
     fetchCity();
   }, [watchCity]);
 
+
   return (
     <>
       <label className={styles.order__delivery__block__label}>
@@ -48,12 +52,21 @@ export default function CitySelect() {
             placeholder="Введіть назву міста"
             {...register('city')}
             className={styles.order__delivery__block__label__block__input}
+            onFocus={() => setFocusInput(true)}
+            onBlur={() => {
+              setTimeout(() => {
+                setFocusInput(false)
+              }, 200)
+            }}
           />
-          <datalist id="places">
+          <div className="">
+          {focusInput ? <MdKeyboardArrowUp className={styles.order__delivery__block__label__block__input_arrow} /> : <MdKeyboardArrowDown className={styles.order__delivery__block__label__block__input_arrow} />}
+          </div>
+          {focusInput && <ul className={styles.order__delivery__block__label__block__list}>
             {cityArray.map((city: TNPCity, index: number) => (
-              <option key={index}>{city.MainDescription}</option>
+              <li key={index} className={styles.order__delivery__block__label__block__list__item} onClick={() => setValue('city', city.MainDescription)}>{city.MainDescription}</li>
             ))}
-          </datalist>
+          </ul>}
         </div>
 
         {/* Display error message if any */}
