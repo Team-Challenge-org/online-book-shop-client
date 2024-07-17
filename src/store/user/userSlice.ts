@@ -1,7 +1,7 @@
 import type { TUserState } from './types';
 
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from './asyncActions';
+import { loginUser, logoutUser, registerUser } from './asyncActions';
 import { getAuthFromLS, getUserFromLS } from 'utils/getDataFromLS';
 
 const initialState: TUserState = {
@@ -15,14 +15,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.isAuth = false;
-      localStorage.removeItem('user');
-      localStorage.removeItem('auth');
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('auth');
-    },
   },
   extraReducers(builder) {
     builder
@@ -56,16 +48,36 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.error = null;
-        state.isAuth = true;
+        state.isAuth = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.user = null;
         console.log(action.error.message);
       })
+      
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.user = null;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        state.error = null;
+        state.isAuth = false
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        console.log(action.error.message);
+        if (action.error.message === 'CharSequence cannot be null or empty.') {
+          state.error = 'User not found';
+        } else {
+          state.error = action.error.message!;
+        }
+      })
   },
 });
-
-export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

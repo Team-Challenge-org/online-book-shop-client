@@ -39,3 +39,22 @@ export const registerUser = createAsyncThunk(
     return data;
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  "user/logout",
+  async ({token}: any) => {
+    
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+
+    await axios.post(Endpoints.LOGOUT, '' , config)
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('auth');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('auth');
+
+    return
+  }
+)
