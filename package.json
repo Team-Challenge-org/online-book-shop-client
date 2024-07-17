@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/preset-typescript": "^7.24.1",
     "@hookform/resolvers": "^3.6.0",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

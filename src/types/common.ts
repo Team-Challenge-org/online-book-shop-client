@@ -32,3 +32,15 @@ export type TDropdownCharacteristicsType = {
   illustrations: string;
   type: string;
 };
+
+export type TDeliveryType = {
+  id: number;
+  type: string;
+  label: string;
+  placeholder: string;
+  valueName:
+    | 'city'
+    | 'delivery_type'
+    | 'department'
+  errorTips?: string[];
+}

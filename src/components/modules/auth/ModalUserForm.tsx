@@ -35,7 +35,7 @@ export default function ModalUserForm() {
   return (
     <AuthModal>
       <SocialRegister />
-
+      
       {isAuth ? (
         isLoading ? <Spinner /> : (
           <button onClick={() => dispatch(logoutUser(user))}>Logout</button>
