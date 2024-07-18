@@ -30,6 +30,7 @@ const userSlice = createSlice({
     resetEmailCheckState(state) {
       state.isEmailChecked = false;
       state.error = null;
+    },
 
     hideMessage(state) {
       state.showMessage = false
@@ -37,7 +38,6 @@ const userSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.user = null;
@@ -59,7 +59,6 @@ const userSlice = createSlice({
           state.error = action.error.message!;
         }
       })
-
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.user = null;
@@ -77,7 +76,6 @@ const userSlice = createSlice({
         state.user = null;
         console.log(action.error.message);
       })
-
       .addCase(checkEmailForResetPassword.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -92,7 +90,6 @@ const userSlice = createSlice({
         state.error = action.error.message || null;
         state.isEmailChecked = false;
       })
-
       .addCase(resetPassword.pending, (state) => {
         state.error = null;
         state.loading = true;
@@ -125,12 +122,12 @@ const userSlice = createSlice({
           state.error = 'User not found';
         } else {
           state.error = action.error.message!;
-        })
-  },
-});
+        }})
+  }
+})
       
       
 
-export const { logout, resetEmailCheckState, hideMessage } = userSlice.actions;
+export const { resetEmailCheckState, hideMessage } = userSlice.actions;
 
 export default userSlice.reducer;
