@@ -1,7 +1,7 @@
 export enum userStatus {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
 }
 
 export type TUserState = {
@@ -9,6 +9,8 @@ export type TUserState = {
   user: string | null;
   error: null | string;
   isAuth: boolean | null;
+  isEmailChecked: boolean;
+  isPasswordReset: boolean;
 };
 
 export type TUser = {

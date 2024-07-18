@@ -11,7 +11,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
-import { EmailCheckerForPasswordResetForm } from "../auth/resetPasswordForm/EmailCheckerForPasswordResetForm";
+import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();

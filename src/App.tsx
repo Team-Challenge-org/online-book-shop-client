@@ -1,18 +1,19 @@
-import MainLayout from 'components/layouts/MainLayout';
-import NotFoundPage from 'pages/ErrorPage/NotFoundPage';
-import ServiceUnavailablePage from 'pages/ErrorPage/ServiceUnavailablePage';
-import HomePage from 'pages/HomePage/HomePage';
-import ProductPage from 'pages/ProductPage/ProductPage';
+import MainLayout from "components/layouts/MainLayout";
+import NotFoundPage from "pages/ErrorPage/NotFoundPage";
+import ServiceUnavailablePage from "pages/ErrorPage/ServiceUnavailablePage";
+import HomePage from "pages/HomePage/HomePage";
+import ProductPage from "pages/ProductPage/ProductPage";
+import ResetPasswordPage from "pages/resetPasswordPage/ResetPasswordPage";
 
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route path="" element={<HomePage />} />
         <Route path="/book/:id" element={<ProductPage />} />
+        <Route path="/reset_password" element={<ResetPasswordPage />} />
 
         {/* Errors: */}
         <Route path="/404" element={<NotFoundPage />} />

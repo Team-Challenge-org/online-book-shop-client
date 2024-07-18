@@ -4,6 +4,7 @@ import {
   loginUser,
   registerUser,
   checkEmailForResetPassword,
+  resetPassword,
 } from "./asyncActions";
 import { createSlice } from "@reduxjs/toolkit";
 import { getAuthFromLS, getUserFromLS } from "utils/getDataFromLS";
@@ -13,6 +14,8 @@ const initialState: TUserState = {
   user: getUserFromLS(),
   error: null,
   isAuth: getAuthFromLS(),
+  isEmailChecked: false,
+  isPasswordReset: false,
 };
 
 const userSlice = createSlice({
@@ -27,9 +30,14 @@ const userSlice = createSlice({
       sessionStorage.removeItem("user");
       sessionStorage.removeItem("auth");
     },
+    resetEmailCheckState(state) {
+      state.isEmailChecked = false;
+      state.error = null;
+    },
   },
   extraReducers(builder) {
     builder
+
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.user = null;
@@ -51,6 +59,7 @@ const userSlice = createSlice({
           state.error = action.error.message!;
         }
       })
+
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.user = null;
@@ -67,21 +76,38 @@ const userSlice = createSlice({
         state.user = null;
         console.log(action.error.message);
       })
+
       .addCase(checkEmailForResetPassword.pending, (state) => {
         state.loading = true;
-        state.user = null;
         state.error = null;
+        state.isEmailChecked = false;
       })
       .addCase(checkEmailForResetPassword.fulfilled, (state) => {
         state.loading = false;
+        state.isEmailChecked = true;
       })
       .addCase(checkEmailForResetPassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || null;
+        state.isEmailChecked = false;
+      })
+
+      .addCase(resetPassword.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.loading = false;
+        state.isPasswordReset = true;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || null;
+        state.isPasswordReset = false;
       });
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, resetEmailCheckState } = userSlice.actions;
 
 export default userSlice.reducer;

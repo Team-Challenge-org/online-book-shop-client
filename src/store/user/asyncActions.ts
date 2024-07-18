@@ -43,8 +43,26 @@ export const registerUser = createAsyncThunk(
 export const checkEmailForResetPassword = createAsyncThunk(
   "user/email_checker",
   async (email: string) => {
-    const data  = await axios.post(
+    const data = await axios.post(
       `${Endpoints.CHECK_EMAIL}?userEmail=${email}`
+    );
+
+    console.log(data);
+
+    return data;
+  }
+);
+
+type TResetPasswordPayload = {
+  token: string | null;
+  newPassword: string | null;
+};
+
+export const resetPassword = createAsyncThunk(
+  "user/reset_password",
+  async ({ token, newPassword }: TResetPasswordPayload) => {
+    const data = await axios.post(
+      `${Endpoints.RESET_PASSWORD}?token=${token}&newPassword=${newPassword}`
     );
 
     console.log(data);

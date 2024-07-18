@@ -1,20 +1,21 @@
-import styles from "./resetPasswordModalForm.module.scss";
+import styles from "./resetPasswordForm.module.scss";
 
 import {
-  emailCheckerSchema,
-  type TEmailCheckerSchema,
+  resetPasswordSchema,
+  TResetPasswordSchema,
 } from "validations/resetPasswordSchema";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthModal } from "../authModal/AuthModal";
-import { EmailField } from "./emailField/EmailField";
-import { FormProvider, useForm } from "react-hook-form";
-import { NewPasswordField } from "./newPasswordField/NewPasswordField";
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { checkEmailForResetPassword } from "store/user/asyncActions";
 import { AppDispatch } from "store/store";
+import { NAV_URL } from "constants/global";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { selectUserData } from "store/user/selectors";
+import { AuthModal } from "../../authModal/AuthModal";
+import { useDispatch, useSelector } from "react-redux";
+import { resetPassword } from "store/user/asyncActions";
+import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { NewPasswordField } from "../newPasswordField/NewPasswordField";
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import { useEffect } from "react";
 
 export type TResetPasswordField = {
   id: number;
@@ -56,61 +57,69 @@ const resetPasswordFields: TResetPasswordField[] = [
   },
 ];
 
-export function EmailCheckerForPasswordResetForm() {
-  const methods = useForm<TEmailCheckerSchema>({
-    resolver: zodResolver(emailCheckerSchema),
+export default function ResetPasswordForm() {
+  const methods = useForm<TResetPasswordSchema>({
+    resolver: zodResolver(resetPasswordSchema),
   });
+
+  const [searchParams] = useSearchParams();
+  const urlToken = searchParams.get("token");
+
+  const navigate = useNavigate();
+  const {
+    loading: isUpdatingPassword,
+    isPasswordReset,
+    error: isError,
+  } = useSelector(selectUserData);
+
   const dispatch = useDispatch<AppDispatch>();
-  const checkEmail = useSelector(selectUserData);
 
-  const handleEmailValidation = async () => {
-    await methods.trigger("email"); // Is valid email
-  };
-
-  function onSubmitData(data: TEmailCheckerSchema) {
-    if (methods.formState.isValid) {
-      dispatch(checkEmailForResetPassword(data.email));
+  useEffect(() => {
+    if (isPasswordReset) {
+      alert("🟢Successfully changed password");
     }
-  }
 
-  // TODO: show notification if there is email in data base and there is not
-  // checkEmail.loading
-  // checkEmail.error
+    if (isError && !isPasswordReset) {
+      alert("🔴Problem to change pass");
+    }
+  }, [isPasswordReset, isError, dispatch]);
+
+  function onSubmitData(data: TResetPasswordSchema) {
+    const newPasswordData = {
+      token: urlToken,
+      newPassword: data?.password,
+    };
+
+    dispatch(resetPassword(newPasswordData));
+
+    if (isPasswordReset) {
+      navigate(NAV_URL.HOME_PAGE);
+    }
+
+    console.log(newPasswordData);
+  }
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmitData)}>
         <AuthModal>
-          <EmailField />
+          <h2 className={styles.title}>Створення нового пароля</h2>
+          {resetPasswordFields.map((field) => (
+            <NewPasswordField key={field.id} field={field} />
+          ))}
 
           <button
             type="submit"
-            onClick={handleEmailValidation}
-            className={styles.btn_active}
+            className={
+              methods.formState.isValid
+                ? styles.btn_active
+                : styles.btn_unactive
+            }
           >
-            Створити новий пароль
+            {isUpdatingPassword ? "Обновление пароля" : "Змінити пароль"}
           </button>
         </AuthModal>
       </form>
     </FormProvider>
   );
-}
-
-{
-  /* // <>
-  //   <h2 className={styles.title}>Створення нового пароля</h2>
-  //   {resetPasswordFields.map((field) => (
-  //     <NewPasswordField key={field.id} field={field} />
-  //   ))}
-  //   <button
-  //     type="submit"
-  //     className={
-  //       methods.formState.isValid
-  //         ? styles.btn_active
-  //         : styles.btn_unactive
-  //     }
-  //   >
-  //     Змінити пароль
-  //   </button>
-  // </> */
 }
