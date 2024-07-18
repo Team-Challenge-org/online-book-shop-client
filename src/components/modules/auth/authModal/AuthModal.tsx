@@ -9,8 +9,14 @@ type TAuthModalProps = {
 };
 
 export function AuthModal({ children }: TAuthModalProps) {
-  const { onCloseRegisterForm } = useAuth();
-  const overlayRef = useOutsideModalClick(onCloseRegisterForm);
+  const { onCloseRegisterForm, showRegisterForm, onCloseResetPasswordForm } =
+    useAuth();
+
+  const closeModalForm = showRegisterForm
+    ? onCloseRegisterForm
+    : onCloseResetPasswordForm;
+
+  const overlayRef = useOutsideModalClick(closeModalForm);
 
   //remove background scroll
   useEffect(() => {
@@ -25,7 +31,7 @@ export function AuthModal({ children }: TAuthModalProps) {
   return (
     <div ref={overlayRef} className={styles.overlay}>
       <div className={styles.modal}>
-        <button className={styles.btnClose} onClick={onCloseRegisterForm}>
+        <button className={styles.btnClose} onClick={closeModalForm}>
           &times;
         </button>
 

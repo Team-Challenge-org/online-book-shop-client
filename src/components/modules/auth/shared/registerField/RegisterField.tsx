@@ -6,14 +6,20 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "../errorMessage/ErrorMessage";
 import { usePasswordComplexity } from "hooks/usePasswordComplexity";
 import { PasswordComplexity } from "../passwordComplexity/PasswordComplexity";
+import { useAuth } from "contexts/AuthContext";
 
-export function RegisterField({ field }: { field: TRegisterField }) {
+type TRegisterFieldProps = {
+  field: TRegisterField;
+  resetPassword?: boolean;
+};
+
+export function RegisterField({ field, resetPassword }: TRegisterFieldProps) {
   const {
     watch,
     register,
     formState: { errors },
   } = useFormContext();
-
+  const { onShowResetPasswordForm } = useAuth();
   const passwordValue = watch("password");
 
   const {
@@ -26,7 +32,15 @@ export function RegisterField({ field }: { field: TRegisterField }) {
 
   return (
     <label key={field.id}>
-      <span className={styles.text}>{field.label}</span>
+      <div className={styles.text_box}>
+        <span>{field.label}</span>
+
+        {resetPassword && (
+          <span className={styles.reset_pass} onClick={onShowResetPasswordForm}>
+            Забули пароль?
+          </span>
+        )}
+      </div>
 
       <div
         className={
