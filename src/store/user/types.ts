@@ -11,6 +11,8 @@ export type TUserState = {
   isAuth: boolean | null;
   isEmailChecked: boolean;
   isPasswordReset: boolean;
+  showMessage: boolean;
+
 };
 
 export type TUser = {

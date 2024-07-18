@@ -1,6 +1,6 @@
 import styles from "./header.module.scss";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "contexts/AuthContext";
 import { MdOutlineSearch } from "react-icons/md";
 import Logo from "components/elements/Logo/Logo";
@@ -12,12 +12,27 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
+import { selectShowMessage } from "store/user/selectors";
+import { useEffect, useState } from "react";
+import { hideMessage } from "store/user/userSlice";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm, showResetPasswordForm } =
     useAuth();
   const { items: shoppingCart } = useSelector(selectCart);
+  const message = useSelector(selectShowMessage)
+  const dispatch = useDispatch()
+
+  function handleHideMessage () {
+    dispatch(hideMessage())
+  }
+
+  useEffect(() => {
+    if (message) {
+      setTimeout(handleHideMessage, 5000)
+    }
+  }, [message])
 
   return (
     <header className={styles.header}>
@@ -42,6 +57,12 @@ const Header = () => {
         </form>
 
         <div className={styles.header__right__actions}>
+
+          {message && <div className={styles.header__right__actions__message}>
+            <span className={styles.header__right__actions__message__title}>Вітаємо, <span className={styles.header__right__actions__message__title_italic}>Ім’я</span>!</span>
+            <span className={styles.header__right__actions__message__text}>Ви успішно зареєструвались!</span>
+          </div>}
+
           <span className={styles.header__right__actions__switch}>
             <span>UA </span>/ EN
           </span>

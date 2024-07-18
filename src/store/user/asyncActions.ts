@@ -36,6 +36,8 @@ export const registerUser = createAsyncThunk(
     sessionStorage.setItem("user", JSON.stringify(data));
     sessionStorage.setItem("auth", "true");
 
+    await axios.post(`https://online-book-shop-1.onrender.com/api/v1/mail/send?mail=${user.email}`)
+
     return data;
   }
 );
@@ -70,3 +72,22 @@ export const resetPassword = createAsyncThunk(
     return data;
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  "user/logout",
+  async ({token}: any) => {
+    
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+
+    await axios.post(Endpoints.LOGOUT, '' , config)
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('auth');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('auth');
+
+    return
+  }
+)

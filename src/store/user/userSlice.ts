@@ -5,9 +5,11 @@ import {
   registerUser,
   checkEmailForResetPassword,
   resetPassword,
+  logoutUser
 } from "./asyncActions";
-import { createSlice } from "@reduxjs/toolkit";
-import { getAuthFromLS, getUserFromLS } from "utils/getDataFromLS";
+
+import { createSlice } from '@reduxjs/toolkit';
+import { getAuthFromLS, getUserFromLS } from 'utils/getDataFromLS';
 
 const initialState: TUserState = {
   loading: false,
@@ -16,23 +18,21 @@ const initialState: TUserState = {
   isAuth: getAuthFromLS(),
   isEmailChecked: false,
   isPasswordReset: false,
+  showMessage: false
+
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null;
-      state.isAuth = false;
-      localStorage.removeItem("user");
-      localStorage.removeItem("auth");
-      sessionStorage.removeItem("user");
-      sessionStorage.removeItem("auth");
-    },
+
     resetEmailCheckState(state) {
       state.isEmailChecked = false;
       state.error = null;
+
+    hideMessage(state) {
+      state.showMessage = false
     },
   },
   extraReducers(builder) {
@@ -70,6 +70,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         state.error = null;
         state.isAuth = true;
+        state.showMessage = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -104,10 +105,32 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || null;
         state.isPasswordReset = false;
-      });
+      })
+    .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.user = null;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        state.error = null;
+        state.isAuth = false
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        console.log(action.error.message);
+        if (action.error.message === 'CharSequence cannot be null or empty.') {
+          state.error = 'User not found';
+        } else {
+          state.error = action.error.message!;
+        })
   },
 });
+      
+      
 
-export const { logout, resetEmailCheckState } = userSlice.actions;
+export const { logout, resetEmailCheckState, hideMessage } = userSlice.actions;
 
 export default userSlice.reducer;
