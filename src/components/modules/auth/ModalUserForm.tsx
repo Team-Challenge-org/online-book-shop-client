@@ -11,7 +11,7 @@ import Spinner from 'components/elements/Spinner/Spinner';
 export default function ModalUserForm() {
   const auth = useSelector(selectAuthData, shallowEqual);
   const {user, loading} = useSelector(selectUserData);
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
   const [isAuth, setIsAuth] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -23,13 +23,13 @@ export default function ModalUserForm() {
     }
   }, [auth]);
 
-  useEffect(() => {
-    if (loading) {
-      setIsLoading(true)
-    } else {
-      setIsLoading(false)
-    }
-  }, [loading])
+  // useEffect(() => {
+  //   if (loading) {
+  //     setIsLoading(true)
+  //   } else {
+  //     setIsLoading(false)
+  //   }
+  // }, [loading])
 
 
   return (
@@ -37,7 +37,7 @@ export default function ModalUserForm() {
       <SocialRegister />
       
       {isAuth ? (
-        isLoading ? <Spinner /> : (
+        loading ? <Spinner /> : (
           <button onClick={() => dispatch(logoutUser(user))}>Logout</button>
         )
       ) : (

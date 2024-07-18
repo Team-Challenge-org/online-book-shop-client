@@ -134,11 +134,10 @@
           &__list {
             border: none;
             max-height: 480px;
-            overflow-y: auto;
-            width: 90%;
+            width: 100%;
 
             &__item {
-              height: 48px;
+              height: 40px;
               width: 90%;
               font-weight: 400;
               font-size: 14px;
@@ -150,6 +149,11 @@
               border-bottom: 1px solid $color-gray;
               display: flex;
               align-items: center;
+            }
+
+            &__item:hover {
+              background-color: rgb(221, 233, 232);
+              cursor: pointer;
             }
           }
         }

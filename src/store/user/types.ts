@@ -13,7 +13,7 @@ export type TUserState = {
 };
 
 export type TUser = {
-  email: string | null;
+  emailOrPhone: string | null;
   password: string | null;
   isRememberMe: boolean | null;
 };

@@ -16,15 +16,6 @@ const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const {loading} = useSelector(selectUserData);
-  const [isLoading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    if (loading) {
-      setIsLoading(true)
-    } else {
-      setIsLoading(false)
-    }
-  }, [loading])
 
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),
@@ -32,7 +23,7 @@ const LoginForm = () => {
 
   function onSubmitData(data: TLoginUserSchema) {
     let userCredential: TUser = {
-      email: data.email_or_number,
+      emailOrPhone: data.email_or_number,
       password: data.login_password,
       isRememberMe,
     };
@@ -49,7 +40,7 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      {isLoading ? <Spinner /> : (
+      {loading ? <Spinner /> : (
         <form onSubmit={handleSubmit(onSubmitData)} className={styles.login}>
         <RegisterField
           field={{
