@@ -8,6 +8,7 @@ import favoriteReducer from './favorite/favoriteSlice';
 import categoriesReducer from './categories/categoriesSlice';
 import recentlyViewedBooksReducer from './recentlyViewedBooks/recentlyViewedBooksSlice';
 import userReducer from './user/userSlice';
+import deliveryReducer from './delivery/deliverySlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     categories: categoriesReducer,
     recentlyViewedBooks: recentlyViewedBooksReducer,
     user: userReducer,
+    delivery: deliveryReducer
   },
 });
 

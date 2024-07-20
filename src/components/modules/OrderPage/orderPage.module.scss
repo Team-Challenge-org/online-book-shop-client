@@ -115,7 +115,7 @@
           position: relative;
 
           &__input {
-            width: 90%;
+            width: 100%;
             border: none;
             padding: 16px;
             outline: none;
@@ -127,7 +127,7 @@
               height: 24px;
               position: absolute;
               top: 12px;
-              right: calc(10% + 12px);
+              right: 12px;
             }
           }
           
@@ -138,7 +138,7 @@
 
             &__item {
               height: 40px;
-              width: 90%;
+              width: 100%;
               font-weight: 400;
               font-size: 14px;
               line-height: 16.41px;
