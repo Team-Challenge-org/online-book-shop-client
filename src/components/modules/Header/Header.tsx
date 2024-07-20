@@ -11,13 +11,15 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
+import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
 import { selectShowMessage } from "store/user/selectors";
 import { useEffect } from "react";
 import { hideMessage } from "store/user/userSlice";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
-  const { showRegisterForm, onShowRegisterForm } = useAuth();
+  const { showRegisterForm, onShowRegisterForm, showResetPasswordForm } =
+    useAuth();
   const { items: shoppingCart } = useSelector(selectCart);
   const message = useSelector(selectShowMessage)
   const dispatch = useDispatch()
@@ -91,7 +93,9 @@ const Header = () => {
       {showModal && <ModalCart />}
 
       {/* Register Modal Window  */}
-      {showRegisterForm && <ModalUserForm />}
+      {showRegisterForm && !showResetPasswordForm && <ModalUserForm />}
+
+      {showResetPasswordForm && <EmailCheckerForPasswordResetForm />}
     </header>
   );
 };

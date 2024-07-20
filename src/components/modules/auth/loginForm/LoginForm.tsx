@@ -1,21 +1,32 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { TLoginUserSchema, loginUserSchema } from 'validations/loginUserSchema';
-import styles from './loginForm.module.scss';
-import { RegisterField } from '../shared/registerField/RegisterField';
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
-import { TUser } from 'store/user/types';
-import { loginUser } from 'store/user/asyncActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from 'store/store';
-import Spinner from 'components/elements/Spinner/Spinner';
-import { selectUserData } from 'store/user/selectors';
+import styles from "./loginForm.module.scss";
+
+import type { TUser } from "store/user/types";
+
+import { AppDispatch } from "store/store";
+import React, { useEffect, useState } from "react";
+import { loginUser } from "store/user/asyncActions";
+import { selectUserData } from "store/user/selectors";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useDispatch, useSelector } from "react-redux";
+import { FormProvider, useForm } from "react-hook-form";
+import Spinner from "components/elements/Spinner/Spinner";
+import { RegisterField } from "../shared/registerField/RegisterField";
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import { TLoginUserSchema, loginUserSchema } from "validations/loginUserSchema";
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const {loading} = useSelector(selectUserData);
+  const { loading } = useSelector(selectUserData);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [loading]);
 
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),
@@ -27,7 +38,7 @@ const LoginForm = () => {
       password: data.login_password,
       isRememberMe,
     };
-    dispatch(loginUser(userCredential))
+    dispatch(loginUser(userCredential));
     methods.reset();
   }
 
@@ -40,43 +51,47 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      {loading ? <Spinner /> : (
+      {isLoading ? (
+        <Spinner />
+      ) : (
         <form onSubmit={handleSubmit(onSubmitData)} className={styles.login}>
-        <RegisterField
-          field={{
-            id: 400,
-            type: 'text',
-            label: 'Номер телефону або електронна пошта *',
-            placeholder: 'Введіть номер телефону або електронну пошту',
-            valueName: 'email_or_number',
-          }}
-        />
-        <RegisterField
-          field={{
-            id: 401,
-            type: 'password',
-            label: 'Пароль *',
-            placeholder: 'Введіть пароль',
-            valueName: 'login_password',
-            iconOpenEye: <MdOutlineVisibility />,
-            iconCloseEye: <MdOutlineVisibilityOff />,
-          }}
-        />
-
-        <label className={styles.checkbox_container}>
-          <input
-            type="checkbox"
-            checked={isRememberMe}
-            onChange={() => setIsRememberMe((prev) => !prev)}
-            className={styles.checkbox}
+          <RegisterField
+            field={{
+              id: 400,
+              type: "text",
+              label: "Номер телефону або електронна пошта *",
+              placeholder: "Введіть номер телефону або електронну пошту",
+              valueName: "email_or_number",
+            }}
           />
-          <span>Запам’ятати мене</span>
-        </label>
 
-        <button className={activeBtnSubmit} type="submit">
-          Увійти
-        </button>
-      </form>
+          <RegisterField
+            resetPassword={true}
+            field={{
+              id: 401,
+              type: "password",
+              label: "Пароль *",
+              placeholder: "Введіть пароль",
+              valueName: "login_password",
+              iconOpenEye: <MdOutlineVisibility />,
+              iconCloseEye: <MdOutlineVisibilityOff />,
+            }}
+          />
+
+          <label className={styles.checkbox_container}>
+            <input
+              type="checkbox"
+              checked={isRememberMe}
+              onChange={() => setIsRememberMe((prev) => !prev)}
+              className={styles.checkbox}
+            />
+            <span>Запам’ятати мене</span>
+          </label>
+
+          <button className={activeBtnSubmit} type="submit">
+            Увійти
+          </button>
+        </form>
       )}
     </FormProvider>
   );
