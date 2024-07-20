@@ -5,9 +5,6 @@ import type { TRegisterField } from "types/auth";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "components/modules/auth/shared/errorMessage/ErrorMessage";
 import { TDeliveryType } from "types/common";
-import { useEffect } from "react";
-import axios from "axios";
-import { TNPCity } from "types/np";
 
 export function OrderField({ field }: { field: TDeliveryType | TRegisterField }) {
   const {
@@ -15,29 +12,6 @@ export function OrderField({ field }: { field: TDeliveryType | TRegisterField })
     register,
     formState: { errors },
   } = useFormContext();
-
-  // const watchCity = watch('city')  
-
-  // useEffect(() => {
-  //   async function fetchCity() {
-  //     const {data} = await axios.post('https://api.novaposhta.ua/v2.0/json/', {
-  //       "apiKey": process.env.REACT_NP_API_BASE_KEY,
-  //       "modelName": "AddressGeneral",
-  //       "calledMethod": "searchSettlements",
-  //       "methodProperties": {
-  //    "CityName" : watchCity,
-  //    "Limit" : "50",
-  //    "Page" : "1"
-  //       }
-  //    }
-  //    )
-     
-  //  console.log(data.data[0].Addresses.map((city: TNPCity) => city.MainDescription))
-  //   }
-
-  //   fetchCity()
-
-  // }, [watchCity])
 
   return (
     <label key={field.id} className={styles.order__contacts__block__label}>

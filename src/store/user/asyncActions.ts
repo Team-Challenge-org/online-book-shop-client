@@ -29,8 +29,8 @@ export const registerUser = createAsyncThunk(
       firstName: user.first_name,
       surname: user.last_name,
       email: user.email,
+      phoneNumber: user.phone_number,
       password: user.password,
-      //phone: data.phone_number -- Нужно будет добавить, когда добавят на беке
     });
 
     sessionStorage.setItem("user", JSON.stringify(data));

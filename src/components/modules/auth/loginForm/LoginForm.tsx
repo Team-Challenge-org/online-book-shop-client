@@ -34,7 +34,7 @@ const LoginForm = () => {
 
   function onSubmitData(data: TLoginUserSchema) {
     let userCredential: TUser = {
-      email: data.email_or_number,
+      emailOrPhone: data.email_or_number,
       password: data.login_password,
       isRememberMe,
     };

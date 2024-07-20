@@ -13,7 +13,7 @@ import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
 import { selectShowMessage } from "store/user/selectors";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { hideMessage } from "store/user/userSlice";
 
 const Header = () => {

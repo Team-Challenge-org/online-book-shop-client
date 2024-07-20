@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { TNPCity } from 'types/np';
+import { TNPAddress, TNPCity } from 'types/np';
 import { useFormContext } from 'react-hook-form';
 import styles from '../orderPage.module.scss';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useAppDispatch } from 'store/store';
-import { fetchCity } from 'store/delivery/asyncActions';
+import { fetchAddress } from 'store/delivery/asyncActions';
 import { useSelector } from 'react-redux';
 import { selectDeliveryData } from 'store/delivery/selectors';
-import { setCity } from 'store/delivery/deliverySlice';
+import { setAddress } from 'store/delivery/deliverySlice';
 
-export default function CitySelect() {
+export default function DeliveryAddress() {
   const [focusInput, setFocusInput] = useState(false)
   const dispatch = useAppDispatch()
   const deliveryData = useSelector(selectDeliveryData)
@@ -25,22 +25,23 @@ export default function CitySelect() {
     formState: { errors },
   } = useFormContext();
 
-  const watchCity: TNPCity = watch('city');
+  const watchBranch: TNPAddress = watch('np_branch');
+
 
   useEffect(() => {
-    dispatch(fetchCity(watchCity))
-    dispatch(setCity(watchCity))
-  }, [watchCity])
+    dispatch(fetchAddress(watchBranch))
+    dispatch(setAddress(watchBranch))
+  }, [watchBranch])
 
   return (
       <label className={styles.order__delivery__block__label}>
-        <span className={styles.order__delivery__block__label__title}>Місто *</span>
+        <span className={styles.order__delivery__block__label__title}>Оберіть відділення/поштомат *</span>
 
         <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
           <input
             type="text"
-            placeholder="Введіть назву міста"
-            {...register('city')}
+            placeholder="Оберіть відділення/поштомат"
+            {...register('np_branch')}
             className={styles.order__delivery__block__label__block__input}
             onFocus={() => {
               setTimeout(() => {
@@ -55,8 +56,8 @@ export default function CitySelect() {
           />
           {focusInput ? <MdKeyboardArrowUp className={styles.order__delivery__block__label__block__input_arrow} /> : <MdKeyboardArrowDown className={styles.order__delivery__block__label__block__input_arrow} />}
           {focusInput && <ul className={styles.order__delivery__block__label__block__list}>
-            {deliveryData.cityArray.map((city: TNPCity, index: number) => (
-              <li key={index} className={styles.order__delivery__block__label__block__list__item} onClick={() => setValue('city', city.MainDescription)}>{city.MainDescription}</li>
+            {deliveryData.addressArray.map((address: TNPAddress, index: number) => (
+              <li key={index} className={styles.order__delivery__block__label__block__list__item} onClick={() => setValue('np_branch', address.Description)}>{address.Description}</li>
             ))}
           </ul>}
         </div>

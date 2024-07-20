@@ -115,7 +115,7 @@
           position: relative;
 
           &__input {
-            width: 90%;
+            width: 100%;
             border: none;
             padding: 16px;
             outline: none;
@@ -127,19 +127,18 @@
               height: 24px;
               position: absolute;
               top: 12px;
-              right: calc(10% + 12px);
+              right: 12px;
             }
           }
           
           &__list {
             border: none;
             max-height: 480px;
-            overflow-y: auto;
-            width: 90%;
+            width: 100%;
 
             &__item {
-              height: 48px;
-              width: 90%;
+              height: 40px;
+              width: 100%;
               font-weight: 400;
               font-size: 14px;
               line-height: 16.41px;
@@ -150,6 +149,11 @@
               border-bottom: 1px solid $color-gray;
               display: flex;
               align-items: center;
+            }
+
+            &__item:hover {
+              background-color: rgb(221, 233, 232);
+              cursor: pointer;
             }
           }
         }
