@@ -2,7 +2,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TDeliveryState } from './types';
 import { fetchAddress, fetchCity } from './asyncActions';
-import { number } from 'zod';
 
 const initialState: TDeliveryState = {
     loading: false,
@@ -10,7 +9,7 @@ const initialState: TDeliveryState = {
     citySelect: '',
     addressArray: [],
     addressSelect: '',
-    service: 1,
+    service: 0,
     error: null,
 };
 

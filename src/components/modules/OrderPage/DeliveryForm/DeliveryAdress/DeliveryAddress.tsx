@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styles from '../../orderPage.module.scss';
 import MeestBranch from './MeestBranch';
 import NpBranch from './NpBranch';
 import NpCourier from './NpCourier';
@@ -15,14 +14,12 @@ export default function DeliveryAddress() {
     setDelivery(deliveryData.service)
   }, [deliveryData, delivery])
 
-  console.log(delivery)
-
   return (
-      <label className={styles.order__delivery__block__label}>
+      <>
         {delivery == 1 && <NpBranch />}
         {delivery == 2 && <UpBranch />}
         {delivery == 3 && <MeestBranch />}
         {delivery == 4 && <NpCourier />}
-      </label>
+      </>
   );
 }

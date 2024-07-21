@@ -9,7 +9,7 @@ export default function UpBranch() {
       formState: { errors },
     } = useFormContext();
   return (
-    <>
+    <label className={styles.order__delivery__block__label}>
     <span className={styles.order__delivery__block__label__title}>Оберіть відділення *</span>
 
         <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
@@ -31,6 +31,6 @@ export default function UpBranch() {
             ]}
           />
         )}
-        </>
+        </label>
   )
 }

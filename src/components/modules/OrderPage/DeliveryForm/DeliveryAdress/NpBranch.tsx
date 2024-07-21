@@ -26,13 +26,12 @@ export default function NpBranch() {
 
   const watchBranch: TNPAddress = watch('np_branch');
 
-
   useEffect(() => {
     dispatch(fetchAddress(watchBranch))
     dispatch(setAddress(watchBranch))
   }, [watchBranch])
   return (
-    <>
+    <label className={styles.order__delivery__block__label}>
     <span className={styles.order__delivery__block__label__title}>Оберіть відділення/поштомат *</span>
 
         <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
@@ -70,6 +69,6 @@ export default function NpBranch() {
             ]}
           />
         )}
-        </>
+        </label>
   )
 }

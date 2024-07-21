@@ -4,7 +4,7 @@
     citySelect: '';
     addressArray: [];
     addressSelect: '';
-    service: number,
+    service: number;
     error: null | string;
   };
   

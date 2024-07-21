@@ -10,8 +10,8 @@ export default function NpCourier() {
     } = useFormContext();
   return (
     <>
+    <label className={styles.order__delivery__block__label}>
     <span className={styles.order__delivery__block__label__title}>Оберіть вулицю *</span>
-
     <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
           <input
             type="text"
@@ -21,7 +21,9 @@ export default function NpCourier() {
           />
           
     </div>
+    </label>
 
+    <label className={styles.order__delivery__block__label}>
     <span className={styles.order__delivery__block__label__title}>Будинок *</span>
 
     <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
@@ -33,7 +35,9 @@ export default function NpCourier() {
           />
           
     </div>
-    
+    </label>
+
+    <label className={styles.order__delivery__block__label}>
     <span className={styles.order__delivery__block__label__title}>Кв./Офіс </span>
 
     <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
@@ -45,7 +49,7 @@ export default function NpCourier() {
           />
           
     </div>
-
+    </label>
         {/* Display error message if any */}
         {errors?.city && (
           <ErrorMessage
@@ -56,6 +60,6 @@ export default function NpCourier() {
             ]}
           />
         )}
-    </>
+        </>
   )
 }
