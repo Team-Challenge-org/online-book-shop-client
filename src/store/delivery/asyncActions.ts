@@ -36,8 +36,10 @@ export const fetchAddress = createAsyncThunk(
         Page: "1",
         Limit: "10",
         Language: "UA",
-        WarehouseId: address
+        FindByString: address
       }})
+
+      console.log(state.delivery.citySelect)
 
     return data.data;
   

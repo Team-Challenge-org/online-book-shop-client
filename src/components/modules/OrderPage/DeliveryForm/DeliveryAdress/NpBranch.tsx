@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
-import axios from 'axios';
 import { useEffect } from 'react';
-import { TNPAddress, TNPCity } from 'types/np';
+import { TNPAddress } from 'types/np';
 import { useFormContext } from 'react-hook-form';
-import styles from '../orderPage.module.scss';
-import { MdKeyboardArrowDown } from 'react-icons/md';
-import { MdKeyboardArrowUp } from "react-icons/md";
 import { useAppDispatch } from 'store/store';
 import { fetchAddress } from 'store/delivery/asyncActions';
 import { useSelector } from 'react-redux';
 import { selectDeliveryData } from 'store/delivery/selectors';
 import { setAddress } from 'store/delivery/deliverySlice';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
+import styles from '../../orderPage.module.scss';
 
-export default function DeliveryAddress() {
+export default function NpBranch() {
   const [focusInput, setFocusInput] = useState(false)
   const dispatch = useAppDispatch()
   const deliveryData = useSelector(selectDeliveryData)
@@ -27,15 +26,13 @@ export default function DeliveryAddress() {
 
   const watchBranch: TNPAddress = watch('np_branch');
 
-
   useEffect(() => {
     dispatch(fetchAddress(watchBranch))
     dispatch(setAddress(watchBranch))
   }, [watchBranch])
-
   return (
-      <label className={styles.order__delivery__block__label}>
-        <span className={styles.order__delivery__block__label__title}>Оберіть відділення/поштомат *</span>
+    <label className={styles.order__delivery__block__label}>
+    <span className={styles.order__delivery__block__label__title}>Оберіть відділення/поштомат *</span>
 
         <div className={errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block}>
           <input
@@ -72,6 +69,6 @@ export default function DeliveryAddress() {
             ]}
           />
         )}
-      </label>
-  );
+        </label>
+  )
 }

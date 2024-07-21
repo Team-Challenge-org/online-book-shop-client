@@ -9,6 +9,7 @@ const initialState: TDeliveryState = {
     citySelect: '',
     addressArray: [],
     addressSelect: '',
+    service: 0,
     error: null,
 };
 
@@ -21,6 +22,9 @@ const deliverySlice = createSlice({
     },
     setAddress (state, action) {
       state.addressSelect = action.payload;
+    },
+    setService (state, action) {
+      state.service = action.payload;
     }
   },
   extraReducers(builder) {
@@ -60,6 +64,6 @@ const deliverySlice = createSlice({
   },
 });
 
-export const { setCity, setAddress } = deliverySlice.actions;
+export const { setCity, setAddress, setService } = deliverySlice.actions;
 
 export default deliverySlice.reducer;

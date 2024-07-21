@@ -34,13 +34,11 @@
     &__block {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       grid-column-gap: 32px;
       grid-row-gap: 16px;
 
       &__label {
         display: flex;
-        flex-direction: column;
 
         &__title {
           margin-bottom: 8px;
@@ -121,6 +119,7 @@
             outline: none;
             border: 1px solid $color-gray;
             position: relative;
+            padding-right: 40px;
 
             &_arrow {
               width: 24px;

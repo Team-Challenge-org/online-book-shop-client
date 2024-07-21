@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
-import axios from 'axios';
 import { useEffect } from 'react';
 import { TNPCity } from 'types/np';
 import { useFormContext } from 'react-hook-form';
@@ -56,7 +55,11 @@ export default function CitySelect() {
           {focusInput ? <MdKeyboardArrowUp className={styles.order__delivery__block__label__block__input_arrow} /> : <MdKeyboardArrowDown className={styles.order__delivery__block__label__block__input_arrow} />}
           {focusInput && <ul className={styles.order__delivery__block__label__block__list}>
             {deliveryData.cityArray.map((city: TNPCity, index: number) => (
-              <li key={index} className={styles.order__delivery__block__label__block__list__item} onClick={() => setValue('city', city.MainDescription)}>{city.MainDescription}</li>
+              <li key={index} className={styles.order__delivery__block__label__block__list__item} onClick={() => {
+                setValue('city', city.MainDescription)
+                setTimeout(() => {
+                  setFocusInput(false)
+                }, 200)}}>{city.MainDescription}</li>
             ))}
           </ul>}
         </div>
