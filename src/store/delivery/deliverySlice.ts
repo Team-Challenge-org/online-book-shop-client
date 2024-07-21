@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TDeliveryState } from './types';
 import { fetchAddress, fetchCity } from './asyncActions';
+import { number } from 'zod';
 
 const initialState: TDeliveryState = {
     loading: false,
@@ -9,6 +10,7 @@ const initialState: TDeliveryState = {
     citySelect: '',
     addressArray: [],
     addressSelect: '',
+    service: 1,
     error: null,
 };
 
@@ -21,6 +23,9 @@ const deliverySlice = createSlice({
     },
     setAddress (state, action) {
       state.addressSelect = action.payload;
+    },
+    setService (state, action) {
+      state.service = action.payload;
     }
   },
   extraReducers(builder) {
@@ -60,6 +65,6 @@ const deliverySlice = createSlice({
   },
 });
 
-export const { setCity, setAddress } = deliverySlice.actions;
+export const { setCity, setAddress, setService } = deliverySlice.actions;
 
 export default deliverySlice.reducer;

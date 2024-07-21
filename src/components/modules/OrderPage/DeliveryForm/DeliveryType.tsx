@@ -1,27 +1,24 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import styles from '../orderPage.module.scss';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from 'store/store';
+import { setService } from 'store/delivery/deliverySlice';
 
-const deliveryOptions = [
-    {label: 'НП. Відділення/поштомат', value: 'НП. Відділення/поштомат'},
-    {label: 'Укрпошта. Відділення', value: 'Укрпошта. Відділення'},
-    {label: 'Meest. Відділеня', value: 'Meest. Відділеня'},
-    {label: 'НП. Кур&lsquo;єр', value: 'НП. Кур&lsquo;єр'}
-  ]
-  
 export default function DeliveryType() {
-    const [delivery, setDelivery] = useState({
-        label: 'НП. Відділення/поштомат', value: 'НП. Відділення/поштомат'
-    })
+  const dispatch = useAppDispatch()
     
   const {
     watch,
     register,
-    setValue,
-    control,
     formState: { errors },
   } = useFormContext();
+
+  const watchService: number = watch('delivery_type');
+
+  useEffect(() => {
+    dispatch(setService(watchService))
+  }, [watchService])
 
   return (
     <label className={styles.order__delivery__block__label}>
@@ -37,24 +34,9 @@ export default function DeliveryType() {
                 >
                   <option  value="1">НП. Відділення/поштомат</option>
                   <option  value="2">Укрпошта. Відділення</option>
-                  <option  value="2">Meest. Відділеня</option>
-                  <option  value="2">НП. Кур&lsquo;єр</option>
+                  <option  value="3">Meest. Відділеня</option>
+                  <option  value="4">НП. Кур&lsquo;єр</option>
         </select>
-
-          {/* <Controller
-            name='delivery_type'
-            control={control}
-            defaultValue={delivery}
-            render={(fields) => (
-                <select
-                    {...fields}
-                    options={deliveryOptions}
-                    placeholder="Оберіть спосіб доставки"
-                    {...register('delivery_type')}
-                    className={styles.order__delivery__block__label__block__input}
-                />
-            )}
-            /> */}
         </div>
 
         {/* Display error message if any */}

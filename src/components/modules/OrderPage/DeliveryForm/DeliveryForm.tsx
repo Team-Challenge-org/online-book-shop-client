@@ -5,7 +5,7 @@ import styles from '../orderPage.module.scss';
 import CitySelect from './CitySelect';
 import DeliveryType from './DeliveryType';
 import { useEffect, useState } from 'react';
-import DeliveryAddress from './DeliveryAddress';
+import DeliveryAddress from './DeliveryAdress/DeliveryAddress';
 
 
 export default function DeliveryForm() {
@@ -31,7 +31,7 @@ export default function DeliveryForm() {
 
   return (
     <FormProvider {...methods}>
-      <span className={styles.order__subtitle}>Контактні дані</span>
+      <span className={styles.order__subtitle}>Доставка</span>
 
       <div className={styles.order__contacts__block}>
         <CitySelect />

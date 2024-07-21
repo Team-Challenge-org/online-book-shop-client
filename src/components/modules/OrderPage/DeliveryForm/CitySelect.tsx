@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
-import axios from 'axios';
 import { useEffect } from 'react';
 import { TNPCity } from 'types/np';
 import { useFormContext } from 'react-hook-form';
