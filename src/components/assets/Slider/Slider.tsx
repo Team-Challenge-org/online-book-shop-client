@@ -1,14 +1,14 @@
-import Slider from "react-slick";
-import "styles/slider/slick.css";
-import "styles/slider/slick-theme.css";
+import Slider from 'react-slick';
+import 'styles/slider/slick.css';
+import 'styles/slider/slick-theme.css';
 
-import { selectSliderBookData } from "store/slider/selectors";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "store/store";
-import { useEffect } from "react";
-import { fetchSliderBooks } from "store/slider/asyncAction";
-import SliderItem from "./SliderItem";
-import SkeletonSlider from "./Skeleton";
+import { selectSliderBookData } from 'store/slider/selectors';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'store/store';
+import { useEffect } from 'react';
+import { fetchSliderBooks } from 'store/slider/asyncAction';
+import SliderItem from './SliderItem';
+import SkeletonSlider from './Skeleton';
 
 function SliderPage() {
   const settings = {
@@ -19,7 +19,7 @@ function SliderPage() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    cssEase: "linear",
+    cssEase: 'linear',
   };
 
   const { items, status } = useSelector(selectSliderBookData);
@@ -33,18 +33,14 @@ function SliderPage() {
     getSliderBooks();
   }, [dispatch]);
 
-  const renderedItems = items.map((item) => (
-    <SliderItem obj={item} key={item.id} />
-  ));
+  const renderedItems = items.map((item) => <SliderItem obj={item} key={item.id} />);
 
-  const skeletons = [...new Array(5)].map((_, index) => (
-    <SkeletonSlider key={index} />
-  ));
+  const skeletons = [...new Array(5)].map((_, index) => <SkeletonSlider key={index} />);
 
   return (
     <section className="slider-container">
       <Slider {...settings}>
-        {status === "loading" || status === "error" ? skeletons : renderedItems}
+        {status === 'loading' || status === 'error' ? skeletons : renderedItems}
       </Slider>
     </section>
   );

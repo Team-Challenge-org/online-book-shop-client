@@ -11,7 +11,10 @@ export type TRegisterField = {
     | 'password'
     | 'confirm_password'
     | 'email_or_number'
-    | 'login_password';
+    | 'login_password'
+    | 'recipient_first_name'
+    | 'recipient_last_name'
+    | 'recipient_phone_number';
   errorTips?: string[];
   iconOpenEye?: JSX.Element;
   iconCloseEye?: JSX.Element;
