@@ -15,7 +15,6 @@ export const Endpoints = {
   RESET_PASSWORD: `${API_BASE_URL}/api/v1/user/savePassword`,
 
   LOGOUT: `${API_BASE_URL}/api/v1/auth/logout`,
-
 };
 
-export const NP_API_BASE_URL = 'https://api.novaposhta.ua/v2.0/json/'
+export const NP_API_BASE_URL = 'https://api.novaposhta.ua/v2.0/json/';
