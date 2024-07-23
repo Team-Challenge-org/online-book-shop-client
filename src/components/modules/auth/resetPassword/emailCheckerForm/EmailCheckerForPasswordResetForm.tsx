@@ -21,7 +21,7 @@ export function EmailCheckerForPasswordResetForm() {
     resolver: zodResolver(emailCheckerSchema),
   });
   const dispatch = useDispatch<AppDispatch>();
-  const { onCloseResetPasswordForm } = useAuth();
+  const { onCloseEmailCheckerForm } = useAuth();
 
   const {
     isEmailChecked,
@@ -35,14 +35,14 @@ export function EmailCheckerForPasswordResetForm() {
         "🟢Email существует. Инструкции по сбросу пароля отправлены на почту."
       );
       dispatch(resetEmailCheckState());
-      onCloseResetPasswordForm();
+      onCloseEmailCheckerForm();
     }
 
     if (isError && !isEmailChecked) {
       alert("🔴Такого пользователя не существует");
       dispatch(resetEmailCheckState());
     }
-  }, [isEmailChecked, isError, dispatch, onCloseResetPasswordForm]);
+  }, [isEmailChecked, isError, dispatch, onCloseEmailCheckerForm]);
 
   const handleEmailValidation = async () => {
     await methods.trigger("email"); // is valid email

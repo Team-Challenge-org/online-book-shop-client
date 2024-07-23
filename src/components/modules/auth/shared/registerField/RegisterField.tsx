@@ -19,7 +19,7 @@ export function RegisterField({ field, resetPassword }: TRegisterFieldProps) {
     register,
     formState: { errors },
   } = useFormContext();
-  const { onShowResetPasswordForm } = useAuth();
+  const { onShowEmailCheckerForm } = useAuth();
   const passwordValue = watch("password");
 
   const {
@@ -36,7 +36,7 @@ export function RegisterField({ field, resetPassword }: TRegisterFieldProps) {
         <span>{field.label}</span>
 
         {resetPassword && (
-          <span className={styles.reset_pass} onClick={onShowResetPasswordForm}>
+          <span className={styles.reset_pass} onClick={onShowEmailCheckerForm}>
             Забули пароль?
           </span>
         )}
