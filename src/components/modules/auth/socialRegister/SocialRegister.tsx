@@ -1,39 +1,43 @@
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import styles from './socialRegister.module.scss';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-interface AuthResponse {
-  token: string;
-  user: User;
-}
-
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  avatar: string;
-}
-
 export function SocialRegister() {
-  
-//   const responseMessage = (response: CredentialResponse) => {
-//     console.log(response);
-// };
-     
+  const [user, setUser] = useState<any>([]);
+  const [profile, setProfile] = useState<any>([]);
 
-const [user, setUser] = useState<User | null>(null);
-const onSuccess = async (res: CredentialResponse) => {
-  try {
-    const result = res
-    console.log(result)
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log('Login Failed:', error),
+  });
 
-  } catch (err) {
-    console.log(err);
-  }
-};
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+            Accept: 'application/json',
+          },
+        })
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+
+  // log out function to log the user out of google and set the profile array to null
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+    console.log('logout');
+  };
+
+  console.log(profile);
+  console.log(user);
 
   return (
     <div className={styles.container}>
@@ -45,25 +49,20 @@ const onSuccess = async (res: CredentialResponse) => {
             <img src="/img/google_icon.png" alt="google logo" />
             <span>Продовжити через Google</span>
           </Link> */}
-      {/* <GoogleLogin onSuccess={responseMessage} /> */}
+          {/* <GoogleLogin onSuccess={responseMessage} /> */}
 
-
-      {!user && (
-        <GoogleLogin
-          onSuccess={onSuccess}
-        />
-      )}
-
-      {user && (
-        <>
-          <img src={user.avatar} className="rounded-full" />
-          <h1 className="text-xl font-semibold text-center my-5">
-            {user.name}
-          </h1>
-        </>
-      )}
-      
-
+          {profile ? (
+            <div>
+              <h3>User Logged in</h3>
+              <p>Name: {profile.name}</p>
+              <p>Email Address: {profile.email}</p>
+              <br />
+              <br />
+              <button onClick={() => logOut()}>Log out</button>
+            </div>
+          ) : (
+            <button onClick={() => login()}>Sign in with Google 🚀 </button>
+          )}
         </li>
 
         <li className={styles.list__item}>
