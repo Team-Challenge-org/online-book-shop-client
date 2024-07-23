@@ -22,6 +22,30 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const loginUserGoogle = createAsyncThunk(
+  'user/login_google',
+  async ( access_token: string) =>{
+    const { data } = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: 'application/json',
+      },
+    })
+
+    const { data: result } = await axios.post(Endpoints.OAUTH, {
+      name: data.name,
+      email: data.email,
+      provider: 'google',
+      providerId: data.id
+    })
+
+      sessionStorage.setItem("user", JSON.stringify(result));
+      sessionStorage.setItem("auth", "true");
+
+    return result
+  }
+)
+
 export const registerUser = createAsyncThunk(
   "user/register",
   async (user: TRegisterUserSchema) => {
