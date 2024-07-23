@@ -9,12 +9,22 @@ type TAuthModalProps = {
 };
 
 export function AuthModal({ children }: TAuthModalProps) {
-  const { onCloseRegisterForm, showRegisterForm, onCloseResetPasswordForm } =
-    useAuth();
+  const {
+    showRegisterForm,
+    onCloseRegisterForm,
 
-  const closeModalForm = showRegisterForm
-    ? onCloseRegisterForm
-    : onCloseResetPasswordForm;
+    showEmailCheckerForm,
+    onCloseEmailCheckerForm,
+
+    showResetPasswordForm,
+    onCloseResetPasswordForm,
+  } = useAuth();
+
+  let closeModalForm: () => void = () => {};
+
+  if (showRegisterForm) closeModalForm = onCloseRegisterForm;
+  if (showEmailCheckerForm) closeModalForm = onCloseEmailCheckerForm;
+  if (showResetPasswordForm) closeModalForm = onCloseResetPasswordForm;
 
   const overlayRef = useOutsideModalClick(closeModalForm);
 
@@ -31,6 +41,7 @@ export function AuthModal({ children }: TAuthModalProps) {
   return (
     <div ref={overlayRef} className={styles.overlay}>
       <div className={styles.modal}>
+        
         <button className={styles.btnClose} onClick={closeModalForm}>
           &times;
         </button>

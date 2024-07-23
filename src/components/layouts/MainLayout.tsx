@@ -8,9 +8,9 @@ const MainLayout: React.FC = () => {
     <>
       <AuthProvider>
         <Header />
-      </AuthProvider>
 
-      <Outlet />
+        <Outlet />
+      </AuthProvider>
 
       <Footer />
     </>

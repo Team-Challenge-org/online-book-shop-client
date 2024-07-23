@@ -2,19 +2,25 @@ import React, { createContext, useContext, useState } from "react";
 
 type TAuthContext = {
   showRegisterForm: boolean;
-  showResetPasswordForm: boolean;
+  showEmailCheckerForm: boolean;
   onShowRegisterForm: () => void;
   onCloseRegisterForm: () => void;
-  onShowResetPasswordForm: () => void;
+  onShowEmailCheckerForm: () => void;
+  onCloseEmailCheckerForm: () => void;
+
+  showResetPasswordForm: boolean;
   onCloseResetPasswordForm: () => void;
 };
 
 const AuthContext = createContext<TAuthContext>({
   showRegisterForm: false,
-  showResetPasswordForm: false,
+  showEmailCheckerForm: false,
   onShowRegisterForm: () => {},
   onCloseRegisterForm: () => {},
-  onShowResetPasswordForm: () => {},
+  onShowEmailCheckerForm: () => {},
+  onCloseEmailCheckerForm: () => {},
+
+  showResetPasswordForm: true,
   onCloseResetPasswordForm: () => {},
 });
 
@@ -24,15 +30,18 @@ type TAuthContextProps = {
 
 function AuthProvider({ children }: TAuthContextProps) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
-  const [showResetPasswordForm, setShowResetPasswordForm] = useState(false);
+  // const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
+  const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
 
-  function handleShowResetPasswordForm() {
-    setShowResetPasswordForm(true);
+  const [showResetPasswordForm, setShowResetPasswordForm] = useState(true);
+
+  function handleshowEmailCheckerForm() {
+    setShowEmailCheckerForm(true);
     setShowRegisterForm(false);
   }
 
-  function handleCloseResetPasswordForm() {
-    setShowResetPasswordForm(false);
+  function handleCloseEmailCheckerForm() {
+    setShowEmailCheckerForm(false);
   }
 
   function handleShowRegisterForm() {
@@ -43,12 +52,21 @@ function AuthProvider({ children }: TAuthContextProps) {
     setShowRegisterForm(false);
   }
 
+  function handleCloseResetPasswordForm() {
+    setShowResetPasswordForm(false);
+  }
+
   const contextValue: TAuthContext = {
     showRegisterForm,
-    showResetPasswordForm,
+    showEmailCheckerForm,
+
     onShowRegisterForm: handleShowRegisterForm,
     onCloseRegisterForm: handleCloseRegisterForm,
-    onShowResetPasswordForm: handleShowResetPasswordForm,
+
+    onShowEmailCheckerForm: handleshowEmailCheckerForm,
+    onCloseEmailCheckerForm: handleCloseEmailCheckerForm,
+
+    showResetPasswordForm,
     onCloseResetPasswordForm: handleCloseResetPasswordForm,
   };
 

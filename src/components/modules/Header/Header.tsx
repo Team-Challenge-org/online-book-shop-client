@@ -18,21 +18,21 @@ import { hideMessage } from "store/user/userSlice";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
-  const { showRegisterForm, onShowRegisterForm, showResetPasswordForm } =
+  const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
     useAuth();
   const { items: shoppingCart } = useSelector(selectCart);
-  const message = useSelector(selectShowMessage)
-  const dispatch = useDispatch()
+  const message = useSelector(selectShowMessage);
+  const dispatch = useDispatch();
 
-  function handleHideMessage () {
-    dispatch(hideMessage())
+  function handleHideMessage() {
+    dispatch(hideMessage());
   }
 
   useEffect(() => {
     if (message) {
-      setTimeout(handleHideMessage, 5000)
+      setTimeout(handleHideMessage, 5000);
     }
-  }, [message])
+  }, [message]);
 
   return (
     <header className={styles.header}>
@@ -57,11 +57,24 @@ const Header = () => {
         </form>
 
         <div className={styles.header__right__actions}>
-
-          {message && <div className={styles.header__right__actions__message}>
-            <span className={styles.header__right__actions__message__title}>Вітаємо, <span className={styles.header__right__actions__message__title_italic}>Ім’я</span>!</span>
-            <span className={styles.header__right__actions__message__text}>Ви успішно зареєструвались!</span>
-          </div>}
+          {message && (
+            <div className={styles.header__right__actions__message}>
+              <span className={styles.header__right__actions__message__title}>
+                Вітаємо,{" "}
+                <span
+                  className={
+                    styles.header__right__actions__message__title_italic
+                  }
+                >
+                  Ім’я
+                </span>
+                !
+              </span>
+              <span className={styles.header__right__actions__message__text}>
+                Ви успішно зареєструвались!
+              </span>
+            </div>
+          )}
 
           <span className={styles.header__right__actions__switch}>
             <span>UA </span>/ EN
@@ -93,9 +106,9 @@ const Header = () => {
       {showModal && <ModalCart />}
 
       {/* Register Modal Window  */}
-      {showRegisterForm && !showResetPasswordForm && <ModalUserForm />}
+      {showRegisterForm && !showEmailCheckerForm && <ModalUserForm />}
 
-      {showResetPasswordForm && <EmailCheckerForPasswordResetForm />}
+      {showEmailCheckerForm && <EmailCheckerForPasswordResetForm />}
     </header>
   );
 };

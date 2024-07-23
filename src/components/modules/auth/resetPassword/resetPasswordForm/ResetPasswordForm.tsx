@@ -4,6 +4,7 @@ import {
   resetPasswordSchema,
   TResetPasswordSchema,
 } from "validations/resetPasswordSchema";
+import { useEffect } from "react";
 import { AppDispatch } from "store/store";
 import { NAV_URL } from "constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +16,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { NewPasswordField } from "../newPasswordField/NewPasswordField";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
-import { useEffect } from "react";
 
 export type TResetPasswordField = {
   id: number;
@@ -67,9 +67,9 @@ export default function ResetPasswordForm() {
 
   const navigate = useNavigate();
   const {
-    loading: isUpdatingPassword,
-    isPasswordReset,
     error: isError,
+    isPasswordReset,
+    loading: isUpdatingPassword,
   } = useSelector(selectUserData);
 
   const dispatch = useDispatch<AppDispatch>();
