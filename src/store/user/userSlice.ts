@@ -27,7 +27,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-
+    loginForce(state, action) {
+      state.user = action.payload
+    },
     resetEmailCheckState(state) {
       state.isEmailChecked = false;
       state.error = null;
@@ -130,7 +132,7 @@ const userSlice = createSlice({
         state.user = null;
         state.error = null;
       })
-      .addCase(logoutUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.loading = false;
         state.user = null;
         state.error = null;
@@ -150,6 +152,6 @@ const userSlice = createSlice({
       
       
 
-export const { resetEmailCheckState, hideMessage } = userSlice.actions;
+export const { resetEmailCheckState, hideMessage, loginForce } = userSlice.actions;
 
 export default userSlice.reducer;

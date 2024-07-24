@@ -95,8 +95,6 @@ export default function ResetPasswordForm() {
     if (isPasswordReset) {
       navigate(NAV_URL.HOME_PAGE);
     }
-
-    console.log(newPasswordData);
   }
 
   return (

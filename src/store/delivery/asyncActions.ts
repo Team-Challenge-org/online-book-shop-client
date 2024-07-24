@@ -39,8 +39,6 @@ export const fetchAddress = createAsyncThunk(
         FindByString: address
       }})
 
-      console.log(state.delivery.citySelect)
-
     return data.data;
   
 })
