@@ -21,7 +21,6 @@
   gap: 16px;
 
   &__item {
-    a {
       border: 1px solid $color-gray;
       padding: 12px 0;
       display: flex;
@@ -38,8 +37,8 @@
       &:hover {
         border: 1px solid rgba(25, 108, 103, 0);
         background-color: $color-main-hover;
+        cursor: pointer;
       }
-    }
   }
 }
 

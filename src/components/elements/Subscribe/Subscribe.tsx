@@ -9,8 +9,6 @@ const Subscribe = () => {
     await axios.post(`https://online-book-shop-1.onrender.com/api/v1/mail/send?mail=${email}`)
   }
 
-  console.log(email)
-
   return (
     <div className={styles.footer__subscribe}>
       <h1 className={styles.footer__subscribe__title}>Підпишіться на розсилку</h1>
