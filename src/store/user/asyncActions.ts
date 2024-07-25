@@ -4,6 +4,7 @@ import axios from "axios";
 import { Endpoints } from "constants/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { TRegisterUserSchema } from "validations/registerUserSchema";
+import { googleLogout } from "@react-oauth/google";
 
 export const loginUser = createAsyncThunk(
   "user/login",
@@ -17,10 +18,34 @@ export const loginUser = createAsyncThunk(
       sessionStorage.setItem("user", JSON.stringify(data));
       sessionStorage.setItem("auth", "true");
     }
-
+    
     return data;
   }
 );
+
+export const loginUserGoogle = createAsyncThunk(
+  'user/login_google',
+  async ( access_token: string) =>{
+    const { data } = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: 'application/json',
+      },
+    })
+
+    const { data: result } = await axios.post(Endpoints.OAUTH, {
+      name: data.name,
+      email: data.email,
+      provider: 'google',
+      providerId: data.id
+    })
+
+      sessionStorage.setItem("user", JSON.stringify(result));
+      sessionStorage.setItem("auth", "true");
+
+    return result
+  }
+)
 
 export const registerUser = createAsyncThunk(
   "user/register",
@@ -49,8 +74,6 @@ export const checkEmailForResetPassword = createAsyncThunk(
       `${Endpoints.CHECK_EMAIL}?userEmail=${email}`
     );
 
-    console.log(data);
-
     return data;
   }
 );
@@ -67,15 +90,13 @@ export const resetPassword = createAsyncThunk(
       `${Endpoints.RESET_PASSWORD}?token=${token}&newPassword=${newPassword}`
     );
 
-    console.log(data);
-
     return data;
   }
 );
 
 export const logoutUser = createAsyncThunk(
   "user/logout",
-  async ({token}: any) => {
+  async (token: string | null) => {
     
     const config = {
       headers: { Authorization: `Bearer ${token}` }
@@ -83,10 +104,13 @@ export const logoutUser = createAsyncThunk(
 
     await axios.post(Endpoints.LOGOUT, '' , config)
 
+    googleLogout();
+    
     localStorage.removeItem('user');
     localStorage.removeItem('auth');
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('auth');
+
 
     return
   }

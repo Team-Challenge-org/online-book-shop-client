@@ -9,6 +9,7 @@ export const Endpoints = {
 
   // user
   LOGIN: `${API_BASE_URL}/api/v1/auth/login`,
+  OAUTH: `${API_BASE_URL}/api/v1/auth/oauth2/success`,
   REGISTER: `${API_BASE_URL}/api/v1/auth/register`,
 
   CHECK_EMAIL: `${API_BASE_URL}/api/v1/user/resetPassword`,
