@@ -10,7 +10,7 @@ const emailErrorTips = [
   "Пошта повинна мати будь-який діючий домен окрім “mail.ru”, “yandex.ru” та інших доменів, пов'язаних з росією.",
 ];
 
-export function EmailField() {
+export function EmailField({ errorMessage }: { errorMessage?: string }) {
   const {
     register,
     formState: { errors },
@@ -24,7 +24,11 @@ export function EmailField() {
         </p>
 
         <div
-          className={errors?.email ? styles.input_box_error : styles.input_box}
+          className={
+            errors?.email || errorMessage
+              ? styles.input_box_error
+              : styles.input_box
+          }
         >
           <input
             type="email"
@@ -33,9 +37,9 @@ export function EmailField() {
           />
         </div>
 
-        {errors.email && (
+        {(errors.email || errorMessage) && (
           <ErrorMessage
-            message={errors.email?.message as string}
+            message={(errors.email?.message as string) || errorMessage}
             errorTips={emailErrorTips}
           />
         )}
