@@ -10,6 +10,9 @@ type TAuthContext = {
 
   showResetPasswordForm: boolean;
   onCloseResetPasswordForm: () => void;
+
+  isRegisterForm: boolean;
+  setIsRegisterForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AuthContext = createContext<TAuthContext>({
@@ -22,6 +25,9 @@ const AuthContext = createContext<TAuthContext>({
 
   showResetPasswordForm: true,
   onCloseResetPasswordForm: () => {},
+
+  isRegisterForm: false,
+  setIsRegisterForm: () => {},
 });
 
 type TAuthContextProps = {
@@ -33,6 +39,7 @@ function AuthProvider({ children }: TAuthContextProps) {
   const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
 
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(true);
+  const [isRegisterForm, setIsRegisterForm] = useState(false);
 
   function handleshowEmailCheckerForm() {
     setShowEmailCheckerForm(true);
@@ -67,6 +74,9 @@ function AuthProvider({ children }: TAuthContextProps) {
 
     showResetPasswordForm,
     onCloseResetPasswordForm: handleCloseResetPasswordForm,
+
+    isRegisterForm,
+    setIsRegisterForm,
   };
 
   return (
