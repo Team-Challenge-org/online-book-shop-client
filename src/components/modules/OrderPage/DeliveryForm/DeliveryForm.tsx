@@ -7,14 +7,8 @@ import DeliveryAddress from './DeliveryAdress/DeliveryAddress';
 import styles from '../orderPage.module.scss';
 
 export default function DeliveryForm() {
-  const methods = useForm<TOrderContactsSchema>({
-    resolver: zodResolver(orderContactsSchema),
-  });
-
-  const { handleSubmit } = methods;
-
   return (
-    <FormProvider {...methods}>
+    <>
       <span className={styles.order__subtitle}>Доставка</span>
 
       <div className={styles.order__contacts__block}>
@@ -22,6 +16,6 @@ export default function DeliveryForm() {
         <DeliveryType />
         <DeliveryAddress />
       </div>
-    </FormProvider>
+    </>
   );
 }

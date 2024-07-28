@@ -4,32 +4,49 @@ import DeliveryForm from 'components/modules/OrderPage/DeliveryForm/DeliveryForm
 import PaymentForm from 'components/modules/OrderPage/PaymentForm/PaymentForm';
 import CommentForm from 'components/modules/OrderPage/CommentForm/CommentForm';
 import ConfirmOrder from 'components/modules/OrderPage/ConfirmOrder/ConfirmOrder';
-import { useForm } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { TOrderContactsSchema } from 'validations/orderContactsSchema';
 
 export default function OrderPage() {
-  
-  const methods = useForm();
-  
+  const defaultValues = {
+    payment: 'online',
+    city: '',
+    delivery_type: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    np_branch: '',
+    phone_number: '',
+    comment: '',
+  };
+
+  const methods = useForm<TOrderContactsSchema>({ defaultValues });
+
   const {
     handleSubmit,
     formState: { isValid },
   } = methods;
 
-  function onSubmitData(data: any) {
-    console.log(data)
-  }
+  const onSubmitData: SubmitHandler<any> = (data: TOrderContactsSchema) => {
+    console.log(data);
+  };
 
   return (
-    <div className={styles.order}>
-      <span className={styles.order__title}>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</span>
-      <form onSubmit={handleSubmit(onSubmitData)}>
-      <ContactsForm />
-      <DeliveryForm />
-      <PaymentForm />
-      <CommentForm />
+    <FormProvider {...methods}>
+      <div className={styles.order}>
+        <span className={styles.order__title}>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</span>
 
-      <ConfirmOrder />
-      </form>
-    </div>
+        <form onSubmit={handleSubmit(onSubmitData)}>
+          <ContactsForm />
+          <DeliveryForm />
+          <PaymentForm />
+          <CommentForm />
+
+          <button type="submit">Оформити</button>
+        </form>
+
+        {/*<ConfirmOrder />*/}
+      </div>
+    </FormProvider>
   );
 }

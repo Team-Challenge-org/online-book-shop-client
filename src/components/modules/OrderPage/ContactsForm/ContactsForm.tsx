@@ -1,7 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, useForm } from 'react-hook-form';
 import { TRegisterField } from 'types/auth';
-import { orderContactsSchema, TOrderContactsSchema } from 'validations/orderContactsSchema';
 import { OrderField } from '../OrderField/OrderField';
 import styles from '../orderPage.module.scss';
 import { useState } from 'react';
@@ -61,17 +58,8 @@ const orderFields: TRegisterField[] = [
 export default function ContactsForm() {
   const [isAnotherRecipient, setIsAnotherRecipient] = useState(false);
 
-  const methods = useForm<TOrderContactsSchema>({
-    resolver: zodResolver(orderContactsSchema),
-  });
-
-  const {
-    handleSubmit,
-    formState: { isValid },
-  } = methods;
-
   return (
-    <FormProvider {...methods}>
+    <>
       <span className={styles.order__subtitle}>Контактні дані</span>
 
       <div className={styles.order__contacts__block}>
@@ -91,6 +79,6 @@ export default function ContactsForm() {
       </div>
 
       {isAnotherRecipient && <RecipientForm />}
-    </FormProvider>
+    </>
   );
 }
