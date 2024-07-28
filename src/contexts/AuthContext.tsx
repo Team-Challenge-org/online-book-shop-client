@@ -30,7 +30,6 @@ type TAuthContextProps = {
 
 function AuthProvider({ children }: TAuthContextProps) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
-  // const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
   const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
 
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(true);
