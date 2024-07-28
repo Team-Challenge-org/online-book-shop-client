@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
+import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
 import { useEffect } from 'react';
-import { TNPAddress, TNPCity } from 'types/np';
+import { TNPCity } from 'types/np';
 import { useFormContext } from 'react-hook-form';
-import { useAppDispatch } from 'store/store';
-import { fetchAddress } from 'store/delivery/asyncActions';
-import { useSelector } from 'react-redux';
-import { selectDeliveryData } from 'store/delivery/selectors';
-import { setAddress } from 'store/delivery/deliverySlice';
+import styles from '../../orderPage.module.scss';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { MdKeyboardArrowUp } from 'react-icons/md';
-import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
-import styles from '../../orderPage.module.scss';
+import { useAppDispatch } from 'store/store';
+import { fetchCity } from 'store/delivery/asyncActions';
+import { useSelector } from 'react-redux';
+import { selectDeliveryData } from 'store/delivery/selectors';
+import { setCity } from 'store/delivery/deliverySlice';
 
-export default function NpBranch() {
+export default function CitySelect() {
   const [focusInput, setFocusInput] = useState(false);
   const dispatch = useAppDispatch();
   const deliveryData = useSelector(selectDeliveryData);
@@ -24,19 +24,16 @@ export default function NpBranch() {
     formState: { errors },
   } = useFormContext();
 
-  const watchBranch: TNPAddress = watch('np_branch');
   const watchCity: TNPCity = watch('city');
 
   useEffect(() => {
-    dispatch(fetchAddress(watchBranch));
-    dispatch(setAddress(watchBranch));
-  }, [watchBranch, watchCity]);
+    dispatch(fetchCity(watchCity));
+    dispatch(setCity(watchCity));
+  }, [watchCity]);
 
   return (
     <label className={styles.order__delivery__block__label}>
-      <span className={styles.order__delivery__block__label__title}>
-        Оберіть відділення/поштомат *
-      </span>
+      <span className={styles.order__delivery__block__label__title}>Місто *</span>
 
       <div
         className={
@@ -44,8 +41,8 @@ export default function NpBranch() {
         }>
         <input
           type="text"
-          placeholder="Оберіть відділення/поштомат"
-          {...register('np_branch')}
+          placeholder="Введіть назву міста"
+          {...register('city')}
           className={styles.order__delivery__block__label__block__input}
           onFocus={() => {
             setTimeout(() => {
@@ -67,17 +64,17 @@ export default function NpBranch() {
         )}
         {focusInput && (
           <ul className={styles.order__delivery__block__label__block__list}>
-            {deliveryData.addressArray.map((address: TNPAddress, index: number) => (
+            {deliveryData.cityArray.map((city: TNPCity, index: number) => (
               <li
                 key={index}
                 className={styles.order__delivery__block__label__block__list__item}
                 onClick={() => {
-                  setValue('np_branch', address.Description);
+                  setValue('city', city.MainDescription);
                   setTimeout(() => {
                     setFocusInput(false);
                   }, 200);
                 }}>
-                {address.Description}
+                {city.MainDescription}
               </li>
             ))}
           </ul>

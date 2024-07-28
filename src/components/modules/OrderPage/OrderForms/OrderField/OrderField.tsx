@@ -1,14 +1,13 @@
-import styles from "../orderPage.module.scss";
+import styles from '../../orderPage.module.scss';
 
-import type { TRegisterField } from "types/auth";
+import type { TRegisterField } from 'types/auth';
 
-import { useFormContext } from "react-hook-form";
-import { ErrorMessage } from "components/modules/auth/shared/errorMessage/ErrorMessage";
-import { TDeliveryType } from "types/common";
+import { useFormContext } from 'react-hook-form';
+import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
+import { TDeliveryType } from 'types/common';
 
 export function OrderField({ field }: { field: TDeliveryType | TRegisterField }) {
   const {
-    watch,
     register,
     formState: { errors },
   } = useFormContext();
@@ -19,16 +18,16 @@ export function OrderField({ field }: { field: TDeliveryType | TRegisterField })
 
       <div
         className={
-          errors?.[field.valueName] ? styles.input_box_error : styles.order__contacts__block__label__block
-        }
-      >
+          errors?.[field.valueName]
+            ? styles.input_box_error
+            : styles.order__contacts__block__label__block
+        }>
         <input
           type={field.type}
           placeholder={field.placeholder}
           {...register(field.valueName)}
           className={styles.order__contacts__block__label__block__input}
         />
-
       </div>
 
       {/* Display error message if any */}
@@ -38,8 +37,6 @@ export function OrderField({ field }: { field: TDeliveryType | TRegisterField })
           errorTips={field.errorTips}
         />
       )}
-
-     
     </label>
   );
 }

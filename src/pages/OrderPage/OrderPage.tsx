@@ -1,15 +1,18 @@
-import ContactsForm from 'components/modules/OrderPage/ContactsForm/ContactsForm';
+import OrderForms from 'components/modules/OrderPage/OrderForms/OrderForms';
 import styles from '../../components/modules/OrderPage/orderPage.module.scss';
-import DeliveryForm from 'components/modules/OrderPage/DeliveryForm/DeliveryForm';
-import PaymentForm from 'components/modules/OrderPage/PaymentForm/PaymentForm';
+import OrderItems from 'components/modules/OrderPage/OrderItems/OrderItems';
+import OrderConfirm from 'components/modules/OrderPage/OrderConfirm/OrderConfirm';
 
 export default function OrderPage() {
   return (
     <div className={styles.order}>
-      <span className={styles.order__title}>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</span>
-      <ContactsForm />
-      <DeliveryForm />
-      <PaymentForm />
+      <div className={styles.order__block}>
+        <OrderForms />
+        <div>
+          <OrderItems />
+          <OrderConfirm />
+        </div>
+      </div>
     </div>
   );
 }
