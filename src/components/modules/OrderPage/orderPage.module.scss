@@ -1,11 +1,12 @@
-@import 'styles/utils/variables';
+@import '/src/styles/utils/_variables.scss';
 
 .order {
   margin-left: 80px;
   margin-top: 40px;
   font-family: 'Roboto';
   width: 845px;
-
+  margin-bottom: 80px;
+  
   &__title {
     font-weight: 600;
     font-size: 16px;
@@ -24,6 +25,7 @@
   }
 
   &__contacts {
+
     &__title {
       font-weight: 700;
       font-size: 14px;
@@ -36,6 +38,7 @@
       grid-template-columns: repeat(2, 1fr);
       grid-column-gap: 32px;
       grid-row-gap: 16px;
+      margin-right: 13px;
 
       &__label {
         display: flex;
@@ -159,4 +162,34 @@
       }
     }
   }
-}
+
+  &__payment {
+    position: relative;
+    margin: .5rem;
+    cursor: pointer;
+
+    &__label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &__text {
+        margin-left: 12px;
+      color: $color-black;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14.52px;
+      }
+
+    &__input {
+      display: none;
+    }
+    }
+  }
+
+  &__comment {
+    border: 1px solid rgba(149, 149, 149, 0.7);
+    height: 147px;
+    width: 100%;
+  }
+  }
