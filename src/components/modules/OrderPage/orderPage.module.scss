@@ -3,20 +3,31 @@
 .order {
   margin-left: 80px;
   margin-top: 40px;
-  font-family: 'Roboto';
-  width: 845px;
-  margin-bottom: 80px;
-  
+
+  &__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   &__title {
     font-weight: 600;
     font-size: 16px;
     line-height: 19.36px;
     color: $color-black;
+    margin-bottom: 16px;
+  }
+
+  &__forms {
+    font-family: 'Roboto';
+    width: 845px;
+    margin-bottom: 80px;
+    margin-right: 28px;
   }
 
   &__subtitle {
     display: block;
-    margin-top: 56px;
+    margin-top: 40px;
     margin-bottom: 40px;
     font-weight: 700;
     font-size: 14px;
@@ -25,7 +36,6 @@
   }
 
   &__contacts {
-
     &__title {
       font-weight: 700;
       font-size: 14px;
@@ -98,7 +108,6 @@
   }
 
   &__delivery {
-
     &__block {
       &__label {
         display: flex;
@@ -132,7 +141,7 @@
               right: 12px;
             }
           }
-          
+
           &__list {
             border: none;
             max-height: 480px;
@@ -164,10 +173,6 @@
   }
 
   &__payment {
-    position: relative;
-    margin: .5rem;
-    cursor: pointer;
-
     &__label {
       display: flex;
       flex-direction: row;
@@ -175,21 +180,90 @@
 
       &__text {
         margin-left: 12px;
-      color: $color-black;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 14.52px;
+        color: $color-black;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14.52px;
       }
 
-    &__input {
-      display: none;
-    }
+      &__input {
+        display: none;
+      }
     }
   }
 
   &__comment {
-    border: 1px solid rgba(149, 149, 149, 0.7);
-    height: 147px;
-    width: 100%;
+    &__subtitle {
+      margin-top: 40px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 16.94px;
+    }
+
+    &__input {
+      border: 1px solid rgba(149, 149, 149, 0.7);
+      height: 147px;
+      width: 100%;
+      color: $color-gray;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16.41px;
+      padding: 16px;
+      text-justify: inter-word;
+      font-family: 'Roboto';
+      resize: none;
+    }
+
+    &__input:focus {
+      outline: none;
+    }
   }
+
+  &__items {
+    background-color: $color-main-05;
+    width: 411px;
+    padding: 24px;
+    margin-top: 75px;
+    margin-bottom: 4px;
+
+    &__title {
+      margin-bottom: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16.94px;
+      color: $color-black;
+    }
+
+    &__footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      &__text {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14.52px;
+        color: $color-black;
+      }
+    }
   }
+
+  &__confirm {
+    background-color: $color-main-05;
+    width: 411px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+
+    &__dash {
+      width: calc(100% + 37px);
+      height: 1px;
+      background-color: $color-white;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      margin-left: -18px;
+    }
+  }
+}

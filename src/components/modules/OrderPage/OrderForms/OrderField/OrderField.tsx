@@ -1,4 +1,4 @@
-import styles from '../orderPage.module.scss';
+import styles from '../../orderPage.module.scss';
 
 import type { TRegisterField } from 'types/auth';
 

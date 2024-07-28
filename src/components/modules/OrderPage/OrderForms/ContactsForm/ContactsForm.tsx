@@ -1,6 +1,6 @@
 import { TRegisterField } from 'types/auth';
 import { OrderField } from '../OrderField/OrderField';
-import styles from '../orderPage.module.scss';
+import styles from '../../orderPage.module.scss';
 import { useState } from 'react';
 import RecipientForm from './RecipientForm';
 
