@@ -8,6 +8,7 @@ export default function OrderPage() {
     <div className={styles.order}>
       <div className={styles.order__block}>
         <OrderForms />
+
         <div>
           <OrderItems />
           <OrderConfirm />

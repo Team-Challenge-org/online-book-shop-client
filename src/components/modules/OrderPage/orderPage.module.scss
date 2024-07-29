@@ -265,5 +265,110 @@
       margin-bottom: 24px;
       margin-left: -18px;
     }
+
+    &__promo {
+      font-family: 'Inter';
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14.52px;
+      color: $color-black;
+      margin-bottom: 16px;
+
+      &_form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__input {
+          border: 1px solid $color-gray;
+          height: 40px;
+          width: 170px;
+          padding-left: 6.8px;
+        }
+
+        &__input::placeholder,
+        &__input:focus {
+          font-family: 'Roboto';
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 11.72px;
+          color: $color-gray;
+          outline: none;
+        }
+
+        &__button {
+          border: 1px solid $color-main;
+          height: 40px;
+          width: 169px;
+          color: $color-main;
+          font-family: 'Roboto';
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14.06px;
+          background-color: $color-white;
+        }
+
+        &__button:hover {
+          background-color: $color-main;
+          color: $color-white;
+        }
+      }
+    }
+
+    &__total {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14.52px;
+      color: $color-black;
+      margin-bottom: 8px;
+      font-family: 'Inter';
+    }
+
+    &__note {
+      font-family: 'Inter';
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 12.1px;
+      color: $color-gray;
+    }
+
+    &__offer {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14.52px;
+      color: $color-black;
+
+      &__green {
+        color: $color-main;
+        cursor: pointer;
+        text-decoration: none;
+      }
+    }
+
+    &__call {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 25px;
+
+      &__text {
+        margin-left: 14px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14.52px;
+        color: $color-black;
+        font-family: 'Inter';
+      }
+    }
+
+    &__button {
+      padding-top: 15.5px;
+      padding-bottom: 15.5px;
+      margin: 0auto;
+      font-size: 14px !important;
+    }
   }
 }
