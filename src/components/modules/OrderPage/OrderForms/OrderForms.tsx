@@ -5,6 +5,7 @@ import CommentForm from 'components/modules/OrderPage/OrderForms/CommentForm/Com
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { TOrderContactsSchema } from 'validations/orderContactsSchema';
 import styles from '../orderPage.module.scss';
+import { useImperativeHandle } from 'react';
 
 export default function OrderForms() {
   const defaultValues = {
@@ -34,13 +35,11 @@ export default function OrderForms() {
     <FormProvider {...methods}>
       <div className={styles.order__forms}>
         <h1 className={styles.order__title}>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
-        <form onSubmit={handleSubmit(onSubmitData)}>
+        <form onSubmit={handleSubmit(onSubmitData)} id="orderForm">
           <ContactsForm />
           <DeliveryForm />
           <PaymentForm />
           <CommentForm />
-
-          <button type="submit">Оформити</button>
         </form>
       </div>
     </FormProvider>

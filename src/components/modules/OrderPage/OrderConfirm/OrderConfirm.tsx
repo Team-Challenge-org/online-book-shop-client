@@ -25,7 +25,9 @@ export default function OrderConfirm() {
       <label>
         <input type="checkbox" />
       </label>
-      <button>Підтвердити замовлення</button>
+      <button type="submit" form="orderForm">
+        Підтвердити замовлення
+      </button>
     </div>
   );
 }
