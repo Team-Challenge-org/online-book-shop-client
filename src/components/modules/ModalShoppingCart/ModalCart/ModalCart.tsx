@@ -1,12 +1,12 @@
-import styles from './modalCart.module.scss';
+import styles from "./modalCart.module.scss";
 
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { CartItem } from '../СartItem/CartItem';
-import { selectCart } from 'store/cart/selectors';
-import { useModalCart } from 'contexts/ModalCartContext';
-import { useOutsideModalClick } from 'hooks/useOutsideModalClick';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { CartItem } from "../СartItem/CartItem";
+import { selectCart } from "store/cart/selectors";
+import { useModalCart } from "contexts/ModalCartContext";
+import { useOutsideModalClick } from "hooks/useOutsideModalClick";
 
 export function ModalCart() {
   const { onCloseCartModal, totalCartPrice, cartItemsCount } = useModalCart();
@@ -18,7 +18,7 @@ export function ModalCart() {
   //remove background scroll
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = prevOverflow;
@@ -50,20 +50,23 @@ export function ModalCart() {
         </div>
 
         {cartItemsCount === 0 ? (
-          ''
+          ""
         ) : (
           <div className={styles.footer_box}>
             <div className={styles.price_box}>
               <h2>Разом</h2>
-              <p className={styles.total_price}>{totalCartPrice.toFixed(2)} грн</p>
+              <p className={styles.total_price}>
+                {totalCartPrice.toFixed(2)} грн
+              </p>
             </div>
 
             <button
               className={styles.submit_btn}
               onClick={() => {
-                navigate('/order');
+                navigate("/order");
                 onCloseCartModal();
-              }}>
+              }}
+            >
               Оформити замовлення
             </button>
           </div>
