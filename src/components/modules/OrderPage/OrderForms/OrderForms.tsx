@@ -5,7 +5,6 @@ import CommentForm from 'components/modules/OrderPage/OrderForms/CommentForm/Com
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { TOrderContactsSchema } from 'validations/orderContactsSchema';
 import styles from '../orderPage.module.scss';
-import { useImperativeHandle } from 'react';
 
 export default function OrderForms() {
   const defaultValues = {
@@ -18,14 +17,12 @@ export default function OrderForms() {
     np_branch: '',
     phone_number: '',
     comment: '',
+    call: false,
   };
 
   const methods = useForm<TOrderContactsSchema>({ defaultValues });
 
-  const {
-    handleSubmit,
-    formState: { isValid },
-  } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmitData: SubmitHandler<any> = (data: TOrderContactsSchema) => {
     console.log(data);
@@ -35,7 +32,7 @@ export default function OrderForms() {
     <FormProvider {...methods}>
       <div className={styles.order__forms}>
         <h1 className={styles.order__title}>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
-        <form onSubmit={handleSubmit(onSubmitData)} id="orderForm">
+        <form onSubmit={handleSubmit(onSubmitData)} id='orderForm'>
           <ContactsForm />
           <DeliveryForm />
           <PaymentForm />

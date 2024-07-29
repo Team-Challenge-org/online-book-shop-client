@@ -21,4 +21,5 @@ export const orderContactsSchema = z.object({
     .max(50, errorDeliveryMessage.DEPARTMENT),
 
   payment: z.string(),
+  call: z.boolean(),
 });
