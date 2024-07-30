@@ -1,25 +1,26 @@
 import styles from "./header.module.scss";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { useAuth } from "contexts/AuthContext";
-import { MdOutlineSearch } from "react-icons/md";
 import Logo from "components/elements/Logo/Logo";
-import { selectCart } from "store/cart/selectors";
+import { MdOutlineSearch } from "react-icons/md";
 import ModalUserForm from "../auth/ModalUserForm";
 import { MdFavoriteBorder } from "react-icons/md";
+import { selectCart } from "store/cart/selectors";
+import { hideMessage } from "store/user/userSlice";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
+import { selectShowMessage } from "store/user/selectors";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
-import { selectShowMessage } from "store/user/selectors";
-import { useEffect } from "react";
-import { hideMessage } from "store/user/userSlice";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
     useAuth();
+
   const { items: shoppingCart } = useSelector(selectCart);
   const message = useSelector(selectShowMessage);
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const Header = () => {
           {message && (
             <div className={styles.header__right__actions__message}>
               <span className={styles.header__right__actions__message__title}>
-                Вітаємо,{" "}
+                Вітаємо,
                 <span
                   className={
                     styles.header__right__actions__message__title_italic

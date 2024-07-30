@@ -4,7 +4,6 @@ import {
   resetPasswordSchema,
   TResetPasswordSchema,
 } from "validations/resetPasswordSchema";
-import { useEffect } from "react";
 import { AppDispatch } from "store/store";
 import { NAV_URL } from "constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,23 +65,10 @@ export default function ResetPasswordForm() {
   const urlToken = searchParams.get("token");
 
   const navigate = useNavigate();
-  const {
-    error: isError,
-    isPasswordReset,
-    loading: isUpdatingPassword,
-  } = useSelector(selectUserData);
+  const { isPasswordReset, loading: isUpdatingPassword } =
+    useSelector(selectUserData);
 
   const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    if (isPasswordReset) {
-      alert("🟢Successfully changed password");
-    }
-
-    if (isError && !isPasswordReset) {
-      alert("🔴Problem to change pass");
-    }
-  }, [isPasswordReset, isError, dispatch]);
 
   function onSubmitData(data: TResetPasswordSchema) {
     const newPasswordData = {
@@ -114,7 +100,7 @@ export default function ResetPasswordForm() {
                 : styles.btn_unactive
             }
           >
-            {isUpdatingPassword ? "Обновление пароля" : "Змінити пароль"}
+            {isUpdatingPassword ? "Змінення паролю..." : "Змінити пароль"}
           </button>
         </AuthModal>
       </form>

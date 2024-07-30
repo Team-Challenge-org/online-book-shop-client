@@ -17,23 +17,26 @@ import { MdFavorite } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdShoppingCart } from "react-icons/md";
+import { useModalCart } from "contexts/ModalCartContext";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
   const { updateBookViewAndData } = useBooksLogic();
-  const favorite = useSelector(selectOneFavorite(item))
-  const cart = useSelector(selectOneCart(item))
-  const [hoverFavorite, setHoverFavorite] = useState(false)
-  const [hoverCart, setHoverCart] = useState(false)
+  const favorite = useSelector(selectOneFavorite(item));
+  const cart = useSelector(selectOneCart(item));
+  const [hoverFavorite, setHoverFavorite] = useState(false);
+  const [hoverCart, setHoverCart] = useState(false);
+
+  const { onOpenCartModal } = useModalCart();
 
   const CartItemHandler = (obj: TBook) => {
     dispatch(addOrRemoveCartItem(obj));
+    onOpenCartModal();
   };
 
   const favoriteItemsHandler = (obj: TFavoriteItems) => {
     dispatch(addOrRemoveFavoriteItem(obj));
   };
-
 
   return (
     <div className={styles.hover} onClick={() => updateBookViewAndData(item)}>
@@ -48,10 +51,27 @@ const ImageHover = ({ item }: TCatalogItemType) => {
               e.stopPropagation();
               favoriteItemsHandler(item);
             }}
-            className={styles.hover__button}>
-            {favorite ? (<div className={`${styles.hover__button__icon} ${styles.hover__button__black}`}><MdFavorite color="#FFFFFF" size="28px" /></div>) : (<div
-      onMouseEnter={() => setHoverFavorite(true)}
-      onMouseLeave={() => setHoverFavorite(false)} className={`${styles.hover__button__icon} ${hoverFavorite ? (styles.hover__button__black) : (styles.hover__button__green)}`}><MdFavoriteBorder color="#FFFFFF" size="28px" /></div>)}
+            className={styles.hover__button}
+          >
+            {favorite ? (
+              <div
+                className={`${styles.hover__button__icon} ${styles.hover__button__black}`}
+              >
+                <MdFavorite color="#FFFFFF" size="28px" />
+              </div>
+            ) : (
+              <div
+                onMouseEnter={() => setHoverFavorite(true)}
+                onMouseLeave={() => setHoverFavorite(false)}
+                className={`${styles.hover__button__icon} ${
+                  hoverFavorite
+                    ? styles.hover__button__black
+                    : styles.hover__button__green
+                }`}
+              >
+                <MdFavoriteBorder color="#FFFFFF" size="28px" />
+              </div>
+            )}
           </button>
           <button
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -60,9 +80,25 @@ const ImageHover = ({ item }: TCatalogItemType) => {
             }}
             className={styles.hover__button}
           >
-              {cart ? (<div className={`${styles.hover__button__icon} ${styles.hover__button__black}`}><MdShoppingCart color="#FFFFFF" size="28px" /></div>) : (<div
-      onMouseEnter={() => setHoverCart(true)}
-      onMouseLeave={() => setHoverCart(false)} className={`${styles.hover__button__icon} ${hoverCart ? (styles.hover__button__black) : (styles.hover__button__green)}`}><MdOutlineShoppingCart color="#FFFFFF" size="28px" /></div>)}
+            {cart ? (
+              <div
+                className={`${styles.hover__button__icon} ${styles.hover__button__black}`}
+              >
+                <MdShoppingCart color="#FFFFFF" size="28px" />
+              </div>
+            ) : (
+              <div
+                onMouseEnter={() => setHoverCart(true)}
+                onMouseLeave={() => setHoverCart(false)}
+                className={`${styles.hover__button__icon} ${
+                  hoverCart
+                    ? styles.hover__button__black
+                    : styles.hover__button__green
+                }`}
+              >
+                <MdOutlineShoppingCart color="#FFFFFF" size="28px" />
+              </div>
+            )}
           </button>
         </div>
       </motion.div>

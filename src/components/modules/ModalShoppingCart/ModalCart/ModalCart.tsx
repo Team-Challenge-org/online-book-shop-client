@@ -2,6 +2,7 @@ import styles from "./modalCart.module.scss";
 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CartItem } from "../СartItem/CartItem";
 import { selectCart } from "store/cart/selectors";
 import { useModalCart } from "contexts/ModalCartContext";
@@ -10,6 +11,7 @@ import { useOutsideModalClick } from "hooks/useOutsideModalClick";
 export function ModalCart() {
   const { onCloseCartModal, totalCartPrice, cartItemsCount } = useModalCart();
   const { items: shoppingCart } = useSelector(selectCart);
+  const navigate = useNavigate();
 
   const overlayRef = useOutsideModalClick(onCloseCartModal);
 
@@ -58,7 +60,15 @@ export function ModalCart() {
               </p>
             </div>
 
-            <button className={styles.submit_btn}>Оформити замовлення</button>
+            <button
+              className={styles.submit_btn}
+              onClick={() => {
+                navigate("/order");
+                onCloseCartModal();
+              }}
+            >
+              Оформити замовлення
+            </button>
           </div>
         )}
       </div>

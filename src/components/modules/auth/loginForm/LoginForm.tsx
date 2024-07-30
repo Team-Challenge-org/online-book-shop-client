@@ -13,6 +13,7 @@ import Spinner from "components/elements/Spinner/Spinner";
 import { RegisterField } from "../shared/registerField/RegisterField";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { TLoginUserSchema, loginUserSchema } from "validations/loginUserSchema";
+import { useAuth } from "contexts/AuthContext";
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
@@ -20,13 +21,17 @@ const LoginForm = () => {
   const { loading } = useSelector(selectUserData);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { setIsRegisterForm } = useAuth();
+
   useEffect(() => {
     if (loading) {
       setIsLoading(true);
     } else {
       setIsLoading(false);
     }
-  }, [loading]);
+
+    setIsRegisterForm(false);
+  }, [loading, setIsRegisterForm]);
 
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),

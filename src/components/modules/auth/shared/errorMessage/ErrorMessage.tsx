@@ -16,7 +16,7 @@ export function ErrorMessage({ message, errorTips }: TErrorMessageProps) {
     <div className={styles.error_message_container}>
       <span className={styles.error_message}>{message}</span>
 
-      {errorTips && (
+      {errorTips && message !== "Такого користувача не існує" && (
         <MdInfoOutline
           className={styles.error_info}
           onMouseEnter={() => setIsShownTooltip(true)}

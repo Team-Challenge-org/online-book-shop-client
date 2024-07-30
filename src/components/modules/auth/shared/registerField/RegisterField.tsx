@@ -31,7 +31,7 @@ export function RegisterField({ field, resetPassword }: TRegisterFieldProps) {
   } = usePasswordComplexity(passwordValue, field);
 
   return (
-    <label key={field.id}>
+    <label>
       <div className={styles.text_box}>
         <span>{field.label}</span>
 

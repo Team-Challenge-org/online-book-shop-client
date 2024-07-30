@@ -1,6 +1,6 @@
 import React from 'react';
 import { TRegisterField } from 'types/auth';
-import styles from '../orderPage.module.scss';
+import styles from '../../orderPage.module.scss';
 import { OrderField } from '../OrderField/OrderField';
 
 const orderFields: TRegisterField[] = [

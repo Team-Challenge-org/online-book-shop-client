@@ -102,7 +102,8 @@ export function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { onCloseRegisterForm } = useAuth();
+
+  const { setIsRegisterForm, onCloseRegisterForm } = useAuth();
 
   useEffect(() => {
     if (loading) {
@@ -110,7 +111,9 @@ export function RegisterForm() {
     } else {
       setIsLoading(false);
     }
-  }, [loading]);
+
+    setIsRegisterForm(true);
+  }, [loading, setIsRegisterForm]);
 
   const methods = useForm<TRegisterUserSchema>({
     resolver: zodResolver(registerUserSchema),
@@ -142,7 +145,7 @@ export function RegisterForm() {
       ) : (
         <form onSubmit={handleSubmit(onSubmitData)}>
           {registerFields.map((field) => (
-            <RegisterField field={field} />
+            <RegisterField field={field} key={field.id} />
           ))}
 
           <label className={styles.checkbox_container}>

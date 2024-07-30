@@ -7,6 +7,7 @@ const HomePage = () => {
     <main className="main">
       <Slider />
       <CategoriesList />
+
       <div className="container">
         <CatalogList />
       </div>
