@@ -1,7 +1,7 @@
 import { useModalCart } from 'contexts/ModalCartContext';
 import styles from '../orderPage.module.scss';
 import { Link } from 'react-router-dom';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 export default function OrderConfirm() {
   const { totalCartPrice } = useModalCart();

@@ -3,7 +3,7 @@ import styles from './orderPage.module.scss';
 import OrderItems from 'components/modules/OrderPage/OrderItems/OrderItems';
 import OrderConfirm from 'components/modules/OrderPage/OrderConfirm/OrderConfirm';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { TOrderContactsSchema } from 'validations/orderContactsSchema';
+import { TOrderSchema } from 'validations/orderSchema';
 
 export default function OrderPageComponent() {
   const defaultValues = {
@@ -19,11 +19,11 @@ export default function OrderPageComponent() {
     call: false,
   };
 
-  const methods = useForm<TOrderContactsSchema>({ defaultValues });
+  const methods = useForm<TOrderSchema>({ defaultValues });
 
-  const { handleSubmit, watch } = methods;
+  const { handleSubmit } = methods;
 
-  const onSubmitData: SubmitHandler<any> = (data: TOrderContactsSchema) => {
+  const onSubmitData: SubmitHandler<any> = (data: TOrderSchema) => {
     console.log(data);
   };
 

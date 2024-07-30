@@ -1,0 +1,9 @@
+export const errorDeliveryMessage = {
+  CITY: 'Будь ласка, перевірте правильність введення міста',
+  DELIVERY_TYPE: 'Будь ласка, перевірте правильність введення способу доставки',
+  DEPARTMENT: 'Будь ласка, перевірте правильність введення відділення',
+};
+
+export const errorCommentMessage = {
+  COMMENT: 'Максимум 500 символів',
+};
