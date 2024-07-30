@@ -1,19 +1,10 @@
-import OrderForms from 'components/modules/OrderPage/OrderForms/OrderForms';
+import OrderPageComponent from 'components/modules/OrderPage/OrderPageComponent';
 import styles from '../../components/modules/OrderPage/orderPage.module.scss';
-import OrderItems from 'components/modules/OrderPage/OrderItems/OrderItems';
-import OrderConfirm from 'components/modules/OrderPage/OrderConfirm/OrderConfirm';
 
 export default function OrderPage() {
   return (
     <div className={styles.order}>
-      <div className={styles.order__block}>
-        <OrderForms />
-
-        <div>
-          <OrderItems />
-          <OrderConfirm />
-        </div>
-      </div>
+      <OrderPageComponent />
     </div>
   );
 }

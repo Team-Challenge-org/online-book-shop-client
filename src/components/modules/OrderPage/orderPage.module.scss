@@ -1,13 +1,14 @@
 @import '/src/styles/utils/_variables.scss';
 
 .order {
-  margin-left: 80px;
-  margin-top: 40px;
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 40px 80px;
 
   &__block {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   &__title {
