@@ -7,12 +7,14 @@ import { AppDispatch } from 'store/store';
 import EnterOrRegisterAccount from './shared/enterOrRegisterAccount/EnterOrRegisterAccount';
 import { logoutUser } from 'store/user/asyncActions';
 import Spinner from 'components/elements/Spinner/Spinner';
+import { useAuth } from 'contexts/AuthContext';
 
 export default function ModalUserForm() {
   const auth = useSelector(selectAuthData, shallowEqual);
   const { user, loading } = useSelector(selectUserData);
   const [isAuth, setIsAuth] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+  const { onCloseRegisterForm } = useAuth();
 
   useEffect(() => {
     if (auth) {
@@ -30,7 +32,13 @@ export default function ModalUserForm() {
         loading ? (
           <Spinner />
         ) : (
-          <button onClick={() => dispatch(logoutUser(user))}>Logout</button>
+          <button
+            onClick={async () => {
+              await dispatch(logoutUser(user));
+              onCloseRegisterForm();
+            }}>
+            Logout
+          </button>
         )
       ) : (
         <EnterOrRegisterAccount />
