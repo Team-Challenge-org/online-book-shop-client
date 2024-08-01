@@ -8,6 +8,7 @@ import EnterOrRegisterAccount from './shared/enterOrRegisterAccount/EnterOrRegis
 import { logoutUser } from 'store/user/asyncActions';
 import Spinner from 'components/elements/Spinner/Spinner';
 import { useAuth } from 'contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function ModalUserForm() {
   const auth = useSelector(selectAuthData, shallowEqual);
@@ -15,6 +16,7 @@ export default function ModalUserForm() {
   const [isAuth, setIsAuth] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { onCloseRegisterForm } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (auth) {
@@ -36,6 +38,7 @@ export default function ModalUserForm() {
             onClick={async () => {
               await dispatch(logoutUser(user));
               onCloseRegisterForm();
+              navigate('/');
             }}>
             Logout
           </button>
