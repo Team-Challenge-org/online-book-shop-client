@@ -8,14 +8,16 @@ export const loginUserSchema = z.object({
   email_or_number: z
     .string()
     .min(5, errorMessage.PHONE_OR_EMAIL)
+    .refine((value) => value.includes('@'))
     .refine((value) => emailRegex.test(value), errorMessage.PHONE_OR_EMAIL)
     .refine((value) => !EXCLUDED_DOMAINS.some((domain) => value.endsWith(`@${domain}`)), {
-      message: errorMessage.EMAIL,
+      message: errorMessage.PHONE_OR_EMAIL,
     })
     .or(
       z
         .string()
-        .refine((value) => value.replace(/\D+/g, '').length === 12, errorMessage.PHONE_NUMBER)
+        .max(12, errorMessage.PHONE_OR_EMAIL)
+        .refine((value) => value.replace(/\D+/g, '').length === 12, errorMessage.PHONE_OR_EMAIL)
         .transform((value) => value.replace(/\D+/g, '')),
     ),
 
