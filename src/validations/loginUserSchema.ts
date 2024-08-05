@@ -19,6 +19,14 @@ export const loginUserSchema = z.object({
         .max(12, errorMessage.PHONE_OR_EMAIL)
         .refine((value) => value.replace(/\D+/g, '').length === 12, errorMessage.PHONE_OR_EMAIL)
         .transform((value) => value.replace(/\D+/g, '')),
+    )
+    .or(
+      z
+        .string()
+        .min(13, errorMessage.PHONE_OR_EMAIL)
+        .max(13, errorMessage.PHONE_OR_EMAIL)
+        .refine((value) => value[0] === '+')
+        .transform((value) => value.replace(/\D+/g, '')),
     ),
 
   login_password: z
