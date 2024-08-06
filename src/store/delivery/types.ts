@@ -1,10 +1,9 @@
-  export type TDeliveryState = {
-    loading: boolean;
-    cityArray: [];
-    citySelect: '';
-    addressArray: [];
-    addressSelect: '';
-    service: number;
-    error: null | string;
-  };
-  
+export type TDeliveryState = {
+  loading: boolean;
+  cityArray: [];
+  citySelect: '';
+  addressArray: [];
+  addressSelect: '';
+  service: string;
+  error: null | string;
+};
