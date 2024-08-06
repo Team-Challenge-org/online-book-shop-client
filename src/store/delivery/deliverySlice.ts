@@ -1,31 +1,30 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 import { TDeliveryState } from './types';
 import { fetchAddress, fetchCity } from './asyncActions';
 
 const initialState: TDeliveryState = {
-    loading: false,
-    cityArray: [],
-    citySelect: '',
-    addressArray: [],
-    addressSelect: '',
-    service: 0,
-    error: null,
+  loading: false,
+  cityArray: [],
+  citySelect: '',
+  addressArray: [],
+  addressSelect: '',
+  service: '',
+  error: null,
 };
 
 const deliverySlice = createSlice({
   name: 'delivery',
   initialState,
   reducers: {
-    setCity (state, action) {
+    setCity(state, action) {
       state.citySelect = action.payload;
     },
-    setAddress (state, action) {
+    setAddress(state, action) {
       state.addressSelect = action.payload;
     },
-    setService (state, action) {
+    setService(state, action) {
       state.service = action.payload;
-    }
+    },
   },
   extraReducers(builder) {
     builder
@@ -43,7 +42,7 @@ const deliverySlice = createSlice({
         state.loading = false;
         state.cityArray = [];
         console.log(action.error.message);
-        state.error = action.error.message!
+        state.error = action.error.message!;
       })
       .addCase(fetchAddress.pending, (state) => {
         state.loading = true;
@@ -59,8 +58,8 @@ const deliverySlice = createSlice({
         state.loading = false;
         state.addressArray = [];
         console.log(action.error.message);
-        state.error = action.error.message!
-      })
+        state.error = action.error.message!;
+      });
   },
 });
 

@@ -8,11 +8,7 @@ import { setService } from 'store/delivery/deliverySlice';
 export default function DeliveryType() {
   const dispatch = useAppDispatch();
 
-  const {
-    watch,
-    register,
-    formState: { errors },
-  } = useFormContext();
+  const { watch, register } = useFormContext();
 
   const watchService: number = watch('delivery_type');
 
@@ -24,10 +20,7 @@ export default function DeliveryType() {
     <label className={styles.order__delivery__block__label}>
       <span className={styles.order__delivery__block__label__title}>Спосіб доставки *</span>
 
-      <div
-        className={
-          errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
-        }>
+      <div className={styles.order__delivery__block__label__block}>
         <select
           className={styles.order__delivery__block__label__block__input}
           id='delivery_type'
@@ -42,17 +35,6 @@ export default function DeliveryType() {
           <option value='4'>НП. Кур&lsquo;єр</option>
         </select>
       </div>
-
-      {/* Display error message if any */}
-      {errors?.city && (
-        <ErrorMessage
-          message={errors.city?.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
-      )}
     </label>
   );
 }

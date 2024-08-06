@@ -37,11 +37,11 @@ export default function CitySelect() {
 
       <div
         className={
-          errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
+          errors.city ? styles.input_box_error : styles.order__delivery__block__label__block
         }>
         <input
-          type="text"
-          placeholder="Введіть назву міста"
+          type='text'
+          placeholder='Введіть назву міста'
           {...register('city')}
           className={styles.order__delivery__block__label__block__input}
           onFocus={() => {
