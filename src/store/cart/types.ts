@@ -15,5 +15,8 @@ export type TCartItem = {
 };
 
 export type TCartSliceState = {
-  items: TCartItem[];
+  cartId: string | null;
+  books: TCartItem[];
+  loading: boolean;
+  error: string | null;
 };

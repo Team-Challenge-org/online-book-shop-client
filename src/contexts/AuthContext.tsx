@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectAuthData } from "store/user/selectors";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type TAuthContext = {
   showRegisterForm: boolean;
@@ -13,6 +15,8 @@ type TAuthContext = {
 
   isRegisterForm: boolean;
   setIsRegisterForm: React.Dispatch<React.SetStateAction<boolean>>;
+
+  isAuth: boolean;
 };
 
 const AuthContext = createContext<TAuthContext>({
@@ -28,6 +32,8 @@ const AuthContext = createContext<TAuthContext>({
 
   isRegisterForm: false,
   setIsRegisterForm: () => {},
+
+  isAuth: false,
 });
 
 type TAuthContextProps = {
@@ -35,11 +41,19 @@ type TAuthContextProps = {
 };
 
 function AuthProvider({ children }: TAuthContextProps) {
+  const isAuthenticatedUser = useSelector(selectAuthData);
+
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
 
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(true);
   const [isRegisterForm, setIsRegisterForm] = useState(false);
+
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    isAuthenticatedUser ? setIsAuth(true) : setIsAuth(false);
+  }, []);
 
   function handleshowEmailCheckerForm() {
     setShowEmailCheckerForm(true);
@@ -77,6 +91,8 @@ function AuthProvider({ children }: TAuthContextProps) {
 
     isRegisterForm,
     setIsRegisterForm,
+
+    isAuth,
   };
 
   return (
