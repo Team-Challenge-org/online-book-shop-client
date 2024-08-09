@@ -24,13 +24,13 @@ export default function NpBranch() {
     formState: { errors },
   } = useFormContext();
 
-  const watchBranch: TNPAddress = watch('np_branch');
+  const watchBranch: TNPAddress = watch('department');
   const watchCity: TNPCity = watch('city');
 
   useEffect(() => {
     dispatch(fetchAddress(watchBranch));
     dispatch(setAddress(watchBranch));
-  }, [watchBranch, watchCity]);
+  }, [watchBranch, watchCity, dispatch]);
 
   return (
     <label className={styles.order__delivery__block__label}>
@@ -45,7 +45,7 @@ export default function NpBranch() {
         <input
           type='text'
           placeholder='Оберіть відділення/поштомат'
-          {...register('np_branch')}
+          {...register('department')}
           className={styles.order__delivery__block__label__block__input}
           onFocus={() => {
             setTimeout(() => {
@@ -72,7 +72,7 @@ export default function NpBranch() {
                 key={index}
                 className={styles.order__delivery__block__label__block__list__item}
                 onClick={() => {
-                  setValue('np_branch', address.Description);
+                  setValue('department', address.Description);
                   setTimeout(() => {
                     setFocusInput(false);
                   }, 200);

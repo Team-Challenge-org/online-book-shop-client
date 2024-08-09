@@ -29,7 +29,7 @@ export default function CitySelect() {
   useEffect(() => {
     dispatch(fetchCity(watchCity));
     dispatch(setCity(watchCity));
-  }, [watchCity]);
+  }, [watchCity, dispatch]);
 
   return (
     <label className={styles.order__delivery__block__label}>
@@ -84,7 +84,7 @@ export default function CitySelect() {
       {/* Display error message if any */}
       {errors?.city && (
         <ErrorMessage
-          message={errors.city?.message as string}
+          message={errors?.city.message as string}
           errorTips={[
             'Ви можете використовувати лише українську мову',
             'Ви можете використовувати великі та малі літери.',
