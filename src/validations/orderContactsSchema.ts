@@ -3,11 +3,9 @@ import { z } from 'zod';
 import { emailRegex, nameRegex } from './registerUserSchema';
 import { errorMessage, EXCLUDED_DOMAINS } from 'constants/auth';
 
-export type TOrderContactsSchema = z.infer<typeof orderContactsSchema>;
+export type TOrderContactsSchema = z.infer<typeof orderSchema>;
 
-export const ukranianRegex = /[А-ЩЬЮЯҐЄІЇа-щьюяґєії]+/g;
-
-export const orderContactsSchema = z.object({
+const orderContactsSchema = z.object({
   first_name: z
     .string()
     .regex(nameRegex, errorMessage.FIRST_NAME)
@@ -34,15 +32,44 @@ export const orderContactsSchema = z.object({
 
   city: z
     .string()
+    .regex(nameRegex, errorDeliveryMessage.CITY)
     .min(2, errorDeliveryMessage.CITY)
-    .max(30, errorDeliveryMessage.CITY)
-    .refine((value) => ukranianRegex.test(value), errorDeliveryMessage.CITY),
+    .max(30, errorDeliveryMessage.CITY),
 
-  department: z
-    .string()
-    .min(2, errorDeliveryMessage.DEPARTMENT)
-    .max(50, errorDeliveryMessage.DEPARTMENT),
+  delivery_type: z.string(),
+
+  department: z.string().min(2, errorDeliveryMessage.DEPARTMENT),
 
   payment: z.string(),
   call: z.boolean(),
+  another_recipient: z.boolean(),
 });
+
+const anotherRecipientSchema = z.object({
+  another_recipient: z.literal(true),
+  recipient_first_name: z
+    .string()
+    .regex(nameRegex, errorMessage.FIRST_NAME)
+    .min(2, errorMessage.FIRST_NAME)
+    .max(30, errorMessage.FIRST_NAME),
+  recipient_last_name: z
+    .string()
+    .regex(nameRegex, errorMessage.LAST_NAME)
+    .min(2, errorMessage.LAST_NAME)
+    .max(50, errorMessage.LAST_NAME),
+  recipient_phone_number: z
+    .string()
+    .refine((value) => value.replace(/\D+/g, '').length === 12, errorMessage.PHONE_NUMBER)
+    .transform((value) => value.replace(/\D+/g, '')),
+});
+
+const notAnotherRecipientSchema = z.object({
+  another_recipient: z.literal(false),
+});
+
+const schemaCond = z.discriminatedUnion('another_recipient', [
+  anotherRecipientSchema,
+  notAnotherRecipientSchema,
+]);
+
+export const orderSchema = z.intersection(schemaCond, orderContactsSchema);

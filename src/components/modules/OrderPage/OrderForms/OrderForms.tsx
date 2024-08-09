@@ -3,7 +3,7 @@ import DeliveryForm from 'components/modules/OrderPage/OrderForms/DeliveryForm/D
 import PaymentForm from 'components/modules/OrderPage/OrderForms/PaymentForm/PaymentForm';
 import CommentForm from 'components/modules/OrderPage/OrderForms/CommentForm/CommentForm';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { orderContactsSchema, TOrderContactsSchema } from 'validations/orderContactsSchema';
+import { orderSchema, TOrderContactsSchema } from 'validations/orderContactsSchema';
 import styles from '../orderPage.module.scss';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -23,7 +23,7 @@ export default function OrderForms() {
 
   const methods = useForm<TOrderContactsSchema>({
     defaultValues,
-    resolver: zodResolver(orderContactsSchema),
+    resolver: zodResolver(orderSchema),
   });
 
   const { handleSubmit } = methods;

@@ -19,7 +19,7 @@ export default function UpBranch() {
         <input
           type='text'
           placeholder='Оберіть відділення'
-          {...register('up_branch')}
+          {...register('department')}
           className={styles.order__delivery__block__label__block__input}
         />
       </div>
