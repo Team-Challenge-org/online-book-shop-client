@@ -3,7 +3,7 @@ import DeliveryForm from 'components/modules/OrderPage/OrderForms/DeliveryForm/D
 import PaymentForm from 'components/modules/OrderPage/OrderForms/PaymentForm/PaymentForm';
 import CommentForm from 'components/modules/OrderPage/OrderForms/CommentForm/CommentForm';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { orderSchema, TOrderContactsSchema } from 'validations/orderContactsSchema';
+import { orderSchema, TOrderSchema } from 'validations/orderSchema';
 import styles from '../orderPage.module.scss';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -21,14 +21,13 @@ export default function OrderForms() {
     call: false,
   };
 
-  const methods = useForm<TOrderContactsSchema>({
-    defaultValues,
+  const methods = useForm<TOrderSchema>({
     resolver: zodResolver(orderSchema),
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmitData: SubmitHandler<any> = (data: TOrderContactsSchema) => {
+  const onSubmitData: SubmitHandler<any> = (data: TOrderSchema) => {
     console.log(data);
   };
 

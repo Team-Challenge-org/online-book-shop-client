@@ -25,8 +25,8 @@ export default function DeliveryType() {
           className={styles.order__delivery__block__label__block__input}
           id='delivery_type'
           {...register('delivery_type')}
-          defaultValue='0'>
-          <option disabled value='0'>
+          defaultValue='1'>
+          <option disabled value='1'>
             Оберіть спосіб доставки
           </option>
           <option value='1'>НП. Відділення/поштомат</option>

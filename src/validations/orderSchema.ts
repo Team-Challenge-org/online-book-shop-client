@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { emailRegex, nameRegex } from './registerUserSchema';
 import { errorMessage, EXCLUDED_DOMAINS } from 'constants/auth';
 
-export type TOrderContactsSchema = z.infer<typeof orderSchema>;
+export type TOrderSchema = z.infer<typeof orderSchema>;
 
 const orderContactsSchema = z.object({
   first_name: z
@@ -38,12 +38,41 @@ const orderContactsSchema = z.object({
 
   delivery_type: z.string(),
 
-  department: z.string().min(2, errorDeliveryMessage.DEPARTMENT),
-
   payment: z.string(),
   call: z.boolean(),
   another_recipient: z.boolean(),
 });
+
+const typeDeliveryEnum = z.enum(['1', '2', '3', '4']);
+
+const deliveryNpBranchSchema = z.object({
+  delivery_type: z.literal(typeDeliveryEnum.enum[1]),
+  department: z.string().min(2, errorDeliveryMessage.DEPARTMENT),
+});
+
+const deliveryUPBranchSchema = z.object({
+  delivery_type: z.literal(typeDeliveryEnum.enum[2]),
+  department: z.string().min(2, errorDeliveryMessage.DEPARTMENT),
+});
+
+const deliveryMeestBranchSchema = z.object({
+  delivery_type: z.literal(typeDeliveryEnum.enum[3]),
+  department: z.string().min(2, errorDeliveryMessage.DEPARTMENT),
+});
+
+const deliveryNPCourierSchema = z.object({
+  delivery_type: z.literal(typeDeliveryEnum.enum[4]),
+  np_street: z.string().min(2, errorDeliveryMessage.STREET),
+  np_house: z.string().min(2, errorDeliveryMessage.HOUSE),
+  np_apart: z.string().min(2, errorDeliveryMessage.APART),
+});
+
+const deliveryType = z.discriminatedUnion('delivery_type', [
+  deliveryNpBranchSchema,
+  deliveryUPBranchSchema,
+  deliveryMeestBranchSchema,
+  deliveryNPCourierSchema,
+]);
 
 const anotherRecipientSchema = z.object({
   another_recipient: z.literal(true),
@@ -72,4 +101,4 @@ const schemaCond = z.discriminatedUnion('another_recipient', [
   notAnotherRecipientSchema,
 ]);
 
-export const orderSchema = z.intersection(schemaCond, orderContactsSchema);
+export const orderSchema = z.intersection(schemaCond, orderContactsSchema, deliveryType);
