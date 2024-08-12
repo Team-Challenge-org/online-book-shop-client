@@ -8,19 +8,6 @@ import styles from '../orderPage.module.scss';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function OrderForms() {
-  const defaultValues = {
-    payment: 'online',
-    city: '',
-    delivery_type: '1',
-    email: '',
-    first_name: '',
-    last_name: '',
-    np_branch: '',
-    phone_number: '',
-    comment: '',
-    call: false,
-  };
-
   const methods = useForm<TOrderSchema>({
     resolver: zodResolver(orderSchema),
   });
