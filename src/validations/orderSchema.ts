@@ -86,7 +86,7 @@ const schemaCondDeliveryType = z.discriminatedUnion('delivery_type', [
 ]);
 
 const defaultDeliveryTypeSchema = z.object({
-  delivery_type: z.nativeEnum(typeDeliveryEnum),
+  delivery_type: z.nativeEnum(typeDeliveryEnum).default(typeDeliveryEnum.NPBranch),
 });
 
 const validationDeliveryTypeSchema = z.intersection(

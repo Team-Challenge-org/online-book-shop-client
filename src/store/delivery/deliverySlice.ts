@@ -8,8 +8,9 @@ const initialState: TDeliveryState = {
   citySelect: '',
   addressArray: [],
   addressSelect: '',
-  service: '',
+  service: '1',
   error: null,
+  formError: false,
 };
 
 const deliverySlice = createSlice({
@@ -24,6 +25,9 @@ const deliverySlice = createSlice({
     },
     setService(state, action) {
       state.service = action.payload;
+    },
+    setFormError(state, action) {
+      state.formError = action.payload;
     },
   },
   extraReducers(builder) {
@@ -63,6 +67,6 @@ const deliverySlice = createSlice({
   },
 });
 
-export const { setCity, setAddress, setService } = deliverySlice.actions;
+export const { setCity, setAddress, setService, setFormError } = deliverySlice.actions;
 
 export default deliverySlice.reducer;

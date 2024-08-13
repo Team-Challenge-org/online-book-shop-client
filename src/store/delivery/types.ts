@@ -6,4 +6,5 @@ export type TDeliveryState = {
   addressSelect: '';
   service: string;
   error: null | string;
+  formError: boolean;
 };
