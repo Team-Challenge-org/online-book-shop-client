@@ -16,6 +16,7 @@ export default function DeliveryAddress() {
 
   return (
     <>
+      {delivery === undefined && <NpBranch />}
       {delivery === '1' && <NpBranch />}
       {delivery === '2' && <UpBranch />}
       {delivery === '3' && <MeestBranch />}

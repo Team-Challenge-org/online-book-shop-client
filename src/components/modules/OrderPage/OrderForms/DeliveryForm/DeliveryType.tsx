@@ -18,7 +18,7 @@ export default function DeliveryType() {
 
   useEffect(() => {
     dispatch(setService(watchService));
-  }, [watchService]);
+  }, [watchService, dispatch]);
 
   return (
     <label className={styles.order__delivery__block__label}>
@@ -29,7 +29,7 @@ export default function DeliveryType() {
           className={styles.order__delivery__block__label__block__input}
           id='delivery_type'
           {...register('delivery_type')}
-          defaultValue='0'>
+          defaultValue='1'>
           <option disabled value='0'>
             Оберіть спосіб доставки
           </option>
@@ -41,15 +41,7 @@ export default function DeliveryType() {
       </div>
 
       {/* Display error message if any */}
-      {errors?.delivery_type && (
-        <ErrorMessage
-          message={errors.delivery_type?.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
-      )}
+      {errors?.delivery_type && <ErrorMessage message={errors.delivery_type?.message as string} />}
     </label>
   );
 }

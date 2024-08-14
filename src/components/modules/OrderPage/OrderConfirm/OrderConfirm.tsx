@@ -2,10 +2,13 @@ import { useModalCart } from 'contexts/ModalCartContext';
 import styles from '../orderPage.module.scss';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { selectDeliveryData } from 'store/delivery/selectors';
+import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
 
 export default function OrderConfirm() {
   const { totalCartPrice } = useModalCart();
-
+  const { formError } = useSelector(selectDeliveryData);
   const methods = useForm();
 
   const { register } = methods;
@@ -49,6 +52,11 @@ export default function OrderConfirm() {
       <button className={`${styles.order__confirm__button} button`} type='submit' form='orderForm'>
         Підтвердити замовлення
       </button>
+      {formError && (
+        <ErrorMessage
+          message={'Будь ласка, перевірте правильність заповнення необхідних полів' as string}
+        />
+      )}
     </div>
   );
 }
