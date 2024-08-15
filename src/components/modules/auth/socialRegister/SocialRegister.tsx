@@ -6,7 +6,7 @@ import { selectUserData } from 'store/user/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserGoogle } from 'store/user/asyncActions';
 import { useAuth } from 'contexts/AuthContext';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+//import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 export function SocialRegister() {
   const { user: userData } = useSelector(selectUserData);
@@ -40,7 +40,10 @@ export function SocialRegister() {
           </li>
 
           <li className={styles.list__item}>
-            <FacebookLogin
+            <img src='/img/facebook_icon.png' alt='facebook logo' />
+            <span>Продовжити через Facebook</span>
+
+            {/*<FacebookLogin
               appId='522254420463237'
               autoLoad={false}
               fields='name,email'
@@ -51,7 +54,7 @@ export function SocialRegister() {
                   <span>Продовжити через Facebook</span>
                 </button>
               )}
-            />
+            />*/}
           </li>
         </ul>
       )}
