@@ -24,7 +24,7 @@ export const getCartItems = createAsyncThunk<
   TCartResponse,
   void,
   { rejectValue: APIError }
->("cart/getUserCartById", async (_, thunkAPI) => {
+>("cart/getCartItems", async (_, thunkAPI) => {
   try {
     const token =
       sessionStorage.getItem("user") || localStorage.getItem("user");
