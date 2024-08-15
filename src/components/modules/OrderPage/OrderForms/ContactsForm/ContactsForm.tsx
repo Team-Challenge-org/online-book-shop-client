@@ -3,6 +3,7 @@ import { OrderField } from '../OrderField/OrderField';
 import styles from '../../orderPage.module.scss';
 import { useState } from 'react';
 import RecipientForm from './RecipientForm';
+import { useFormContext } from 'react-hook-form';
 
 const orderFields: TRegisterField[] = [
   {
@@ -58,6 +59,8 @@ const orderFields: TRegisterField[] = [
 export default function ContactsForm() {
   const [isAnotherRecipient, setIsAnotherRecipient] = useState(false);
 
+  const { register } = useFormContext();
+
   return (
     <>
       <span className={styles.order__subtitle}>Контактні дані</span>
@@ -69,9 +72,10 @@ export default function ContactsForm() {
 
         <label className={styles.checkbox_container}>
           <input
-            type="checkbox"
+            type='checkbox'
             className={styles.checkbox}
             checked={isAnotherRecipient}
+            {...register('another_recipient')}
             onChange={() => setIsAnotherRecipient(!isAnotherRecipient)}
           />
           <span>отримувач інша людина</span>

@@ -9,6 +9,7 @@ import { logoutUser } from 'store/user/asyncActions';
 import Spinner from 'components/elements/Spinner/Spinner';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function ModalUserForm() {
   const auth = useSelector(selectAuthData, shallowEqual);
@@ -17,6 +18,19 @@ export default function ModalUserForm() {
   const dispatch = useDispatch<AppDispatch>();
   const { onCloseRegisterForm } = useAuth();
   const navigate = useNavigate();
+
+  const logout = async (user: string | null | any) => {
+    const { data } = await axios.post(
+      'https://online-book-shop-1.onrender.com/api/v1/auth/logout',
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      },
+    );
+    return console.log(data);
+  };
 
   useEffect(() => {
     if (auth) {
@@ -34,14 +48,22 @@ export default function ModalUserForm() {
         loading ? (
           <Spinner />
         ) : (
-          <button
-            onClick={async () => {
-              await dispatch(logoutUser(user));
-              onCloseRegisterForm();
-              navigate('/');
-            }}>
-            Logout
-          </button>
+          <>
+            <button
+              onClick={async () => {
+                await dispatch(logoutUser(user));
+                onCloseRegisterForm();
+                navigate('/');
+              }}>
+              Logout
+            </button>
+            <button
+              onClick={async () => {
+                await logout(user);
+              }}>
+              Logout2
+            </button>
+          </>
         )
       ) : (
         <EnterOrRegisterAccount />

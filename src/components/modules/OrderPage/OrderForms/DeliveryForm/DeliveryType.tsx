@@ -14,25 +14,22 @@ export default function DeliveryType() {
     formState: { errors },
   } = useFormContext();
 
-  const watchService: number = watch('delivery_type');
+  const watchService: string = watch('delivery_type');
 
   useEffect(() => {
     dispatch(setService(watchService));
-  }, [watchService]);
+  }, [watchService, dispatch]);
 
   return (
     <label className={styles.order__delivery__block__label}>
       <span className={styles.order__delivery__block__label__title}>Спосіб доставки *</span>
 
-      <div
-        className={
-          errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
-        }>
+      <div className={styles.order__delivery__block__label__block}>
         <select
           className={styles.order__delivery__block__label__block__input}
           id='delivery_type'
           {...register('delivery_type')}
-          defaultValue='0'>
+          defaultValue='1'>
           <option disabled value='0'>
             Оберіть спосіб доставки
           </option>
@@ -44,15 +41,7 @@ export default function DeliveryType() {
       </div>
 
       {/* Display error message if any */}
-      {errors?.city && (
-        <ErrorMessage
-          message={errors.city?.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
-      )}
+      {errors?.delivery_type && <ErrorMessage message={errors.delivery_type?.message as string} />}
     </label>
   );
 }

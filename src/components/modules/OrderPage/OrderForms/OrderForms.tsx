@@ -3,36 +3,37 @@ import DeliveryForm from 'components/modules/OrderPage/OrderForms/DeliveryForm/D
 import PaymentForm from 'components/modules/OrderPage/OrderForms/PaymentForm/PaymentForm';
 import CommentForm from 'components/modules/OrderPage/OrderForms/CommentForm/CommentForm';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { TOrderContactsSchema } from 'validations/orderContactsSchema';
+import { orderSchema, TOrderSchema } from 'validations/orderSchema';
 import styles from '../orderPage.module.scss';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { setFormError } from 'store/delivery/deliverySlice';
+import { useAppDispatch } from 'store/store';
+import { useNavigate } from 'react-router-dom';
 
 export default function OrderForms() {
-  const defaultValues = {
-    payment: 'online',
-    city: '',
-    delivery_type: '1',
-    email: '',
-    first_name: '',
-    last_name: '',
-    np_branch: '',
-    phone_number: '',
-    comment: '',
-    call: false,
-  };
-
-  const methods = useForm<TOrderContactsSchema>({ defaultValues });
+  const methods = useForm<TOrderSchema>({
+    resolver: zodResolver(orderSchema),
+  });
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { handleSubmit } = methods;
 
-  const onSubmitData: SubmitHandler<any> = (data: TOrderContactsSchema) => {
+  const onSubmitData: SubmitHandler<TOrderSchema> = (data: TOrderSchema) => {
     console.log(data);
+    dispatch(setFormError(false));
+    navigate('/payment');
+  };
+
+  const onErrorMessage = () => {
+    dispatch(setFormError(true));
   };
 
   return (
     <FormProvider {...methods}>
       <div className={styles.order__forms}>
         <h1 className={styles.order__title}>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
-        <form onSubmit={handleSubmit(onSubmitData)} id='orderForm'>
+        <form onSubmit={handleSubmit(onSubmitData, onErrorMessage)} id='orderForm'>
           <ContactsForm />
           <DeliveryForm />
           <PaymentForm />
