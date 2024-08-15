@@ -19,7 +19,7 @@ export default function ModalUserForm() {
   const { onCloseRegisterForm } = useAuth();
   const navigate = useNavigate();
 
-  const logout2 = async (user: string | null | any) => {
+  const logout = async (user: string | null | any) => {
     const { data } = await axios.post(
       'https://online-book-shop-1.onrender.com/api/v1/auth/logout',
       null,
@@ -59,7 +59,7 @@ export default function ModalUserForm() {
             </button>
             <button
               onClick={async () => {
-                await logout2(user);
+                await logout(user);
               }}>
               Logout2
             </button>

@@ -59,10 +59,7 @@ const orderFields: TRegisterField[] = [
 export default function ContactsForm() {
   const [isAnotherRecipient, setIsAnotherRecipient] = useState(false);
 
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+  const { register } = useFormContext();
 
   return (
     <>
