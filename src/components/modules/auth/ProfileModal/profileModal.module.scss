@@ -1,0 +1,44 @@
+@import 'styles/utils/_variables';
+
+.profile {
+  &__block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-left: -40px;
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+      color: $color-white;
+
+      &__wrapper {
+        background-color: $color-main;
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__title {
+      margin-left: 16px;
+      font-family: 'Inter';
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16.94px;
+      color: $color-black;
+    }
+  }
+
+  &__line {
+    width: calc(100% + 160px);
+    height: 1px;
+    border-bottom: 1px solid $color-gray-05;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+}

@@ -10,6 +10,7 @@ import Spinner from 'components/elements/Spinner/Spinner';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { MdLogout } from 'react-icons/md';
 
 export default function ModalUserForm() {
   const auth = useSelector(selectAuthData, shallowEqual);
@@ -55,13 +56,8 @@ export default function ModalUserForm() {
                 onCloseRegisterForm();
                 navigate('/');
               }}>
-              Logout
-            </button>
-            <button
-              onClick={async () => {
-                await logout(user);
-              }}>
-              Logout2
+              <MdLogout />
+              Вихід
             </button>
           </>
         )
