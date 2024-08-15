@@ -1,26 +1,24 @@
-import type { TBook } from 'store/books/types';
-import type { TCartItem } from 'store/cart/types';
-import type { TCategory } from 'store/categories/types';
-import type { TFavoriteItems } from 'store/favorite/types';
+import type { TBook } from "store/books/types";
+import type { TCartItem } from "store/cart/types";
+import type { TCategory } from "store/categories/types";
+import type { TFavoriteItems } from "store/favorite/types";
 
 export const getCartFromLS = () => {
-  const data = localStorage.getItem('cart');
-  const items = data ? JSON.parse(data) : [];
+  const data = localStorage.getItem("cart");
+  const books = data ? JSON.parse(data) : [];
 
-  return {
-    items: items as TCartItem[],
-  };
+  return books;
 };
 
 export const getCategoryFromLS = () => {
-  const data = localStorage.getItem('category');
-  const category: TCategory = data ? JSON.parse(data) : '';
+  const data = localStorage.getItem("category");
+  const category: TCategory = data ? JSON.parse(data) : "";
 
   return category;
 };
 
 export const getFavoriteFromLS = () => {
-  const data = localStorage.getItem('favorite');
+  const data = localStorage.getItem("favorite");
   const items = data ? JSON.parse(data) : [];
 
   return {
@@ -29,7 +27,7 @@ export const getFavoriteFromLS = () => {
 };
 
 export function getRecentlyViewedBooksFromLS() {
-  const data = localStorage.getItem('recentlyViewedBooks');
+  const data = localStorage.getItem("recentlyViewedBooks");
   const books = data ? JSON.parse(data) : [];
 
   return {
@@ -38,26 +36,34 @@ export function getRecentlyViewedBooksFromLS() {
 }
 
 export function getSimilarBooksFromLS() {
-  const data = localStorage.getItem('similarBooks');
+  const data = localStorage.getItem("similarBooks");
   const books: TBook[] = data ? JSON.parse(data) : [];
 
   return books;
 }
 
 export function getUserFromLS() {
-  let data = localStorage.getItem('user');
-  let data2 = sessionStorage.getItem('user');
+  let data = localStorage.getItem("user");
+  let data2 = sessionStorage.getItem("user");
 
-  const user: string = data ? JSON.parse(data) : (data2 ? JSON.parse(data2) : null);
+  const user: string = data
+    ? JSON.parse(data)
+    : data2
+    ? JSON.parse(data2)
+    : null;
 
   return user;
 }
 
 export function getAuthFromLS() {
-  let data = localStorage.getItem('auth');
-  let data2 = sessionStorage.getItem('auth');
- 
-  const auth: boolean = data ? JSON.parse(data) : (data2 ? JSON.parse(data2) : false);
+  let data = localStorage.getItem("auth");
+  let data2 = sessionStorage.getItem("auth");
+
+  const auth: boolean = data
+    ? JSON.parse(data)
+    : data2
+    ? JSON.parse(data2)
+    : false;
 
   return auth;
 }

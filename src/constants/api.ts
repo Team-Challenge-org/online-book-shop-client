@@ -11,11 +11,17 @@ export const Endpoints = {
   LOGIN: `${API_BASE_URL}/api/v1/auth/login`,
   OAUTH: `${API_BASE_URL}/api/v1/auth/oauth2/success`,
   REGISTER: `${API_BASE_URL}/api/v1/auth/register`,
+  LOGOUT: `${API_BASE_URL}/api/v1/auth/logout`,
 
   CHECK_EMAIL: `${API_BASE_URL}/api/v1/user/resetPassword`,
   RESET_PASSWORD: `${API_BASE_URL}/api/v1/user/savePassword`,
 
-  LOGOUT: `${API_BASE_URL}/api/v1/auth/logout`,
+  // authenticated user shopping cart
+  GET_CART_ITEMS: `${API_BASE_URL}/api/v1/cart/items`,
+  
+  
+  ADD_BOOK_TO_CART: `${API_BASE_URL}/api/v1/cart/add`,
+  DELETE_BOOK_FROM_CART: `${API_BASE_URL}/api/v1/cart/delete`,
 };
 
-export const NP_API_BASE_URL = 'https://api.novaposhta.ua/v2.0/json/';
+export const NP_API_BASE_URL = "https://api.novaposhta.ua/v2.0/json/";

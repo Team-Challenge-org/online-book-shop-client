@@ -1,19 +1,25 @@
 export type TCartItem = {
   id: number;
   title: string;
-  full_description: string;
-  short_description: string;
   price: number;
-  category: string;
-  isThisNotSlider: boolean;
-  available: string;
-  authors: string | null;
-  titleImage: string | null;
-  timeAdded: string;
   images: string[];
   quantity: number;
+  authors: string | null;
+  titleImage: string | null;
+};
+
+export type TNotAuthUserCart = {
+  cartItems: TCartItem[];
+};
+
+export type TAuthUserCart = {
+  isLoading: boolean;
+  cartItems: TCartItem[] | null;
+  totalPrice: number ;
+  // error: string | null;
 };
 
 export type TCartSliceState = {
-  items: TCartItem[];
+  notAuthUserCart: TNotAuthUserCart;
+  authUserCart: TAuthUserCart;
 };

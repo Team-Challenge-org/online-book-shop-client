@@ -1,26 +1,28 @@
-import styles from './header.module.scss';
 
-import { useEffect } from 'react';
-import { useAuth } from 'contexts/AuthContext';
-import Logo from 'components/elements/Logo/Logo';
-import { MdOutlineSearch } from 'react-icons/md';
-import ModalUserForm from '../auth/ModalUserForm';
-import { MdFavoriteBorder } from 'react-icons/md';
-import { selectCart } from 'store/cart/selectors';
-import { hideMessage } from 'store/user/userSlice';
-import { MdOutlineShoppingCart } from 'react-icons/md';
-import { useDispatch, useSelector } from 'react-redux';
-import { MdOutlinePersonOutline } from 'react-icons/md';
-import { useModalCart } from 'contexts/ModalCartContext';
-import { selectShowMessage } from 'store/user/selectors';
-import { ModalCart } from '../ModalShoppingCart/ModalCart/ModalCart';
-import { EmailCheckerForPasswordResetForm } from '../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm';
+import styles from "./header.module.scss";
+
+import { useEffect } from "react";
+import { useAuth } from "contexts/AuthContext";
+import Logo from "components/elements/Logo/Logo";
+import { MdOutlineSearch } from "react-icons/md";
+import ModalUserForm from "../auth/ModalUserForm";
+import { MdFavoriteBorder } from "react-icons/md";
+import { hideMessage } from "store/user/userSlice";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { MdOutlinePersonOutline } from "react-icons/md";
+import { useModalCart } from "contexts/ModalCartContext";
+import { selectShowMessage } from "store/user/selectors";
+import { selectNotAuthUserCart } from "store/cart/selectors";
+import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
+import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
+
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } = useAuth();
 
-  const { items: shoppingCart } = useSelector(selectCart);
+  const { cartItems: shoppingCart } = useSelector(selectNotAuthUserCart);
   const message = useSelector(selectShowMessage);
   const dispatch = useDispatch();
 

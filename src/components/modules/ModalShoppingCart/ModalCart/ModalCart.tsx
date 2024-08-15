@@ -1,16 +1,23 @@
 import styles from "./modalCart.module.scss";
 
+import {
+  selectAuthUserCart,
+  selectNotAuthUserCart,
+} from "store/cart/selectors";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../СartItem/CartItem";
-import { selectCart } from "store/cart/selectors";
 import { useModalCart } from "contexts/ModalCartContext";
 import { useOutsideModalClick } from "hooks/useOutsideModalClick";
+import Spinner from "components/elements/Spinner/Spinner";
 
 export function ModalCart() {
   const { onCloseCartModal, totalCartPrice, cartItemsCount } = useModalCart();
-  const { items: shoppingCart } = useSelector(selectCart);
+  const { cartItems: notAuthUserCart } = useSelector(selectNotAuthUserCart);
+  const { cartItems: authUserCart, isLoading } =
+    useSelector(selectAuthUserCart);
+
   const navigate = useNavigate();
 
   const overlayRef = useOutsideModalClick(onCloseCartModal);
@@ -38,14 +45,22 @@ export function ModalCart() {
 
         {/* List of Books  */}
         <div className={styles.main_box}>
-          {cartItemsCount === 0 ? (
-            <p>Ваш кошик порожній.</p>
+          {isLoading ? (
+            <Spinner />
           ) : (
-            <ul>
-              {shoppingCart?.map((book) => (
-                <CartItem key={book.id} book={book} />
-              ))}
-            </ul>
+            <>
+              {cartItemsCount === 0 ? (
+                <p>Ваш кошик порожній.</p>
+              ) : (
+                <ul>
+                  {(authUserCart ? authUserCart : notAuthUserCart).map(
+                    (book) => (
+                      <CartItem key={book.id} book={book} />
+                    )
+                  )}
+                </ul>
+              )}
+            </>
           )}
         </div>
 
