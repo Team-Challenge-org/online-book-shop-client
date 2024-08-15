@@ -12,16 +12,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { selectShowMessage } from "store/user/selectors";
-import { selectNotAuthUserCart } from "store/cart/selectors";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
+import { selectAuthUserCart } from "store/cart/selectors";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
     useAuth();
 
-  const { cartItems: shoppingCart } = useSelector(selectNotAuthUserCart);
+  const { isLoading } = useSelector(selectAuthUserCart);
+
+  const { cartItemsCount } = useModalCart();
   const message = useSelector(selectShowMessage);
   const dispatch = useDispatch();
 
@@ -92,12 +94,20 @@ const Header = () => {
               className={styles.nav_icon}
               onClick={onOpenCartModal}
             />
-            {shoppingCart.length > 0 ? (
-              <span className={styles.header__right__actions__cart__quantity}>
-                {shoppingCart.length}
-              </span>
-            ) : (
+            {isLoading ? (
               ""
+            ) : (
+              <>
+                {cartItemsCount > 0 ? (
+                  <span
+                    className={styles.header__right__actions__cart__quantity}
+                  >
+                    {cartItemsCount}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </>
             )}
           </div>
         </div>

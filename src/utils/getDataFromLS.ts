@@ -1,5 +1,4 @@
 import type { TBook } from "store/books/types";
-import type { TCartItem } from "store/cart/types";
 import type { TCategory } from "store/categories/types";
 import type { TFavoriteItems } from "store/favorite/types";
 

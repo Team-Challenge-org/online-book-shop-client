@@ -26,8 +26,8 @@ export const getCartItems = createAsyncThunk<
   { rejectValue: APIError }
 >("cart/getCartItems", async (_, thunkAPI) => {
   try {
-    const token =
-      sessionStorage.getItem("user") || localStorage.getItem("user");
+    const user = sessionStorage.getItem("user") || localStorage.getItem("user");
+    const token = user ? JSON.parse(user).token : null;
 
     const { data } = await axios.get<TCartResponse>(Endpoints.GET_CART_ITEMS, {
       headers: {
@@ -44,25 +44,7 @@ export const getCartItems = createAsyncThunk<
     }
 
     return thunkAPI.rejectWithValue({
-      message: "An unexpected error occurred",
+      message: "User is not authenticated",
     });
   }
 });
-
-// export const getUserCartById = createAsyncThunk<TCartResponse>(
-//   "cart/getUserCartById",
-//   async () => {
-//     const cartId = Cookies.get("userCartId");
-
-//     if (!cartId) throw new Error("Cart Id not found");
-
-//     const { data } = await axios.get<TCartResponse>(Endpoints.GET_CART_BY_ID, {
-//       headers: {
-//         Cookie: `cartId=${cartId}`,
-//       },
-//       withCredentials: true,
-//     });
-
-//     return data;
-//   }
-// );

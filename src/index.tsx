@@ -9,7 +9,7 @@ import { ModalCartProvider } from "contexts/ModalCartContext";
 import "./index.scss";
 import { BooksLogicProvider } from "contexts/BooksContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-//import 'normalize.css';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
