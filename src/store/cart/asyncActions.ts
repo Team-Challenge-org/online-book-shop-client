@@ -20,20 +20,18 @@ interface APIError {
   errors?: FieldError[];
 }
 
+axios.defaults.withCredentials = true;
+
 export const getCartItems = createAsyncThunk<
   TCartResponse,
   void,
   { rejectValue: APIError }
 >("cart/getCartItems", async (_, thunkAPI) => {
   try {
-    const user = sessionStorage.getItem("user") || localStorage.getItem("user");
-    const token = user ? JSON.parse(user).token : null;
+    // const user = sessionStorage.getItem("user") || localStorage.getItem("user");
+    // const token = user ? JSON.parse(user).token : null;
 
-    const { data } = await axios.get<TCartResponse>(Endpoints.GET_CART_ITEMS, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await axios.get<TCartResponse>(Endpoints.GET_CART_ITEMS);
 
     return data;
   } catch (error) {

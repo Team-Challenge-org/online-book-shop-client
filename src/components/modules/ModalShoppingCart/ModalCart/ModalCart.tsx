@@ -11,12 +11,15 @@ import { CartItem } from "../СartItem/CartItem";
 import { useModalCart } from "contexts/ModalCartContext";
 import { useOutsideModalClick } from "hooks/useOutsideModalClick";
 import Spinner from "components/elements/Spinner/Spinner";
+import { selectAuthData } from "store/user/selectors";
 
 export function ModalCart() {
   const { onCloseCartModal, totalCartPrice, cartItemsCount } = useModalCart();
   const { cartItems: notAuthUserCart } = useSelector(selectNotAuthUserCart);
   const { cartItems: authUserCart, isLoading } =
     useSelector(selectAuthUserCart);
+
+  const isAuth = useSelector(selectAuthData);
 
   const navigate = useNavigate();
 
@@ -45,52 +48,38 @@ export function ModalCart() {
 
         {/* List of Books  */}
         <div className={styles.main_box}>
-          {isLoading ? (
-            <Spinner />
+          {cartItemsCount === 0 ? (
+            <p>Ваш кошик порожній.</p>
           ) : (
-            <>
-              {cartItemsCount === 0 ? (
-                <p>Ваш кошик порожній.</p>
-              ) : (
-                <ul>
-                  {(authUserCart ? authUserCart : notAuthUserCart).map(
-                    (book) => (
-                      <CartItem key={book.id} book={book} />
-                    )
-                  )}
-                </ul>
-              )}
-            </>
+            <ul>
+              {(isAuth ? authUserCart : notAuthUserCart)?.map((book) => (
+                <CartItem key={book.id} book={book} />
+              ))}
+            </ul>
           )}
         </div>
 
-        {isLoading ? (
+        {cartItemsCount === 0 ? (
           ""
         ) : (
-          <>
-            {cartItemsCount === 0 ? (
-              ""
-            ) : (
-              <div className={styles.footer_box}>
-                <div className={styles.price_box}>
-                  <h2>Разом</h2>
-                  <p className={styles.total_price}>
-                    {totalCartPrice.toFixed(2)} грн
-                  </p>
-                </div>
+          <div className={styles.footer_box}>
+            <div className={styles.price_box}>
+              <h2>Разом</h2>
+              <p className={styles.total_price}>
+                {totalCartPrice.toFixed(2)} грн
+              </p>
+            </div>
 
-                <button
-                  className={styles.submit_btn}
-                  onClick={() => {
-                    navigate("/order");
-                    onCloseCartModal();
-                  }}
-                >
-                  Оформити замовлення
-                </button>
-              </div>
-            )}
-          </>
+            <button
+              className={styles.submit_btn}
+              onClick={() => {
+                navigate("/order");
+                onCloseCartModal();
+              }}
+            >
+              Оформити замовлення
+            </button>
+          </div>
         )}
       </div>
     </div>

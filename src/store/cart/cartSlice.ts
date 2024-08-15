@@ -10,7 +10,7 @@ const initialState: TCartSliceState = {
     cartItems: getCartFromLS(),
   },
   authUserCart: {
-    cartItems: null,
+    cartItems: [],
     totalPrice: 0,
     isLoading: false,
     error: null,

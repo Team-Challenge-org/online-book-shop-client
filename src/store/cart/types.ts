@@ -14,7 +14,7 @@ export type TNotAuthUserCart = {
 
 export type TAuthUserCart = {
   isLoading: boolean;
-  cartItems: TCartItem[] | null;
+  cartItems: TCartItem[];
   totalPrice: number ;
   error: string | null;
 };
