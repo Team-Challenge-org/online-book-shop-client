@@ -1,4 +1,4 @@
-import type { TUserState } from "./types";
+import type { TUserState } from './types';
 
 import {
   loginUser,
@@ -6,8 +6,8 @@ import {
   checkEmailForResetPassword,
   resetPassword,
   logoutUser,
-  loginUserGoogle
-} from "./asyncActions";
+  loginUserGoogle,
+} from './asyncActions';
 
 import { createSlice } from '@reduxjs/toolkit';
 import { getAuthFromLS, getUserFromLS } from 'utils/getDataFromLS';
@@ -19,16 +19,15 @@ const initialState: TUserState = {
   isAuth: getAuthFromLS(),
   isEmailChecked: false,
   isPasswordReset: false,
-  showMessage: false
-
+  showMessage: false,
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     loginForce(state, action) {
-      state.user = action.payload
+      state.user = action.payload;
     },
     resetEmailCheckState(state) {
       state.isEmailChecked = false;
@@ -36,7 +35,7 @@ const userSlice = createSlice({
     },
 
     hideMessage(state) {
-      state.showMessage = false
+      state.showMessage = false;
     },
   },
   extraReducers(builder) {
@@ -56,8 +55,8 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = null;
         console.log(action.error.message);
-        if (action.error.message === "User not found") {
-          state.error = "User not found";
+        if (action.error.message === 'User not found') {
+          state.error = 'User not found';
         } else {
           state.error = action.error.message!;
         }
@@ -77,8 +76,8 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = null;
         console.log(action.error.message);
-        if (action.error.message === "User not found") {
-          state.error = "User not found";
+        if (action.error.message === 'User not found') {
+          state.error = 'User not found';
         } else {
           state.error = action.error.message!;
         }
@@ -127,7 +126,7 @@ const userSlice = createSlice({
         state.error = action.error.message || null;
         state.isPasswordReset = false;
       })
-    .addCase(logoutUser.pending, (state) => {
+      .addCase(logoutUser.pending, (state) => {
         state.loading = true;
         state.user = null;
         state.error = null;
@@ -136,7 +135,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = null;
         state.error = null;
-        state.isAuth = false
+        state.isAuth = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
@@ -146,11 +145,10 @@ const userSlice = createSlice({
           state.error = 'User not found';
         } else {
           state.error = action.error.message!;
-        }})
-  }
-})
-      
-      
+        }
+      });
+  },
+});
 
 export const { resetEmailCheckState, hideMessage, loginForce } = userSlice.actions;
 

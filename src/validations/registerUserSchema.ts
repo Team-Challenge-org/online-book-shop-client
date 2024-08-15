@@ -1,11 +1,10 @@
-import { z } from "zod";
-import { errorMessage, EXCLUDED_DOMAINS } from "constants/auth";
+import { z } from 'zod';
+import { errorMessage, EXCLUDED_DOMAINS } from 'constants/auth';
 
 export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
 
-const nameRegex = /^[А-Яа-яA-Za-z0-9iIіІєЄ'\s-]+$/;
-export const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+export const nameRegex = /^[А-Яа-яA-Za-z0-9iIіІєЄ'\s-]+$/;
+export const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const registerUserSchema = z
   .object({
@@ -23,22 +22,15 @@ export const registerUserSchema = z
 
     phone_number: z
       .string()
-      .refine(
-        (value) => value.replace(/\D+/g, "").length === 12,
-        errorMessage.PHONE_NUMBER
-      )
-      .transform((value) => value.replace(/\D+/g, "")),
+      .refine((value) => value.replace(/\D+/g, '').length === 12, errorMessage.PHONE_NUMBER)
+      .transform((value) => value.replace(/\D+/g, '')),
 
     email: z
       .string()
       .refine((value) => emailRegex.test(value), errorMessage.EMAIL)
-      .refine(
-        (value) =>
-          !EXCLUDED_DOMAINS.some((domain) => value.endsWith(`@${domain}`)),
-        {
-          message: errorMessage.EMAIL,
-        }
-      ),
+      .refine((value) => !EXCLUDED_DOMAINS.some((domain) => value.endsWith(`@${domain}`)), {
+        message: errorMessage.EMAIL,
+      }),
 
     password: z
       .string()
@@ -48,13 +40,13 @@ export const registerUserSchema = z
         (value) => /^[\x00-\x7F]+$/.test(value), // Checking for ASCII characters
         {
           message: errorMessage.PASSWORD.COMMON,
-        }
+        },
       )
       .refine(
         (value) => !/^\s|\s$/.test(value), // Check if there is no space at the beginning or end
         {
           message: errorMessage.PASSWORD.COMMON,
-        }
+        },
       ),
 
     confirm_password: z.string(),
@@ -63,9 +55,9 @@ export const registerUserSchema = z
   .superRefine(({ password, confirm_password }, ctx) => {
     if (password !== confirm_password) {
       ctx.addIssue({
-        code: "custom",
+        code: 'custom',
         message: errorMessage.CONFIRM_PASSWORD,
-        path: ["confirm_password"],
+        path: ['confirm_password'],
       });
     }
   });

@@ -24,13 +24,13 @@ export default function NpBranch() {
     formState: { errors },
   } = useFormContext();
 
-  const watchBranch: TNPAddress = watch('np_branch');
+  const watchBranch: TNPAddress = watch('department');
   const watchCity: TNPCity = watch('city');
 
   useEffect(() => {
     dispatch(fetchAddress(watchBranch));
     dispatch(setAddress(watchBranch));
-  }, [watchBranch, watchCity]);
+  }, [watchBranch, watchCity, dispatch]);
 
   return (
     <label className={styles.order__delivery__block__label}>
@@ -40,12 +40,12 @@ export default function NpBranch() {
 
       <div
         className={
-          errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
+          errors?.department ? styles.input_box_error : styles.order__delivery__block__label__block
         }>
         <input
-          type="text"
-          placeholder="Оберіть відділення/поштомат"
-          {...register('np_branch')}
+          type='text'
+          placeholder='Оберіть відділення/поштомат'
+          {...register('department')}
           className={styles.order__delivery__block__label__block__input}
           onFocus={() => {
             setTimeout(() => {
@@ -72,7 +72,7 @@ export default function NpBranch() {
                 key={index}
                 className={styles.order__delivery__block__label__block__list__item}
                 onClick={() => {
-                  setValue('np_branch', address.Description);
+                  setValue('department', address.Description);
                   setTimeout(() => {
                     setFocusInput(false);
                   }, 200);
@@ -85,9 +85,9 @@ export default function NpBranch() {
       </div>
 
       {/* Display error message if any */}
-      {errors?.city && (
+      {errors?.department && (
         <ErrorMessage
-          message={errors.city?.message as string}
+          message={errors.department.message as string}
           errorTips={[
             'Ви можете використовувати лише українську мову',
             'Ви можете використовувати великі та малі літери.',

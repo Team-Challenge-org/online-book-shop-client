@@ -1,3 +1,4 @@
+
 import styles from "./header.module.scss";
 
 import { useEffect } from "react";
@@ -16,28 +17,28 @@ import { selectNotAuthUserCart } from "store/cart/selectors";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
 
+
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
-  const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
-    useAuth();
+  const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } = useAuth();
 
   const { cartItems: shoppingCart } = useSelector(selectNotAuthUserCart);
   const message = useSelector(selectShowMessage);
   const dispatch = useDispatch();
 
-  function handleHideMessage() {
-    dispatch(hideMessage());
-  }
-
   useEffect(() => {
+    function handleHideMessage() {
+      dispatch(hideMessage());
+    }
+
     if (message) {
       setTimeout(handleHideMessage, 5000);
     }
-  }, [message]);
+  }, [message, dispatch]);
 
   return (
     <header className={styles.header}>
-      <Logo color={"#000000"} />
+      <Logo color={'#000000'} />
 
       <nav className={styles.header__nav}>
         <ul className={styles.header__nav__list}>
@@ -49,11 +50,7 @@ const Header = () => {
 
       <div className={styles.header__right}>
         <form className={styles.header__right__form}>
-          <input
-            type="text"
-            placeholder="Пошук"
-            className={styles.header__right__form__input}
-          />
+          <input type='text' placeholder='Пошук' className={styles.header__right__form__input} />
           <MdOutlineSearch className={styles.header__right__form__icon} />
         </form>
 
@@ -62,14 +59,7 @@ const Header = () => {
             <div className={styles.header__right__actions__message}>
               <span className={styles.header__right__actions__message__title}>
                 Вітаємо,
-                <span
-                  className={
-                    styles.header__right__actions__message__title_italic
-                  }
-                >
-                  Ім’я
-                </span>
-                !
+                <span className={styles.header__right__actions__message__title_italic}>Ім’я</span>!
               </span>
               <span className={styles.header__right__actions__message__text}>
                 Ви успішно зареєструвались!
@@ -83,21 +73,15 @@ const Header = () => {
 
           <MdFavoriteBorder className={styles.nav_icon} />
 
-          <MdOutlinePersonOutline
-            className={styles.nav_icon}
-            onClick={onShowRegisterForm}
-          />
+          <MdOutlinePersonOutline className={styles.nav_icon} onClick={onShowRegisterForm} />
           <div className={styles.header__right__actions__cart}>
-            <MdOutlineShoppingCart
-              className={styles.nav_icon}
-              onClick={onOpenCartModal}
-            />
+            <MdOutlineShoppingCart className={styles.nav_icon} onClick={onOpenCartModal} />
             {shoppingCart.length > 0 ? (
               <span className={styles.header__right__actions__cart__quantity}>
                 {shoppingCart.length}
               </span>
             ) : (
-              ""
+              ''
             )}
           </div>
         </div>

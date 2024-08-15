@@ -1,9 +1,11 @@
+
 import styles from "../orderPage.module.scss";
 
 import { useSelector } from "react-redux";
 import { useModalCart } from "contexts/ModalCartContext";
 import { selectNotAuthUserCart } from "store/cart/selectors";
 import { CartItem } from "components/modules/ModalShoppingCart/СartItem/CartItem";
+
 
 export default function OrderItems() {
   const { cartItems: shoppingCart } = useSelector(selectNotAuthUserCart);
@@ -14,7 +16,7 @@ export default function OrderItems() {
       <h1 className={styles.order__items__title}>Замовлення</h1>
       <ul>
         {shoppingCart?.map((book) => (
-          <CartItem key={book.id} book={book} />
+          <OrderItem key={book.id} book={book} />
         ))}
       </ul>
       <div className={styles.order__items__footer}>
