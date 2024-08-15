@@ -4,14 +4,15 @@ import {
   increaseItemQuantity,
   updateItemQuantity,
 } from "store/cart/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectAuthUserCart,
   selectNotAuthUserCart,
 } from "store/cart/selectors";
-import React, { createContext, useContext, useState } from "react";
-import { getCartItems } from "store/cart/asyncActions";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
+import { getCartItems } from "store/cart/asyncActions";
+import React, { createContext, useContext, useState } from "react";
 
 export type TModalCartContext = {
   showModal: boolean;
@@ -63,6 +64,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
   function handleOpenModal() {
     // make api call to get auth cart
     dispatch(getCartItems());
+
     setShowModal(true);
   }
 

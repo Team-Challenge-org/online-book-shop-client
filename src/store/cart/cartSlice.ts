@@ -1,6 +1,5 @@
 import type { TCartItem, TCartSliceState } from "./types";
 
-
 // import { RootState } from "store/store";
 import { getCartItems } from "./asyncActions";
 import { getCartFromLS } from "utils/getDataFromLS";
@@ -14,6 +13,7 @@ const initialState: TCartSliceState = {
     cartItems: null,
     totalPrice: 0,
     isLoading: false,
+    error: null,
   },
 };
 
@@ -129,8 +129,11 @@ const cartSlice = createSlice({
         state.authUserCart.cartItems = action.payload.items;
         state.authUserCart.totalPrice = action.payload.totalPrice;
       })
-      .addCase(getCartItems.rejected, (state) => {
+      .addCase(getCartItems.rejected, (state, action) => {
         state.authUserCart.isLoading = false;
+        state.authUserCart.error =
+          action.payload?.message || "User is not authenticated";
+        console.log(action.payload);
       });
   },
 });

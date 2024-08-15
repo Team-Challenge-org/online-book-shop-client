@@ -16,7 +16,7 @@ export type TAuthUserCart = {
   isLoading: boolean;
   cartItems: TCartItem[] | null;
   totalPrice: number ;
-  // error: string | null;
+  error: string | null;
 };
 
 export type TCartSliceState = {
