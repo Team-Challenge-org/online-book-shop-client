@@ -7,7 +7,7 @@ import type { TFavoriteItems } from "store/favorite/types";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
-import { selectOneCart } from "store/cart/selectors";
+import { selectItemInNotAuthUserCart } from "store/cart/selectors";
 import React, { useState } from "react";
 import { useBooksLogic } from "contexts/BooksContext";
 import { selectOneFavorite } from "store/favorite/selectors";
@@ -23,7 +23,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
   const { updateBookViewAndData } = useBooksLogic();
   const favorite = useSelector(selectOneFavorite(item));
-  const cart = useSelector(selectOneCart(item));
+  const cart = useSelector(selectItemInNotAuthUserCart(item));
   const [hoverFavorite, setHoverFavorite] = useState(false);
   const [hoverCart, setHoverCart] = useState(false);
 

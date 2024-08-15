@@ -5,8 +5,8 @@ export type TFavoriteItems = {
   short_description: string;
   price: number;
   category: string;
-  isThisNotSlider: boolean;
-  available: string;
+  isThisSlider: boolean;
+  available?: string;
   authors: string | null;
   titleImage: string | null;
   timeAdded: string;

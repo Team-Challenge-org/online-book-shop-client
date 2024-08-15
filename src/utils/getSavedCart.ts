@@ -1,9 +1,8 @@
 import Cookies from "js-cookie";
-import { useAuth } from "contexts/AuthContext";
 import { getCartFromLS } from "./getDataFromLS";
 
-export function getSavedCart() {
-  const { isAuth } = useAuth();
-
-  return isAuth ? JSON.parse(Cookies.get("cart") || "[]") : getCartFromLS();
+export function getSavedCart(isAuthenticated: boolean | null) {
+  return isAuthenticated
+    ? JSON.parse(Cookies.get("cart") || "[]")
+    : getCartFromLS();
 }

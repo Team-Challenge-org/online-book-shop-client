@@ -3,16 +3,16 @@ import styles from "styles/catalogList/index.module.scss";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
-import { selectCart } from "store/cart/selectors";
 import { fetchBooks } from "store/books/asyncActions";
 import { selectBookData } from "store/books/selectors";
 import { selectFavorite } from "store/favorite/selectors";
 import { selectCategory } from "store/categories/selectors";
+import { selectNotAuthUserCart } from "store/cart/selectors";
 import CatalogItem from "components/modules/CatalogList/CatalogItem";
 
 const CatalogList = () => {
   const { books } = useSelector(selectBookData);
-  const { items: cartItems } = useSelector(selectCart);
+  const { cartItems } = useSelector(selectNotAuthUserCart);
   const { items: favoriteItems } = useSelector(selectFavorite);
   const category = useSelector(selectCategory);
 

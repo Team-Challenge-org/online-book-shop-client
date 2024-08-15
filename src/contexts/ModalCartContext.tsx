@@ -4,9 +4,14 @@ import {
   increaseItemQuantity,
   updateItemQuantity,
 } from "store/cart/cartSlice";
-import { selectCart } from "store/cart/selectors";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  selectAuthUserCart,
+  selectNotAuthUserCart,
+} from "store/cart/selectors";
 import React, { createContext, useContext, useState } from "react";
+import { getCartItems } from "store/cart/asyncActions";
+import { useAppDispatch } from "store/store";
 
 export type TModalCartContext = {
   showModal: boolean;
@@ -37,18 +42,27 @@ type TModalCartProviderProps = {
 };
 
 function ModalCartProvider({ children }: TModalCartProviderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
   const [showModal, setShowModal] = useState(false);
-  const { items: shoppingCart } = useSelector(selectCart);
+  const { cartItems: authUserCart, totalPrice } =
+    useSelector(selectAuthUserCart);
+  const { cartItems: notAuthUserCart } = useSelector(selectNotAuthUserCart);
 
-  const totalCartPrice = shoppingCart?.reduce(
-    (totalPrice, book) => totalPrice + book?.price * book?.quantity,
-    0
-  );
+  const totalCartPrice = authUserCart
+    ? totalPrice
+    : notAuthUserCart?.reduce(
+        (totalPrice, book) => totalPrice + book?.price * book?.quantity,
+        0
+      );
 
-  const cartItemsCount = shoppingCart?.length;
+  const cartItemsCount = authUserCart
+    ? authUserCart?.length
+    : notAuthUserCart?.length;
 
   function handleOpenModal() {
+    // make api call to get auth cart
+    dispatch(getCartItems());
     setShowModal(true);
   }
 

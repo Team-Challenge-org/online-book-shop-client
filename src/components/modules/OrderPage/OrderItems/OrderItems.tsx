@@ -1,11 +1,12 @@
-import { useSelector } from 'react-redux';
-import styles from '../orderPage.module.scss';
-import { selectCart } from 'store/cart/selectors';
-import { CartItem } from 'components/modules/ModalShoppingCart/СartItem/CartItem';
-import { useModalCart } from 'contexts/ModalCartContext';
+import styles from "../orderPage.module.scss";
+
+import { useSelector } from "react-redux";
+import { useModalCart } from "contexts/ModalCartContext";
+import { selectNotAuthUserCart } from "store/cart/selectors";
+import { CartItem } from "components/modules/ModalShoppingCart/СartItem/CartItem";
 
 export default function OrderItems() {
-  const { items: shoppingCart } = useSelector(selectCart);
+  const { cartItems: shoppingCart } = useSelector(selectNotAuthUserCart);
   const { totalCartPrice } = useModalCart();
 
   return (
@@ -18,7 +19,9 @@ export default function OrderItems() {
       </ul>
       <div className={styles.order__items__footer}>
         <h2 className={styles.order__items__footer__text}>Разом</h2>
-        <p className={styles.order__items__footer__text}>{totalCartPrice.toFixed(2)} грн</p>
+        <p className={styles.order__items__footer__text}>
+          {totalCartPrice.toFixed(2)} грн
+        </p>
       </div>
     </div>
   );

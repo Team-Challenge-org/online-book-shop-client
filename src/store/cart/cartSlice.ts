@@ -1,19 +1,20 @@
 import type { TCartItem, TCartSliceState } from "./types";
 
-import {
-  createUserCart,
-  getUserCartById,
-  addBookToUserCart,
-} from "./asyncActions";
-import Cookies from "js-cookie";
-import { getSavedCart } from "utils/getSavedCart";
+
+// import { RootState } from "store/store";
+import { getCartItems } from "./asyncActions";
+import { getCartFromLS } from "utils/getDataFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TCartSliceState = {
-  cartId: Cookies.get("userCartId") || null,
-  books: getSavedCart(),
-  loading: false,
-  error: null,
+  notAuthUserCart: {
+    cartItems: getCartFromLS(),
+  },
+  authUserCart: {
+    cartItems: null,
+    totalPrice: 0,
+    isLoading: false,
+  },
 };
 
 const cartSlice = createSlice({
@@ -21,108 +22,115 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addOrRemoveCartItem(state, action: PayloadAction<TCartItem>) {
-      const findCartItem = state.books.find(
+      const findCartItem = state.notAuthUserCart.cartItems.find(
         (item) => item.id === action.payload.id
       );
 
       if (findCartItem) {
-        state.books = state.books.filter((obj) => obj.id !== action.payload.id);
+        state.notAuthUserCart.cartItems =
+          state.notAuthUserCart.cartItems.filter(
+            (obj) => obj.id !== action.payload.id
+          );
       } else {
-        state.books.push({
+        state.notAuthUserCart.cartItems.push({
           ...action.payload,
         });
       }
 
-      localStorage.setItem("cart", JSON.stringify(state.books));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.notAuthUserCart.cartItems)
+      );
     },
 
     clearItems(state) {
-      state.books = [];
+      state.notAuthUserCart.cartItems = [];
     },
 
     increaseItemQuantity(state, { payload }) {
-      const currentItem = state.books.find((item) => item.id === payload);
+      const currentItem = state.notAuthUserCart.cartItems.find(
+        (item) => item.id === payload
+      );
 
       if (currentItem) currentItem.quantity += 1;
-      localStorage.setItem("cart", JSON.stringify(state.books));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.notAuthUserCart.cartItems)
+      );
     },
 
     decreaseItemQantity(state, { payload }) {
-      const currentItem = state.books.find((item) => item.id === payload);
+      const currentItem = state.notAuthUserCart.cartItems.find(
+        (item) => item.id === payload
+      );
 
       if (currentItem) currentItem.quantity -= 1;
 
       if (currentItem?.quantity === 0) currentItem.quantity = 1;
 
-      localStorage.setItem("cart", JSON.stringify(state.books));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.notAuthUserCart.cartItems)
+      );
     },
 
     updateItemQuantity(state, action) {
       const { itemId, newQuantity } = action.payload;
-      const currentItem = state.books.find((item) => item.id === itemId);
+      const currentItem = state.notAuthUserCart.cartItems.find(
+        (item) => item.id === itemId
+      );
 
       if (currentItem) currentItem.quantity = newQuantity;
 
       if (currentItem?.quantity === 0) currentItem.quantity = 1;
 
-      localStorage.setItem("cart", JSON.stringify(state.books));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.notAuthUserCart.cartItems)
+      );
     },
 
     removeItem(state, { payload }) {
-      state.books = state.books.filter((item) => item.id !== payload);
-      localStorage.setItem("cart", JSON.stringify(state.books));
+      state.notAuthUserCart.cartItems = state.notAuthUserCart.cartItems.filter(
+        (item) => item.id !== payload
+      );
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.notAuthUserCart.cartItems)
+      );
     },
 
-    addItemToCart(state, { payload }) {
-      const findCartItem = state.books.find((item) => item.id === payload.id);
+    addItemToCart(state, action: PayloadAction<TCartItem>) {
+      const { payload } = action;
+      const findCartItem = state.notAuthUserCart.cartItems.find(
+        (item) => item.id === payload.id
+      );
 
       if (findCartItem) findCartItem.quantity += 1;
 
-      if (!findCartItem) state.books.push(payload);
+      if (!findCartItem) state.notAuthUserCart.cartItems.push(payload);
 
-      localStorage.setItem("cart", JSON.stringify(state.books));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.notAuthUserCart.cartItems)
+      );
 
       return;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createUserCart.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(createUserCart.fulfilled, (state, action) => {
-        state.loading = false;
-        state.cartId = action.payload.cartId;
-        Cookies.set("userCartId", action.payload.cartId);
-      })
-      .addCase(createUserCart.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to fetch cart";
-      })
 
-      .addCase(getUserCartById.pending, (state) => {
-        state.loading = true;
+      .addCase(getCartItems.pending, (state) => {
+        state.authUserCart.isLoading = true;
       })
-      .addCase(getUserCartById.fulfilled, (state, action) => {
-        state.loading = false;
-        state.books = action.payload.books;
-        Cookies.set("cart", JSON.stringify(state.books));
+      .addCase(getCartItems.fulfilled, (state, action) => {
+        state.authUserCart.isLoading = false;
+        state.authUserCart.cartItems = action.payload.items;
+        state.authUserCart.totalPrice = action.payload.totalPrice;
       })
-      .addCase(getUserCartById.rejected, (state, action) => {
-        state.error = action.error.message || "Failed to get books";
-      })
-
-      .addCase(addBookToUserCart.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(addBookToUserCart.fulfilled, (state, action) => {
-        state.loading = false;
-        state.books.push(action.payload.bookId);
-        Cookies.set("cart", JSON.stringify(state.books));
-      })
-      .addCase(addBookToUserCart.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to add book to cart";
+      .addCase(getCartItems.rejected, (state) => {
+        state.authUserCart.isLoading = false;
       });
   },
 });

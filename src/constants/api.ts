@@ -16,10 +16,9 @@ export const Endpoints = {
   CHECK_EMAIL: `${API_BASE_URL}/api/v1/user/resetPassword`,
   RESET_PASSWORD: `${API_BASE_URL}/api/v1/user/savePassword`,
 
-  // user shopping cart
-  CREATE_CART: `${API_BASE_URL}/api/v1/cart/create`,
-  GET_CART_BY_ID: `${API_BASE_URL}/api/v1/cart/findById`,
-  GET_TOTAL_CART_PRICE: `${API_BASE_URL}/api/v1/cart/total`,
+  // authenticated user shopping cart
+  GET_CART_ITEMS: `${API_BASE_URL}/api/v1/cart/items`,
+  
   
   ADD_BOOK_TO_CART: `${API_BASE_URL}/api/v1/cart/add`,
   DELETE_BOOK_FROM_CART: `${API_BASE_URL}/api/v1/cart/delete`,

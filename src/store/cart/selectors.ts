@@ -1,5 +1,15 @@
-import { TBook } from 'store/books/types';
-import { RootState } from 'store/store';
+import type { TCartItem } from "./types";
 
-export const selectCart = (state: RootState) => state.cart;
-export const selectOneCart = (book: TBook) => ( (state: RootState) => state.cart.items.find(item => book.id === item.id))
+import { RootState } from "store/store";
+
+
+export const selectNotAuthUserCart = (state: RootState) =>
+  state.cart.notAuthUserCart;
+
+export const selectItemInNotAuthUserCart =
+(book: TCartItem) => (state: RootState) =>
+  state.cart.notAuthUserCart.cartItems.find((item) => book.id === item.id);
+
+
+export const selectAuthUserCart = (state: RootState) =>
+  state.cart.authUserCart;
