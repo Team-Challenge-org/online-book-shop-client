@@ -4,45 +4,71 @@ import axios from "axios";
 import { Endpoints } from "constants/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export type TCartResponse = {
+export type TGetCartItemsResponse = {
   items: TCartItem[];
   totalPrice: number;
 };
 
-interface FieldError {
-  field: string;
-  message: string;
-}
+export type TDeleteCartItemResponse = {
+  id: string;
+  isPermanent: boolean;
+  lastModified: string;
+  items: TCartItem[];
+};
 
-interface APIError {
+export type TAPIError = {
+  statusCode: number;
   message: string;
-  code?: number;
-  errors?: FieldError[];
-}
+  timestamp: string;
+};
 
 axios.defaults.withCredentials = true;
 
 export const getCartItems = createAsyncThunk<
-  TCartResponse,
+  TGetCartItemsResponse,
   void,
-  { rejectValue: APIError }
+  { rejectValue: TAPIError }
 >("cart/getCartItems", async (_, thunkAPI) => {
   try {
-    // const user = sessionStorage.getItem("user") || localStorage.getItem("user");
-    // const token = user ? JSON.parse(user).token : null;
-
-    const { data } = await axios.get<TCartResponse>(Endpoints.GET_CART_ITEMS);
+    const { data } = await axios.get<TGetCartItemsResponse>(
+      Endpoints.GET_CART_ITEMS
+    );
 
     return data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response && error.response.data) {
-        return thunkAPI.rejectWithValue(error.response.data.errors as APIError);
-      }
-    }
+    return thunkAPI.rejectWithValue(error as TAPIError);
+  }
+});
 
-    return thunkAPI.rejectWithValue({
-      message: "User is not authenticated",
+export const addItemToAuthCart = createAsyncThunk<
+  void,
+  string,
+  { rejectValue: TAPIError }
+>("cart/addItemToAuthCart", async (bookId, thunkAPI) => {
+  try {
+    await axios.post(Endpoints.ADD_BOOK_TO_CART, null, {
+      params: { bookId },
     });
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as TAPIError);
+  }
+});
+
+
+export const deleteCartItem = createAsyncThunk<
+  TDeleteCartItemResponse,
+  string,
+  { rejectValue: TAPIError }
+>("cart/deleteCartItem", async (bookId, thunkAPI) => {
+  try {
+    const { data } = await axios.delete<TDeleteCartItemResponse>(
+      Endpoints.DELETE_BOOK_FROM_CART,
+      {
+        params: { bookId },
+      }
+    );
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as TAPIError);
   }
 });

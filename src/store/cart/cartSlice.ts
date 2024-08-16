@@ -1,7 +1,12 @@
 import type { TCartItem, TCartSliceState } from "./types";
 
-// import { RootState } from "store/store";
-import { getCartItems } from "./asyncActions";
+import {
+  addItemToAuthCart,
+  deleteCartItem,
+  getCartItems,
+  TAPIError,
+  TGetCartItemsResponse,
+} from "./asyncActions";
 import { getCartFromLS } from "utils/getDataFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -124,17 +129,54 @@ const cartSlice = createSlice({
       .addCase(getCartItems.pending, (state) => {
         state.authUserCart.isLoading = true;
       })
-      .addCase(getCartItems.fulfilled, (state, action) => {
-        state.authUserCart.isLoading = false;
-        state.authUserCart.cartItems = action.payload.items;
-        state.authUserCart.totalPrice = action.payload.totalPrice;
+      .addCase(
+        getCartItems.fulfilled,
+        (state, action: PayloadAction<TGetCartItemsResponse>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.cartItems = action.payload.items;
+          state.authUserCart.totalPrice = action.payload.totalPrice;
+        }
+      )
+      .addCase(
+        getCartItems.rejected,
+        (state, action: PayloadAction<TAPIError | undefined>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.error =
+            action.payload?.message || "Failed to get cart items";
+
+          console.log(action.payload);
+        }
+      )
+
+      .addCase(addItemToAuthCart.pending, (state) => {
+        state.authUserCart.isLoading = true;
       })
-      .addCase(getCartItems.rejected, (state, action) => {
+      .addCase(addItemToAuthCart.fulfilled, (state) => {
         state.authUserCart.isLoading = false;
-        state.authUserCart.error =
-          action.payload?.message || "User is not authenticated";
-        console.log(action.payload);
-      });
+      })
+      .addCase(
+        addItemToAuthCart.rejected,
+        (state, action: PayloadAction<TAPIError | undefined>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.error =
+            action.payload?.message || "Failed to add book to cart";
+        }
+      )
+
+      .addCase(deleteCartItem.pending, (state) => {
+        state.authUserCart.isLoading = true;
+      })
+      .addCase(deleteCartItem.fulfilled, (state) => {
+        state.authUserCart.isLoading = false;
+      })
+      .addCase(
+        deleteCartItem.rejected,
+        (state, action: PayloadAction<TAPIError | undefined>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.error =
+            action.payload?.message || "Failed to delete book from cart";
+        }
+      );
   },
 });
 
