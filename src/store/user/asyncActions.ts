@@ -90,7 +90,6 @@ export const resetPassword = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk('user/logout', async (token: string | null | any) => {
-  console.log(token?.token);
   const config = {
     headers: { Authorization: `Bearer ${token?.token}` },
   };
