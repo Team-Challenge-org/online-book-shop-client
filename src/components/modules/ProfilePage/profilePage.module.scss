@@ -1,0 +1,38 @@
+@import '/src/styles/utils/_variables';
+
+.profile {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 80px 40px 80px;
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19.36px;
+    color: $color-black;
+    margin-bottom: 40px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 24px;
+
+    &__item {
+      padding: 16px 20px;
+      border: 0.5px solid $color-main-15;
+
+      &__link {
+        text-decoration: none;
+        color: rgba(0, 0, 0, 1);
+      }
+
+      &_active {
+        background-color: $color-main-05;
+        border: none;
+        border-bottom: 2px solid $color-main;
+      }
+    }
+  }
+}

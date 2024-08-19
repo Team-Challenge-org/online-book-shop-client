@@ -18,21 +18,7 @@ import { useAuth } from 'contexts/AuthContext';
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { loading } = useSelector(selectUserData);
-  const [isLoading, setIsLoading] = useState(false);
   const { onCloseRegisterForm } = useAuth();
-
-  const { setIsRegisterForm } = useAuth();
-
-  useEffect(() => {
-    if (loading) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-
-    setIsRegisterForm(false);
-  }, [loading, setIsRegisterForm]);
 
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),
@@ -58,48 +44,44 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <form onSubmit={handleSubmit(onSubmitData)} className={styles.login}>
-          <RegisterField
-            field={{
-              id: 400,
-              type: 'text',
-              label: 'Номер телефону або електронна пошта *',
-              placeholder: 'Введіть номер телефону або електронну пошту',
-              valueName: 'email_or_number',
-            }}
+      <form onSubmit={handleSubmit(onSubmitData)} className={styles.login}>
+        <RegisterField
+          field={{
+            id: 400,
+            type: 'text',
+            label: 'Номер телефону або електронна пошта *',
+            placeholder: 'Введіть номер телефону або електронну пошту',
+            valueName: 'email_or_number',
+          }}
+        />
+
+        <RegisterField
+          resetPassword={true}
+          field={{
+            id: 401,
+            type: 'password',
+            label: 'Пароль *',
+            placeholder: 'Введіть пароль',
+            valueName: 'login_password',
+            iconOpenEye: <MdOutlineVisibility />,
+            iconCloseEye: <MdOutlineVisibilityOff />,
+          }}
+        />
+
+        <label className={styles.checkbox_container}>
+          <input
+            type='checkbox'
+            checked={isRememberMe}
+            onChange={() => setIsRememberMe((prev) => !prev)}
+            className={styles.checkbox}
           />
+          <span>Запам’ятати мене</span>
+        </label>
 
-          <RegisterField
-            resetPassword={true}
-            field={{
-              id: 401,
-              type: 'password',
-              label: 'Пароль *',
-              placeholder: 'Введіть пароль',
-              valueName: 'login_password',
-              iconOpenEye: <MdOutlineVisibility />,
-              iconCloseEye: <MdOutlineVisibilityOff />,
-            }}
-          />
-
-          <label className={styles.checkbox_container}>
-            <input
-              type='checkbox'
-              checked={isRememberMe}
-              onChange={() => setIsRememberMe((prev) => !prev)}
-              className={styles.checkbox}
-            />
-            <span>Запам’ятати мене</span>
-          </label>
-
-          <button className={activeBtnSubmit} type='submit'>
-            Увійти
-          </button>
-        </form>
-      )}
+        <button className={activeBtnSubmit} type='submit'>
+          Увійти
+        </button>
+      </form>
     </FormProvider>
   );
 };
