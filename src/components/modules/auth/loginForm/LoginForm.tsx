@@ -1,25 +1,26 @@
-import styles from "./loginForm.module.scss";
+import styles from './loginForm.module.scss';
 
-import type { TUser } from "store/user/types";
+import type { TUser } from 'store/user/types';
 
-import { AppDispatch } from "store/store";
-import React, { useEffect, useState } from "react";
-import { loginUser } from "store/user/asyncActions";
-import { selectUserData } from "store/user/selectors";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useDispatch, useSelector } from "react-redux";
-import { FormProvider, useForm } from "react-hook-form";
-import Spinner from "components/elements/Spinner/Spinner";
-import { RegisterField } from "../shared/registerField/RegisterField";
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
-import { TLoginUserSchema, loginUserSchema } from "validations/loginUserSchema";
-import { useAuth } from "contexts/AuthContext";
+import { AppDispatch } from 'store/store';
+import React, { useEffect, useState } from 'react';
+import { loginUser } from 'store/user/asyncActions';
+import { selectUserData } from 'store/user/selectors';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useDispatch, useSelector } from 'react-redux';
+import { FormProvider, useForm } from 'react-hook-form';
+import Spinner from 'components/elements/Spinner/Spinner';
+import { RegisterField } from '../shared/registerField/RegisterField';
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
+import { TLoginUserSchema, loginUserSchema } from 'validations/loginUserSchema';
+import { useAuth } from 'contexts/AuthContext';
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { loading } = useSelector(selectUserData);
   const [isLoading, setIsLoading] = useState(false);
+  const { onCloseRegisterForm } = useAuth();
 
   const { setIsRegisterForm } = useAuth();
 
@@ -45,6 +46,7 @@ const LoginForm = () => {
     };
     dispatch(loginUser(userCredential));
     methods.reset();
+    onCloseRegisterForm();
   }
 
   const {
@@ -63,10 +65,10 @@ const LoginForm = () => {
           <RegisterField
             field={{
               id: 400,
-              type: "text",
-              label: "Номер телефону або електронна пошта *",
-              placeholder: "Введіть номер телефону або електронну пошту",
-              valueName: "email_or_number",
+              type: 'text',
+              label: 'Номер телефону або електронна пошта *',
+              placeholder: 'Введіть номер телефону або електронну пошту',
+              valueName: 'email_or_number',
             }}
           />
 
@@ -74,10 +76,10 @@ const LoginForm = () => {
             resetPassword={true}
             field={{
               id: 401,
-              type: "password",
-              label: "Пароль *",
-              placeholder: "Введіть пароль",
-              valueName: "login_password",
+              type: 'password',
+              label: 'Пароль *',
+              placeholder: 'Введіть пароль',
+              valueName: 'login_password',
               iconOpenEye: <MdOutlineVisibility />,
               iconCloseEye: <MdOutlineVisibilityOff />,
             }}
@@ -85,7 +87,7 @@ const LoginForm = () => {
 
           <label className={styles.checkbox_container}>
             <input
-              type="checkbox"
+              type='checkbox'
               checked={isRememberMe}
               onChange={() => setIsRememberMe((prev) => !prev)}
               className={styles.checkbox}
@@ -93,7 +95,7 @@ const LoginForm = () => {
             <span>Запам’ятати мене</span>
           </label>
 
-          <button className={activeBtnSubmit} type="submit">
+          <button className={activeBtnSubmit} type='submit'>
             Увійти
           </button>
         </form>

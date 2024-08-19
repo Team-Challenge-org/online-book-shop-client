@@ -5,6 +5,7 @@ import HomePage from 'pages/HomePage/HomePage';
 import OrderPage from 'pages/OrderPage/OrderPage';
 import PaymentPage from 'pages/PaymentPage/PaymentPage';
 import ProductPage from 'pages/ProductPage/ProductPage';
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import ResetPasswordPage from 'pages/resetPasswordPage/ResetPasswordPage';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -17,6 +18,7 @@ function App() {
         <Route path='/book/:id' element={<ProductPage />} />
         <Route path='/reset_password' element={<ResetPasswordPage />} />
         <Route path='/payment' element={<PaymentPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
 
         {/* Errors: */}
         <Route path='/404' element={<NotFoundPage />} />
