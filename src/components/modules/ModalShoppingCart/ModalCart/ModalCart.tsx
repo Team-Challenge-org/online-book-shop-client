@@ -64,27 +64,33 @@ export function ModalCart() {
           )}
         </div>
 
-        {cartItemsCount === 0 ? (
+        {isLoading ? (
           ""
         ) : (
-          <div className={styles.footer_box}>
-            <div className={styles.price_box}>
-              <h2>Разом</h2>
-              <p className={styles.total_price}>
-                {totalCartPrice.toFixed(2)} грн
-              </p>
-            </div>
+          <>
+            {cartItemsCount === 0 ? (
+              ""
+            ) : (
+              <div className={styles.footer_box}>
+                <div className={styles.price_box}>
+                  <h2>Разом</h2>
+                  <p className={styles.total_price}>
+                    {totalCartPrice.toFixed(2)} грн
+                  </p>
+                </div>
 
-            <button
-              className={styles.submit_btn}
-              onClick={() => {
-                navigate("/order");
-                onCloseCartModal();
-              }}
-            >
-              Оформити замовлення
-            </button>
-          </div>
+                <button
+                  className={styles.submit_btn}
+                  onClick={() => {
+                    navigate("/order");
+                    onCloseCartModal();
+                  }}
+                >
+                  Оформити замовлення
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
