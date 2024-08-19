@@ -34,7 +34,7 @@ export default function ProfileModal() {
         <li
           className={styles.profile__block__list__item}
           onClick={() => {
-            navigate('/profile');
+            navigate('/profile?element=personal');
             onCloseRegisterForm();
           }}>
           <div className={styles.profile__block__list__item__icon__wrapper}>
@@ -45,7 +45,7 @@ export default function ProfileModal() {
         <li
           className={styles.profile__block__list__item}
           onClick={() => {
-            navigate('/profile');
+            navigate('/profile?element=favorites');
             onCloseRegisterForm();
           }}>
           <div className={styles.profile__block__list__item__icon__wrapper}>
@@ -56,7 +56,7 @@ export default function ProfileModal() {
         <li
           className={styles.profile__block__list__item}
           onClick={() => {
-            navigate('/profile');
+            navigate('/profile?element=orders');
             onCloseRegisterForm();
           }}>
           <div className={styles.profile__block__list__item__icon__wrapper}>
