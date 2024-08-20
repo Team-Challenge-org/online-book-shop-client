@@ -148,7 +148,7 @@ export function RegisterForm() {
             <RegisterField field={field} key={field.id} />
           ))}
 
-          <label className={styles.checkbox_container}>
+          <div className={styles.checkbox_container}>
             <input
               type="checkbox"
               checked={isPublicOfferAccepted}
@@ -156,8 +156,8 @@ export function RegisterForm() {
               className={styles.checkbox}
             />
 
-            <span>Я ознайомлений(-а) з публічною офертою та приймаю її</span>
-          </label>
+            <span className={styles.checkbox_label}>Я ознайомлений(-а) з публічною офертою та приймаю її</span>
+          </div>
 
           <button className={activeBtnSubmit} type="submit">
             Зареєструватись
