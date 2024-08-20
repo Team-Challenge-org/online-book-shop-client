@@ -24,6 +24,14 @@ form {
     height: 16px;
     margin: 0;
   }
+
+  .checkbox_label {
+    cursor: pointer;
+
+    &:hover {
+      color: $color-main;
+    }
+  }
 }
 
 .btn_active {
