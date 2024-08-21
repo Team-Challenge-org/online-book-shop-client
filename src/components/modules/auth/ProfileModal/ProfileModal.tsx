@@ -3,15 +3,13 @@ import styles from './profileModal.module.scss';
 import { MdLogout, MdOutlinePerson } from 'react-icons/md';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { MdOutlineLocalShipping } from 'react-icons/md';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData } from 'store/user/selectors';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from 'store/store';
 import { useAuth } from 'contexts/AuthContext';
 import { logoutUser } from 'store/user/asyncActions';
 
 export default function ProfileModal() {
-  const { user } = useSelector(selectUserData);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { onCloseRegisterForm } = useAuth();
@@ -71,7 +69,7 @@ export default function ProfileModal() {
       <div
         className={styles.profile__block__footer}
         onClick={async () => {
-          await dispatch(logoutUser(user));
+          await dispatch(logoutUser());
           onCloseRegisterForm();
           navigate('/');
         }}>

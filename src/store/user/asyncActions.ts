@@ -5,17 +5,14 @@ import { Endpoints } from 'constants/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TRegisterUserSchema } from 'validations/registerUserSchema';
 import { googleLogout } from '@react-oauth/google';
+import Cookies from 'js-cookie';
 
 export const loginUser = createAsyncThunk('user/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
+  const { data } = await axios.post(Endpoints.LOGIN, userCrentials, { withCredentials: true });
 
-  if (userCrentials.isRememberMe) {
-    localStorage.setItem('user', JSON.stringify(data));
-    localStorage.setItem('auth', 'true');
-  } else {
-    sessionStorage.setItem('user', JSON.stringify(data));
-    sessionStorage.setItem('auth', 'true');
-  }
+  userCrentials.rememberMe
+    ? Cookies.set('auth', data.token, { expires: 30 })
+    : Cookies.set('auth', data.token);
 
   return data;
 });
@@ -89,19 +86,12 @@ export const resetPassword = createAsyncThunk(
   },
 );
 
-export const logoutUser = createAsyncThunk('user/logout', async (token: string | null | any) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token?.token}` },
-  };
-
-  await axios.post(Endpoints.LOGOUT, '', config);
+export const logoutUser = createAsyncThunk('user/logout', async () => {
+  await axios.post(Endpoints.LOGOUT, '', { withCredentials: true });
 
   googleLogout();
 
-  localStorage.removeItem('user');
-  localStorage.removeItem('auth');
-  sessionStorage.removeItem('user');
-  sessionStorage.removeItem('auth');
+  Cookies.remove('auth');
 
   return;
 });

@@ -6,9 +6,8 @@ export enum userStatus {
 
 export type TUserState = {
   loading: boolean;
-  user: string | null | any;
   error: null | string;
-  isAuth: boolean | null;
+  isAuth: boolean | undefined;
   isEmailChecked: boolean;
   isPasswordReset: boolean;
   showMessage: boolean;
@@ -17,5 +16,5 @@ export type TUserState = {
 export type TUser = {
   emailOrPhone: string | null;
   password: string | null;
-  isRememberMe: boolean | null;
+  rememberMe: boolean | null;
 };
