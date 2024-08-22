@@ -64,6 +64,7 @@
         color: $color-main;
         background: none;
         cursor: pointer;
+        user-select: none;
       }
 
       .field_quantity {
