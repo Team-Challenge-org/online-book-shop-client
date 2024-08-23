@@ -1,25 +1,18 @@
-import type { TCartItem } from "./types";
+import type {
+  TAPIError,
+  TGetCartItemsResponse,
+  TDeleteCartItemResponse,
+  TUpdateItemQuantityResponse,
+} from "./types";
 
 import axios from "axios";
 import { Endpoints } from "constants/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export type TGetCartItemsResponse = {
-  items: TCartItem[];
-  totalPrice: number;
-};
-
-export type TDeleteCartItemResponse = {
-  id: string;
-  isPermanent: boolean;
-  lastModified: string;
-  items: TCartItem[];
-};
-
-export type TAPIError = {
-  statusCode: number;
-  message: string;
-  timestamp: string;
+export type TUpdateParams = {
+  bookId: number;
+  operation?: "+1" | "-1";
+  quantity?: number;
 };
 
 axios.defaults.withCredentials = true;
@@ -54,7 +47,6 @@ export const addItemToAuthCart = createAsyncThunk<
   }
 });
 
-
 export const deleteCartItem = createAsyncThunk<
   TDeleteCartItemResponse,
   string,
@@ -72,3 +64,26 @@ export const deleteCartItem = createAsyncThunk<
     return thunkAPI.rejectWithValue(error as TAPIError);
   }
 });
+
+export const updateCartItemQuantity = createAsyncThunk<
+  TUpdateItemQuantityResponse,
+  TUpdateParams,
+  { rejectValue: TAPIError }
+>(
+  "cart/updateCartItemQuantity",
+  async (updateParams: TUpdateParams, thunkAPI) => {
+    try {
+      const { data } = await axios.put<TUpdateItemQuantityResponse>(
+        Endpoints.UPDATE_BOOK_QUANTITY,
+        null,
+        {
+          params: updateParams,
+        }
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as TAPIError);
+    }
+  }
+);

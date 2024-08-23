@@ -1,11 +1,16 @@
-import type { TCartItem, TCartSliceState } from "./types";
+import type {
+  TCartItem,
+  TAPIError,
+  TCartSliceState,
+  TGetCartItemsResponse,
+  TUpdateItemQuantityResponse,
+} from "./types";
 
 import {
-  addItemToAuthCart,
-  deleteCartItem,
   getCartItems,
-  TAPIError,
-  TGetCartItemsResponse,
+  deleteCartItem,
+  addItemToAuthCart,
+  updateCartItemQuantity,
 } from "./asyncActions";
 import { getCartFromLS } from "utils/getDataFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
@@ -175,6 +180,24 @@ const cartSlice = createSlice({
           state.authUserCart.isLoading = false;
           state.authUserCart.error =
             action.payload?.message || "Failed to delete book from cart";
+        }
+      )
+
+      .addCase(updateCartItemQuantity.pending, (state) => {
+        state.authUserCart.isLoading = true;
+      })
+      .addCase(
+        updateCartItemQuantity.fulfilled,
+        (state, action: PayloadAction<TUpdateItemQuantityResponse>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.totalPrice = action.payload.totalPrice;
+        }
+      )
+      .addCase(
+        updateCartItemQuantity.rejected,
+        (state, action: PayloadAction<TAPIError | undefined>) => {
+          state.authUserCart.error =
+            action.payload?.message || "Failed to update book quantity";
         }
       );
   },
