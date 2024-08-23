@@ -52,9 +52,9 @@ export function ModalCart() {
             <p>Ваш кошик порожній.</p>
           ) : (
             <ul>
-              {(isAuth ? authUserCart : notAuthUserCart)?.map((book) => (
-                <CartItem key={book.id} book={book} />
-              ))}
+              {(isAuth ? authUserCart : notAuthUserCart)?.map((book) =>
+                isLoading ? <Spinner /> : <CartItem key={book.id} book={book} />
+              )}
             </ul>
           )}
         </div>

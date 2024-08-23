@@ -1,7 +1,7 @@
 import styles from "./authModal.module.scss";
 
 import { useEffect } from "react";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 import { useOutsideModalClick } from "hooks/useOutsideModalClick";
 
 type TAuthModalProps = {
@@ -41,7 +41,6 @@ export function AuthModal({ children }: TAuthModalProps) {
   return (
     <div ref={overlayRef} className={styles.overlay}>
       <div className={styles.modal}>
-        
         <button className={styles.btnClose} onClick={closeModalForm}>
           &times;
         </button>

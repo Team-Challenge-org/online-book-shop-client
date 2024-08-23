@@ -51,3 +51,9 @@ export type TAPIError = {
   message: string;
   timestamp: string;
 };
+
+export type TUpdateParams = {
+  bookId: number;
+  quantity?: number;
+  operation?: "+1" | "-1";
+};

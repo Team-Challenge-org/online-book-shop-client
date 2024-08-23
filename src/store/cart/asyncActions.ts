@@ -1,5 +1,6 @@
 import type {
   TAPIError,
+  TUpdateParams,
   TGetCartItemsResponse,
   TDeleteCartItemResponse,
   TUpdateItemQuantityResponse,
@@ -8,14 +9,6 @@ import type {
 import axios from "axios";
 import { Endpoints } from "constants/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-export type TUpdateParams = {
-  bookId: number;
-  operation?: "+1" | "-1";
-  quantity?: number;
-};
-
-axios.defaults.withCredentials = true;
 
 export const getCartItems = createAsyncThunk<
   TGetCartItemsResponse,
@@ -35,7 +28,7 @@ export const getCartItems = createAsyncThunk<
 
 export const addItemToAuthCart = createAsyncThunk<
   void,
-  string,
+  number,
   { rejectValue: TAPIError }
 >("cart/addItemToAuthCart", async (bookId, thunkAPI) => {
   try {
@@ -49,7 +42,7 @@ export const addItemToAuthCart = createAsyncThunk<
 
 export const deleteCartItem = createAsyncThunk<
   TDeleteCartItemResponse,
-  string,
+  number,
   { rejectValue: TAPIError }
 >("cart/deleteCartItem", async (bookId, thunkAPI) => {
   try {

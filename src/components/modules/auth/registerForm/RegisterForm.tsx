@@ -10,7 +10,7 @@ import {
 import { AppDispatch } from "store/store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 import { MdOutlineVisibility } from "react-icons/md";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { selectUserData } from "store/user/selectors";

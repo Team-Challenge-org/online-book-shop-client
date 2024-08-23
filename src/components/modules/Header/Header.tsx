@@ -1,7 +1,7 @@
 import styles from "./header.module.scss";
 
 import { useEffect } from "react";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 import Logo from "components/elements/Logo/Logo";
 import { MdOutlineSearch } from "react-icons/md";
 import ModalUserForm from "../auth/ModalUserForm";
@@ -11,18 +11,14 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
-import { selectAuthData, selectShowMessage } from "store/user/selectors";
+import { selectShowMessage } from "store/user/selectors";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
-import { selectAuthUserCart } from "store/cart/selectors";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
     useAuth();
-
-  // const { isLoading } = useSelector(selectAuthUserCart);
-  // const isAuth = useSelector(selectAuthData);
 
   const { cartItemsCount } = useModalCart();
   const message = useSelector(selectShowMessage);
@@ -103,7 +99,6 @@ const Header = () => {
             ) : (
               ""
             )}
-
           </div>
         </div>
       </div>

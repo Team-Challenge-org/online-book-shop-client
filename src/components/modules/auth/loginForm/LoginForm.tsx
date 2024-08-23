@@ -13,7 +13,7 @@ import Spinner from "components/elements/Spinner/Spinner";
 import { RegisterField } from "../shared/registerField/RegisterField";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { TLoginUserSchema, loginUserSchema } from "validations/loginUserSchema";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);

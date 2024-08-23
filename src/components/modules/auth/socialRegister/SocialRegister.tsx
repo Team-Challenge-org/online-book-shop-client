@@ -5,7 +5,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { selectUserData } from "store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserGoogle } from "store/user/asyncActions";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 
 export function SocialRegister() {
   const { user: userData } = useSelector(selectUserData);

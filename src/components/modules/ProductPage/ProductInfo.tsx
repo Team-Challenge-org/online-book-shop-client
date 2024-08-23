@@ -1,24 +1,22 @@
 import styles from "styles/productInfo/index.module.scss";
 
 import type { TBook } from "store/books/types";
-import type { TCartItem } from "store/cart/types";
 import type { TFavoriteItems } from "store/favorite/types";
 import type { TDropdownCharacteristicsType } from "types/common";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Endpoints } from "constants/api";
 import { useAppDispatch } from "store/store";
 import React, { useEffect, useState } from "react";
-import { addItemToCart } from "store/cart/cartSlice";
 import { SliderImage } from "./imageSlider/SliderImage";
 import { useModalCart } from "contexts/ModalCartContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectOneFavorite } from "store/favorite/selectors";
+import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 import { Breadcrumbs } from "components/elements/Breadcrumbs/Breadcrumbs";
 import { DropdownItem } from "components/modules/ProductPage/DropdownItem";
-import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import { Endpoints } from "constants/api";
-import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>({
@@ -39,8 +37,8 @@ export const ProductInfo = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { onAddBookToCart } = useModalCart();
   const favorite = useSelector(selectOneFavorite(book!));
-  const { onOpenCartModal } = useModalCart();
 
   useEffect(() => {
     async function fetchBook() {
@@ -55,11 +53,6 @@ export const ProductInfo = () => {
     fetchBook();
     window.scrollTo(0, 0); //show upper part of page
   }, [id, navigate]);
-
-  const cartItemHandler = (obj: TCartItem) => {
-    dispatch(addItemToCart(obj));
-    onOpenCartModal();
-  };
 
   const favoriteItemsHandler = (obj: TFavoriteItems) => {
     dispatch(addOrRemoveFavoriteItem(obj));
@@ -106,24 +99,30 @@ export const ProductInfo = () => {
             <span className={styles.product__main__item__header__author}>
               {book.authors}
             </span>
+
             <span className={styles.product__main__item__header__quantity}>
               {book.quantity > 0 ? "В наявності" : "Немає в наявності"}
             </span>
           </div>
+
           <h1 className={styles.product__main__item__title}>{book.title}</h1>
+
           <span className={styles.product__main__item__price}>
             {book.price} грн
           </span>
+
           <p className={styles.product__main__item__text}>
             {book.short_description}
           </p>
+
           <div className={styles.product__main__item__active}>
             <button
               className={`${styles.product__main__item__active__cart} + button`}
-              onClick={() => cartItemHandler(book)}
+              onClick={() => onAddBookToCart(book)}
             >
               Додати у кошик
             </button>
+
             <button
               className={styles.product__main__item__active__favorite}
               onClick={() => favoriteItemsHandler(book)}
@@ -136,10 +135,12 @@ export const ProductInfo = () => {
             </button>
           </div>
           <DropdownItem title="Опис" description={book.full_description} />
+
           <DropdownItem
             title="Характеристики"
             characteristics={characteristics}
           />
+
           <DropdownItem title="Оплата, доставка та повернення" order={order} />
         </div>
       </div>

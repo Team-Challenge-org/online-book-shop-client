@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "../errorMessage/ErrorMessage";
 import { usePasswordComplexity } from "hooks/usePasswordComplexity";
 import { PasswordComplexity } from "../passwordComplexity/PasswordComplexity";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 
 type TRegisterFieldProps = {
   field: TRegisterField;
