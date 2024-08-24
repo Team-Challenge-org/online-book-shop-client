@@ -1,12 +1,10 @@
-import styles from './authModal.module.scss';
+import styles from "./authModal.module.scss";
 
-
-import { useEffect, useState } from 'react';
-import { useAuth } from 'contexts/AuthContext';
-import { useOutsideModalClick } from 'hooks/useOutsideModalClick';
-import { useSelector } from 'react-redux';
-import { selectAuthData } from 'store/user/selectors';
-
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useAuth } from "contexts/AuthContext";
+import { selectAuthData } from "store/user/selectors";
+import { useOutsideModalClick } from "hooks/useOutsideModalClick";
 
 type TAuthModalProps = {
   children: React.ReactNode;
@@ -46,7 +44,7 @@ export function AuthModal({ children }: TAuthModalProps) {
   //remove background scroll
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = prevOverflow;
@@ -56,15 +54,13 @@ export function AuthModal({ children }: TAuthModalProps) {
   return (
     <div ref={overlayRef} className={styles.overlay}>
       <div className={styles.modal}>
-
         {isAuth ? (
-          ''
+          ""
         ) : (
           <button className={styles.btnClose} onClick={closeModalForm}>
             &times;
           </button>
         )}
-
 
         {children}
       </div>

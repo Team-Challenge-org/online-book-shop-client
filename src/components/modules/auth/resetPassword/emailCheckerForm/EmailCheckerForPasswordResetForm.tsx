@@ -6,7 +6,7 @@ import {
 } from "validations/emailCheckerSchema";
 import { AppDispatch } from "store/store";
 import { useEffect, useState } from "react";
-import { useAuth } from "pages/AuthContext";
+import { useAuth } from "contexts/AuthContext";
 import { EmailField } from "../emailField/EmailField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { selectUserData } from "store/user/selectors";
