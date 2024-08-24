@@ -9,8 +9,8 @@ import {
 
 import { AppDispatch } from "store/store";
 import { useEffect, useState } from "react";
+import { useAuth } from "contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "pages/AuthContext";
 import { MdOutlineVisibility } from "react-icons/md";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { selectUserData } from "store/user/selectors";
@@ -156,7 +156,9 @@ export function RegisterForm() {
               className={styles.checkbox}
             />
 
-            <span className={styles.checkbox_label}>Я ознайомлений(-а) з публічною офертою та приймаю її</span>
+            <span className={styles.checkbox_label}>
+              Я ознайомлений(-а) з публічною офертою та приймаю її
+            </span>
           </div>
 
           <button className={activeBtnSubmit} type="submit">

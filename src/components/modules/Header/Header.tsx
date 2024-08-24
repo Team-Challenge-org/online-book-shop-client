@@ -2,7 +2,7 @@ import styles from "./header.module.scss";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "pages/AuthContext";
+import { useAuth } from "contexts/AuthContext";
 import Logo from "components/elements/Logo/Logo";
 import { MdOutlineSearch } from "react-icons/md";
 import ModalUserForm from "../auth/ModalUserForm";
@@ -21,10 +21,10 @@ const Header = () => {
   const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
     useAuth();
 
-  const { cartItemsCount } = useModalCart();
-  const message = useSelector(selectShowMessage);
   const dispatch = useDispatch();
   const auth = useSelector(selectAuthData);
+  const { cartItemsCount } = useModalCart();
+  const message = useSelector(selectShowMessage);
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
@@ -123,6 +123,7 @@ const Header = () => {
         </div>
       </div>
 
+      {/* FIXME: Create React Portal  */}
       {/* Modal Window For Shopping Cart */}
       {showModal && <ModalCart />}
 

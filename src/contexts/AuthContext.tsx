@@ -9,6 +9,7 @@ type TAuthContext = {
   onCloseRegisterForm: () => void;
   onShowEmailCheckerForm: () => void;
   onCloseEmailCheckerForm: () => void;
+  onShowResetPasswordForm: () => void;
 
   showResetPasswordForm: boolean;
   onCloseResetPasswordForm: () => void;
@@ -26,6 +27,7 @@ const AuthContext = createContext<TAuthContext>({
   onCloseRegisterForm: () => {},
   onShowEmailCheckerForm: () => {},
   onCloseEmailCheckerForm: () => {},
+  onShowResetPasswordForm: () => {},
 
   showResetPasswordForm: true,
   onCloseResetPasswordForm: () => {},
@@ -46,7 +48,7 @@ function AuthProvider({ children }: TAuthContextProps) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);
 
-  const [showResetPasswordForm, setShowResetPasswordForm] = useState(true);
+  const [showResetPasswordForm, setShowResetPasswordForm] = useState(false);
   const [isRegisterForm, setIsRegisterForm] = useState(false);
 
   const [isAuth, setIsAuth] = useState(false);
@@ -76,6 +78,10 @@ function AuthProvider({ children }: TAuthContextProps) {
     setShowResetPasswordForm(false);
   }
 
+  function handleShowResetPasswordForm() {
+    setShowResetPasswordForm(true);
+  }
+
   const contextValue: TAuthContext = {
     showRegisterForm,
     showEmailCheckerForm,
@@ -88,6 +94,7 @@ function AuthProvider({ children }: TAuthContextProps) {
 
     showResetPasswordForm,
     onCloseResetPasswordForm: handleCloseResetPasswordForm,
+    onShowResetPasswordForm: handleShowResetPasswordForm,
 
     isRegisterForm,
     setIsRegisterForm,
