@@ -8,7 +8,7 @@ import { googleLogout } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 
 export const loginUser = createAsyncThunk('user/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(Endpoints.LOGIN, userCrentials, { withCredentials: true });
+  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
 
   userCrentials.rememberMe
     ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
@@ -89,7 +89,7 @@ export const resetPassword = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk('user/logout', async () => {
-  await axios.post(Endpoints.LOGOUT, '', { withCredentials: true });
+  await axios.post(Endpoints.LOGOUT, '');
 
   googleLogout();
 
