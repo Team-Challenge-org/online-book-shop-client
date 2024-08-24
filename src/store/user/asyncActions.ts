@@ -11,8 +11,10 @@ export const loginUser = createAsyncThunk('user/login', async (userCrentials: TU
   const { data } = await axios.post(Endpoints.LOGIN, userCrentials, { withCredentials: true });
 
   userCrentials.rememberMe
-    ? Cookies.set('auth', data.token, { expires: 30 })
-    : Cookies.set('auth', data.token);
+    ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
+      Cookies.set('refreshToken', data.refreshToken, { expires: 10 }))
+    : (Cookies.set('accessToken', data.accessToken),
+      Cookies.set('refreshToken', data.refreshToken));
 
   return data;
 });
@@ -37,8 +39,8 @@ export const loginUserGoogle = createAsyncThunk(
       providerId: data.id,
     });
 
-    sessionStorage.setItem('user', JSON.stringify(result));
-    sessionStorage.setItem('auth', 'true');
+    Cookies.set('accessToken', JSON.stringify(result.accessToken));
+    Cookies.set('refreshToken', JSON.stringify(result.refreshToken));
 
     return result;
   },
@@ -91,7 +93,8 @@ export const logoutUser = createAsyncThunk('user/logout', async () => {
 
   googleLogout();
 
-  Cookies.remove('auth');
+  Cookies.remove('accessToken');
+  Cookies.remove('refreshToken');
 
   return;
 });
