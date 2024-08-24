@@ -17,17 +17,17 @@ export default function MeestBranch() {
           errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
         }>
         <input
-          type="text"
-          placeholder="Оберіть відділення"
-          {...register('meest_branch')}
+          type='text'
+          placeholder='Оберіть відділення'
+          {...register('department')}
           className={styles.order__delivery__block__label__block__input}
         />
       </div>
 
       {/* Display error message if any */}
-      {errors?.city && (
+      {errors?.department && (
         <ErrorMessage
-          message={errors.city?.message as string}
+          message={errors.department?.message as string}
           errorTips={[
             'Ви можете використовувати лише українську мову',
             'Ви можете використовувати великі та малі літери.',

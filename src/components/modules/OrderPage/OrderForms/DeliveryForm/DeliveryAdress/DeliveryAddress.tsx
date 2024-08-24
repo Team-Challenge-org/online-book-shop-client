@@ -7,19 +7,20 @@ import { useSelector } from 'react-redux';
 import { selectDeliveryData } from 'store/delivery/selectors';
 
 export default function DeliveryAddress() {
-  const [delivery, setDelivery] = useState(1)
-  const deliveryData = useSelector(selectDeliveryData)
+  const [delivery, setDelivery] = useState('1');
+  const deliveryData = useSelector(selectDeliveryData);
 
   useEffect(() => {
-    setDelivery(deliveryData.service)
-  }, [deliveryData, delivery])
+    setDelivery(deliveryData.service);
+  }, [deliveryData, delivery]);
 
   return (
-      <>
-        {delivery == 1 && <NpBranch />}
-        {delivery == 2 && <UpBranch />}
-        {delivery == 3 && <MeestBranch />}
-        {delivery == 4 && <NpCourier />}
-      </>
+    <>
+      {delivery === undefined && <NpBranch />}
+      {delivery === '1' && <NpBranch />}
+      {delivery === '2' && <UpBranch />}
+      {delivery === '3' && <MeestBranch />}
+      {delivery === '4' && <NpCourier />}
+    </>
   );
 }

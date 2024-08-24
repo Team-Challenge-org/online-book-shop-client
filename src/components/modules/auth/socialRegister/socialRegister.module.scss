@@ -1,4 +1,4 @@
-@import 'styles/utils/variables';
+@import 'styles/utils/_variables';
 
 .container {
   width: 100%;
@@ -21,24 +21,31 @@
   gap: 16px;
 
   &__item {
-      border: 1px solid $color-gray;
-      padding: 12px 0;
+    border: 1px solid $color-gray;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+
+    text-decoration: none;
+    color: $color-black;
+
+    button {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
 
-      text-decoration: none;
-      color: $color-black;
+    span {
+      margin-left: 16px;
+    }
 
-      span {
-        margin-left: 16px;
-      }
-
-      &:hover {
-        border: 1px solid rgba(25, 108, 103, 0);
-        background-color: $color-main-hover;
-        cursor: pointer;
-      }
+    &:hover {
+      border: 1px solid rgba(25, 108, 103, 0);
+      background-color: $color-main-hover;
+      cursor: pointer;
+    }
   }
 }
 

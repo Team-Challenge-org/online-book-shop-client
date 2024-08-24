@@ -1,3 +1,4 @@
+
 import { AuthModal } from "./authModal/AuthModal";
 import { SocialRegister } from "./socialRegister/SocialRegister";
 import { useEffect, useState } from "react";
@@ -10,13 +11,13 @@ import Spinner from "components/elements/Spinner/Spinner";
 import { useAuth } from "pages/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+
 export default function ModalUserForm() {
-  const auth = useSelector(selectAuthData, shallowEqual);
-  const { user, loading } = useSelector(selectUserData);
+  const auth = useSelector(selectAuthData);
   const [isAuth, setIsAuth] = useState(false);
-  const dispatch = useDispatch<AppDispatch>();
-  const { onCloseRegisterForm } = useAuth();
-  const navigate = useNavigate();
+  const { loading } = useSelector(selectUserData);
+  const [isLoading, setIsLoading] = useState(false);
+  const { setIsRegisterForm } = useAuth();
 
   useEffect(() => {
     if (auth) {
@@ -26,8 +27,19 @@ export default function ModalUserForm() {
     }
   }, [auth]);
 
+  useEffect(() => {
+    if (loading) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+
+    setIsRegisterForm(false);
+  }, [loading, setIsRegisterForm]);
+
   return (
     <AuthModal>
+
       <SocialRegister />
 
       {isAuth ? (
@@ -44,9 +56,16 @@ export default function ModalUserForm() {
             Logout
           </button>
         )
+
       ) : (
-        <EnterOrRegisterAccount />
+        <>
+          <SocialRegister />
+          {isAuth ? '' : <EnterOrRegisterAccount />}
+        </>
       )}
     </AuthModal>
   );
+}
+function setIsRegisterForm(arg0: boolean) {
+  throw new Error('Function not implemented.');
 }

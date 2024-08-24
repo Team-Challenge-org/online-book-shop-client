@@ -6,24 +6,23 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ModalCartProvider } from "contexts/ModalCartContext";
 
-import "./index.scss";
+import "index.scss";
 import { BooksLogicProvider } from "contexts/BooksContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <GoogleOAuthProvider clientId="336704376321-ffc2vo7ostsru4udrskftmkt853imcc4.apps.googleusercontent.com">
-  <BrowserRouter>
-    <Provider store={store}>
-      <BooksLogicProvider>
-        <ModalCartProvider>
-          <App />
-        </ModalCartProvider>
-      </BooksLogicProvider>
-    </Provider>
-  </BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
+        <BooksLogicProvider>
+          <ModalCartProvider>
+            <App />
+          </ModalCartProvider>
+        </BooksLogicProvider>
+      </Provider>
+    </BrowserRouter>
   </GoogleOAuthProvider>
 );

@@ -1,0 +1,104 @@
+@import '/src/styles/utils/variables';
+
+.book_container {
+  display: flex;
+  margin-bottom: 40px;
+  position: relative;
+
+  .img_box {
+    min-width: 90px;
+
+    .image {
+      height: 113px;
+      width: 90px;
+    }
+  }
+
+  .icon {
+    color: $color-gray;
+  }
+
+  .book_info_box {
+    width: 100%;
+    height: 113px;
+    margin-left: 39px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .text {
+      width: 220px;
+
+      .book_authors {
+        font-size: 12px;
+        color: $color-gray;
+        margin-bottom: 16px;
+      }
+
+      .book_title {
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .count_price_box {
+    display: flex;
+    justify-content: space-between;
+
+    .count_box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .change_count_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid $color-main;
+        padding: 6px 6px;
+        text-align: center;
+
+        color: $color-main;
+        background: none;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .field_quantity {
+        display: block;
+        text-align: center;
+        width: 36px;
+        height: 100%;
+
+        border: none;
+        font-weight: 600;
+        background-color: #196c6726;
+        font-weight: 400;
+
+        &:focus {
+          outline: 1px solid $color-main;
+          outline-offset: -1px;
+        }
+      }
+    }
+
+    .price {
+      display: flex;
+      align-items: end;
+      font-weight: 500;
+    }
+  }
+
+  .remove_book_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: #959595;
+    cursor: pointer;
+    height: 24px;
+  }
+}

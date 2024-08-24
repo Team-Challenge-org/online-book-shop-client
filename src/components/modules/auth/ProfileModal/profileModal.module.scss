@@ -1,0 +1,109 @@
+@import 'styles/utils/_variables';
+
+.profile {
+  &__block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-left: -40px;
+    margin-top: -16px;
+    position: relative;
+
+    &__btnClose {
+      width: 24px;
+      height: 24px;
+      color: $color-gray;
+      position: absolute;
+      top: 8px;
+      right: -56px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+      color: $color-white;
+
+      &__wrapper {
+        background-color: $color-main;
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__title {
+      margin-left: 16px;
+      font-family: 'Inter';
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16.94px;
+      color: $color-black;
+      float: left;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-left: -40px;
+
+      &__item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+        cursor: pointer;
+
+        &__icon {
+          width: 18px;
+          height: 18px;
+          color: $color-main;
+
+          &__wrapper {
+            background-color: $color-main-15;
+            width: 36px;
+            height: 36px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        &__title {
+          margin-left: 16px;
+          font-family: 'Inter';
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16.94px;
+          color: $color-black;
+        }
+      }
+
+      &__item:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &__footer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      margin-left: -40px;
+      cursor: pointer;
+    }
+  }
+
+  &__line {
+    width: calc(100% + 160px);
+    height: 1px;
+    border-bottom: 1px solid $color-gray-05;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+}

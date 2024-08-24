@@ -17,12 +17,22 @@ export default function NpCourier() {
             errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
           }>
           <input
-            type="text"
-            placeholder="Оберіть назву вулиці"
+            type='text'
+            placeholder='Оберіть назву вулиці'
             {...register('np_street')}
             className={styles.order__delivery__block__label__block__input}
           />
         </div>
+        {/* Display error message if any */}
+        {errors?.np_street && (
+          <ErrorMessage
+            message={errors.np_street?.message as string}
+            errorTips={[
+              'Ви можете використовувати лише українську мову',
+              'Ви можете використовувати великі та малі літери.',
+            ]}
+          />
+        )}
       </label>
 
       <label className={styles.order__delivery__block__label}>
@@ -33,12 +43,22 @@ export default function NpCourier() {
             errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
           }>
           <input
-            type="text"
-            placeholder="Enter text"
+            type='text'
+            placeholder='Enter text'
             {...register('np_house')}
             className={styles.order__delivery__block__label__block__input}
           />
         </div>
+        {/* Display error message if any */}
+        {errors?.np_house && (
+          <ErrorMessage
+            message={errors.np_house?.message as string}
+            errorTips={[
+              'Ви можете використовувати лише українську мову',
+              'Ви можете використовувати великі та малі літери.',
+            ]}
+          />
+        )}
       </label>
 
       <label className={styles.order__delivery__block__label}>
@@ -49,23 +69,13 @@ export default function NpCourier() {
             errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
           }>
           <input
-            type="text"
-            placeholder="Enter text"
+            type='text'
+            placeholder='Enter text'
             {...register('np_apart')}
             className={styles.order__delivery__block__label__block__input}
           />
         </div>
       </label>
-      {/* Display error message if any */}
-      {errors?.city && (
-        <ErrorMessage
-          message={errors.city?.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
-      )}
     </>
   );
 }

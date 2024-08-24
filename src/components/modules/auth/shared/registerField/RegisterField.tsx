@@ -1,12 +1,13 @@
-import styles from "./registerField.module.scss";
+import styles from './registerField.module.scss';
 
-import type { TRegisterField } from "types/auth";
+import type { TRegisterField } from 'types/auth';
 
-import { useFormContext } from "react-hook-form";
-import { ErrorMessage } from "../errorMessage/ErrorMessage";
-import { usePasswordComplexity } from "hooks/usePasswordComplexity";
-import { PasswordComplexity } from "../passwordComplexity/PasswordComplexity";
-import { useAuth } from "pages/AuthContext";
+
+import { useFormContext } from 'react-hook-form';
+import { ErrorMessage } from '../errorMessage/ErrorMessage';
+import { usePasswordComplexity } from 'hooks/usePasswordComplexity';
+import { PasswordComplexity } from '../passwordComplexity/PasswordComplexity';
+import { useAuth } from 'contexts/AuthContext';
 
 type TRegisterFieldProps = {
   field: TRegisterField;
@@ -20,7 +21,7 @@ export function RegisterField({ field, resetPassword }: TRegisterFieldProps) {
     formState: { errors },
   } = useFormContext();
   const { onShowEmailCheckerForm } = useAuth();
-  const passwordValue = watch("password");
+  const passwordValue = watch('password');
 
   const {
     passwordHidden,
@@ -42,22 +43,15 @@ export function RegisterField({ field, resetPassword }: TRegisterFieldProps) {
         )}
       </div>
 
-      <div
-        className={
-          errors?.[field.valueName] ? styles.input_box_error : styles.input_box
-        }
-      >
+      <div className={errors?.[field.valueName] ? styles.input_box_error : styles.input_box}>
         <input
-          type={passwordHidden ? field.type : "text"}
+          type={passwordHidden ? field.type : 'text'}
           placeholder={field.placeholder}
           {...register(field.valueName)}
         />
 
         {field.iconOpenEye && (
-          <span
-            className={styles.eye_icon}
-            onClick={() => setPasswordHidden((prev) => !prev)}
-          >
+          <span className={styles.eye_icon} onClick={() => setPasswordHidden((prev) => !prev)}>
             {passwordHidden ? field.iconCloseEye : field.iconOpenEye}
           </span>
         )}
