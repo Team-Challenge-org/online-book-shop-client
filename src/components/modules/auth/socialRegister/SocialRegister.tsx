@@ -1,5 +1,6 @@
 import styles from './socialRegister.module.scss';
 
+
 import { AppDispatch } from 'store/store';
 import { useGoogleLogin } from '@react-oauth/google';
 import { selectAuthData, selectUserData } from 'store/user/selectors';
@@ -8,6 +9,7 @@ import { loginUserGoogle } from 'store/user/asyncActions';
 import { useAuth } from 'contexts/AuthContext';
 import ProfileModal from '../ProfileModal/ProfileModal';
 //import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+
 
 export function SocialRegister() {
   const isAuth = useSelector(selectAuthData);

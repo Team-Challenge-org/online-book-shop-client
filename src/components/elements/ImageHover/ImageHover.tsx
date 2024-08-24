@@ -1,23 +1,21 @@
 import styles from "./imagehover.module.scss";
 
-import type { TBook } from "store/books/types";
 import type { TCatalogItemType } from "types/common";
 import type { TFavoriteItems } from "store/favorite/types";
 
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "store/store";
-import { selectItemInNotAuthUserCart } from "store/cart/selectors";
 import React, { useState } from "react";
-import { useBooksLogic } from "contexts/BooksContext";
-import { selectOneFavorite } from "store/favorite/selectors";
-import { addOrRemoveCartItem } from "store/cart/cartSlice";
-import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
+import { useSelector } from "react-redux";
 import { MdFavorite } from "react-icons/md";
-import { MdFavoriteBorder } from "react-icons/md";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { useAppDispatch } from "store/store";
 import { MdShoppingCart } from "react-icons/md";
+import { MdFavoriteBorder } from "react-icons/md";
+import { useBooksLogic } from "contexts/BooksContext";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
+import { selectOneFavorite } from "store/favorite/selectors";
+import { selectItemInNotAuthUserCart } from "store/cart/selectors";
+import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -27,12 +25,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
   const [hoverFavorite, setHoverFavorite] = useState(false);
   const [hoverCart, setHoverCart] = useState(false);
 
-  const { onOpenCartModal } = useModalCart();
-
-  const CartItemHandler = (obj: TBook) => {
-    dispatch(addOrRemoveCartItem(obj));
-    onOpenCartModal();
-  };
+  const { onAddOrRemoveCartItem } = useModalCart();
 
   const favoriteItemsHandler = (obj: TFavoriteItems) => {
     dispatch(addOrRemoveFavoriteItem(obj));
@@ -73,10 +66,11 @@ const ImageHover = ({ item }: TCatalogItemType) => {
               </div>
             )}
           </button>
+
           <button
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              CartItemHandler(item);
+              onAddOrRemoveCartItem(item);
             }}
             className={styles.hover__button}
           >

@@ -1,5 +1,5 @@
 import { NAV_URL } from "constants/global";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Slider from "components/assets/Slider/Slider";
 import CatalogList from "components/modules/CatalogList/CatalogList";

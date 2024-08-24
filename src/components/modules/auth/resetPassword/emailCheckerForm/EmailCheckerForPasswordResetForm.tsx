@@ -6,7 +6,7 @@ import {
 } from "validations/emailCheckerSchema";
 import { AppDispatch } from "store/store";
 import { useEffect, useState } from "react";
-import { useAuth } from "contexts/AuthContext";
+import { useAuth } from "pages/AuthContext";
 import { EmailField } from "../emailField/EmailField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { selectUserData } from "store/user/selectors";
@@ -62,7 +62,6 @@ export function EmailCheckerForPasswordResetForm() {
   return (
     <FormProvider {...methods}>
       {!isEmailExists ? (
-        
         <form onSubmit={methods.handleSubmit(onSubmitData)}>
           <AuthModal>
             <EmailField errorMessage={errorMessage} />
