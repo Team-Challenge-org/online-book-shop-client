@@ -1,16 +1,11 @@
-
-import { AuthModal } from "./authModal/AuthModal";
-import { SocialRegister } from "./socialRegister/SocialRegister";
-import { useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { selectAuthData, selectUserData } from "store/user/selectors";
-import { AppDispatch } from "store/store";
-import EnterOrRegisterAccount from "./shared/enterOrRegisterAccount/EnterOrRegisterAccount";
-import { logoutUser } from "store/user/asyncActions";
-import Spinner from "components/elements/Spinner/Spinner";
-import { useAuth } from "pages/AuthContext";
-import { useNavigate } from "react-router-dom";
-
+import { AuthModal } from './authModal/AuthModal';
+import { SocialRegister } from './socialRegister/SocialRegister';
+import EnterOrRegisterAccount from './shared/enterOrRegisterAccount/EnterOrRegisterAccount';
+import { useSelector } from 'react-redux';
+import { selectAuthData, selectUserData } from 'store/user/selectors';
+import { useEffect, useState } from 'react';
+import Spinner from 'components/elements/Spinner/Spinner';
+import { useAuth } from 'contexts/AuthContext';
 
 export default function ModalUserForm() {
   const auth = useSelector(selectAuthData);
@@ -39,24 +34,8 @@ export default function ModalUserForm() {
 
   return (
     <AuthModal>
-
-      <SocialRegister />
-
-      {isAuth ? (
-        loading ? (
-          <Spinner />
-        ) : (
-          <button
-            onClick={async () => {
-              await dispatch(logoutUser(user));
-              onCloseRegisterForm();
-              navigate("/");
-            }}
-          >
-            Logout
-          </button>
-        )
-
+      {isLoading ? (
+        <Spinner />
       ) : (
         <>
           <SocialRegister />
@@ -65,7 +44,4 @@ export default function ModalUserForm() {
       )}
     </AuthModal>
   );
-}
-function setIsRegisterForm(arg0: boolean) {
-  throw new Error('Function not implemented.');
 }
