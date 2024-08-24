@@ -33,7 +33,9 @@ axiosConfig.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
-          const response = await axios.post(`${API_BASE_URL}/refreshToken`, { refreshToken });
+          const response = await axiosConfig.post(`${API_BASE_URL}/api/v1/refreshToken`, {
+            refreshToken,
+          });
           // don't use axious instance that already configured for refresh token api call
           const newAccessToken = response.data.accessToken;
           Cookies.set('accessToken', newAccessToken); //set new access token
