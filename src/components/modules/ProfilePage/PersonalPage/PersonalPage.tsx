@@ -1,20 +1,19 @@
 import axios from 'axios';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectUserData } from 'store/user/selectors';
+import Cookies from 'js-cookie';
+import React, { useEffect } from 'react';
+import axiosConfig from 'utils/axiosConfig';
 
 export default function PersonalPage() {
-  const { user } = useSelector(selectUserData);
+  //useEffect(() => {
+  //  const getData = async () => {
+  //    const { data } = await axiosConfig.get('/api/v1/profile/user');
 
-  const getUser = async () => {
-    const { data } = await axios.get(
-      `https://online-book-shop-1.onrender.com/api/v1/user/userByToken?token=${user.token}`,
-    );
-    console.log(data);
+  //    console.log(data);
+  //    return data;
+  //  };
 
-    return data;
-  };
-
+  //  getData();
+  //}, []);
   return (
     <div>
       <h1>Personal Page</h1>

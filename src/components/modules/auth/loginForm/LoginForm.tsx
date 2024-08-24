@@ -30,7 +30,7 @@ const LoginForm = () => {
     let userCredential: TUser = {
       emailOrPhone: data.email_or_number,
       password: data.login_password,
-      isRememberMe,
+      rememberMe: isRememberMe,
     };
     dispatch(loginUser(userCredential));
     methods.reset();

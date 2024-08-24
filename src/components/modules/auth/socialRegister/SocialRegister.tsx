@@ -12,7 +12,7 @@ import ProfileModal from '../ProfileModal/ProfileModal';
 
 
 export function SocialRegister() {
-  const { user: userData } = useSelector(selectUserData);
+  const isAuth = useSelector(selectAuthData);
   const { isRegisterForm } = useAuth();
   const auth = useSelector(selectAuthData);
 
@@ -38,7 +38,7 @@ export function SocialRegister() {
       ) : (
         <div className={styles.container}>
           <h1 className={styles.title}>{isRegisterForm ? 'Реєстрація ' : 'Вхід до акаунту'}</h1>
-          {userData ? (
+          {isAuth ? (
             ''
           ) : (
             <ul className={styles.list}>

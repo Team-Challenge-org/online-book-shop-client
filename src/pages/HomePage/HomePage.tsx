@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useAppDispatch } from "store/store";
 import Slider from "components/assets/Slider/Slider";
@@ -6,6 +7,7 @@ import CatalogList from "components/modules/CatalogList/CatalogList";
 import CategoriesList from "components/modules/CategoriesList/CategoriesList";
 import { useSelector } from "react-redux";
 import { selectAuthData } from "store/user/selectors";
+
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -16,11 +18,11 @@ const HomePage = () => {
   }, [dispatch, isAuth]);
 
   return (
-    <main className="main">
+    <main className='main'>
       <Slider />
       <CategoriesList />
 
-      <div className="container">
+      <div className='container'>
         <CatalogList />
       </div>
     </main>

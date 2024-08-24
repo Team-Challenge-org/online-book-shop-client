@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import { selectAuthData } from "store/user/selectors";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { selectAuthData } from 'store/user/selectors';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type TAuthContext = {
   showRegisterForm: boolean;
@@ -53,7 +53,7 @@ function AuthProvider({ children }: TAuthContextProps) {
 
   useEffect(() => {
     isAuthenticatedUser ? setIsAuth(true) : setIsAuth(false);
-  }, []);
+  }, [isAuthenticatedUser]);
 
   function handleshowEmailCheckerForm() {
     setShowEmailCheckerForm(true);
@@ -95,16 +95,13 @@ function AuthProvider({ children }: TAuthContextProps) {
     isAuth,
   };
 
-  return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 }
 
 function useAuth() {
   const context = useContext(AuthContext);
 
-  if (context === undefined)
-    throw new Error("AuthContext was used outside of AuthProvider");
+  if (context === undefined) throw new Error('AuthContext was used outside of AuthProvider');
 
   return context;
 }

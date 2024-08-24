@@ -5,17 +5,16 @@ import { Endpoints } from 'constants/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TRegisterUserSchema } from 'validations/registerUserSchema';
 import { googleLogout } from '@react-oauth/google';
+import Cookies from 'js-cookie';
 
 export const loginUser = createAsyncThunk('user/login', async (userCrentials: TUser) => {
   const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
 
-  if (userCrentials.isRememberMe) {
-    localStorage.setItem('user', JSON.stringify(data));
-    localStorage.setItem('auth', 'true');
-  } else {
-    sessionStorage.setItem('user', JSON.stringify(data));
-    sessionStorage.setItem('auth', 'true');
-  }
+  userCrentials.rememberMe
+    ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
+      Cookies.set('refreshToken', data.refreshToken, { expires: 10 }))
+    : (Cookies.set('accessToken', data.accessToken),
+      Cookies.set('refreshToken', data.refreshToken));
 
   return data;
 });
@@ -40,8 +39,8 @@ export const loginUserGoogle = createAsyncThunk(
       providerId: data.id,
     });
 
-    sessionStorage.setItem('user', JSON.stringify(result));
-    sessionStorage.setItem('auth', 'true');
+    Cookies.set('accessToken', JSON.stringify(result.accessToken));
+    Cookies.set('refreshToken', JSON.stringify(result.refreshToken));
 
     return result;
   },
@@ -89,19 +88,13 @@ export const resetPassword = createAsyncThunk(
   },
 );
 
-export const logoutUser = createAsyncThunk('user/logout', async (token: string | null | any) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token?.token}` },
-  };
-
-  await axios.post(Endpoints.LOGOUT, '', config);
+export const logoutUser = createAsyncThunk('user/logout', async () => {
+  await axios.post(Endpoints.LOGOUT, '');
 
   googleLogout();
 
-  localStorage.removeItem('user');
-  localStorage.removeItem('auth');
-  sessionStorage.removeItem('user');
-  sessionStorage.removeItem('auth');
+  Cookies.remove('accessToken');
+  Cookies.remove('refreshToken');
 
   return;
 });
