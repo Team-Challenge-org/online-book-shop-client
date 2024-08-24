@@ -1,13 +1,13 @@
 import type { TCategory } from "./types";
 
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import Axios from "utils/axiosConfig";
 import { Endpoints } from "constants/api";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchCategories = createAsyncThunk<TCategory[]>(
   "categories/fetchCategoriesStatus",
   async () => {
-    const { data } = await axios.get<TCategory[]>(Endpoints.GET_ALL_CATEGORIES);
+    const { data } = await Axios.get<TCategory[]>(Endpoints.GET_ALL_CATEGORIES);
     return data;
   }
 );

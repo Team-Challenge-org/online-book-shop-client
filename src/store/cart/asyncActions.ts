@@ -6,7 +6,7 @@ import type {
   TUpdateItemQuantityResponse,
 } from "./types";
 
-import axios from "axios";
+import Axios from "utils/axiosConfig";
 import { Endpoints } from "constants/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -16,7 +16,7 @@ export const getCartItems = createAsyncThunk<
   { rejectValue: TAPIError }
 >("cart/getCartItems", async (_, thunkAPI) => {
   try {
-    const { data } = await axios.get<TGetCartItemsResponse>(
+    const { data } = await Axios.get<TGetCartItemsResponse>(
       Endpoints.GET_CART_ITEMS
     );
 
@@ -32,7 +32,7 @@ export const addItemToAuthCart = createAsyncThunk<
   { rejectValue: TAPIError }
 >("cart/addItemToAuthCart", async (bookId, thunkAPI) => {
   try {
-    await axios.post(Endpoints.ADD_BOOK_TO_CART, null, {
+    await Axios.post(Endpoints.ADD_BOOK_TO_CART, null, {
       params: { bookId },
     });
   } catch (error) {
@@ -46,7 +46,7 @@ export const deleteCartItem = createAsyncThunk<
   { rejectValue: TAPIError }
 >("cart/deleteCartItem", async (bookId, thunkAPI) => {
   try {
-    const { data } = await axios.delete<TDeleteCartItemResponse>(
+    const { data } = await Axios.delete<TDeleteCartItemResponse>(
       Endpoints.DELETE_BOOK_FROM_CART,
       {
         params: { bookId },
@@ -66,7 +66,7 @@ export const updateCartItemQuantity = createAsyncThunk<
   "cart/updateCartItemQuantity",
   async (updateParams: TUpdateParams, thunkAPI) => {
     try {
-      const { data } = await axios.put<TUpdateItemQuantityResponse>(
+      const { data } = await Axios.put<TUpdateItemQuantityResponse>(
         Endpoints.UPDATE_BOOK_QUANTITY,
         null,
         {

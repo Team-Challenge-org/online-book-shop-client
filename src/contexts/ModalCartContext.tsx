@@ -24,7 +24,7 @@ import {
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
 import { selectAuthData } from "store/user/selectors";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type TModalCartContext = {
   showModal: boolean;

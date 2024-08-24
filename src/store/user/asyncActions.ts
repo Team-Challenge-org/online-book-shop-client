@@ -1,14 +1,14 @@
 import type { TUser } from './types';
 
-import axios from 'axios';
 import { Endpoints } from 'constants/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TRegisterUserSchema } from 'validations/registerUserSchema';
 import { googleLogout } from '@react-oauth/google';
 import Cookies from 'js-cookie';
+import Axios from 'utils/axiosConfig';
 
 export const loginUser = createAsyncThunk('user/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
+  const { data } = await Axios.post(Endpoints.LOGIN, userCrentials);
 
   userCrentials.rememberMe
     ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
@@ -22,7 +22,7 @@ export const loginUser = createAsyncThunk('user/login', async (userCrentials: TU
 export const loginUserGoogle = createAsyncThunk(
   'user/login_google',
   async (access_token: string) => {
-    const { data } = await axios.get(
+    const { data } = await Axios.get(
       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`,
       {
         headers: {
@@ -32,7 +32,7 @@ export const loginUserGoogle = createAsyncThunk(
       },
     );
 
-    const { data: result } = await axios.post(Endpoints.OAUTH, {
+    const { data: result } = await Axios.post(Endpoints.OAUTH, {
       name: data.name,
       email: data.email,
       provider: 'google',
@@ -47,7 +47,7 @@ export const loginUserGoogle = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk('user/register', async (user: TRegisterUserSchema) => {
-  const { data } = await axios.post(`${Endpoints.REGISTER}`, {
+  const { data } = await Axios.post(`${Endpoints.REGISTER}`, {
     firstName: user.first_name,
     surname: user.last_name,
     email: user.email,
@@ -58,7 +58,7 @@ export const registerUser = createAsyncThunk('user/register', async (user: TRegi
   sessionStorage.setItem('user', JSON.stringify(data));
   sessionStorage.setItem('auth', 'true');
 
-  await axios.post(`https://online-book-shop-1.onrender.com/api/v1/mail/send?mail=${user.email}`);
+  await Axios.post(`https://online-book-shop-1.onrender.com/api/v1/mail/send?mail=${user.email}`);
 
   return data;
 });
@@ -66,7 +66,7 @@ export const registerUser = createAsyncThunk('user/register', async (user: TRegi
 export const checkEmailForResetPassword = createAsyncThunk(
   'user/email_checker',
   async (email: string) => {
-    const data = await axios.post(`${Endpoints.CHECK_EMAIL}?userEmail=${email}`);
+    const data = await Axios.post(`${Endpoints.CHECK_EMAIL}?userEmail=${email}`);
 
     return data;
   },
@@ -80,7 +80,7 @@ type TResetPasswordPayload = {
 export const resetPassword = createAsyncThunk(
   'user/reset_password',
   async ({ token, newPassword }: TResetPasswordPayload) => {
-    const data = await axios.post(
+    const data = await Axios.post(
       `${Endpoints.RESET_PASSWORD}?token=${token}&newPassword=${newPassword}`,
     );
 
@@ -89,7 +89,7 @@ export const resetPassword = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk('user/logout', async () => {
-  await axios.post(Endpoints.LOGOUT, '');
+  await Axios.post(Endpoints.LOGOUT, '');
 
   googleLogout();
 

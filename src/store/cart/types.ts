@@ -2,7 +2,6 @@ export type TCartItem = {
   id: number;
   title: string;
   price: number;
-  images: string[];
   quantity: number;
   authors: string | null;
   titleImage: string | null;

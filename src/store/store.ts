@@ -1,25 +1,25 @@
-import { useDispatch } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
 
-import cartReducer from './cart/cartSlice';
-import booksReducer from './books/booksSlice';
-import sliderReducer from './slider/sliderSlice';
-import favoriteReducer from './favorite/favoriteSlice';
-import categoriesReducer from './categories/categoriesSlice';
-import recentlyViewedBooksReducer from './recentlyViewedBooks/recentlyViewedBooksSlice';
-import userReducer from './user/userSlice';
-import deliveryReducer from './delivery/deliverySlice';
+import cartReducer from "./cart/cartSlice";
+import userReducer from "./user/userSlice";
+import booksReducer from "./books/booksSlice";
+import sliderReducer from "./slider/sliderSlice";
+import favoriteReducer from "./favorite/favoriteSlice";
+import deliveryReducer from "./delivery/deliverySlice";
+import categoriesReducer from "./categories/categoriesSlice";
+import recentlyViewedBooksReducer from "./recentlyViewedBooks/recentlyViewedBooksSlice";
 
 export const store = configureStore({
   reducer: {
+    user: userReducer,
     cart: cartReducer,
     books: booksReducer,
     slider: sliderReducer,
+    delivery: deliveryReducer,
     favorite: favoriteReducer,
     categories: categoriesReducer,
     recentlyViewedBooks: recentlyViewedBooksReducer,
-    user: userReducer,
-    delivery: deliveryReducer
   },
 });
 

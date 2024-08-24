@@ -4,7 +4,7 @@ import type { TBook } from "store/books/types";
 import type { TFavoriteItems } from "store/favorite/types";
 import type { TDropdownCharacteristicsType } from "types/common";
 
-import axios from "axios";
+import Axios from "utils/axiosConfig";
 import { useSelector } from "react-redux";
 import { Endpoints } from "constants/api";
 import { useAppDispatch } from "store/store";
@@ -43,7 +43,7 @@ export const ProductInfo = () => {
   useEffect(() => {
     async function fetchBook() {
       try {
-        const { data } = await axios.get(Endpoints.GET_BOOK_BY_ID + id);
+        const { data } = await Axios.get(Endpoints.GET_BOOK_BY_ID + id);
         setBook(data);
       } catch (error) {
         alert("Помилка при загрузці книги");
