@@ -1,17 +1,15 @@
-
-import { useEffect } from "react";
-import { useAppDispatch } from "store/store";
-import Slider from "components/assets/Slider/Slider";
-import { getCartItems } from "store/cart/asyncActions";
-import CatalogList from "components/modules/CatalogList/CatalogList";
-import CategoriesList from "components/modules/CategoriesList/CategoriesList";
-import { useSelector } from "react-redux";
-import { selectAuthData } from "store/user/selectors";
-
+import { useEffect } from 'react';
+import { useAppDispatch } from 'store/store';
+import Slider from 'components/assets/Slider/Slider';
+import { getCartItems } from 'store/cart/asyncActions';
+import CatalogList from 'components/modules/CatalogList/CatalogList';
+import CategoriesList from 'components/modules/CategoriesList/CategoriesList';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from 'store/auth/selectors';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const isAuth = useSelector(selectAuthData);
+  const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
     if (isAuth) dispatch(getCartItems());

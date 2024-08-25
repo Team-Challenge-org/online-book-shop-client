@@ -7,8 +7,9 @@ import sliderReducer from './slider/sliderSlice';
 import favoriteReducer from './favorite/favoriteSlice';
 import categoriesReducer from './categories/categoriesSlice';
 import recentlyViewedBooksReducer from './recentlyViewedBooks/recentlyViewedBooksSlice';
-import userReducer from './user/userSlice';
+import authReducer from './auth/authSlice';
 import deliveryReducer from './delivery/deliverySlice';
+import userReducer from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,8 +19,9 @@ export const store = configureStore({
     favorite: favoriteReducer,
     categories: categoriesReducer,
     recentlyViewedBooks: recentlyViewedBooksReducer,
+    auth: authReducer,
+    delivery: deliveryReducer,
     user: userReducer,
-    delivery: deliveryReducer
   },
 });
 

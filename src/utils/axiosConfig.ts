@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from 'constants/api';
+import { API_BASE_URL, Endpoints } from 'constants/api';
 import Cookies from 'js-cookie';
 
 const axiosConfig = axios.create({
@@ -27,23 +27,24 @@ axiosConfig.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    const originalRequest = await error.config;
+    if ((await error.response.status) === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
-          const response = await axiosConfig.post(`${API_BASE_URL}/api/v1/refreshToken`, {
+          const response = await axios.post(Endpoints.REFRESH_TOKEN, {
             refreshToken,
           });
           // don't use axious instance that already configured for refresh token api call
-          const newAccessToken = response.data.accessToken;
+          const newAccessToken = await response.data.accessToken;
           Cookies.set('accessToken', newAccessToken); //set new access token
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           return axios(originalRequest); //recall Api with new token
         } catch (error) {
           // Handle token refresh failure
           // mostly logout the user and re-authenticate by login again
+          console.log('Помилка оновлення токена', error);
         }
       }
     }

@@ -1,28 +1,27 @@
-import styles from "./header.module.scss";
+import styles from './header.module.scss';
 
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useAuth } from "contexts/AuthContext";
-import Logo from "components/elements/Logo/Logo";
-import { MdOutlineSearch } from "react-icons/md";
-import ModalUserForm from "../auth/ModalUserForm";
-import { MdFavoriteBorder } from "react-icons/md";
-import { hideMessage } from "store/user/userSlice";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { MdOutlinePersonOutline } from "react-icons/md";
-import { useModalCart } from "contexts/ModalCartContext";
-import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
-import { selectAuthData, selectShowMessage } from "store/user/selectors";
-import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useAuth } from 'contexts/AuthContext';
+import Logo from 'components/elements/Logo/Logo';
+import { MdOutlineSearch } from 'react-icons/md';
+import ModalUserForm from '../auth/ModalUserForm';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { hideMessage } from 'store/auth/authSlice';
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { MdOutlinePersonOutline } from 'react-icons/md';
+import { useModalCart } from 'contexts/ModalCartContext';
+import { ModalCart } from '../ModalShoppingCart/ModalCart/ModalCart';
+import { selectIsAuth, selectShowMessage } from 'store/auth/selectors';
+import { EmailCheckerForPasswordResetForm } from '../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm';
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
-  const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
-    useAuth();
+  const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } = useAuth();
 
   const dispatch = useDispatch();
-  const auth = useSelector(selectAuthData);
+  const auth = useSelector(selectIsAuth);
   const { cartItemsCount } = useModalCart();
   const message = useSelector(selectShowMessage);
   const [isAuth, setIsAuth] = useState(false);
@@ -47,7 +46,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Logo color={"#000000"} />
+      <Logo color={'#000000'} />
 
       <nav className={styles.header__nav}>
         <ul className={styles.header__nav__list}>
@@ -59,11 +58,7 @@ const Header = () => {
 
       <div className={styles.header__right}>
         <form className={styles.header__right__form}>
-          <input
-            type="text"
-            placeholder="Пошук"
-            className={styles.header__right__form__input}
-          />
+          <input type='text' placeholder='Пошук' className={styles.header__right__form__input} />
           <MdOutlineSearch className={styles.header__right__form__icon} />
         </form>
 
@@ -72,14 +67,7 @@ const Header = () => {
             <div className={styles.header__right__actions__message}>
               <span className={styles.header__right__actions__message__title}>
                 Вітаємо,
-                <span
-                  className={
-                    styles.header__right__actions__message__title_italic
-                  }
-                >
-                  Ім’я
-                </span>
-                !
+                <span className={styles.header__right__actions__message__title_italic}>Ім’я</span>!
               </span>
               <span className={styles.header__right__actions__message__text}>
                 Ви успішно зареєструвались!
@@ -92,32 +80,23 @@ const Header = () => {
           </span>
 
           {isAuth ? (
-            <Link to="/profile?element=favorites">
+            <Link to='/profile?element=favorites'>
               <MdFavoriteBorder className={styles.nav_icon} />
             </Link>
           ) : (
-            <MdFavoriteBorder
-              className={styles.nav_icon}
-              onClick={onShowRegisterForm}
-            />
+            <MdFavoriteBorder className={styles.nav_icon} onClick={onShowRegisterForm} />
           )}
 
-          <MdOutlinePersonOutline
-            className={styles.nav_icon}
-            onClick={onShowRegisterForm}
-          />
+          <MdOutlinePersonOutline className={styles.nav_icon} onClick={onShowRegisterForm} />
           <div className={styles.header__right__actions__cart}>
-            <MdOutlineShoppingCart
-              className={styles.nav_icon}
-              onClick={onOpenCartModal}
-            />
+            <MdOutlineShoppingCart className={styles.nav_icon} onClick={onOpenCartModal} />
 
             {cartItemsCount > 0 ? (
               <span className={styles.header__right__actions__cart__quantity}>
                 {cartItemsCount}
               </span>
             ) : (
-              ""
+              ''
             )}
           </div>
         </div>

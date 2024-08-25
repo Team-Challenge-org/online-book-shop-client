@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectAuthData } from 'store/user/selectors';
+import { selectIsAuth } from 'store/auth/selectors';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type TAuthContext = {
@@ -43,7 +43,7 @@ type TAuthContextProps = {
 };
 
 function AuthProvider({ children }: TAuthContextProps) {
-  const isAuthenticatedUser = useSelector(selectAuthData);
+  const isAuthenticatedUser = useSelector(selectIsAuth);
 
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showEmailCheckerForm, setShowEmailCheckerForm] = useState(false);

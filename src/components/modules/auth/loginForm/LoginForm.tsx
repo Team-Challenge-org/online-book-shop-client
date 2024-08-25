@@ -1,21 +1,17 @@
 import styles from './loginForm.module.scss';
 
-import type { TUser } from 'store/user/types';
-
+import type { TUser } from 'store/auth/types';
 
 import { AppDispatch } from 'store/store';
 import React, { useEffect, useState } from 'react';
-import { loginUser } from 'store/user/asyncActions';
-import { selectUserData } from 'store/user/selectors';
+import { loginUser } from 'store/auth/asyncActions';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
-import Spinner from 'components/elements/Spinner/Spinner';
 import { RegisterField } from '../shared/registerField/RegisterField';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import { TLoginUserSchema, loginUserSchema } from 'validations/loginUserSchema';
 import { useAuth } from 'contexts/AuthContext';
-
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
