@@ -54,5 +54,5 @@ export type TAPIError = {
 export type TUpdateParams = {
   bookId: number;
   quantity?: number;
-  operation?: "+1" | "-1";
+  operation?: "1" | "-1";
 };

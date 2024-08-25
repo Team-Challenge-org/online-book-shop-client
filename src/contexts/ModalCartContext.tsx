@@ -119,7 +119,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     if (isAuth) {
       const params: TUpdateParams = {
         bookId,
-        operation: "+1",
+        operation: "1",
       };
 
       dispatch(updateCartItemQuantity(params));

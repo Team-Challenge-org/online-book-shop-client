@@ -35,6 +35,8 @@ export const addItemToAuthCart = createAsyncThunk<
     await Axios.post(Endpoints.ADD_BOOK_TO_CART, null, {
       params: { bookId },
     });
+
+    thunkAPI.dispatch(getCartItems());
   } catch (error) {
     return thunkAPI.rejectWithValue(error as TAPIError);
   }
@@ -52,6 +54,9 @@ export const deleteCartItem = createAsyncThunk<
         params: { bookId },
       }
     );
+
+    thunkAPI.dispatch(getCartItems());
+
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as TAPIError);
@@ -73,6 +78,8 @@ export const updateCartItemQuantity = createAsyncThunk<
           params: updateParams,
         }
       );
+
+      thunkAPI.dispatch(getCartItems());
 
       return data;
     } catch (error) {
