@@ -1,4 +1,4 @@
-import type { TCartItem, TUpdateParams } from "store/cart/types";
+import type { TCartItem, TUpdateParams } from 'store/cart/types';
 
 import {
   removeItem,
@@ -7,24 +7,21 @@ import {
   decreaseItemQantity,
   increaseItemQuantity,
   addOrRemoveCartItem,
-} from "store/cart/cartSlice";
+} from 'store/cart/cartSlice';
 
-import {
-  selectAuthUserCart,
-  selectNotAuthUserCart,
-} from "store/cart/selectors";
+import { selectAuthUserCart, selectNotAuthUserCart } from 'store/cart/selectors';
 
 import {
   getCartItems,
   deleteCartItem,
   addItemToAuthCart,
   updateCartItemQuantity,
-} from "store/cart/asyncActions";
+} from 'store/cart/asyncActions';
 
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "store/store";
-import { selectAuthData } from "store/user/selectors";
-import React, { createContext, useContext, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'store/store';
+import { selectIsAuth } from 'store/auth/selectors';
+import React, { createContext, useContext, useState } from 'react';
 
 export type TModalCartContext = {
   showModal: boolean;
@@ -62,22 +59,16 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
   const dispatch = useAppDispatch();
 
   const [showModal, setShowModal] = useState(false);
-  const { cartItems: authUserCart, totalPrice } =
-    useSelector(selectAuthUserCart);
+  const { cartItems: authUserCart, totalPrice } = useSelector(selectAuthUserCart);
   const { cartItems: notAuthUserCart } = useSelector(selectNotAuthUserCart);
 
-  const isAuth = useSelector(selectAuthData);
+  const isAuth = useSelector(selectIsAuth);
 
   const totalCartPrice = isAuth
     ? totalPrice
-    : notAuthUserCart?.reduce(
-        (totalPrice, book) => totalPrice + book?.price * book?.quantity,
-        0
-      );
+    : notAuthUserCart?.reduce((totalPrice, book) => totalPrice + book?.price * book?.quantity, 0);
 
-  const cartItemsCount = isAuth
-    ? authUserCart?.length || 0
-    : notAuthUserCart?.length;
+  const cartItemsCount = isAuth ? authUserCart?.length || 0 : notAuthUserCart?.length;
 
   function handleOpenModal() {
     // make api call to get auth cart
@@ -101,9 +92,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
 
   function handleAddOrRemoveCartItem(book: TCartItem) {
     if (isAuth) {
-      const isBookInsideCart = !!authUserCart.find(
-        (item) => item.id === book.id
-      );
+      const isBookInsideCart = !!authUserCart.find((item) => item.id === book.id);
 
       if (isBookInsideCart) {
         dispatch(deleteCartItem(book.id));
@@ -119,7 +108,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     if (isAuth) {
       const params: TUpdateParams = {
         bookId,
-        operation: "+1",
+        operation: '+1',
       };
 
       dispatch(updateCartItemQuantity(params));
@@ -132,7 +121,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     if (isAuth) {
       const params: TUpdateParams = {
         bookId,
-        operation: "-1",
+        operation: '-1',
       };
 
       dispatch(updateCartItemQuantity(params));
@@ -162,7 +151,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
         updateItemQuantity({
           itemId: id,
           newQuantity: quantity,
-        })
+        }),
       );
     }
   }
@@ -181,11 +170,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     onAddOrRemoveCartItem: handleAddOrRemoveCartItem,
   };
 
-  return (
-    <ModalCartContext.Provider value={contextValue}>
-      {children}
-    </ModalCartContext.Provider>
-  );
+  return <ModalCartContext.Provider value={contextValue}>{children}</ModalCartContext.Provider>;
 }
 
 // Custom hook
@@ -193,7 +178,7 @@ function useModalCart() {
   const context = useContext(ModalCartContext);
 
   if (context === undefined)
-    throw new Error("ModalCartContext  was used outside of ModalCartProvider");
+    throw new Error('ModalCartContext  was used outside of ModalCartProvider');
 
   return context;
 }

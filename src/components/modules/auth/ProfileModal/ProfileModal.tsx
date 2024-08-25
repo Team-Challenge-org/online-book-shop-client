@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from 'store/store';
 import { useAuth } from 'contexts/AuthContext';
-import { logoutUser } from 'store/user/asyncActions';
+import { logoutUser } from 'store/auth/asyncActions';
 
 export default function ProfileModal() {
   const navigate = useNavigate();
