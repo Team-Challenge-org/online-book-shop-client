@@ -31,6 +31,8 @@ const LoginForm = () => {
       rememberMe: isRememberMe,
     };
     await dispatch(loginUser(userCredential));
+    methods.reset();
+    onCloseRegisterForm();
   }
 
   const {
