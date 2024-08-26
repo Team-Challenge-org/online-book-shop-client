@@ -38,13 +38,6 @@ export type TUpdateItemQuantityResponse = {
   totalPrice: number;
 };
 
-export type TDeleteCartItemResponse = {
-  id: string;
-  isPermanent: boolean;
-  lastModified: string;
-  items: TCartItem[];
-};
-
 export type TAPIError = {
   statusCode: number;
   message: string;
