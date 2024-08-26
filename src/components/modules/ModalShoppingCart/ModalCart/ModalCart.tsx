@@ -1,14 +1,18 @@
 import styles from './modalCart.module.scss';
 
-import { selectAuthUserCart, selectNotAuthUserCart } from 'store/cart/selectors';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { CartItem } from '../СartItem/CartItem';
-import { useModalCart } from 'contexts/ModalCartContext';
-import { useOutsideModalClick } from 'hooks/useOutsideModalClick';
-import Spinner from 'components/elements/Spinner/Spinner';
+import {
+  selectAuthUserCart,
+  selectNotAuthUserCart,
+} from "store/cart/selectors";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { CartItem } from "../СartItem/CartItem";
 import { selectIsAuth } from 'store/auth/selectors';
+import { useModalCart } from "contexts/ModalCartContext";
+import Spinner from "components/elements/Spinner/Spinner";
+import { useOutsideModalClick } from "hooks/useOutsideModalClick";
+
 
 export function ModalCart() {
   const { onCloseCartModal, totalCartPrice, cartItemsCount } = useModalCart();
@@ -46,11 +50,14 @@ export function ModalCart() {
         <div className={styles.main_box}>
           {cartItemsCount === 0 ? (
             <p>Ваш кошик порожній.</p>
+          ) : isAuth && isLoading ? (
+            <Spinner />
           ) : (
             <ul>
-              {(isAuth ? authUserCart : notAuthUserCart)?.map((book) =>
-                isLoading ? <Spinner /> : <CartItem key={book.id} book={book} />,
-              )}
+              {(isAuth ? authUserCart : notAuthUserCart)?.map((book) => (
+                <CartItem key={book.id} book={book} />
+              ))}
+
             </ul>
           )}
         </div>

@@ -14,16 +14,22 @@ import { useBooksLogic } from "contexts/BooksContext";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { selectOneFavorite } from "store/favorite/selectors";
-import { selectItemInNotAuthUserCart } from "store/cart/selectors";
+import {
+  selectItemInAuthUserCart,
+  selectItemInNotAuthUserCart,
+} from "store/cart/selectors";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
+import { selectAuthData } from "store/user/selectors";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
   const { updateBookViewAndData } = useBooksLogic();
   const favorite = useSelector(selectOneFavorite(item));
-  const cart = useSelector(selectItemInNotAuthUserCart(item));
+  const notAuthcart = useSelector(selectItemInNotAuthUserCart(item));
+  const authCart = selectItemInAuthUserCart(item);
   const [hoverFavorite, setHoverFavorite] = useState(false);
   const [hoverCart, setHoverCart] = useState(false);
+  const isAuth = useSelector(selectAuthData);
 
   const { onAddOrRemoveCartItem } = useModalCart();
 
@@ -74,7 +80,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
             }}
             className={styles.hover__button}
           >
-            {cart ? (
+            {(isAuth ? authCart : notAuthcart) ? (
               <div
                 className={`${styles.hover__button__icon} ${styles.hover__button__black}`}
               >

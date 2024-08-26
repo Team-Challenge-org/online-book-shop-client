@@ -2,7 +2,6 @@ export type TCartItem = {
   id: number;
   title: string;
   price: number;
-  images: string[];
   quantity: number;
   authors: string | null;
   titleImage: string | null;
@@ -55,5 +54,5 @@ export type TAPIError = {
 export type TUpdateParams = {
   bookId: number;
   quantity?: number;
-  operation?: "+1" | "-1";
+  operation?: "1" | "-1";
 };

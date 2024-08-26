@@ -18,10 +18,11 @@ import {
   updateCartItemQuantity,
 } from 'store/cart/asyncActions';
 
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'store/store';
-import { selectIsAuth } from 'store/auth/selectors';
-import React, { createContext, useContext, useState } from 'react';
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "store/store";
+import { selectAuthData } from "store/user/selectors";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
 
 export type TModalCartContext = {
   showModal: boolean;
@@ -108,7 +109,7 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     if (isAuth) {
       const params: TUpdateParams = {
         bookId,
-        operation: '+1',
+        operation: "1",
       };
 
       dispatch(updateCartItemQuantity(params));
