@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { API_BASE_URL } from 'constants/api';
+import { Endpoints } from 'constants/api';
 
 const Axios = axios.create({
   baseURL: 'https://online-book-shop-1.onrender.com', //replace with your BaseURL
@@ -28,27 +28,34 @@ Axios.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
+    console.log(error.response);
+    console.log('step 1...');
     if (error.response.status === 401 && !originalRequest._retry) {
+      console.log('step 2...');
       originalRequest._retry = true;
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
+        console.log('step 3...');
+
         try {
-          const response = await axios.post(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/refreshToken`,
-            {
-              refreshToken: 'refreshToken',
-            },
-          );
+          console.log('step 4...');
+
+          const response = await axios.post(Endpoints.REFRESH_TOKEN, {
+            refreshToken: 'refreshToken',
+          });
           // don't use axious instance that already configured for refresh token api call
           const newAccessToken = response.data.accessToken;
           Cookies.set('accessToken', newAccessToken); //set new access token
+
+          const newRefreshToken = response.data.refreshToken;
+          Cookies.set('refreshToken', newRefreshToken); //set new refresh token
 
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           return axios(originalRequest); //recall Api with new token
         } catch (error) {
           // Handle token refresh failure
           // mostly logout the user and re-authenticate by login again
-          console.log('Помилка токена', error);
+          console.log('Помилка', error);
         }
       }
     }
