@@ -27,14 +27,17 @@ axiosConfig.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = await error.config;
-    if ((await error.response.status) === 401 && !originalRequest._retry) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
           const response = await axios.post(Endpoints.REFRESH_TOKEN, {
-            refreshToken,
+            headers: {
+              Authorization: `Bearer ${refreshToken}`,
+              Accept: 'application/json',
+            },
           });
           // don't use axious instance that already configured for refresh token api call
           const newAccessToken = await response.data.accessToken;
@@ -44,7 +47,7 @@ axiosConfig.interceptors.response.use(
         } catch (error) {
           // Handle token refresh failure
           // mostly logout the user and re-authenticate by login again
-          console.log('Помилка оновлення токена', error);
+          console.log('Помилка токена', error);
         }
       }
     }
