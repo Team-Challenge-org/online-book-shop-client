@@ -1,14 +1,14 @@
 import type { TUser } from './types';
 
 import axios from 'axios';
-import { Endpoints } from 'constants/api';
+import { API_BASE_URL, Endpoints } from 'constants/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TRegisterUserSchema } from 'validations/registerUserSchema';
 import { googleLogout } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 
 export const loginUser = createAsyncThunk('auth/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
+  const { data } = await axios.post(`${API_BASE_URL}${Endpoints.LOGIN}`, userCrentials);
 
   userCrentials.rememberMe
     ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
