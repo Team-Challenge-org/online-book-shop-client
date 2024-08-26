@@ -12,6 +12,8 @@ export const Endpoints = {
   LOGOUT: "/api/v1/auth/logout",
   REGISTER: "/api/v1/auth/register",
   OAUTH: "/api/v1/auth/oauth2/success",
+  REFRESH_TOKEN: `/api/v1/auth/refresh-token`,
+
 
   CHECK_EMAIL: "/api/v1/user/resetPassword",
   RESET_PASSWORD: "/api/v1/user/savePassword",
@@ -23,4 +25,4 @@ export const Endpoints = {
   DELETE_BOOK_FROM_CART: "/api/v1/cart/delete",
 };
 
-export const NP_API_BASE_URL = "https://api.novaposhta.ua/v2.0/json/";
+export const NP_API_BASE_URL = 'https://api.novaposhta.ua/v2.0/json/';

@@ -22,7 +22,6 @@ input[type='reset'] {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .main {
@@ -55,7 +54,7 @@ input[type='reset'] {
   background-color: rgba(28, 27, 31, 1);
 }
 
-// custom attribute data-title 
+// custom attribute data-title
 [data-title]:hover:after {
   opacity: 1;
   transition: all 0.1s ease 0.5s;
@@ -82,7 +81,7 @@ input[type='reset'] {
 }
 
 .line {
-  background-color:#95959580;
+  background-color: #95959580;
   height: 1px;
   width: 100%;
   display: block;

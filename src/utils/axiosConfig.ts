@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { API_BASE_URL } from "constants/api";
 
+
 const Axios = axios.create({
   baseURL: "https://online-book-shop-1.onrender.com", //replace with your BaseURL
   headers: {
@@ -27,8 +28,8 @@ Axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    const originalRequest = await error.config;
+    if ((await error.response.status) === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = Cookies.get("refreshToken");
       if (refreshToken) {
@@ -39,11 +40,13 @@ Axios.interceptors.response.use(
           // don't use axious instance that already configured for refresh token api call
           const newAccessToken = response.data.accessToken;
           Cookies.set("accessToken", newAccessToken); //set new access token
+
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           return axios(originalRequest); //recall Api with new token
         } catch (error) {
           // Handle token refresh failure
           // mostly logout the user and re-authenticate by login again
+          console.log('Помилка оновлення токена', error);
         }
       }
     }
