@@ -8,7 +8,7 @@ import { googleLogout } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 
 export const loginUser = createAsyncThunk('auth/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(`${API_BASE_URL}${Endpoints.LOGIN}`, userCrentials);
+  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
 
   userCrentials.rememberMe
     ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
@@ -55,10 +55,9 @@ export const registerUser = createAsyncThunk('auth/register', async (user: TRegi
     password: user.password,
   });
 
-  sessionStorage.setItem('user', JSON.stringify(data));
-  sessionStorage.setItem('auth', 'true');
+  Cookies.set('accessToken', data.accessToken), Cookies.set('refreshToken', data.refreshToken);
 
-  await axios.post(`https://online-book-shop-1.onrender.com/api/v1/mail/send?mail=${user.email}`);
+  await axios.post(`${Endpoints.SEND_EMAIL}${user.email}`);
 
   return data;
 });

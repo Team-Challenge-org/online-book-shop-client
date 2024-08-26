@@ -48,6 +48,7 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
+
         if (action.error.message === 'User not found') {
           state.error = 'User not found';
         } else {

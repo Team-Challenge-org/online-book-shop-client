@@ -6,29 +6,31 @@ import { AppDispatch } from 'store/store';
 import React, { useEffect, useState } from 'react';
 import { loginUser } from 'store/auth/asyncActions';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
 import { RegisterField } from '../shared/registerField/RegisterField';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import { TLoginUserSchema, loginUserSchema } from 'validations/loginUserSchema';
 import { useAuth } from 'contexts/AuthContext';
+import { selectAuthData } from 'store/auth/selectors';
 
 const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { onCloseRegisterForm } = useAuth();
+  const { error } = useSelector(selectAuthData);
 
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),
   });
 
-  function onSubmitData(data: TLoginUserSchema) {
+  async function onSubmitData(data: TLoginUserSchema) {
     let userCredential: TUser = {
       emailOrPhone: data.email_or_number,
       password: data.login_password,
       rememberMe: isRememberMe,
     };
-    dispatch(loginUser(userCredential));
+    await dispatch(loginUser(userCredential));
     methods.reset();
     onCloseRegisterForm();
   }
