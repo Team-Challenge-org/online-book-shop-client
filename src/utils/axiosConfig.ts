@@ -28,20 +28,13 @@ Axios.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    console.log(error.response);
-    console.log('step 1...');
     if (error.response.status === 401 && !originalRequest._retry) {
-      console.log('step 2...');
       originalRequest._retry = true;
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
-        console.log('step 3...');
-
         try {
-          console.log('step 4...');
-
           const response = await axios.post(Endpoints.REFRESH_TOKEN, {
-            refreshToken: 'refreshToken',
+            refreshToken: refreshToken,
           });
           // don't use axious instance that already configured for refresh token api call
           const newAccessToken = response.data.accessToken;
