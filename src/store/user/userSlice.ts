@@ -41,6 +41,10 @@ const userSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        state.email = action.payload.email;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
+        state.phoneNumber = action.payload.phoneNumber;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;

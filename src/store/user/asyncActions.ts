@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Endpoints } from 'constants/api';
 import Axios from 'utils/axiosConfig';
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
@@ -8,12 +9,6 @@ export const getUser = createAsyncThunk('user/getUser', async () => {
 });
 
 export const updateUser = createAsyncThunk('user/update', async (obj: any) => {
-  const { data } = await Axios.patch(
-    'https://online-book-shop-1.onrender.com/api/v1/profile/update',
-    {
-      obj,
-    },
-  );
-  console.log(data);
+  const { data } = await Axios.patch(Endpoints.UPDATE, obj);
   return data;
 });

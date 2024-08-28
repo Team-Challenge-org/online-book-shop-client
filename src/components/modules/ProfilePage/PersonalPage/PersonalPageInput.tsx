@@ -10,9 +10,6 @@ import { selectUserData } from 'store/user/selectors';
 import { TPersonalProfileField } from 'types/common';
 import { AppDispatch } from 'store/store';
 import { updateUser } from 'store/user/asyncActions';
-import Axios from 'utils/axiosConfig';
-import { Endpoints } from 'constants/api';
-import axios from 'axios';
 
 export default function PersonalPageInput({ field }: { field: TPersonalProfileField }) {
   const [disableInput, setDisableInput] = useState(true);
@@ -50,8 +47,6 @@ export default function PersonalPageInput({ field }: { field: TPersonalProfileFi
   }, []);
 
   const onSubmit = async () => {
-    console.log('submit');
-
     let updatedField =
       field.valueName === 'first_name'
         ? {
@@ -72,16 +67,6 @@ export default function PersonalPageInput({ field }: { field: TPersonalProfileFi
         : '';
 
     dispatch(updateUser(updatedField));
-
-    //const configD = {
-    //  headers: {
-    //    Authorization: `Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0NEB0ZXN0LnVhIiwidXNlcklkIjo5LCJpYXQiOjE3MjQ4NjMwMDQsImV4cCI6MTcyNDg2MzkwNH0.l1dicoV1qCoKgQ5KQe-ca_kzKcQKQBGM4S2pueO_4J5XafNPOF4vli7LlDVSDh3a`,
-    //    Accept: 'application/json',
-    //  },
-    //};
-    //const { data } = await axios.patch(Endpoints.UPDATE, updatedField, configD);
-    //console.log(data);
-    //return data;
   };
 
   return (
