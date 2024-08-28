@@ -1,4 +1,4 @@
-import type { TBook } from "store/books/types";
+import type { TBook } from 'store/books/types';
 
 export type TFooterSocialItemProps = {
   show: JSX.Element;
@@ -38,9 +38,17 @@ export type TDeliveryType = {
   type: string;
   label: string;
   placeholder: string;
-  valueName:
-    | 'city'
-    | 'delivery_type'
-    | 'department'
+  valueName: 'city' | 'delivery_type' | 'department';
   errorTips?: string[];
-}
+};
+
+export type TPersonalProfileField = {
+  id: number;
+  type: string;
+  label: string;
+  valueName: 'first_name' | 'last_name' | 'phone_number' | 'email';
+  errorTips?: string[];
+  iconOpenEye?: JSX.Element;
+  iconCloseEye?: JSX.Element;
+  schema: any;
+};

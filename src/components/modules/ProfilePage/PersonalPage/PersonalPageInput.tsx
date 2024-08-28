@@ -1,39 +1,26 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import {
-  lastNameSchema,
-  firstNameSchema,
-  emailSchema,
-  phoneNumberSchema,
-  TFirstNameSchema,
-  TLastNameSchema,
-  TEmailSchema,
-  TPhoneNumberSchema,
-} from 'validations/profileSchema';
+import { TProfileSchema } from 'validations/profileSchema';
 import { MdOutlineCreate } from 'react-icons/md';
 import styles from '../profilePage.module.scss';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserData } from 'store/user/selectors';
-import { TRegisterField } from 'types/auth';
+import { TPersonalProfileField } from 'types/common';
+import { AppDispatch } from 'store/store';
+import { updateUser } from 'store/user/asyncActions';
+import Axios from 'utils/axiosConfig';
+import { Endpoints } from 'constants/api';
+import axios from 'axios';
 
-export default function PersonalPageInput({ field }: { field: TRegisterField }) {
+export default function PersonalPageInput({ field }: { field: TPersonalProfileField }) {
   const [disableInput, setDisableInput] = useState(true);
   const user = useSelector(selectUserData);
+  const dispatch = useDispatch<AppDispatch>();
 
-  type ConditionalType<T> = T extends TFirstNameSchema
-    ? TFirstNameSchema
-    : T extends TLastNameSchema
-    ? TLastNameSchema
-    : T extends TEmailSchema
-    ? TEmailSchema
-    : T extends TPhoneNumberSchema
-    ? TPhoneNumberSchema
-    : '';
-
-  const methods = useForm<TLastNameSchema>({
-    resolver: zodResolver(lastNameSchema),
+  const methods = useForm<TProfileSchema>({
+    resolver: zodResolver(field.schema),
   });
 
   const {
@@ -45,27 +32,68 @@ export default function PersonalPageInput({ field }: { field: TRegisterField }) 
     formState: { errors },
   } = methods;
 
-  const watchLastName = watch('last_name');
+  const watchField = watch(field.valueName);
 
   useEffect(() => {
-    setValue('last_name', user.lastName);
+    setValue(
+      field.valueName,
+      field.valueName === 'phone_number'
+        ? user.phoneNumber
+        : field.valueName === 'first_name'
+        ? user.firstName
+        : field.valueName === 'last_name'
+        ? user.lastName
+        : field.valueName === 'email'
+        ? user.email
+        : '',
+    );
   }, []);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log('submit');
+
+    let updatedField =
+      field.valueName === 'first_name'
+        ? {
+            firstName: watchField,
+          }
+        : field.valueName === 'last_name'
+        ? {
+            lastName: watchField,
+          }
+        : field.valueName === 'email'
+        ? {
+            email: watchField,
+          }
+        : field.valueName === 'phone_number'
+        ? {
+            phoneNumber: watchField,
+          }
+        : '';
+
+    dispatch(updateUser(updatedField));
+
+    //const configD = {
+    //  headers: {
+    //    Authorization: `Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0NEB0ZXN0LnVhIiwidXNlcklkIjo5LCJpYXQiOjE3MjQ4NjMwMDQsImV4cCI6MTcyNDg2MzkwNH0.l1dicoV1qCoKgQ5KQe-ca_kzKcQKQBGM4S2pueO_4J5XafNPOF4vli7LlDVSDh3a`,
+    //    Accept: 'application/json',
+    //  },
+    //};
+    //const { data } = await axios.patch(Endpoints.UPDATE, updatedField, configD);
+    //console.log(data);
+    //return data;
   };
 
   return (
     <FormProvider {...methods}>
-      <span className={styles.profile__personal__title}>Прізвище</span>
+      <span className={styles.profile__personal__title}>{field.label}</span>
       <form className={styles.profile__personal__form} onSubmit={handleSubmit(onSubmit)}>
         <label className={styles.profile__personal__form__label}>
           <input
             className={styles.profile__personal__form__label__input}
             type='text'
-            {...register('last_name')}
-            defaultValue={watchLastName}
-            placeholder={watchLastName}
+            {...register(field.valueName)}
+            defaultValue={watchField}
             disabled={disableInput}
           />
         </label>
@@ -79,7 +107,7 @@ export default function PersonalPageInput({ field }: { field: TRegisterField }) 
             className={styles.profile__personal__form__icon}
             onClick={() =>
               setTimeout(() => {
-                setFocus('last_name');
+                setFocus(field.valueName);
               }, 10)
             }>
             <MdOutlineCreate color='rgba(149, 149, 149, 1)' size='26.67px' />
@@ -90,9 +118,9 @@ export default function PersonalPageInput({ field }: { field: TRegisterField }) 
         </button>
       </form>
       {/* Display error message if any */}
-      {errors?.last_name && (
+      {(errors as any)?.[field.valueName] && (
         <ErrorMessage
-          message={errors.last_name.message as string}
+          message={(errors as any)[field.valueName].message as string}
           errorTips={[
             'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
             'Ви можете використовувати великі та малі літери.',

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TUserState } from './types';
-import { getUser } from './asyncActions';
+import { getUser, updateUser } from './asyncActions';
 
 const initialState: TUserState = {
   loading: false,
@@ -8,7 +8,7 @@ const initialState: TUserState = {
   firstName: '',
   lastName: '',
   email: '',
-  phoneNumber: 0,
+  phoneNumber: '',
 };
 
 const userSlice = createSlice({
@@ -30,6 +30,19 @@ const userSlice = createSlice({
         state.phoneNumber = action.payload.phoneNumber;
       })
       .addCase(getUser.rejected, (state, action) => {
+        state.loading = false;
+        console.log(action.error.message);
+        state.error = action.error.message!;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
         state.error = action.error.message!;

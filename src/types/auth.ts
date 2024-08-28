@@ -1,3 +1,6 @@
+import { TProfileSchema } from 'validations/profileSchema';
+import { UnknownKeysParam, ZodObject, ZodTypeAny } from 'zod';
+
 export type TRegisterField = {
   id: number;
   type: string;
