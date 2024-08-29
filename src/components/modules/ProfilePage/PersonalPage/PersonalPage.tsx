@@ -16,6 +16,7 @@ import { getUser } from 'store/user/asyncActions';
 import Spinner from 'components/elements/Spinner/Spinner';
 import styles from '../profilePage.module.scss';
 import { TPersonalProfileField } from 'types/common';
+import PersonalPagePasswordInput from './PersonalPagePasswordInput';
 
 const registerFields: TPersonalProfileField[] = [
   {
@@ -101,17 +102,10 @@ export default function PersonalPage() {
         <Spinner />
       ) : (
         <>
-          {/*<FormProvider {...methods}>
-            <form>
-              <label>
-                <span>Ім’я</span>
-                <input type='text' placeholder={watchName} disabled />
-              </label>
-            </form>
-          </FormProvider>*/}
           {registerFields.map((field) => (
             <PersonalPageInput field={field} key={field.id} />
           ))}
+          <PersonalPagePasswordInput />
         </>
       )}
     </div>
