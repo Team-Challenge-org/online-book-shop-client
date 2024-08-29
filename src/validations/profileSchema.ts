@@ -2,10 +2,12 @@ import { z } from 'zod';
 import { emailRegex, nameRegex } from './registerUserSchema';
 import { errorMessage, EXCLUDED_DOMAINS } from 'constants/auth';
 
-export type TFirstNameSchema = z.infer<typeof firstNameSchema>;
+export type TProfileSchema = TLastNameSchema | TFirstNameSchema | TPhoneNumberSchema | TEmailSchema;
+
+type TFirstNameSchema = z.infer<typeof firstNameSchema>;
 export type TLastNameSchema = z.infer<typeof lastNameSchema>;
-export type TPhoneNumberSchema = z.infer<typeof phoneNumberSchema>;
-export type TEmailSchema = z.infer<typeof emailSchema>;
+type TPhoneNumberSchema = z.infer<typeof phoneNumberSchema>;
+type TEmailSchema = z.infer<typeof emailSchema>;
 
 export const firstNameSchema = z.object({
   first_name: z

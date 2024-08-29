@@ -13,6 +13,7 @@ export const Endpoints = {
   REGISTER: '/api/v1/auth/register',
   OAUTH: '/api/v1/auth/oauth2/success',
   REFRESH_TOKEN: '/api/v1/auth/refresh-token',
+  UPDATE: '/api/v1/profile/update',
 
   CHECK_EMAIL: '/api/v1/user/resetPassword',
   RESET_PASSWORD: '/api/v1/user/savePassword',
