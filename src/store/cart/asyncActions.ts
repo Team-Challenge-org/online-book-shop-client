@@ -45,7 +45,7 @@ export const deleteCartItem = createAsyncThunk<
   { rejectValue: TAPIError }
 >("cart/deleteCartItem", async (bookId, thunkAPI) => {
   try {
-    await Axios.post(Endpoints.ADD_BOOK_TO_CART, null, {
+    await Axios.delete(Endpoints.DELETE_BOOK_FROM_CART, {
       params: { bookId },
     });
 
@@ -70,7 +70,6 @@ export const updateCartItemQuantity = createAsyncThunk<
           params: updateParams,
         }
       );
-
       thunkAPI.dispatch(getCartItems());
 
       return data;
