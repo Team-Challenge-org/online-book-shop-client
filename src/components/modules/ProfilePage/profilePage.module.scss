@@ -63,6 +63,7 @@
         width: 400px;
         height: 100%;
         margin-bottom: 0;
+        position: relative;
 
         &__input {
           width: 100%;
@@ -72,6 +73,19 @@
           background-color: $color-white;
           outline: none;
           border: 1px solid $color-gray-07;
+
+          &__eye_icon {
+            color: $color-gray;
+            z-index: 1;
+            width: 15px;
+            height: 15px;
+
+            position: absolute;
+            top: 16px;
+            right: 16px;
+
+            cursor: pointer;
+          }
         }
       }
 
