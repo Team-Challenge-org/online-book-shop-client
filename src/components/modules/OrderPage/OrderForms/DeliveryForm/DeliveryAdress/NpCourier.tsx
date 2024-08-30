@@ -64,10 +64,7 @@ export default function NpCourier() {
       <label className={styles.order__delivery__block__label}>
         <span className={styles.order__delivery__block__label__title}>Кв./Офіс </span>
 
-        <div
-          className={
-            errors?.city ? styles.input_box_error : styles.order__delivery__block__label__block
-          }>
+        <div className={styles.order__delivery__block__label__block}>
           <input
             type='text'
             placeholder='Enter text'
