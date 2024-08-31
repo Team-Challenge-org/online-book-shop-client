@@ -1,17 +1,21 @@
 import { getFavoriteFromLS } from 'utils/getDataFromLS';
-import type { TFavoriteItems, TFavoriteSliceState } from './types';
+import type { TFavoriteItem, TFavoriteSliceState } from './types';
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { getFavorites } from './asyncActions';
 
-const initialState: TFavoriteSliceState = getFavoriteFromLS();
-
+const initialState: TFavoriteSliceState = {
+  items: getFavoriteFromLS(),
+  loading: false,
+  error: null,
+};
 const favoriteSlice = createSlice({
   name: 'favorite',
   initialState,
   reducers: {
-    addOrRemoveFavoriteItem(state, action: PayloadAction<TFavoriteItems>) {
+    addOrRemoveFavoriteItem(state, action: PayloadAction<TFavoriteItem>) {
       const checkItemInFavorite = state.items.find(
-        (item: TFavoriteItems) => item.id === action.payload.id,
+        (item: TFavoriteItem) => item.id === action.payload.id,
       );
       if (checkItemInFavorite) {
         state.items = state.items.filter((obj) => obj.id !== action.payload.id);
@@ -22,12 +26,26 @@ const favoriteSlice = createSlice({
       }
       localStorage.setItem('favorite', JSON.stringify(state.items));
     },
-    clearItems(state) {
-      state.items = [];
-    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getFavorites.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getFavorites.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(getFavorites.rejected, (state, action) => {
+        state.loading = false;
+        console.log(action.error.message);
+        state.error = action.error.message!;
+      });
   },
 });
 
-export const { addOrRemoveFavoriteItem, clearItems } = favoriteSlice.actions;
+export const { addOrRemoveFavoriteItem } = favoriteSlice.actions;
 
 export default favoriteSlice.reducer;

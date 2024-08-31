@@ -3,13 +3,13 @@ import { Endpoints } from 'constants/api';
 import Axios from 'utils/axiosConfig';
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
-  const { data } = await Axios.get('/api/v1/profile/user');
+  const { data } = await Axios.get(Endpoints.GET_USER);
 
   return data;
 });
 
 export const updateUser = createAsyncThunk('user/update', async (obj: any) => {
-  const { data } = await Axios.patch(Endpoints.UPDATE, obj);
+  const { data } = await Axios.patch(Endpoints.UPDATE_USER, obj);
   return data;
 });
 

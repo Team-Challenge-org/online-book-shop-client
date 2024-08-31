@@ -1,23 +1,36 @@
 import type { TUser } from './types';
 
 import axios from 'axios';
-import { API_BASE_URL, Endpoints } from 'constants/api';
+import { Endpoints } from 'constants/api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TRegisterUserSchema } from 'validations/registerUserSchema';
 import { googleLogout } from '@react-oauth/google';
 import Cookies from 'js-cookie';
+import { RootState } from 'store/store';
+import { getFavorites } from 'store/favorite/asyncActions';
 
-export const loginUser = createAsyncThunk('auth/login', async (userCrentials: TUser) => {
-  const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
+export const loginUser = createAsyncThunk(
+  'auth/login',
+  async (userCrentials: TUser, { getState, dispatch }) => {
+    const { data } = await axios.post(Endpoints.LOGIN, userCrentials);
 
-  userCrentials.rememberMe
-    ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
-      Cookies.set('refreshToken', data.refreshToken, { expires: 10 }))
-    : (Cookies.set('accessToken', data.accessToken),
-      Cookies.set('refreshToken', data.refreshToken));
+    userCrentials.rememberMe
+      ? (Cookies.set('accessToken', data.accessToken, { expires: 10 }),
+        Cookies.set('refreshToken', data.refreshToken, { expires: 10 }))
+      : (Cookies.set('accessToken', data.accessToken),
+        Cookies.set('refreshToken', data.refreshToken));
 
-  return data;
-});
+    await dispatch(getFavorites());
+
+    const state = getState() as RootState;
+
+    localStorage.clear();
+    const favoriteItems = state.favorite.items;
+    localStorage.setItem('favorite', JSON.stringify(favoriteItems));
+
+    return data;
+  },
+);
 
 export const loginUserGoogle = createAsyncThunk(
   'auth/login_google',

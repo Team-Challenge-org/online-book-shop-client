@@ -1,4 +1,4 @@
-export type TFavoriteItems = {
+export type TFavoriteItem = {
   id: number;
   title: string;
   full_description: string;
@@ -14,5 +14,7 @@ export type TFavoriteItems = {
 };
 
 export type TFavoriteSliceState = {
-  items: TFavoriteItems[];
+  items: TFavoriteItem[];
+  loading: boolean;
+  error: string | null;
 };

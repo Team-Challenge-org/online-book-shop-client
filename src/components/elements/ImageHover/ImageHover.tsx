@@ -1,7 +1,7 @@
 import styles from './imagehover.module.scss';
 
 import type { TCatalogItemType } from 'types/common';
-import type { TFavoriteItems } from 'store/favorite/types';
+import type { TFavoriteItem } from 'store/favorite/types';
 
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
@@ -30,7 +30,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
 
   const { onAddOrRemoveCartItem } = useModalCart();
 
-  const favoriteItemsHandler = (obj: TFavoriteItems) => {
+  const favoriteItemsHandler = (obj: TFavoriteItem) => {
     dispatch(addOrRemoveFavoriteItem(obj));
   };
 

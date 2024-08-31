@@ -1,7 +1,7 @@
 import styles from 'styles/productInfo/index.module.scss';
 
 import type { TBook } from 'store/books/types';
-import type { TFavoriteItems } from 'store/favorite/types';
+import type { TFavoriteItem } from 'store/favorite/types';
 import type { TDropdownCharacteristicsType } from 'types/common';
 
 import { useSelector } from 'react-redux';
@@ -54,7 +54,7 @@ export const ProductInfo = () => {
     window.scrollTo(0, 0); //show upper part of page
   }, [id, navigate]);
 
-  const favoriteItemsHandler = (obj: TFavoriteItems) => {
+  const favoriteItemsHandler = (obj: TFavoriteItem) => {
     dispatch(addOrRemoveFavoriteItem(obj));
   };
 

@@ -1,4 +1,4 @@
-import FavoritesPage from 'components/modules/ProfilePage/FavoritesPage/FavoritesPage';
+import FavoritePage from 'components/modules/ProfilePage/FavoritePage/FavoritePage';
 import OrdersPage from 'components/modules/ProfilePage/OrdersPage/OrdersPage';
 import PersonalPage from 'components/modules/ProfilePage/PersonalPage/PersonalPage';
 import React from 'react';
@@ -38,7 +38,7 @@ export default function ProfilePage() {
         </Link>
       </ul>
       {searchParams.get('element') === 'personal' ? <PersonalPage /> : ''}
-      {searchParams.get('element') === 'favorites' ? <FavoritesPage /> : ''}
+      {searchParams.get('element') === 'favorites' ? <FavoritePage /> : ''}
       {searchParams.get('element') === 'orders' ? <OrdersPage /> : ''}
     </div>
   );
