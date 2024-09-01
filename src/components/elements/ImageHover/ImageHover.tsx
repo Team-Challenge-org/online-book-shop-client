@@ -15,8 +15,8 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 import { useModalCart } from 'contexts/ModalCartContext';
 import { selectOneFavorite } from 'store/favorite/selectors';
 import { selectItemInAuthUserCart, selectItemInNotAuthUserCart } from 'store/cart/selectors';
-import { addOrRemoveFavoriteItem } from 'store/favorite/favoriteSlice';
 import { selectIsAuth } from 'store/auth/selectors';
+import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
   const { onAddOrRemoveCartItem } = useModalCart();
 
   const favoriteItemsHandler = (obj: TFavoriteItem) => {
-    dispatch(addOrRemoveFavoriteItem(obj));
+    dispatch(addOrRemoveFavoriteAsync(obj));
   };
 
   return (

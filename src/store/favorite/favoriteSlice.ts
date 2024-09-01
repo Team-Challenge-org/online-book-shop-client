@@ -2,7 +2,7 @@ import { getFavoriteFromLS } from 'utils/getDataFromLS';
 import type { TFavoriteItem, TFavoriteSliceState } from './types';
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { getFavorites } from './asyncActions';
+import { addOrRemoveFavoriteAsync, getFavorites } from './asyncActions';
 
 const initialState: TFavoriteSliceState = {
   items: getFavoriteFromLS(),
@@ -14,6 +14,7 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     addOrRemoveFavoriteItem(state, action: PayloadAction<TFavoriteItem>) {
+      console.log('try');
       const checkItemInFavorite = state.items.find(
         (item: TFavoriteItem) => item.id === action.payload.id,
       );
@@ -39,6 +40,21 @@ const favoriteSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(getFavorites.rejected, (state, action) => {
+        state.loading = false;
+        console.log(action.error.message);
+        state.error = action.error.message!;
+      })
+      .addCase(addOrRemoveFavoriteAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addOrRemoveFavoriteAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.items.push(action.payload);
+        console.log(state.items);
+      })
+      .addCase(addOrRemoveFavoriteAsync.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
         state.error = action.error.message!;

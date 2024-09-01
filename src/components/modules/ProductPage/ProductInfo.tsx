@@ -13,10 +13,10 @@ import { useModalCart } from 'contexts/ModalCartContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectOneFavorite } from 'store/favorite/selectors';
 import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
-import { addOrRemoveFavoriteItem } from 'store/favorite/favoriteSlice';
 import { Breadcrumbs } from 'components/elements/Breadcrumbs/Breadcrumbs';
 import { DropdownItem } from 'components/modules/ProductPage/DropdownItem';
 import axios from 'axios';
+import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>({
@@ -55,7 +55,7 @@ export const ProductInfo = () => {
   }, [id, navigate]);
 
   const favoriteItemsHandler = (obj: TFavoriteItem) => {
-    dispatch(addOrRemoveFavoriteItem(obj));
+    dispatch(addOrRemoveFavoriteAsync(obj));
   };
 
   const characteristics: TDropdownCharacteristicsType = {
