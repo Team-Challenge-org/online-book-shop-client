@@ -1,4 +1,4 @@
-@import '/src/styles/utils/_variables.scss';
+@import "/src/styles/utils/_variables.scss";
 
 .order {
   margin-left: 80px;
@@ -19,7 +19,7 @@
   }
 
   &__forms {
-    font-family: 'Roboto';
+    font-family: "Roboto";
     width: 845px;
     margin-bottom: 80px;
     margin-right: 28px;
@@ -211,7 +211,7 @@
       line-height: 16.41px;
       padding: 16px;
       text-justify: inter-word;
-      font-family: 'Roboto';
+      font-family: "Roboto";
       resize: none;
     }
 
@@ -247,6 +247,7 @@
         line-height: 14.52px;
         color: $color-black;
         text-transform: uppercase;
+        margin: 0;
       }
     }
   }
@@ -268,7 +269,7 @@
     }
 
     &__promo {
-      font-family: 'Inter';
+      font-family: "Inter";
       font-weight: 400;
       font-size: 12px;
       line-height: 14.52px;
@@ -289,7 +290,7 @@
 
         &__input::placeholder,
         &__input:focus {
-          font-family: 'Roboto';
+          font-family: "Roboto";
           font-weight: 400;
           font-size: 10px;
           line-height: 11.72px;
@@ -302,7 +303,7 @@
           height: 40px;
           width: 169px;
           color: $color-main;
-          font-family: 'Roboto';
+          font-family: "Roboto";
           font-weight: 400;
           font-size: 12px;
           line-height: 14.06px;
@@ -325,11 +326,11 @@
       line-height: 14.52px;
       color: $color-black;
       margin-bottom: 8px;
-      font-family: 'Inter';
+      font-family: "Inter";
     }
 
     &__note {
-      font-family: 'Inter';
+      font-family: "Inter";
       font-weight: 500;
       font-size: 10px;
       line-height: 12.1px;
@@ -361,7 +362,7 @@
         font-size: 12px;
         line-height: 14.52px;
         color: $color-black;
-        font-family: 'Inter';
+        font-family: "Inter";
       }
     }
 

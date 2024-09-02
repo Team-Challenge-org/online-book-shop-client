@@ -3,7 +3,6 @@ import type {
   TAPIError,
   TCartSliceState,
   TGetCartItemsResponse,
-  TUpdateItemQuantityResponse,
 } from "./types";
 
 import {
@@ -12,6 +11,7 @@ import {
   addItemToAuthCart,
   updateCartItemQuantity,
 } from "./asyncActions";
+import toast from "react-hot-toast";
 import { getCartFromLS } from "utils/getDataFromLS";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -41,10 +41,14 @@ const cartSlice = createSlice({
           state.notAuthUserCart.cartItems.filter(
             (obj) => obj.id !== action.payload.id
           );
+        toast.error(`Вы удалили книгу ${action.payload.title} из корзины!`);
       } else {
         state.notAuthUserCart.cartItems.push({
           ...action.payload,
         });
+        toast.success(
+          `Вы успешно добавили книгу ${action.payload.title} в коризину! `
+        );
       }
 
       localStorage.setItem(
@@ -156,9 +160,14 @@ const cartSlice = createSlice({
       .addCase(addItemToAuthCart.pending, (state) => {
         state.authUserCart.isLoading = true;
       })
-      .addCase(addItemToAuthCart.fulfilled, (state) => {
-        state.authUserCart.isLoading = false;
-      })
+      .addCase(
+        addItemToAuthCart.fulfilled,
+        (state, action: PayloadAction<TGetCartItemsResponse>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.cartItems = action.payload.items;
+          state.authUserCart.totalPrice = action.payload.totalPrice;
+        }
+      )
       .addCase(
         addItemToAuthCart.rejected,
         (state, action: PayloadAction<TAPIError | undefined>) => {
@@ -171,9 +180,14 @@ const cartSlice = createSlice({
       .addCase(deleteCartItem.pending, (state) => {
         state.authUserCart.isLoading = true;
       })
-      .addCase(deleteCartItem.fulfilled, (state) => {
-        state.authUserCart.isLoading = false;
-      })
+      .addCase(
+        deleteCartItem.fulfilled,
+        (state, action: PayloadAction<TGetCartItemsResponse>) => {
+          state.authUserCart.isLoading = false;
+          state.authUserCart.cartItems = action.payload.items;
+          state.authUserCart.totalPrice = action.payload.totalPrice;
+        }
+      )
       .addCase(
         deleteCartItem.rejected,
         (state, action: PayloadAction<TAPIError | undefined>) => {
@@ -188,14 +202,16 @@ const cartSlice = createSlice({
       })
       .addCase(
         updateCartItemQuantity.fulfilled,
-        (state, action: PayloadAction<TUpdateItemQuantityResponse>) => {
+        (state, action: PayloadAction<TGetCartItemsResponse>) => {
           state.authUserCart.isLoading = false;
+          state.authUserCart.cartItems = action.payload.items;
           state.authUserCart.totalPrice = action.payload.totalPrice;
         }
       )
       .addCase(
         updateCartItemQuantity.rejected,
         (state, action: PayloadAction<TAPIError | undefined>) => {
+          state.authUserCart.isLoading = false;
           state.authUserCart.error =
             action.payload?.message || "Failed to update book quantity";
         }
