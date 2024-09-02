@@ -1,9 +1,4 @@
-import type {
-  TAPIError,
-  TUpdateParams,
-  TGetCartItemsResponse,
-  TUpdateItemQuantityResponse,
-} from "./types";
+import type { TAPIError, TUpdateParams, TGetCartItemsResponse } from "./types";
 
 import Axios from "utils/axiosConfig";
 import { Endpoints } from "constants/api";
@@ -26,51 +21,59 @@ export const getCartItems = createAsyncThunk<
 });
 
 export const addItemToAuthCart = createAsyncThunk<
-  void,
+  TGetCartItemsResponse,
   number,
   { rejectValue: TAPIError }
 >("cart/addItemToAuthCart", async (bookId, thunkAPI) => {
   try {
-    await Axios.post(Endpoints.ADD_BOOK_TO_CART, null, {
-      params: { bookId },
-    });
+    const { data } = await Axios.post<TGetCartItemsResponse>(
+      Endpoints.ADD_BOOK_TO_CART,
+      null,
+      {
+        params: { bookId },
+      }
+    );
+
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as TAPIError);
   }
 });
 
 export const deleteCartItem = createAsyncThunk<
-  undefined,
+  TGetCartItemsResponse,
   number,
   { rejectValue: TAPIError }
 >("cart/deleteCartItem", async (bookId, thunkAPI) => {
   try {
-    await Axios.delete(Endpoints.DELETE_BOOK_FROM_CART, {
-      params: { bookId },
-    });
+    const { data } = await Axios.delete<TGetCartItemsResponse>(
+      Endpoints.DELETE_BOOK_FROM_CART,
+      {
+        params: { bookId },
+      }
+    );
 
-    thunkAPI.dispatch(getCartItems());
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as TAPIError);
   }
 });
 
 export const updateCartItemQuantity = createAsyncThunk<
-  TUpdateItemQuantityResponse,
+  TGetCartItemsResponse,
   TUpdateParams,
   { rejectValue: TAPIError }
 >(
   "cart/updateCartItemQuantity",
   async (updateParams: TUpdateParams, thunkAPI) => {
     try {
-      const { data } = await Axios.put<TUpdateItemQuantityResponse>(
+      const { data } = await Axios.put<TGetCartItemsResponse>(
         Endpoints.UPDATE_BOOK_QUANTITY,
         null,
         {
           params: updateParams,
         }
       );
-      thunkAPI.dispatch(getCartItems());
 
       return data;
     } catch (error) {

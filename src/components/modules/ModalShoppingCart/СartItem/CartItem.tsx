@@ -3,43 +3,26 @@ import styles from "./cartItem.module.scss";
 import type { TCartItem } from "store/cart/types";
 
 import { MdAdd } from "react-icons/md";
+import React, { useEffect } from "react";
 import { MdRemove } from "react-icons/md";
-import { useDebounce } from "hooks/useDebounce";
-import React, { useEffect, useState } from "react";
 import { truncateAuthors } from "utils/truncateString";
 import { useModalCart } from "contexts/ModalCartContext";
+import { useChangeBookQuantity } from "hooks/useChangeBookQuantity";
 import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
 
 export function CartItem({ book }: { book: TCartItem }) {
-  const [itemQuantity, setItemQuantity] = useState(book.quantity);
+  const {
+    handleInput,
+    itemQuantity,
+    totalBookPrice,
+    setItemQuantity,
+    handleChangeQuantity,
+    debouncedItemQuantity,
+    handleIncreaseItemQuantity,
+    handleDecreaseItemQuantity,
+  } = useChangeBookQuantity(book);
 
   const { onRemoveBookFromCart, onUpdateItemQuantity } = useModalCart();
-
-  const totalBookPrice = book?.price * book?.quantity;
-
-  const debouncedItemQuantity = useDebounce(itemQuantity, 1000);
-
-  function handleChangeQuantity(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-
-    if (Number(value) === 0) return setItemQuantity(1);
-    setItemQuantity(Number(e.target.value));
-  }
-
-  function handleInput(e: React.FormEvent<HTMLInputElement>) {
-    const input = e.currentTarget;
-    input.value = input.value.replace(/^0+(?=\d)/, ""); // Удаление ведущих нулей
-  }
-
-  function handleIncreaseItemQuantity() {
-    setItemQuantity((prev) => prev + 1);
-  }
-
-  function handleDecreaseItemQuantity() {
-    if (itemQuantity > 1) {
-      setItemQuantity((prev) => prev - 1);
-    }
-  }
 
   useEffect(() => {
     if (debouncedItemQuantity !== book?.quantity) {

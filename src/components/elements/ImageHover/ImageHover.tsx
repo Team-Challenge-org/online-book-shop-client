@@ -3,6 +3,10 @@ import styles from "./imagehover.module.scss";
 import type { TCatalogItemType } from "types/common";
 import type { TFavoriteItems } from "store/favorite/types";
 
+import {
+  selectItemInAuthUserCart,
+  selectItemInNotAuthUserCart,
+} from "store/cart/selectors";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,23 +14,19 @@ import { MdFavorite } from "react-icons/md";
 import { useAppDispatch } from "store/store";
 import { MdShoppingCart } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
+import { selectIsAuth } from "store/auth/selectors";
 import { useBooksLogic } from "contexts/BooksContext";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useModalCart } from "contexts/ModalCartContext";
 import { selectOneFavorite } from "store/favorite/selectors";
-import {
-  selectItemInAuthUserCart,
-  selectItemInNotAuthUserCart,
-} from "store/cart/selectors";
 import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
-import { selectIsAuth } from "store/auth/selectors";
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
   const { updateBookViewAndData } = useBooksLogic();
   const favorite = useSelector(selectOneFavorite(item));
   const notAuthcart = useSelector(selectItemInNotAuthUserCart(item));
-  const authCart = selectItemInAuthUserCart(item);
+  const authCart = useSelector(selectItemInAuthUserCart(item));
   const [hoverFavorite, setHoverFavorite] = useState(false);
   const [hoverCart, setHoverCart] = useState(false);
   const isAuth = useSelector(selectIsAuth);
@@ -34,6 +34,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
   const { onAddOrRemoveCartItem } = useModalCart();
 
   let shoppingCart;
+
   if (isAuth) {
     shoppingCart = authCart;
   } else {

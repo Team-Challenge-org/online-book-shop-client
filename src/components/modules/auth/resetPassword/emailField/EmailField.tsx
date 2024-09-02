@@ -31,7 +31,7 @@ export function EmailField({ errorMessage }: { errorMessage?: string }) {
           }
         >
           <input
-            type="email"
+            type="text"
             placeholder="Введіть електронну пошту"
             {...register("email")}
           />
