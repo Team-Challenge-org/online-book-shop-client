@@ -7,6 +7,7 @@ import { addOrRemoveFavoriteItem } from './favoriteSlice';
 
 export const getFavorites = createAsyncThunk('favorite/getFavorites', async () => {
   const { data } = await Axios.get(Endpoints.GET_FAVORITE);
+  localStorage.setItem('favorite', JSON.stringify(data));
   return data;
 });
 
@@ -16,7 +17,6 @@ export const addOrRemoveFavoriteAsync = createAsyncThunk(
     const state = getState() as RootState;
     const isAuth = state.auth.isAuth;
 
-    console.log(state.favorite.items);
     const checkItemInFavorite = state.favorite.items.find(
       (item: TFavoriteItem) => item.id === obj.id,
     );

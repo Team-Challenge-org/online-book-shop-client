@@ -3,11 +3,20 @@ import styles from '../profilePage.module.scss';
 import { TFavoriteItem } from 'store/favorite/types';
 import { useNavigate } from 'react-router-dom';
 import { NAV_URL } from 'constants/global';
+import { MdDeleteOutline } from 'react-icons/md';
+import { useAppDispatch } from 'store/store';
+import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
 
 export default function FavoriteItem({ obj }: { obj: TFavoriteItem }) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   return (
     <div className={styles.profile__favorite__item}>
+      <div
+        className={styles.profile__favorite__item__icon__wrapper}
+        onClick={() => dispatch(addOrRemoveFavoriteAsync(obj))}>
+        <MdDeleteOutline size={24} className={styles.profile__favorite__item__icon} />
+      </div>
       <img
         className={styles.profile__favorite__item__image}
         src={obj.titleImage!}

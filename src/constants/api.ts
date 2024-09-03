@@ -17,7 +17,7 @@ export const Endpoints = {
   // user
   GET_USER: '/api/v1/profile/user',
   UPDATE_USER: '/api/v1/profile/update',
-  UPDATE_PASSWORD: '/api/v1/profile/update-password',
+  UPDATE_PASSWORD: '/api/v1/profile/reset-password',
 
   CHECK_EMAIL: '/api/v1/user/resetPassword',
   RESET_PASSWORD: '/api/v1/user/savePassword',

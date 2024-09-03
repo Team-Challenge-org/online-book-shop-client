@@ -110,13 +110,38 @@
 
   &__favorite {
     display: grid;
-    grid-template-columns: repeat(4, 4fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 24px;
 
     &__item {
       display: flex;
       flex-direction: column;
       width: 302px;
+      height: 519px;
+      justify-content: space-between;
+      position: relative;
+      &__icon {
+        color: $color-gray;
+
+        &__wrapper {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          height: 36px;
+          width: 36px;
+          background-color: $color-white;
+          border: 0.3px solid $color-gray;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+
+      &__icon:hover {
+        color: $color-black;
+      }
 
       &__image {
         width: 100%;
