@@ -12,31 +12,25 @@ export const getFavorites = createAsyncThunk('favorite/getFavorites', async () =
 
 export const addOrRemoveFavoriteAsync = createAsyncThunk(
   'favorite/addOrRemoveFavorite',
-  async (obj: TFavoriteItem, { getState, dispatch, fulfillWithValue }) => {
+  async (obj: TFavoriteItem, { getState, dispatch, rejectWithValue }) => {
     const state = getState() as RootState;
     const isAuth = state.auth.isAuth;
 
+    console.log(state.favorite.items);
     const checkItemInFavorite = state.favorite.items.find(
       (item: TFavoriteItem) => item.id === obj.id,
     );
 
+    dispatch(addOrRemoveFavoriteItem(obj));
+
     if (isAuth && checkItemInFavorite) {
       const { data } = await Axios.post(`${Endpoints.DELETE_FAVORITE}${obj.id}`);
-      console.log(data);
       return data;
     }
 
     if (isAuth && !checkItemInFavorite) {
       const { data } = await Axios.post(`${Endpoints.ADD_FAVORITE}${obj.id}`);
-      console.log(data);
       return data;
     }
-
-    if (!isAuth) {
-      dispatch(addOrRemoveFavoriteItem(obj));
-      fulfillWithValue({});
-      console.log('no auth');
-    }
-    await dispatch(getFavorites());
   },
 );

@@ -14,8 +14,6 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     addOrRemoveFavoriteItem(state, action: PayloadAction<TFavoriteItem>) {
-      console.log('try');
-      console.log(action.payload);
       const checkItemInFavorite = state.items.find(
         (item: TFavoriteItem) => item.id === action.payload.id,
       );
@@ -52,8 +50,6 @@ const favoriteSlice = createSlice({
       .addCase(addOrRemoveFavoriteAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items.push(action.payload);
-        console.log(action.payload);
       })
       .addCase(addOrRemoveFavoriteAsync.rejected, (state, action) => {
         state.loading = false;
