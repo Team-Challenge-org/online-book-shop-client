@@ -1,7 +1,7 @@
 import styles from 'styles/productInfo/index.module.scss';
 
 import type { TBook } from 'store/books/types';
-import type { TFavoriteItems } from 'store/favorite/types';
+import type { TFavoriteItem } from 'store/favorite/types';
 import type { TDropdownCharacteristicsType } from 'types/common';
 
 import { useSelector } from 'react-redux';
@@ -13,10 +13,10 @@ import { useModalCart } from 'contexts/ModalCartContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { selectOneFavorite } from 'store/favorite/selectors';
 import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
-import { addOrRemoveFavoriteItem } from 'store/favorite/favoriteSlice';
 import { Breadcrumbs } from 'components/elements/Breadcrumbs/Breadcrumbs';
 import { DropdownItem } from 'components/modules/ProductPage/DropdownItem';
 import axios from 'axios';
+import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
 
 export const ProductInfo = () => {
   const [book, setBook] = useState<TBook>({
@@ -54,8 +54,8 @@ export const ProductInfo = () => {
     window.scrollTo(0, 0); //show upper part of page
   }, [id, navigate]);
 
-  const favoriteItemsHandler = (obj: TFavoriteItems) => {
-    dispatch(addOrRemoveFavoriteItem(obj));
+  const favoriteItemsHandler = (obj: TFavoriteItem) => {
+    dispatch(addOrRemoveFavoriteAsync(obj));
   };
 
   const characteristics: TDropdownCharacteristicsType = {

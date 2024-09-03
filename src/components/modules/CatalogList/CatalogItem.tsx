@@ -1,15 +1,15 @@
-import styles from "styles/catalogList/index.module.scss";
+import styles from 'styles/catalogList/index.module.scss';
 
-import type { TCatalogItemType } from "types/common";
+import type { TCatalogItemType } from 'types/common';
 
-import { useState } from "react";
-import { NAV_URL } from "constants/global";
-import { useAppDispatch } from "store/store";
-import { Link, useNavigate } from "react-router-dom";
-import { setSimilarBooks } from "store/books/booksSlice";
-import ImageHover from "components/elements/ImageHover/ImageHover";
-import { truncateAuthors, truncateBookTitle } from "utils/truncateString";
-import { addRecentlyViewedBook } from "store/recentlyViewedBooks/recentlyViewedBooksSlice";
+import { useState } from 'react';
+import { NAV_URL } from 'constants/global';
+import { useAppDispatch } from 'store/store';
+import { Link, useNavigate } from 'react-router-dom';
+import { setSimilarBooks } from 'store/books/booksSlice';
+import ImageHover from 'components/elements/ImageHover/ImageHover';
+import { truncateAuthors, truncateBookTitle } from 'utils/truncateString';
+import { addRecentlyViewedBook } from 'store/recentlyViewedBooks/recentlyViewedBooksSlice';
 
 const CatalogItem = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -22,16 +22,15 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
         className={styles.catalog__list__item}
         onMouseEnter={() => setShowButtons(true)}
         onMouseLeave={() => setShowButtons(false)}
-        onClick={(e) => {
+        onClick={() => {
           navigate(NAV_URL.PRODUCT_PAGE + item.id);
-        }}
-      >
+        }}>
         <img
           src={item.titleImage!}
           alt={item.title}
           className={styles.catalog__list__item__image}
         />
-        {showButtons ? <ImageHover item={item} /> : ""}
+        {showButtons ? <ImageHover item={item} /> : ''}
       </div>
 
       <div className={styles.catalog__list__item__text}>
@@ -44,13 +43,10 @@ const CatalogItem = ({ item }: TCatalogItemType) => {
           onClick={() => {
             dispatch(addRecentlyViewedBook(item));
             dispatch(setSimilarBooks(item));
-          }}
-        >
+          }}>
           {truncateBookTitle(item.title)}
         </Link>
-        <span className={styles.catalog__list__item__text__price}>
-          {item.price} грн.
-        </span>
+        <span className={styles.catalog__list__item__text__price}>{item.price} грн.</span>
       </div>
     </li>
   );

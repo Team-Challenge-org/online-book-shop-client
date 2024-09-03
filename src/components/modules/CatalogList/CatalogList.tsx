@@ -1,14 +1,14 @@
-import styles from "styles/catalogList/index.module.scss";
+import styles from 'styles/catalogList/index.module.scss';
 
-import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "store/store";
-import { fetchBooks } from "store/books/asyncActions";
-import { selectBookData } from "store/books/selectors";
-import { selectFavorite } from "store/favorite/selectors";
-import { selectCategory } from "store/categories/selectors";
-import { selectNotAuthUserCart } from "store/cart/selectors";
-import CatalogItem from "components/modules/CatalogList/CatalogItem";
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'store/store';
+import { fetchBooks } from 'store/books/asyncActions';
+import { selectBookData } from 'store/books/selectors';
+import { selectFavorite } from 'store/favorite/selectors';
+import { selectCategory } from 'store/categories/selectors';
+import { selectNotAuthUserCart } from 'store/cart/selectors';
+import CatalogItem from 'components/modules/CatalogList/CatalogItem';
 
 const CatalogList = () => {
   const { books } = useSelector(selectBookData);
@@ -22,13 +22,13 @@ const CatalogList = () => {
   useEffect(() => {
     if (isMounted.current) {
       const jsonCart = JSON.stringify(cartItems);
-      localStorage.setItem("cart", jsonCart);
+      localStorage.setItem('cart', jsonCart);
 
-      const jsonFavorite = JSON.stringify(favoriteItems);
-      localStorage.setItem("favorite", jsonFavorite);
+      //const jsonFavorite = JSON.stringify(favoriteItems);
+      //localStorage.setItem("favorite", jsonFavorite);
 
       const jsonCategory = JSON.stringify(category);
-      localStorage.setItem("category", jsonCategory);
+      localStorage.setItem('category', jsonCategory);
     }
     isMounted.current = true;
   }, [cartItems, favoriteItems, category]);
@@ -41,9 +41,7 @@ const CatalogList = () => {
     getBooks();
   }, [dispatch]);
 
-  const renderedItems = books
-    .map((item) => <CatalogItem item={item} key={item.id} />)
-    .slice(0, 10);
+  const renderedItems = books.map((item) => <CatalogItem item={item} key={item.id} />).slice(0, 10);
 
   const filteredItems = books
     .filter((item) => item.category === category.name)

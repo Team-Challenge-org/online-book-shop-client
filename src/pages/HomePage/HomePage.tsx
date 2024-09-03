@@ -6,13 +6,17 @@ import CatalogList from 'components/modules/CatalogList/CatalogList';
 import CategoriesList from 'components/modules/CategoriesList/CategoriesList';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'store/auth/selectors';
+import { getFavorites } from 'store/favorite/asyncActions';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
-    if (isAuth) dispatch(getCartItems());
+    if (isAuth) {
+      dispatch(getCartItems());
+      dispatch(getFavorites());
+    }
   }, [dispatch, isAuth]);
 
   return (

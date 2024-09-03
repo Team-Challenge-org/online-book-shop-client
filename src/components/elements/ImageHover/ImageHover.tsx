@@ -1,25 +1,27 @@
 import styles from "./imagehover.module.scss";
 
-import type { TCatalogItemType } from "types/common";
-import type { TFavoriteItems } from "store/favorite/types";
+import type { TCatalogItemType } from 'types/common';
+import type { TFavoriteItem } from 'store/favorite/types';
 
 import {
   selectItemInAuthUserCart,
   selectItemInNotAuthUserCart,
 } from "store/cart/selectors";
-import { motion } from "framer-motion";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { MdFavorite } from "react-icons/md";
-import { useAppDispatch } from "store/store";
-import { MdShoppingCart } from "react-icons/md";
-import { MdFavoriteBorder } from "react-icons/md";
-import { selectIsAuth } from "store/auth/selectors";
-import { useBooksLogic } from "contexts/BooksContext";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { useModalCart } from "contexts/ModalCartContext";
-import { selectOneFavorite } from "store/favorite/selectors";
-import { addOrRemoveFavoriteItem } from "store/favorite/favoriteSlice";
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { MdFavorite } from 'react-icons/md';
+import { useAppDispatch } from 'store/store';
+import { MdShoppingCart } from 'react-icons/md';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { useBooksLogic } from 'contexts/BooksContext';
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import { useModalCart } from 'contexts/ModalCartContext';
+import { selectOneFavorite } from 'store/favorite/selectors';
+import { selectItemInAuthUserCart, selectItemInNotAuthUserCart } from 'store/cart/selectors';
+import { selectIsAuth } from 'store/auth/selectors';
+import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
+
 
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
@@ -33,6 +35,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
 
   const { onAddOrRemoveCartItem } = useModalCart();
 
+
   let shoppingCart;
 
   if (isAuth) {
@@ -41,7 +44,7 @@ const ImageHover = ({ item }: TCatalogItemType) => {
     shoppingCart = notAuthcart;
   }
 
-  const favoriteItemsHandler = (obj: TFavoriteItems) => {
+  const favoriteItemsHandler = (obj: TFavoriteItem) => {
     dispatch(addOrRemoveFavoriteItem(obj));
   };
 

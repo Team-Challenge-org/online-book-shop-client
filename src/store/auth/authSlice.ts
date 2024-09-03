@@ -59,7 +59,7 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUserGoogle.fulfilled, (state, action) => {
+      .addCase(loginUserGoogle.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
         state.isAuth = true;

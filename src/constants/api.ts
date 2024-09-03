@@ -7,14 +7,17 @@ export const Endpoints = {
   GET_ALL_BOOKS: '/api/v1/book/all?size=200',
   GET_ALL_CATEGORIES: '/api/v1/book/category/all',
 
-  // user
+  // auth
   LOGIN: '/api/v1/auth/login',
   LOGOUT: '/api/v1/auth/logout',
   REGISTER: '/api/v1/auth/register',
   OAUTH: '/api/v1/auth/oauth2/success',
   REFRESH_TOKEN: '/api/v1/auth/refresh-token',
-  UPDATE: '/api/v1/profile/update',
-  UPDATE_PASSWORD: '/api/v1/profile/update-password',
+
+  // user
+  GET_USER: '/api/v1/profile/user',
+  UPDATE_USER: '/api/v1/profile/update',
+  UPDATE_PASSWORD: '/api/v1/profile/reset-password',
 
   CHECK_EMAIL: '/api/v1/user/resetPassword',
   RESET_PASSWORD: '/api/v1/user/savePassword',
@@ -24,6 +27,11 @@ export const Endpoints = {
   ADD_BOOK_TO_CART: '/api/v1/cart/add',
   UPDATE_BOOK_QUANTITY: '/api/v1/cart/update',
   DELETE_BOOK_FROM_CART: '/api/v1/cart/delete',
+
+  // favorite items
+  GET_FAVORITE: '/api/v1/user/favourites',
+  ADD_FAVORITE: '/api/v1/user/favourites/add?id=',
+  DELETE_FAVORITE: '/api/v1/user/favourites/delete?id=',
 
   SEND_EMAIL: '/api/v1/mail/send?mail=',
 };

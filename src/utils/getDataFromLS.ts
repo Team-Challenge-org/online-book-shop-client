@@ -1,6 +1,6 @@
 import type { TBook } from 'store/books/types';
 import type { TCategory } from 'store/categories/types';
-import type { TFavoriteItems } from 'store/favorite/types';
+import type { TFavoriteItem } from 'store/favorite/types';
 
 export const getCartFromLS = () => {
   const data = localStorage.getItem('cart');
@@ -18,11 +18,9 @@ export const getCategoryFromLS = () => {
 
 export const getFavoriteFromLS = () => {
   const data = localStorage.getItem('favorite');
-  const items = data ? JSON.parse(data) : [];
+  const items: TFavoriteItem[] = data ? JSON.parse(data) : [];
 
-  return {
-    items: items as TFavoriteItems[],
-  };
+  return items;
 };
 
 export function getRecentlyViewedBooksFromLS() {

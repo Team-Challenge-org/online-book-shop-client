@@ -107,4 +107,75 @@
       }
     }
   }
+
+  &__favorite {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 24px;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      width: 302px;
+      height: 519px;
+      justify-content: space-between;
+      position: relative;
+      &__icon {
+        color: $color-gray;
+
+        &__wrapper {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          height: 36px;
+          width: 36px;
+          background-color: $color-white;
+          border: 0.3px solid $color-gray;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+
+      &__icon:hover {
+        color: $color-black;
+      }
+
+      &__image {
+        width: 100%;
+        height: 369px;
+        cursor: pointer;
+      }
+
+      &__subtitle {
+        color: $color-gray;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19.36px;
+      }
+
+      &__title {
+        color: $color-black;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24.2px;
+        cursor: pointer;
+      }
+
+      &__price {
+        color: $color-black;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24.2px;
+      }
+
+      &__button {
+        width: 100%;
+        height: 40px;
+        font-size: 14px !important;
+      }
+    }
+  }
 }
