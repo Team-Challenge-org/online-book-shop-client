@@ -1,6 +1,5 @@
 import styles from './emailCheckerForPasswordResetForm.module.scss';
 
-import { emailCheckerSchema, type TEmailCheckerSchema } from 'validations/emailCheckerSchema';
 import { AppDispatch } from 'store/store';
 import { useEffect, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
@@ -12,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
 import { resetEmailCheckState } from 'store/auth/authSlice';
 import { checkEmailForResetPassword } from 'store/auth/asyncActions';
+import { emailCheckerSchema, type TEmailCheckerSchema } from 'validations/emailCheckerSchema';
 
 export function EmailCheckerForPasswordResetForm() {
   const methods = useForm<TEmailCheckerSchema>({

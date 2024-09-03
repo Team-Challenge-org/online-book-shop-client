@@ -3,20 +3,36 @@ import styles from "./cartItem.module.scss";
 import type { TCartItem } from "store/cart/types";
 
 import { MdAdd } from "react-icons/md";
+import React, { useEffect } from "react";
 import { MdRemove } from "react-icons/md";
 import { truncateAuthors } from "utils/truncateString";
 import { useModalCart } from "contexts/ModalCartContext";
+import { useChangeBookQuantity } from "hooks/useChangeBookQuantity";
 import { ModalCartBookImageLoader } from "components/assets/skeletonLoader/ModalCartBookImageLoader";
 
 export function CartItem({ book }: { book: TCartItem }) {
   const {
-    onDecreaseBookCount,
-    onIncreaseBookCount,
-    onRemoveBookFromCart,
-    onUpdateItemQuantity,
-  } = useModalCart();
+    handleInput,
+    itemQuantity,
+    totalBookPrice,
+    setItemQuantity,
+    handleChangeQuantity,
+    debouncedItemQuantity,
+    handleIncreaseItemQuantity,
+    handleDecreaseItemQuantity,
+  } = useChangeBookQuantity(book);
 
-  const totalBookPrice = book?.price * book?.quantity;
+  const { onRemoveBookFromCart, onUpdateItemQuantity } = useModalCart();
+
+  useEffect(() => {
+    if (debouncedItemQuantity !== book?.quantity) {
+      onUpdateItemQuantity(book?.id, debouncedItemQuantity);
+    }
+  }, [debouncedItemQuantity]);
+
+  useEffect(() => {
+    setItemQuantity(book.quantity);
+  }, [book.quantity]);
 
   return (
     <li className={styles.book_container}>
@@ -49,7 +65,7 @@ export function CartItem({ book }: { book: TCartItem }) {
           <div className={styles.count_box}>
             <div
               className={styles.change_count_btn}
-              onClick={() => onDecreaseBookCount(book?.id)}
+              onClick={handleDecreaseItemQuantity}
             >
               <MdRemove />
             </div>
@@ -58,15 +74,15 @@ export function CartItem({ book }: { book: TCartItem }) {
               type="number"
               className={styles.field_quantity}
               maxLength={3}
-              value={book?.quantity}
-              onChange={(e) =>
-                onUpdateItemQuantity(book.id, Number(e.target.value))
-              }
+              min="1"
+              value={itemQuantity}
+              onChange={handleChangeQuantity}
+              onInput={handleInput}
             />
 
             <div
               className={styles.change_count_btn}
-              onClick={() => onIncreaseBookCount(book?.id)}
+              onClick={handleIncreaseItemQuantity}
             >
               <MdAdd />
             </div>

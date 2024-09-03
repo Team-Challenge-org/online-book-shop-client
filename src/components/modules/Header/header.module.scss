@@ -145,4 +145,14 @@
   .nav_icon:hover {
     color: $color-main;
   }
+
+  .nav_profile_icon {
+    padding: 11px;
+    height: 48px;
+    width: 48px;
+    color: $color-main;
+    background-color: $color-main-15;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }

@@ -1,8 +1,12 @@
-import styles from './imagehover.module.scss';
+import styles from "./imagehover.module.scss";
 
 import type { TCatalogItemType } from 'types/common';
 import type { TFavoriteItem } from 'store/favorite/types';
 
+import {
+  selectItemInAuthUserCart,
+  selectItemInNotAuthUserCart,
+} from "store/cart/selectors";
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -18,20 +22,30 @@ import { selectItemInAuthUserCart, selectItemInNotAuthUserCart } from 'store/car
 import { selectIsAuth } from 'store/auth/selectors';
 import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
 
+
 const ImageHover = ({ item }: TCatalogItemType) => {
   const dispatch = useAppDispatch();
   const { updateBookViewAndData } = useBooksLogic();
   const favorite = useSelector(selectOneFavorite(item));
   const notAuthcart = useSelector(selectItemInNotAuthUserCart(item));
-  const authCart = selectItemInAuthUserCart(item);
+  const authCart = useSelector(selectItemInAuthUserCart(item));
   const [hoverFavorite, setHoverFavorite] = useState(false);
   const [hoverCart, setHoverCart] = useState(false);
   const isAuth = useSelector(selectIsAuth);
 
   const { onAddOrRemoveCartItem } = useModalCart();
 
+
+  let shoppingCart;
+
+  if (isAuth) {
+    shoppingCart = authCart;
+  } else {
+    shoppingCart = notAuthcart;
+  }
+
   const favoriteItemsHandler = (obj: TFavoriteItem) => {
-    dispatch(addOrRemoveFavoriteAsync(obj));
+    dispatch(addOrRemoveFavoriteItem(obj));
   };
 
   return (
@@ -39,26 +53,33 @@ const ImageHover = ({ item }: TCatalogItemType) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ ease: 'easeOut', duration: 0.4 }}>
+        transition={{ ease: "easeOut", duration: 0.4 }}
+      >
         <div className={styles.hover__wrapper}>
           <button
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               favoriteItemsHandler(item);
             }}
-            className={styles.hover__button}>
+            className={styles.hover__button}
+          >
             {favorite ? (
-              <div className={`${styles.hover__button__icon} ${styles.hover__button__black}`}>
-                <MdFavorite color='#FFFFFF' size='28px' />
+              <div
+                className={`${styles.hover__button__icon} ${styles.hover__button__black}`}
+              >
+                <MdFavorite color="#FFFFFF" size="28px" />
               </div>
             ) : (
               <div
                 onMouseEnter={() => setHoverFavorite(true)}
                 onMouseLeave={() => setHoverFavorite(false)}
                 className={`${styles.hover__button__icon} ${
-                  hoverFavorite ? styles.hover__button__black : styles.hover__button__green
-                }`}>
-                <MdFavoriteBorder color='#FFFFFF' size='28px' />
+                  hoverFavorite
+                    ? styles.hover__button__black
+                    : styles.hover__button__green
+                }`}
+              >
+                <MdFavoriteBorder color="#FFFFFF" size="28px" />
               </div>
             )}
           </button>
@@ -68,19 +89,25 @@ const ImageHover = ({ item }: TCatalogItemType) => {
               e.stopPropagation();
               onAddOrRemoveCartItem(item);
             }}
-            className={styles.hover__button}>
-            {(isAuth ? authCart : notAuthcart) ? (
-              <div className={`${styles.hover__button__icon} ${styles.hover__button__black}`}>
-                <MdShoppingCart color='#FFFFFF' size='28px' />
+            className={styles.hover__button}
+          >
+            {shoppingCart ? (
+              <div
+                className={`${styles.hover__button__icon} ${styles.hover__button__black}`}
+              >
+                <MdShoppingCart color="#FFFFFF" size="28px" />
               </div>
             ) : (
               <div
                 onMouseEnter={() => setHoverCart(true)}
                 onMouseLeave={() => setHoverCart(false)}
                 className={`${styles.hover__button__icon} ${
-                  hoverCart ? styles.hover__button__black : styles.hover__button__green
-                }`}>
-                <MdOutlineShoppingCart color='#FFFFFF' size='28px' />
+                  hoverCart
+                    ? styles.hover__button__black
+                    : styles.hover__button__green
+                }`}
+              >
+                <MdOutlineShoppingCart color="#FFFFFF" size="28px" />
               </div>
             )}
           </button>

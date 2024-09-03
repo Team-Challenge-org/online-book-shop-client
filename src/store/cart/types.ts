@@ -23,18 +23,8 @@ export type TCartSliceState = {
   authUserCart: TAuthUserCart;
 };
 
-export type TUpdateCartItem = Omit<
-  TCartItem,
-  "images" | "authors" | "titleImage"
->;
-
 export type TGetCartItemsResponse = {
   items: TCartItem[];
-  totalPrice: number;
-};
-
-export type TUpdateItemQuantityResponse = {
-  items: TUpdateCartItem[];
   totalPrice: number;
 };
 
@@ -47,5 +37,4 @@ export type TAPIError = {
 export type TUpdateParams = {
   bookId: number;
   quantity?: number;
-  operation?: "1" | "-1";
 };
