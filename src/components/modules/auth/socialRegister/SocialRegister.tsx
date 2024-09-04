@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUserGoogle } from 'store/auth/asyncActions';
 import { useAuth } from 'contexts/AuthContext';
 import ProfileModal from '../ProfileModal/ProfileModal';
-//import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { LoginSocialFacebook, IResolveParams } from 'reactjs-social-login';
 
 export function SocialRegister() {
   const isAuth = useSelector(selectIsAuth);
@@ -42,23 +42,26 @@ export function SocialRegister() {
               <span>Продовжити через Google</span>
             </li>
 
-            <li className={styles.list__item}>
-              <img src='/img/facebook_icon.png' alt='facebook logo' />
-              <span>Продовжити через Facebook</span>
-
-              {/*<FacebookLogin
+            <LoginSocialFacebook
               appId='522254420463237'
-              autoLoad={false}
-              fields='name,email'
-              callback={handleFacebookCallback}
-              render={(renderProps) => (
-                <button onClick={renderProps.onClick}>
-                  <img src='/img/facebook_icon.png' alt='facebook logo' />
-                  <span>Продовжити через Facebook</span>
-                </button>
-              )}
-            />*/}
-            </li>
+              fieldsProfile={
+                'id,first_name,last_name,middle_name,name,name_format,picture,short_name,email,gender'
+              }
+              //onLoginStart={onLoginStart}
+              //onLogoutSuccess={onLogoutSuccess}
+              //redirect_uri={REDIRECT_URI}
+              onResolve={({ provider, data }: IResolveParams) => {
+                console.log(provider);
+                console.log(data);
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}>
+              <li className={styles.list__item}>
+                <img src='/img/facebook_icon.png' alt='facebook logo' />
+                <span>Продовжити через Facebook</span>
+              </li>
+            </LoginSocialFacebook>
           </ul>
 
           <div className={styles.line}>
