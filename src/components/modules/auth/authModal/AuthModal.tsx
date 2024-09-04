@@ -53,7 +53,7 @@ export function AuthModal({ children }: TAuthModalProps) {
 
   return (
     <div ref={overlayRef} className={styles.overlay}>
-      <div className={styles.modal}>
+      <div className={`${isAuth ? styles.modal__profile : '111'} ${styles.modal}`}>
         {isAuth ? (
           ''
         ) : (
