@@ -4,6 +4,12 @@ import styles from '../../orderPage.module.scss';
 import { useState } from 'react';
 import RecipientForm from './RecipientForm';
 import { useFormContext } from 'react-hook-form';
+import {
+  errorEmailTips,
+  errorFirstNameTips,
+  errorLastNameTips,
+  errorPhoneNumberTips,
+} from 'constants/auth';
 
 const orderFields: TRegisterField[] = [
   {
@@ -12,11 +18,7 @@ const orderFields: TRegisterField[] = [
     label: 'Ваше ім’я *',
     placeholder: 'Введіть ваше ім’я',
     valueName: 'first_name',
-    errorTips: [
-      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-      'Ви можете використовувати великі та малі літери.',
-      'Довжина імені має бути від 2 до 30 символів.',
-    ],
+    errorTips: errorFirstNameTips,
   },
   {
     id: 2,
@@ -24,11 +26,7 @@ const orderFields: TRegisterField[] = [
     label: 'Ваше прізвище *',
     placeholder: 'Введіть ваше прізвище',
     valueName: 'last_name',
-    errorTips: [
-      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-      'Ви можете використовувати великі та малі літери.',
-      'Довжина імені має бути від 2 до 50 символів.',
-    ],
+    errorTips: errorLastNameTips,
   },
   {
     id: 3,
@@ -36,10 +34,7 @@ const orderFields: TRegisterField[] = [
     label: 'Номер телефону *',
     placeholder: '+38',
     valueName: 'phone_number',
-    errorTips: [
-      'Ви можете використовувати лише арабські цифри та «+».',
-      'Довжина мобільного номера має бути 13 символів, включаючи «+».',
-    ],
+    errorTips: errorPhoneNumberTips,
   },
   {
     id: 4,
@@ -47,12 +42,7 @@ const orderFields: TRegisterField[] = [
     label: 'Електронна пошта *',
     placeholder: 'Введіть електронну пошту',
     valueName: 'email',
-    errorTips: [
-      "Ви можете використовувати лише арабські цифри, латиницю та наступні символи ~ ! $ % ^ & * _ = + } { ' ? - @.",
-      'Ви можете використовувати великі та малі літери.',
-      'Пошта має містити “@”.',
-      "Пошта повинна мати будь-який діючий домейн окрім “mail.ru”, “yandex.ru” та інших доменів, пов'язаних з росією.",
-    ],
+    errorTips: errorEmailTips,
   },
 ];
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../../../orderPage.module.scss';
 import { useFormContext } from 'react-hook-form';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
+import { errorTextTips } from 'constants/auth';
 
 export default function NpCourier() {
   const {
@@ -25,13 +26,7 @@ export default function NpCourier() {
         </div>
         {/* Display error message if any */}
         {errors?.np_street && (
-          <ErrorMessage
-            message={errors.np_street?.message as string}
-            errorTips={[
-              'Ви можете використовувати лише українську мову',
-              'Ви можете використовувати великі та малі літери.',
-            ]}
-          />
+          <ErrorMessage message={errors.np_street?.message as string} errorTips={errorTextTips} />
         )}
       </label>
 
@@ -51,13 +46,7 @@ export default function NpCourier() {
         </div>
         {/* Display error message if any */}
         {errors?.np_house && (
-          <ErrorMessage
-            message={errors.np_house?.message as string}
-            errorTips={[
-              'Ви можете використовувати лише українську мову',
-              'Ви можете використовувати великі та малі літери.',
-            ]}
-          />
+          <ErrorMessage message={errors.np_house?.message as string} errorTips={errorTextTips} />
         )}
       </label>
 

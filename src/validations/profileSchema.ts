@@ -15,7 +15,7 @@ export const firstNameSchema = z.object({
     .string()
     .regex(nameRegex, errorMessage.FIRST_NAME)
     .min(2, errorMessage.FIRST_NAME)
-    .max(30, errorMessage.FIRST_NAME),
+    .max(50, errorMessage.FIRST_NAME),
 });
 
 export const lastNameSchema = z.object({

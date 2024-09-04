@@ -1,6 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import styles from '../../orderPage.module.scss';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
+import { errorTextTips } from 'constants/auth';
 
 export default function CommentForm() {
   const {
@@ -14,13 +15,7 @@ export default function CommentForm() {
 
       <textarea {...register('comment')} className={styles.order__comment__input} />
       {errors?.comment && (
-        <ErrorMessage
-          message={errors.comment?.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
+        <ErrorMessage message={errors.comment?.message as string} errorTips={errorTextTips} />
       )}
     </label>
   );

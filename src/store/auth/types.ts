@@ -1,4 +1,4 @@
-export enum userStatus {
+export enum authStatus {
   LOADING = 'loading',
   SUCCESS = 'success',
   ERROR = 'error',
@@ -7,6 +7,7 @@ export enum userStatus {
 export type TAuthState = {
   loading: boolean;
   error: null | string;
+  status: authStatus;
   isAuth: boolean | undefined;
   isEmailChecked: boolean;
   isPasswordReset: boolean;

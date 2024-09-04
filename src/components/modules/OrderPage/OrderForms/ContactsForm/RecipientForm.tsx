@@ -2,6 +2,7 @@ import React from 'react';
 import { TRegisterField } from 'types/auth';
 import styles from '../../orderPage.module.scss';
 import { OrderField } from '../OrderField/OrderField';
+import { errorFirstNameTips, errorLastNameTips, errorPhoneNumberTips } from 'constants/auth';
 
 const orderFields: TRegisterField[] = [
   {
@@ -10,11 +11,7 @@ const orderFields: TRegisterField[] = [
     label: 'Ім’я отримувача *',
     placeholder: 'Введіть ім’я отримувача',
     valueName: 'recipient_first_name',
-    errorTips: [
-      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-      'Ви можете використовувати великі та малі літери.',
-      'Довжина імені має бути від 2 до 30 символів.',
-    ],
+    errorTips: errorFirstNameTips,
   },
   {
     id: 2,
@@ -22,11 +19,7 @@ const orderFields: TRegisterField[] = [
     label: 'Прізвище отримувача *',
     placeholder: 'Введіть прізвище отримувача',
     valueName: 'recipient_last_name',
-    errorTips: [
-      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-      'Ви можете використовувати великі та малі літери.',
-      'Довжина імені має бути від 2 до 50 символів.',
-    ],
+    errorTips: errorLastNameTips,
   },
   {
     id: 3,
@@ -34,10 +27,7 @@ const orderFields: TRegisterField[] = [
     label: 'Номер телефону отримувача *',
     placeholder: '+38',
     valueName: 'recipient_phone_number',
-    errorTips: [
-      'Ви можете використовувати лише арабські цифри та «+».',
-      'Довжина мобільного номера має бути 13 символів, включаючи «+».',
-    ],
+    errorTips: errorPhoneNumberTips,
   },
 ];
 

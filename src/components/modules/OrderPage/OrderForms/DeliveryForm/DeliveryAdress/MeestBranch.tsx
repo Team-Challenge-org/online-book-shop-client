@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../../../orderPage.module.scss';
 import { useFormContext } from 'react-hook-form';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
+import { errorTextTips } from 'constants/auth';
 
 export default function MeestBranch() {
   const {
@@ -26,13 +27,7 @@ export default function MeestBranch() {
 
       {/* Display error message if any */}
       {errors?.department && (
-        <ErrorMessage
-          message={errors.department?.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
+        <ErrorMessage message={errors.department?.message as string} errorTips={errorTextTips} />
       )}
     </label>
   );

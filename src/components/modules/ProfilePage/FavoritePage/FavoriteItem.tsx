@@ -6,10 +6,13 @@ import { NAV_URL } from 'constants/global';
 import { MdDeleteOutline } from 'react-icons/md';
 import { useAppDispatch } from 'store/store';
 import { addOrRemoveFavoriteAsync } from 'store/favorite/asyncActions';
+import { useModalCart } from 'contexts/ModalCartContext';
 
 export default function FavoriteItem({ obj }: { obj: TFavoriteItem }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { onAddBookToCart } = useModalCart();
+
   return (
     <div className={styles.profile__favorite__item}>
       <div
@@ -34,7 +37,11 @@ export default function FavoriteItem({ obj }: { obj: TFavoriteItem }) {
         {obj.title}
       </span>
       <span className={styles.profile__favorite__item__price}>{obj.price}, грн </span>
-      <button className={`button ${styles.profile__favorite__item__button}`}>Додати у кошик</button>
+      <button
+        className={`button ${styles.profile__favorite__item__button}`}
+        onClick={() => onAddBookToCart(obj)}>
+        Додати у кошик
+      </button>
     </div>
   );
 }

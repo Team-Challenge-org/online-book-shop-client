@@ -10,6 +10,7 @@ import { updateUser, updateUserPassword } from 'store/user/asyncActions';
 import { PasswordComplexity } from 'components/modules/auth/shared/passwordComplexity/PasswordComplexity';
 import { usePasswordComplexity } from 'hooks/usePasswordComplexity';
 import styles from '../profilePage.module.scss';
+import { errorPasswordTips } from 'constants/auth';
 
 export default function PersonalPagePasswordInput() {
   const [disableInput, setDisableInput] = useState(true);
@@ -92,11 +93,7 @@ export default function PersonalPagePasswordInput() {
       {(errors as any)?.password && (
         <ErrorMessage
           message={(errors as any).password.message as string}
-          errorTips={[
-            'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-            'Ви можете використовувати великі та малі літери.',
-            'Довжина імені має бути від 2 до 50 символів.',
-          ]}
+          errorTips={errorPasswordTips}
         />
       )}
     </FormProvider>

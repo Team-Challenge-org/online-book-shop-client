@@ -17,6 +17,12 @@ import Spinner from 'components/elements/Spinner/Spinner';
 import styles from '../profilePage.module.scss';
 import { TPersonalProfileField } from 'types/common';
 import PersonalPagePasswordInput from './PersonalPagePasswordInput';
+import {
+  errorEmailTips,
+  errorFirstNameTips,
+  errorLastNameTips,
+  errorPhoneNumberTips,
+} from 'constants/auth';
 
 const registerFields: TPersonalProfileField[] = [
   {
@@ -24,11 +30,7 @@ const registerFields: TPersonalProfileField[] = [
     type: 'text',
     label: 'Ім’я',
     valueName: 'first_name',
-    errorTips: [
-      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-      'Ви можете використовувати великі та малі літери.',
-      'Довжина імені має бути від 2 до 30 символів.',
-    ],
+    errorTips: errorFirstNameTips,
     schema: firstNameSchema,
   },
   {
@@ -36,11 +38,7 @@ const registerFields: TPersonalProfileField[] = [
     type: 'text',
     label: 'Прізвище',
     valueName: 'last_name',
-    errorTips: [
-      'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-      'Ви можете використовувати великі та малі літери.',
-      'Довжина імені має бути від 2 до 50 символів.',
-    ],
+    errorTips: errorLastNameTips,
     schema: lastNameSchema,
   },
   {
@@ -48,10 +46,7 @@ const registerFields: TPersonalProfileField[] = [
     type: 'number',
     label: 'Номер телефону',
     valueName: 'phone_number',
-    errorTips: [
-      'Ви можете використовувати лише арабські цифри та «+».',
-      'Довжина мобільного номера має бути 13 символів, включаючи «+».',
-    ],
+    errorTips: errorPhoneNumberTips,
     schema: phoneNumberSchema,
   },
   {
@@ -59,12 +54,7 @@ const registerFields: TPersonalProfileField[] = [
     type: 'email',
     label: 'Електронна пошта',
     valueName: 'email',
-    errorTips: [
-      "Ви можете використовувати лише арабські цифри, латиницю та наступні символи ~ ! $ % ^ & * _ = + } { ' ? - @.",
-      'Ви можете використовувати великі та малі літери.',
-      'Пошта має містити “@”.',
-      "Пошта повинна мати будь-який діючий домейн окрім “mail.ru”, “yandex.ru” та інших доменів, пов'язаних з росією.",
-    ],
+    errorTips: errorEmailTips,
     schema: emailSchema,
   },
 ];

@@ -106,11 +106,7 @@ export default function PersonalPageInput({ field }: { field: TPersonalProfileFi
       {(errors as any)?.[field.valueName] && (
         <ErrorMessage
           message={(errors as any)[field.valueName].message as string}
-          errorTips={[
-            'Ви можете використовувати лише кирилицю, латиницю та арабські цифри.',
-            'Ви можете використовувати великі та малі літери.',
-            'Довжина імені має бути від 2 до 50 символів.',
-          ]}
+          errorTips={field.errorTips}
         />
       )}
     </FormProvider>
