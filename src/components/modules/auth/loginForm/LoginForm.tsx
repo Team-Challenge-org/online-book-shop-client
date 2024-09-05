@@ -1,9 +1,9 @@
 import styles from './loginForm.module.scss';
 
-import type { TUser } from 'store/auth/types';
+import { authStatus, type TUser } from 'store/auth/types';
 
 import { AppDispatch } from 'store/store';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { loginUser } from 'store/auth/asyncActions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ const LoginForm = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { onCloseRegisterForm } = useAuth();
-  const { error } = useSelector(selectAuthData);
+  const { error, status } = useSelector(selectAuthData);
 
   const methods = useForm<TLoginUserSchema>({
     resolver: zodResolver(loginUserSchema),
@@ -31,8 +31,13 @@ const LoginForm = () => {
       rememberMe: isRememberMe,
     };
     await dispatch(loginUser(userCredential));
-    methods.reset();
-    onCloseRegisterForm();
+
+    function reset() {
+      methods.reset();
+      onCloseRegisterForm();
+    }
+
+    status === authStatus.SUCCESS ? reset() : '';
   }
 
   const {
@@ -67,6 +72,14 @@ const LoginForm = () => {
             iconCloseEye: <MdOutlineVisibilityOff />,
           }}
         />
+
+        {error ? (
+          <span className={styles.login__error}>
+            Будь ласка, перевірте правильність введення пошти, телефону, та паролю
+          </span>
+        ) : (
+          ''
+        )}
 
         <label className={styles.checkbox_container}>
           <input

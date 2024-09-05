@@ -11,6 +11,7 @@ export type TFavoriteItem = {
   titleImage: string | null;
   timeAdded: string;
   images: string[];
+  quantity: number;
 };
 
 export type TFavoriteSliceState = {

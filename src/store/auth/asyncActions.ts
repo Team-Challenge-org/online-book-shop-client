@@ -24,7 +24,6 @@ export const loginUser = createAsyncThunk(
 
     const state = getState() as RootState;
 
-    localStorage.clear();
     const favoriteItems = state.favorite.items;
     localStorage.setItem('favorite', JSON.stringify(favoriteItems));
 
@@ -34,7 +33,7 @@ export const loginUser = createAsyncThunk(
 
 export const loginUserGoogle = createAsyncThunk(
   'auth/login_google',
-  async (access_token: string) => {
+  async (access_token: string, { getState, dispatch }) => {
     const { data } = await axios.get(
       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`,
       {
@@ -54,6 +53,14 @@ export const loginUserGoogle = createAsyncThunk(
 
     Cookies.set('accessToken', JSON.stringify(result.accessToken));
     Cookies.set('refreshToken', JSON.stringify(result.refreshToken));
+
+    await dispatch(getFavorites());
+
+    const state = getState() as RootState;
+
+    localStorage.clear();
+    const favoriteItems = state.favorite.items;
+    localStorage.setItem('favorite', JSON.stringify(favoriteItems));
 
     return result;
   },

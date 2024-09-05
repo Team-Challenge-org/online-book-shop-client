@@ -3,7 +3,7 @@ import { errorMessage, EXCLUDED_DOMAINS } from 'constants/auth';
 
 export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
 
-export const nameRegex = /^[А-Яа-яA-Za-z0-9iIіІєЄ'\s-]+$/;
+export const nameRegex = /^[А-Яа-яA-Za-ziIіІєЄ'\s-]+$/;
 export const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const registerUserSchema = z
@@ -12,7 +12,7 @@ export const registerUserSchema = z
       .string()
       .regex(nameRegex, errorMessage.FIRST_NAME)
       .min(2, errorMessage.FIRST_NAME)
-      .max(30, errorMessage.FIRST_NAME),
+      .max(50, errorMessage.FIRST_NAME),
 
     last_name: z
       .string()

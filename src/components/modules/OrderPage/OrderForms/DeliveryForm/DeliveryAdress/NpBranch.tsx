@@ -11,6 +11,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { ErrorMessage } from 'components/modules/auth/shared/errorMessage/ErrorMessage';
 import styles from '../../../orderPage.module.scss';
+import { errorTextTips } from 'constants/auth';
 
 export default function NpBranch() {
   const [focusInput, setFocusInput] = useState(false);
@@ -86,13 +87,7 @@ export default function NpBranch() {
 
       {/* Display error message if any */}
       {errors?.department && (
-        <ErrorMessage
-          message={errors.department.message as string}
-          errorTips={[
-            'Ви можете використовувати лише українську мову',
-            'Ви можете використовувати великі та малі літери.',
-          ]}
-        />
+        <ErrorMessage message={errors.department.message as string} errorTips={errorTextTips} />
       )}
     </label>
   );

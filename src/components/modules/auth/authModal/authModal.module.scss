@@ -1,4 +1,4 @@
-@import "/src/styles/utils/variables";
+@import '/src/styles/utils/variables';
 
 .overlay {
   position: fixed;
@@ -26,6 +26,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    &__profile {
+      left: auto;
+      right: 0 !important;
+      height: 100vh;
+      justify-content: left !important;
+    }
   }
 
   .btnClose {
@@ -38,14 +45,21 @@
   }
 }
 
-@media(max-width: 2000px) {
+@media (max-width: 2000px) {
   .overlay {
     overflow-y: scroll;
 
     .modal {
       transform: none;
       top: 0;
-      left: calc(50% - 280px)
+      left: calc(50% - 280px);
+
+      &__profile {
+        left: auto;
+        right: 0 !important;
+        height: 100vh;
+        justify-content: left !important;
+      }
     }
   }
 }

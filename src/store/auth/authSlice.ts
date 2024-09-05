@@ -1,4 +1,4 @@
-import type { TAuthState } from './types';
+import { authStatus, type TAuthState } from './types';
 
 import {
   loginUser,
@@ -15,6 +15,7 @@ import { getAuthFromCookies } from 'utils/getDataFromCookies';
 const initialState: TAuthState = {
   loading: false,
   error: null,
+  status: authStatus.LOADING,
   isAuth: getAuthFromCookies(),
   isEmailChecked: false,
   isPasswordReset: false,
@@ -40,20 +41,16 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
         state.isAuth = true;
+        state.status = authStatus.SUCCESS;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        console.log(action.error.message);
-
-        if (action.error.message === 'User not found') {
-          state.error = 'User not found';
-        } else {
-          state.error = action.error.message!;
-        }
+        state.error = action.error.message!;
+        state.status = authStatus.ERROR;
       })
       .addCase(loginUserGoogle.pending, (state) => {
         state.loading = true;
@@ -63,10 +60,12 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.isAuth = true;
+        state.status = authStatus.SUCCESS;
       })
       .addCase(loginUserGoogle.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
+        state.status = authStatus.ERROR;
         if (action.error.message === 'User not found') {
           state.error = 'User not found';
         } else {
@@ -77,15 +76,17 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
         state.isAuth = true;
         state.showMessage = true;
+        state.status = authStatus.SUCCESS;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
+        state.status = authStatus.ERROR;
       })
       .addCase(checkEmailForResetPassword.pending, (state) => {
         state.loading = true;
@@ -122,10 +123,12 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.isAuth = false;
+        state.status = authStatus.LOADING;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
+        state.status = authStatus.ERROR;
         if (action.error.message === 'CharSequence cannot be null or empty.') {
           state.error = 'User not found';
         } else {

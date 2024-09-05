@@ -24,7 +24,7 @@ export const addOrRemoveFavoriteAsync = createAsyncThunk(
     dispatch(addOrRemoveFavoriteItem(obj));
 
     if (isAuth && checkItemInFavorite) {
-      const { data } = await Axios.post(`${Endpoints.DELETE_FAVORITE}${obj.id}`);
+      const { data } = await Axios.delete(`${Endpoints.DELETE_FAVORITE}${obj.id}`);
       return data;
     }
 
