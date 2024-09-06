@@ -4,6 +4,7 @@ import ServiceUnavailablePage from 'pages/ErrorPage/ServiceUnavailablePage';
 import HomePage from 'pages/HomePage/HomePage';
 import OrderPage from 'pages/OrderPage/OrderPage';
 import PaymentPage from 'pages/PaymentPage/PaymentPage';
+import PrivacyPage from 'pages/PrivacyPage/PrivacyPage';
 import ProductPage from 'pages/ProductPage/ProductPage';
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import ResetPasswordPage from 'pages/resetPasswordPage/ResetPasswordPage';
@@ -19,13 +20,15 @@ function App() {
         <Route path='/reset_password' element={<ResetPasswordPage />} />
         <Route path='/payment' element={<PaymentPage />} />
         <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/order' element={<OrderPage />} />
 
         {/* Errors: */}
         <Route path='/404' element={<NotFoundPage />} />
         <Route path='/503' element={<ServiceUnavailablePage />} />
         <Route path='*' element={<Navigate to='/404' replace />} />
 
-        <Route path='/order' element={<OrderPage />} />
+        {/* Static pages */}
+        <Route path='/privacy' element={<PrivacyPage />} />
       </Route>
     </Routes>
   );
