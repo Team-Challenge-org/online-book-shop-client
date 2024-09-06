@@ -1,0 +1,40 @@
+@import '/src/styles/utils/_variables.scss';
+
+.privacy {
+  font-family: 'Inter';
+  padding: 40px 80px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+
+  &__block {
+    background-color: $color-main-05;
+    padding: 16px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19.36px;
+    color: $color-black;
+    margin-bottom: 40px;
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16.94px;
+    color: $color-black-full;
+    margin-top: 40px;
+    margin-bottom: 8px;
+  }
+
+  &__text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14.52px;
+    color: $color-black-full;
+    margin-top: 8px;
+    display: block;
+  }
+}
