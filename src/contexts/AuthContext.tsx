@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth } from 'store/auth/selectors';
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useAppDispatch } from 'store/store';
+import { clearErrorState } from 'store/auth/authSlice';
 
 type TAuthContext = {
   showRegisterForm: boolean;
@@ -43,6 +45,7 @@ type TAuthContextProps = {
 };
 
 function AuthProvider({ children }: TAuthContextProps) {
+  const dispatch = useDispatch();
   const isAuthenticatedUser = useSelector(selectIsAuth);
 
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -72,6 +75,7 @@ function AuthProvider({ children }: TAuthContextProps) {
 
   function handleCloseRegisterForm() {
     setShowRegisterForm(false);
+    dispatch(clearErrorState());
   }
 
   function handleCloseResetPasswordForm() {
