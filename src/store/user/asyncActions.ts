@@ -16,7 +16,7 @@ export const updateUser = createAsyncThunk('user/update', async (obj: any) => {
 export const updateUserPassword = createAsyncThunk(
   'user/updatePassword',
   async (password: string) => {
-    const { data } = await Axios.post(Endpoints.UPDATE_PASSWORD, password);
+    const { data } = await Axios.put(Endpoints.UPDATE_PASSWORD, { password: password });
     return data;
   },
 );
