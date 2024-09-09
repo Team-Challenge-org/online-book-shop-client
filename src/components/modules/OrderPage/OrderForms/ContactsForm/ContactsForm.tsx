@@ -1,9 +1,8 @@
 import { TRegisterField } from 'types/auth';
 import { OrderField } from '../OrderField/OrderField';
 import styles from '../../orderPage.module.scss';
-import { useState } from 'react';
 import RecipientForm from './RecipientForm';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import {
   errorEmailTips,
   errorFirstNameTips,
@@ -47,9 +46,9 @@ const orderFields: TRegisterField[] = [
 ];
 
 export default function ContactsForm() {
-  const [isAnotherRecipient, setIsAnotherRecipient] = useState(false);
+  const { control, watch } = useFormContext();
 
-  const { register } = useFormContext();
+  const watchRecipient = watch('another_recipient');
 
   return (
     <>
@@ -61,18 +60,20 @@ export default function ContactsForm() {
         ))}
 
         <label className={styles.checkbox_container}>
-          <input
-            type='checkbox'
-            className={styles.checkbox}
-            checked={isAnotherRecipient}
-            {...register('another_recipient')}
-            onChange={() => setIsAnotherRecipient(!isAnotherRecipient)}
+          <Controller
+            name='another_recipient'
+            control={control}
+            defaultValue={false}
+            render={({ field: { value, ...field } }) => (
+              <input type='checkbox' className={styles.checkbox} checked={!!value} {...field} />
+            )}
           />
+
           <span>отримувач інша людина</span>
         </label>
       </div>
 
-      {isAnotherRecipient && <RecipientForm />}
+      {watchRecipient && <RecipientForm />}
     </>
   );
 }
