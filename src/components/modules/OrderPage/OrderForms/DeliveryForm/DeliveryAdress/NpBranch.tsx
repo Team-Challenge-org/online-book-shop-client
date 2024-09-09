@@ -22,6 +22,7 @@ export default function NpBranch() {
     watch,
     register,
     setValue,
+    clearErrors,
     formState: { errors },
   } = useFormContext();
 
@@ -74,6 +75,7 @@ export default function NpBranch() {
                 className={styles.order__delivery__block__label__block__list__item}
                 onClick={() => {
                   setValue('department', address.Description);
+                  clearErrors();
                   setTimeout(() => {
                     setFocusInput(false);
                   }, 200);

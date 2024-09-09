@@ -13,7 +13,7 @@ export const getFavorites = createAsyncThunk('favorite/getFavorites', async () =
 
 export const addOrRemoveFavoriteAsync = createAsyncThunk(
   'favorite/addOrRemoveFavorite',
-  async (obj: TFavoriteItem, { getState, dispatch, rejectWithValue }) => {
+  async (obj: TFavoriteItem, { getState, dispatch }) => {
     const state = getState() as RootState;
     const isAuth = state.auth.isAuth;
 

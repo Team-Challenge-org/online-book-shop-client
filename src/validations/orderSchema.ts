@@ -121,8 +121,6 @@ const schemaCondRecipient = z.discriminatedUnion('another_recipient', [
   notAnotherRecipientSchema,
 ]);
 
-export const orderSchema = z.intersection(
-  validationDeliveryTypeSchema,
-  orderContactsSchema,
-  schemaCondRecipient,
-);
+const orderFullContactsSchema = z.intersection(schemaCondRecipient, orderContactsSchema);
+
+export const orderSchema = z.intersection(validationDeliveryTypeSchema, orderFullContactsSchema);

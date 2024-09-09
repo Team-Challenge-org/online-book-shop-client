@@ -14,9 +14,6 @@ export default function OrderPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate('/');
-    }
     if (cart.cartItems.length < 1) {
       navigate('/');
     }
