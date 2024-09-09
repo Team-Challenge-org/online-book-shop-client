@@ -34,6 +34,10 @@ const authSlice = createSlice({
     hideMessage(state) {
       state.showMessage = false;
     },
+
+    clearErrorState(state) {
+      state.error = null;
+    },
   },
   extraReducers(builder) {
     builder
@@ -138,6 +142,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { resetEmailCheckState, hideMessage } = authSlice.actions;
+export const { resetEmailCheckState, hideMessage, clearErrorState } = authSlice.actions;
 
 export default authSlice.reducer;
