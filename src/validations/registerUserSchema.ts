@@ -12,7 +12,7 @@ export const registerUserSchema = z
       .string()
       .regex(nameRegex, errorMessage.FIRST_NAME)
       .min(2, errorMessage.FIRST_NAME)
-      .max(50, errorMessage.FIRST_NAME),
+      .max(30, errorMessage.FIRST_NAME),
 
     last_name: z
       .string()
