@@ -1,0 +1,30 @@
+@import "styles/utils/variables";
+
+.bookCard {
+  list-style: none;
+  .bookImage {
+    width: 302px;
+    height: 368px;
+    margin-bottom: 16px;
+
+    background-color: powderblue;
+  }
+
+  .bookAuthor {
+    font-size: 16px;
+    color: $color-gray;
+    margin-bottom: 8px;
+  }
+
+  .bookTitle {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: $color-black;
+  }
+
+  .bookPrice {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-black;
+  }
+}

@@ -1,0 +1,42 @@
+@import "styles/utils/variables";
+
+.container {
+  max-width: 1440px;
+  padding: 0 80px;
+  margin: 0 auto;
+}
+
+.categoryTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: $color-black;
+  margin-bottom: 56px;
+}
+
+.catalogBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+
+  .filtersSidebar {
+    width: 302px;
+    padding: 24px;
+    background-color: $color-main-05;
+
+    .applyBtn {
+      width: 100%;
+      margin-top: 32px;
+      padding: 11.5px 0;
+      background-color: $color-main;
+      color: white;
+      font-size: 14px;
+    }
+  }
+
+  .bookGrid {
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: repeat(3, 302px);
+    margin-bottom: 80px;
+  }
+}

@@ -3,8 +3,8 @@ import { NAV_URL } from "constants/global";
 import { useAuth } from "contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Slider from "components/assets/Slider/Slider";
-import CatalogList from "components/modules/CatalogList/CatalogList";
-import CategoriesList from "components/modules/CategoriesList/CategoriesList";
+import CatalogList from "components/modules/homePage/CatalogList/CatalogList";
+import CategoriesList from "components/modules/homePage/CategoriesList/CategoriesList";
 import ResetPasswordForm from "components/modules/auth/resetPassword/resetPasswordForm/ResetPasswordForm";
 
 export default function ResetPasswordPage() {
