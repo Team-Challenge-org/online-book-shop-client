@@ -2,18 +2,28 @@ import styles from "./CategoriesSidebar.module.scss";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "store/store";
+import { fetchCategories } from "store/categories/asyncAction";
 import { useOutsideModalClick } from "hooks/useOutsideModalClick";
 import { closeCategoriesSidebar } from "store/catalog/catalogSlice";
 import { CatalogCategoriesList } from "../categoriesList/CatalogCategoriesList";
 
 export function CategoriesSidebar() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   function handleCloseSidebar() {
     dispatch(closeCategoriesSidebar());
   }
 
   const overlayRef = useOutsideModalClick(handleCloseSidebar);
+
+  useEffect(() => {
+    async function getCategories() {
+      dispatch(fetchCategories());
+    }
+
+    getCategories();
+  }, [dispatch]);
 
   //remove background scroll
   useEffect(() => {

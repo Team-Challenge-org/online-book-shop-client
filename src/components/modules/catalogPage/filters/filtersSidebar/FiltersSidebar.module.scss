@@ -1,0 +1,16 @@
+@import "styles/utils/variables";
+
+.filtersSidebar {
+  width: 302px;
+  padding: 24px;
+  background-color: $color-main-05;
+
+  .applyBtn {
+    width: 100%;
+    margin-top: 32px;
+    padding: 11.5px 0;
+    background-color: $color-main;
+    color: white;
+    font-size: 14px;
+  }
+}

@@ -4,6 +4,7 @@
   max-width: 1440px;
   padding: 0 80px;
   margin: 0 auto;
+  margin-top: 40px;
 }
 
 .categoryTitle {
@@ -17,21 +18,6 @@
   display: flex;
   align-items: flex-start;
   gap: 24px;
-
-  .filtersSidebar {
-    width: 302px;
-    padding: 24px;
-    background-color: $color-main-05;
-
-    .applyBtn {
-      width: 100%;
-      margin-top: 32px;
-      padding: 11.5px 0;
-      background-color: $color-main;
-      color: white;
-      font-size: 14px;
-    }
-  }
 
   .bookGrid {
     display: grid;

@@ -1,29 +1,28 @@
 import styles from "./CatalogCategoriesList.module.scss";
 
+import type { TCategory } from "store/categories/types";
+
 import { NAV_URL } from "constants/global";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCategories, selectCategory } from "store/categories/selectors";
-import { closeCategoriesSidebar } from "store/catalog/catalogSlice";
+import { selectCategories } from "store/categories/selectors";
 import { setCategory } from "store/categories/categoriesSlice";
-import { TCategory } from "store/categories/types";
+import { closeCategoriesSidebar } from "store/catalog/catalogSlice";
 
 export function CatalogCategoriesList() {
   const dispatch = useDispatch();
   const { items: categories } = useSelector(selectCategories);
-  const selectedCategory = useSelector(selectCategory);
 
   function navigateToCatalogPage(category: TCategory) {
-    navigate(NAV_URL.CATALOG_PAGE);
+    const jsonCategory = JSON.stringify(category);
+    localStorage.setItem("category", jsonCategory);
+
     dispatch(setCategory(category));
     dispatch(closeCategoriesSidebar());
-    
+
+    navigate(NAV_URL.CATALOG_PAGE);
   }
 
-
-
-  //TODO: по нажатию мы фильтруем по setCategory(id)
-  // Полученые книги selectBooks, фильтруем в новый массив
   const navigate = useNavigate();
   return (
     <ul className={styles.category_list}>
