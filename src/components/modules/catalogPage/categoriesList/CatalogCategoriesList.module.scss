@@ -1,0 +1,17 @@
+@import "styles/utils/variables";
+
+.category_list {
+  .category_name {
+    cursor: pointer;
+
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+
+    transition: all ease-in 0.1s;
+
+    &:hover {
+      color: $color-main;
+    }
+  }
+}

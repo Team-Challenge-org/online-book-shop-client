@@ -4,8 +4,6 @@ import {
   removeItem,
   addItemToCart,
   updateItemQuantity,
-  decreaseItemQantity,
-  increaseItemQuantity,
   addOrRemoveCartItem,
 } from "store/cart/cartSlice";
 
@@ -21,18 +19,11 @@ import {
   updateCartItemQuantity,
 } from "store/cart/asyncActions";
 
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/store";
 import { selectIsAuth } from "store/auth/selectors";
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import toast from "react-hot-toast";
-import { useDebounce } from "hooks/useDebounce";
+import React, { createContext, useContext, useState } from "react";
 
 export type TModalCartContext = {
   showModal: boolean;
@@ -41,8 +32,6 @@ export type TModalCartContext = {
   onOpenCartModal: () => void;
   onCloseCartModal: () => void;
   onAddBookToCart: (book: TCartItem) => void;
-  // onIncreaseBookCount: (bookId: number) => void;
-  // onDecreaseBookCount: (bookId: number) => void;
   onRemoveBookFromCart: (bookId: number) => void;
   onAddOrRemoveCartItem: (book: TCartItem) => void;
   onUpdateItemQuantity: (id: number, quantity: number) => void;
@@ -55,8 +44,6 @@ const ModalCartContext = createContext<TModalCartContext>({
   onAddBookToCart: () => {},
   onOpenCartModal: () => {},
   onCloseCartModal: () => {},
-  // onIncreaseBookCount: () => {},
-  // onDecreaseBookCount: () => {},
   onRemoveBookFromCart: () => {},
   onUpdateItemQuantity: () => {},
   onAddOrRemoveCartItem: () => {},
@@ -125,32 +112,6 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     }
   }
 
-  // function handleIncreaseBookCount(bookId: number) {
-  //   if (isAuth) {
-  //     const params: TUpdateParams = {
-  //       bookId,
-  //       operation: "1",
-  //     };
-
-  //     dispatch(updateCartItemQuantity(params));
-  //   } else {
-  //     dispatch(increaseItemQuantity(bookId));
-  //   }
-  // }
-
-  // function handleDecreaseBookCount(bookId: number) {
-  //   if (isAuth) {
-  //     const params: TUpdateParams = {
-  //       bookId,
-  //       operation: "-1",
-  //     };
-
-  //     dispatch(updateCartItemQuantity(params));
-  //   } else {
-  //     dispatch(decreaseItemQantity(bookId));
-  //   }
-  // }
-
   function handleRemoveBookFromCart(bookId: number) {
     if (isAuth) {
       dispatch(deleteCartItem(bookId));
@@ -184,8 +145,6 @@ function ModalCartProvider({ children }: TModalCartProviderProps) {
     onOpenCartModal: handleOpenModal,
     onCloseCartModal: handleCloseModal,
     onAddBookToCart: handleAddBookToCart,
-    // onIncreaseBookCount: handleIncreaseBookCount,
-    // onDecreaseBookCount: handleDecreaseBookCount,
     onRemoveBookFromCart: handleRemoveBookFromCart,
     onUpdateItemQuantity: handleUpdateItemQuantity,
     onAddOrRemoveCartItem: handleAddOrRemoveCartItem,

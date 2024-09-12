@@ -1,4 +1,5 @@
 import MainLayout from 'components/layouts/MainLayout';
+import { CatalogPage } from 'pages/catalogPage/CatalogPage';
 import NotFoundPage from 'pages/ErrorPage/NotFoundPage';
 import ServiceUnavailablePage from 'pages/ErrorPage/ServiceUnavailablePage';
 import HomePage from 'pages/HomePage/HomePage';
@@ -21,6 +22,7 @@ function App() {
         <Route path='/payment' element={<PaymentPage />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/order' element={<OrderPage />} />
+        <Route path='/catalog' element={<CatalogPage />} />
 
         {/* Errors: */}
         <Route path='/404' element={<NotFoundPage />} />

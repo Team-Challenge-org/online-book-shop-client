@@ -16,11 +16,15 @@ import { useModalCart } from "contexts/ModalCartContext";
 import { ModalCart } from "../ModalShoppingCart/ModalCart/ModalCart";
 import { selectIsAuth, selectShowMessage } from "store/auth/selectors";
 import { EmailCheckerForPasswordResetForm } from "../auth/resetPassword/emailCheckerForm/EmailCheckerForPasswordResetForm";
+import { selectCatalogState } from "store/catalog/selectors";
+import { CategoriesSidebar } from "../catalogPage/categoriesSidebar/CategoriesSidebar";
+import { openCategoriesSidebar } from "store/catalog/catalogSlice";
 
 const Header = () => {
   const { showModal, onOpenCartModal } = useModalCart();
   const { showRegisterForm, onShowRegisterForm, showEmailCheckerForm } =
     useAuth();
+  const { showSidebar } = useSelector(selectCatalogState);
 
   const dispatch = useDispatch();
   const auth = useSelector(selectIsAuth);
@@ -52,7 +56,12 @@ const Header = () => {
 
       <nav className={styles.header__nav}>
         <ul className={styles.header__nav__list}>
-          <li className={styles.header__nav__list__item}>Каталог</li>
+          <li
+            className={styles.header__nav__list__item}
+            onClick={() => dispatch(openCategoriesSidebar())}
+          >
+            Каталог
+          </li>
           <li className={styles.header__nav__list__item}>Оплата та доставка</li>
           <li className={styles.header__nav__list__item}>Про нас</li>
         </ul>
@@ -133,6 +142,9 @@ const Header = () => {
       </div>
 
       {/* FIXME: Create React Portal  */}
+
+      {showSidebar && <CategoriesSidebar />}
+
       {/* Modal Window For Shopping Cart */}
       {showModal && <ModalCart />}
 
