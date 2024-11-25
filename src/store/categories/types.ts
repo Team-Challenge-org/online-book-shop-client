@@ -4,9 +4,9 @@ export type TCategory = {
 };
 
 export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
 }
 
 export interface ICategoriesSliceState {

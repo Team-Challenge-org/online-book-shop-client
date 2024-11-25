@@ -1,0 +1,23 @@
+@import "styles/utils/_variables.scss";
+
+.more {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  column-gap: 14px;
+  
+  p {
+    color: $color-main;
+  }
+
+  &_arrow {
+    width: 12px;
+
+    transition: all 0.3s;
+
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -11,6 +11,7 @@ import favoriteReducer from "./favorite/favoriteSlice";
 import deliveryReducer from "./delivery/deliverySlice";
 import categoriesReducer from "./categories/categoriesSlice";
 import recentlyViewedBooksReducer from "./recentlyViewedBooks/recentlyViewedBooksSlice";
+import filtersReducer from "./filters/filters";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     favorite: favoriteReducer,
     categories: categoriesReducer,
     recentlyViewedBooks: recentlyViewedBooksReducer,
+    filters: filtersReducer,
   },
 });
 
