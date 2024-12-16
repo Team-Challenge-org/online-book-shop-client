@@ -9,7 +9,6 @@ export const fetchBooks = createAsyncThunk<TBooksData>(
   "item/fetchItemsStatus",
   async () => {
     const { data } = await axios.get<TBooksData>(Endpoints.GET_ALL_BOOKS);
-    console.log(data);
     return data;
   }
 );

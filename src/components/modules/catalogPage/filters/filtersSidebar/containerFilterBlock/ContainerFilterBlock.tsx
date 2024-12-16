@@ -1,9 +1,14 @@
 import FilterCheckbox from "../filterCheckbox/FilterCheckbox";
 import styles from "./ContainerFilterBlock.module.scss";
 
+type Filter = {
+  title: string;
+  filterName: string;
+};
+
 interface ContainerFilterBlockProps {
   title: string;
-  filters: string[];
+  filters: Filter[];
 }
 
 export default function ContainerFilterBlock({ title, filters }: ContainerFilterBlockProps) {
@@ -13,7 +18,12 @@ export default function ContainerFilterBlock({ title, filters }: ContainerFilter
 
       <ul>
         {filters.map((filter) => (
-          <FilterCheckbox key={filter} typeOfFilters={title} name={filter} />
+          <FilterCheckbox
+            key={filter.title}
+            typeOfFilters={title}
+            filterName={filter.filterName}
+            name={filter.title}
+          />
         ))}
       </ul>
     </div>

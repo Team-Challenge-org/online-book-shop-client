@@ -2,9 +2,15 @@ import styles from "./FilterPrice.module.scss";
 
 import { useAppDispatch } from "store/store";
 import { setFilter } from "store/filters/filters";
+import { useState } from "react";
+import { set } from "lodash";
 
 export default function FilterPrice() {
   const dispatch = useAppDispatch();
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>, type: string, name: string) => {
+    dispatch(setFilter({ type, name }));
+  };
 
   return (
     <div className={styles.filter}>
@@ -14,7 +20,7 @@ export default function FilterPrice() {
         <div className={styles.filter_input}>
           <p>від</p>
           <input
-            onChange={(e) => dispatch(setFilter({ type: "Ціна від", name: e.target.value }))}
+            onChange={(e) => handleChangeInput(e, "Ціна від", e.target.value)}
             type="number"
             placeholder="0"
           />
@@ -24,7 +30,7 @@ export default function FilterPrice() {
           <input
             type="number"
             placeholder="0"
-            onChange={(e) => dispatch(setFilter({ type: "Ціна до", name: e.target.value }))}
+            onChange={(e) => handleChangeInput(e, "Ціна до", e.target.value)}
           />
         </div>
       </div>

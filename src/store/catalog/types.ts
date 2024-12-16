@@ -12,4 +12,10 @@ export type TCatalogBook = {
   timeAdded: string;
   images: string[];
   quantity: number;
+  characteristicDto?: {
+    publisher: string;
+    language: string;
+    bookType: string;
+    coverType: string;
+  };
 };

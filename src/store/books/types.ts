@@ -22,10 +22,16 @@ export type TBook = {
   isThisSlider: boolean;
   available?: string;
   authors: string | null;
-  titleImage: string | null;
+  titleImage: string | undefined;
   timeAdded: string;
   images: string[];
   quantity: number;
+  characteristicDto?: {
+    publisher: string;
+    language: string;
+    bookType: string;
+    coverType: string;
+  };
 };
 
 export type TBooksPageable = {

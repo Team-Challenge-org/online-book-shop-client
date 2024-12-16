@@ -8,9 +8,10 @@ import styles from "./FilterCheckbox.module.scss";
 interface FilterCheckboxProps {
   name: string;
   typeOfFilters: string;
+  filterName?: string;
 }
 
-export default function FilterCheckbox({ name, typeOfFilters }: FilterCheckboxProps) {
+export default function FilterCheckbox({ name, typeOfFilters, filterName }: FilterCheckboxProps) {
   const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -18,9 +19,9 @@ export default function FilterCheckbox({ name, typeOfFilters }: FilterCheckboxPr
     setIsActive((prevActive) => !prevActive);
 
     if (isActive === false) {
-      dispatch(setFilter({ type: typeOfFilters, name }));
+      dispatch(setFilter({ type: typeOfFilters, name: filterName || name }));
     } else {
-      dispatch(deleteFilter({ type: typeOfFilters, name }));
+      dispatch(deleteFilter({ type: typeOfFilters, name: filterName || name }));
     }
   }
 

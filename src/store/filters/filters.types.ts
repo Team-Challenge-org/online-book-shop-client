@@ -1,4 +1,5 @@
 export type InitialStateType = {
+  filterIsActive: boolean;
   availability: string[];
   typesOfBook: string[];
   languages: string[];

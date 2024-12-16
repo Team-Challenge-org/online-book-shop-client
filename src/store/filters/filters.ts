@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { InitialStateType, PayloadActionTypes } from "./filters.types";
 
 const initialState: InitialStateType = {
+  filterIsActive: false,
   availability: [],
   typesOfBook: [],
   languages: [],
@@ -26,13 +27,16 @@ export const filtersSlice = createSlice({
         Автор: (name: string) => state.authors.push(name),
         Видавництво: (name: string) => state.publishingHouse.push(name),
         "Тип обкладинки": (name: string) => state.typesOfCover.push(name),
-        "Ціна: від": (name: string) => (state.prices.min = name),
+        "Ціна до": (name: string) => (state.prices.max = name),
+        "Ціна від": (name: string) => (state.prices.min = name),
       };
 
       const handler = actionsHandler[action.payload.type];
       if (handler) {
         handler(action.payload.name);
       }
+
+      state.filterIsActive = false;
     },
     deleteFilter: (state: InitialStateType, action: PayloadAction<PayloadActionTypes>) => {
       const actionsHandler: { [key: string]: (name: string) => void } = {
@@ -52,9 +56,15 @@ export const filtersSlice = createSlice({
       if (handler) {
         handler(action.payload.name);
       }
+
+      state.filterIsActive = false;
+    },
+    setFilterIsActive: (state: InitialStateType, action: PayloadAction<boolean>) => {
+      state.filterIsActive = false;
+      state.filterIsActive = action.payload;
     },
   },
 });
 
-export const { setFilter, deleteFilter } = filtersSlice.actions;
+export const { setFilter, deleteFilter, setFilterIsActive } = filtersSlice.actions;
 export default filtersSlice.reducer;
