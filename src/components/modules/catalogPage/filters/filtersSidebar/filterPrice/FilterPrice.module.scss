@@ -1,0 +1,47 @@
+@import "styles/utils/_variables.scss";
+
+.filter {
+  &_title {
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  &_inputs {
+    display: flex;
+    column-gap: 30px;
+
+    width: 100%;
+
+    color: $color-gray;
+  }
+
+  &_input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 10px;
+
+    font-size: 12px;
+    padding: 9px 8px 9px 7px;
+
+    border: 1px solid $color-gray;
+
+    input {
+      color: $color-gray;
+      border: none;
+      background: transparent;
+
+      width: 100%;
+      text-align: right;
+
+      &::placeholder {
+        color: $color-gray;
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

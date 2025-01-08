@@ -1,0 +1,35 @@
+@import "styles/utils/_variables.scss";
+
+.filter {
+  &_title {
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &_input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 9px 10px 9px 8px;
+    margin-bottom: 16px;
+
+    background-color: $color-white;
+    border: 1px solid $color-gray;
+
+    font-size: 12px;
+    input {
+      border: none;
+      background: transparent;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &_checkboxes {
+    display: grid;
+    row-gap: 8px;
+  }
+}

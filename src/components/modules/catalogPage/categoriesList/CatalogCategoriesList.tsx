@@ -12,6 +12,7 @@ import { closeCategoriesSidebar } from "store/catalog/catalogSlice";
 export function CatalogCategoriesList() {
   const dispatch = useDispatch();
   const { items: categories } = useSelector(selectCategories);
+  console.log("categories: ", categories);
 
   function navigateToCatalogPage(category: TCategory) {
     const jsonCategory = JSON.stringify(category);
@@ -32,7 +33,7 @@ export function CatalogCategoriesList() {
           className={styles.category_name}
           onClick={() => navigateToCatalogPage(category)}
         >
-          {category.name}
+          {category.ukrName}
         </li>
       ))}
     </ul>

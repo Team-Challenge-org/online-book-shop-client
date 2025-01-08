@@ -17,10 +17,12 @@ const categoriesSlice = createSlice({
       state.items = action.payload;
     },
     setCategory(state, action: PayloadAction<TCategory>) {
+      // console.log(action.payload, "payload");
       const findCategory = state.items.find(
         (category) => category.id === action.payload.id
       );
-
+      console.log(findCategory, "payload");
+      
       if (findCategory) {
         state.selected = action.payload;
       }

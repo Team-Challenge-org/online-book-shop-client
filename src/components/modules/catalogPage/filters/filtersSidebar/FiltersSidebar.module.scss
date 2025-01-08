@@ -3,14 +3,19 @@
 .filtersSidebar {
   width: 302px;
   padding: 24px;
+
+  display: grid;
+  row-gap: 32px;
+
   background-color: $color-main-05;
 
+  font-size: 14px;
   .applyBtn {
     width: 100%;
-    margin-top: 32px;
     padding: 11.5px 0;
+
     background-color: $color-main;
+
     color: white;
-    font-size: 14px;
   }
 }

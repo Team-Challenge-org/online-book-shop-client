@@ -1,0 +1,26 @@
+@import "styles/utils/_variables";
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  &.active {
+    div {
+      background-color: $color-main;
+      border: none;
+    }
+  }
+
+  div {
+    width: 16px;
+    height: 16px;
+
+    border: 1px solid $color-gray;
+    background-color: $color-white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
