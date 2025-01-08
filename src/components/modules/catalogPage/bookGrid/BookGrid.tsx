@@ -12,17 +12,19 @@ const BookGrid = ({ filteredByCategory }: { filteredByCategory: TCatalogBook[] }
   // console.log('filteredArray: ', filteredArray)
   const { filter } = useFilters(filteredByCategory);
   const { filterIsActive } = useSelector(selectFilters);
-  // console.log('filterIsActive: ', filterIsActive)
+
+  console.log("filteredArray: ", filteredArray);
 
   useEffect(() => {
     if (filterIsActive) {
-      setFilteredArray(filter());
+    console.log("filter: ", filter());
+    setFilteredArray(filter());
     }
-  }, [filterIsActive, setFilteredArray, filteredByCategory]);
+  }, [filterIsActive, setFilteredArray, filteredByCategory, filter]);
 
   return (
     <>
-      {filteredArray.map((item: any) => (
+      {filteredArray?.map((item: any) => (
         <CatalogBook key={item.id} book={item as TCatalogBook} />
       ))}
     </>

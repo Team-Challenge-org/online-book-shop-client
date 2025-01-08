@@ -1,6 +1,6 @@
 import { Catalog } from "components/modules/catalogPage/catalog/Catalog";
 
-export function CatalogPage() {
+export default function CatalogPage() {
   return (
     <main>
       <Catalog />

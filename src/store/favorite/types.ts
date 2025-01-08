@@ -8,7 +8,7 @@ export type TFavoriteItem = {
   isThisSlider: boolean;
   available?: string;
   authors: string | null;
-  titleImage: string | null;
+  titleImage: string | undefined;
   timeAdded: string;
   images: string[];
   quantity: number;

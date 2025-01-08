@@ -4,7 +4,7 @@ export type TCartItem = {
   price: number;
   quantity: number;
   authors: string | null;
-  titleImage: string | null;
+  titleImage: string | undefined;
 };
 
 export type TNotAuthUserCart = {

@@ -241,10 +241,14 @@ import BookGrid from "../bookGrid/BookGrid";
 export function Catalog() {
   const selectedCategory = useSelector(selectCategory);
   const { books } = useSelector(selectBookData);
-  console.log(books);
+  console.log("books: ", books);
   const dispatch = useAppDispatch();
 
-  const filteredByCategory = books.filter((book) => book.category === selectedCategory.name);
+  const filteredByCategory = books.filter((book) => {
+    console.log("selectedCategory: ", selectedCategory);
+
+    return book.category === selectedCategory.name;
+  });
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -253,7 +257,7 @@ export function Catalog() {
   return (
     <div className={styles.container}>
       <h1 className={styles.categoryTitle}>
-        {selectedCategory?.name}
+        {selectedCategory?.ukrName}
         <span> ({filteredByCategory.length})</span>
       </h1>
 

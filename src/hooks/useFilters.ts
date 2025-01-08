@@ -7,9 +7,9 @@ import type { TCatalogBook } from "store/catalog/types";
 
 export const useFilters = (books: Array<TCatalogBook>) => {
   const filters = useSelector(selectFilters);
+  console.log("filters: ", filters);
 
-  const applyFilter = (array: TCatalogBook[], condition: (book: TCatalogBook) => boolean) =>
-    array.filter(condition);
+  const applyFilter = (array: TCatalogBook[], condition: (book: TCatalogBook) => boolean) => array.filter(condition);
 
   const filter = useCallback(() => {
     let result = [...books];
@@ -25,16 +25,14 @@ export const useFilters = (books: Array<TCatalogBook>) => {
 
     // Фільтри типу книги
     if (filters.typesOfBook.length > 0) {
-      result = applyFilter(result, (book) =>
-        filters.typesOfBook.includes(book.characteristicDto?.bookType || "")
+      result = applyFilter(result, (book) => 
+        filters.typesOfBook.includes((book.characteristicDto?.bookType || "").trim())
       );
     }
 
     // Фільтри мови
     if (filters.languages.length > 0) {
-      result = applyFilter(result, (book) =>
-        filters.languages.includes(book.characteristicDto?.language || "")
-      );
+      result = applyFilter(result, (book) => filters.languages.includes(book.characteristicDto?.language || ""));
     }
 
     // Фільтри авторів
@@ -44,16 +42,13 @@ export const useFilters = (books: Array<TCatalogBook>) => {
 
     // Фільтри за видавництвом
     if (filters.publishingHouse.length > 0) {
-      result = applyFilter(result, (book) =>
-        filters.publishingHouse.includes(book.characteristicDto?.publisher || "")
-      );
+      console.log("publishingHouse: ", filters.publishingHouse);
+      result = applyFilter(result, (book) => filters.publishingHouse.includes(book.characteristicDto?.publisher || ""));
     }
 
     // Фільтри типу обкладинки
     if (filters.typesOfCover.length > 0) {
-      result = applyFilter(result, (book) =>
-        filters.typesOfCover.includes(book.characteristicDto?.coverType || "")
-      );
+      result = applyFilter(result, (book) => filters.typesOfCover.includes(book.characteristicDto?.coverType || ""));
     }
 
     // Фільтри прайсу

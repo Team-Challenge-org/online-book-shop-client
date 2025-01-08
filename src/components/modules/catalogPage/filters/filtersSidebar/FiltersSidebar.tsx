@@ -31,31 +31,28 @@ export function FiltersSidebar() {
       <ContainerFilterBlock
         title="Мова"
         filters={[
-          { title: "Українська", filterName: "Українська" },
-          { title: "Англійська", filterName: "Англійська" },
-          { title: "Іспанська", filterName: "Іспанська" },
-          { title: "Італійська", filterName: "Італійська" },
-          { title: "Німецька", filterName: "Німецька" },
-          { title: "Французька", filterName: "Французька" },
-          { title: "Турецька", filterName: "Турецька" },
-          { title: "Іврит", filterName: "Іврит" },
-          { title: "Чеська", filterName: "Чеська" },
-          { title: "Польська", filterName: "Польська" },
+          { title: "Українська", filterName: "Ukrainian" },
+          { title: "Англійська", filterName: "English" },
+          { title: "Іспанська", filterName: "Spanish" },
+          { title: "Італійська", filterName: "Italian" },
+          { title: "Німецька", filterName: "German" },
+          { title: "Французька", filterName: "French" },
+          { title: "Турецька", filterName: "Turkish" },
+          { title: "Іврит", filterName: "Hebrew" },
+          { title: "Чеська", filterName: "Czech" },
+          { title: "Польська", filterName: "Polish" },
         ]}
       />
-      <ContainerFilterInput
-        title="Автор"
-        items={["John Doe", "Jane Smith", "Emily Johnson", "Michael Brown"]}
-      />
+      <ContainerFilterInput title="Автор" items={["John Doe", "Andrey Kurkov", "Люсія Бондарь", "Michael Brown"]} />
       <ContainerFilterInput
         title="Видавництво"
-        items={["Publisher A", "Publisher B", "Publisher C", "Publisher D"]}
+        items={["КСД ", "Hachette Livre ", "Macmillan Publishers", "Amazing Publisher", "Hachette Livrer"]}
       />
       <ContainerFilterBlock
         title="Тип обкладинки"
         filters={[
           { title: "Тверда", filterName: "Hardcover" },
-          { title: "М'яка", filterName: "Softcover" },
+          { title: "М'яка", filterName: "Papercover" },
         ]}
       />
 

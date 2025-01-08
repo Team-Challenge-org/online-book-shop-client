@@ -29,7 +29,7 @@ export const ProductInfo = () => {
     isThisSlider: true,
     available: '',
     authors: null,
-    titleImage: null,
+    titleImage: undefined,
     timeAdded: '',
     images: [''],
     quantity: 0,

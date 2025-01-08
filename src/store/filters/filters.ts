@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { InitialStateType, PayloadActionTypes } from "./filters.types";
 
 const initialState: InitialStateType = {
-  filterIsActive: false,
+  filterIsActive: true,
   availability: [],
   typesOfBook: [],
   languages: [],

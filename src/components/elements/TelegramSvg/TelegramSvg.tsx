@@ -19,3 +19,4 @@ const TelegramSvg = () => (
 );
 
 export default TelegramSvg;
+
